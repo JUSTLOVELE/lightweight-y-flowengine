@@ -23,9 +23,7 @@ public class PublicFlowNodeEntity implements Serializable {
     /** 限制时间,单位天 */
     private Integer limitTime ;
     /** 下一个环节 */
-    private String nextNodeId ;
-    /**  */
-    private String nextNodeKey ;
+    private String nextNode ;
     /** 当前环节名称 */
     private String nodeName ;
     /**  */
@@ -77,20 +75,12 @@ public class PublicFlowNodeEntity implements Serializable {
         this.limitTime = limitTime;
     }
 
-    public String getNextNodeId() {
-        return nextNodeId;
+    public String getNextNode() {
+        return nextNode;
     }
 
-    public void setNextNodeId(String nextNodeId) {
-        this.nextNodeId = nextNodeId;
-    }
-
-    public String getNextNodeKey() {
-        return nextNodeKey;
-    }
-
-    public void setNextNodeKey(String nextNodeKey) {
-        this.nextNodeKey = nextNodeKey;
+    public void setNextNode(String nextNode) {
+        this.nextNode = nextNode;
     }
 
     public String getNodeName() {

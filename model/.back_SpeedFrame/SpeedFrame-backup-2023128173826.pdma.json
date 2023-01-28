@@ -2,9 +2,9 @@
   "name": "SpeedFrame",
   "describe": "SpeedFrame",
   "avatar": "",
-  "version": "4.2.2",
+  "version": "4.2.0",
   "createdTime": "2022-12-9 22:49:27",
-  "updatedTime": "2023-1-1 21:30:05",
+  "updatedTime": "2023-1-28 17:03:12",
   "dbConns": [],
   "profile": {
     "default": {
@@ -468,7 +468,8 @@
         "refKey": "extProps",
         "hideInGraph": true
       }
-    ]
+    ],
+    "menuWidth": "326px"
   },
   "entities": [
     {
@@ -1354,6 +1355,23 @@
           "extProps": {},
           "domain": "3E948CEC-3070-472C-AF92-F3CA11EC9D15",
           "id": "055DD4D7-7558-42C0-987B-7B5596C465DC"
+        },
+        {
+          "defKey": "create_user_op_id",
+          "defName": "创建人",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "extProps": {},
+          "domain": "9092C4E0-1A54-4859-ABBB-5B62DBC27573",
+          "id": "91B33C9B-7731-4A3C-ABB0-6AD8D7C5DD71"
         }
       ],
       "correlations": [],

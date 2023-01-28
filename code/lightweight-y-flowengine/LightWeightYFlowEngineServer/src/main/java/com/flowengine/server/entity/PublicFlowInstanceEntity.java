@@ -13,7 +13,6 @@ import java.util.Date;
  */
 @TableName("public_flow_instance_tbl")
 public class PublicFlowInstanceEntity implements Serializable {
-
     /** 主键 */
     private String opId ;
     /** 创建时间 */
@@ -44,6 +43,8 @@ public class PublicFlowInstanceEntity implements Serializable {
     private String publicFlowAttachment ;
     /** 附件id,多个附件用逗号风格，一个流程最多不超过30个附件；不公开附件信息 */
     private String privateFlowAttachment ;
+    /** 创建人主键 */
+    private String createUserOpId;
 
     public String getOpId() {
         return opId;
@@ -163,5 +164,13 @@ public class PublicFlowInstanceEntity implements Serializable {
 
     public void setPrivateFlowAttachment(String privateFlowAttachment) {
         this.privateFlowAttachment = privateFlowAttachment;
+    }
+
+    public String getCreateUserOpId() {
+        return createUserOpId;
+    }
+
+    public void setCreateUserOpId(String createUserOpId) {
+        this.createUserOpId = createUserOpId;
     }
 }

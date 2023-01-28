@@ -1,5 +1,8 @@
 package com.flowengine.server.backend.service;
 
+import com.flowengine.server.entity.PublicFlowInstanceEntity;
+import com.flowengine.server.model.StartFlowVO;
+
 /**
  * @Description:
  * @author yangzl 2023.1.8
@@ -11,7 +14,7 @@ public interface FlowService {
     /**
      * 启动流程
      */
-    public void startFlow();
+    public void startFlow(StartFlowVO startFlowVO);
 
     /**
      * 下一个环节
