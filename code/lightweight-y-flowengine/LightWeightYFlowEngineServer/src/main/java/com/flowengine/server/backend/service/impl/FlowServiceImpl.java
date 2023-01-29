@@ -12,6 +12,8 @@ import com.flowengine.server.mapper.PublicFlowInstanceFlowMapper;
 import com.flowengine.server.mapper.PublicFlowInstanceMapper;
 import com.flowengine.server.mapper.PublicFlowNodeMapper;
 import com.flowengine.server.model.StartFlowVO;
+import com.flowengine.server.model.enums.FlowInstanceFlowFlowStatusEnum;
+import com.flowengine.server.model.enums.FlowResultEnum;
 import com.flowengine.server.model.enums.FlowStatusEnum;
 import com.flowengine.server.model.enums.OverTimeEnum;
 import com.flowengine.server.utils.Constant;
@@ -112,33 +114,44 @@ public class FlowServiceImpl implements FlowService {
         flowInstanceFlowEntity.setLastNodeKey(startNode.getLastNodeKey());
         String nextNode = startNode.getNextNode();
         JSONArray nextArray = JSONUtil.parseArray(nextNode);
+        Integer refType = null;
+        String refId = null;
 
-        if(StrUtil.isEmpty(startFlowVO.getKey())) {
+        if(Constant.Value.START.equals(startFlowVO.getKey())) {
             //如果没有指定key就说明是第一个
             JSONObject nextJSON = nextArray.getJSONObject(0);
             flowInstanceFlowEntity.setNextNodeId(nextJSON.getStr(Constant.Key.NEXT_NODE_ID));
             flowInstanceFlowEntity.setNextNodeKey(nextJSON.getStr(Constant.Key.NEXT_NODE_KEY));
+            refType = nextJSON.getInt(Constant.Key.REF_TYPE);
+            refId = nextJSON.getStr(Constant.Key.REF_ID);
         }else{
-            //循环寻找key
-            for(int i=0; i<nextArray.size(); i++) {
-
-                JSONObject jsonObject = nextArray.getJSONObject(i);
-                String key = jsonObject.getStr(Constant.Key.KEY);
-
-                if(startFlowVO.getKey().equals(key)) {
-
-                    flowInstanceFlowEntity.setNextNodeId(jsonObject.getStr(Constant.Key.NEXT_NODE_ID));
-                    flowInstanceFlowEntity.setNextNodeKey(jsonObject.getStr(Constant.Key.NEXT_NODE_KEY));
-                }
-            }
+            throw new RuntimeException("初始节点必须配置为start");
         }
 
+        flowInstanceFlowEntity.setFlowSort(1);//初始
         flowInstanceFlowEntity.setOperationTime(new Date());
         flowInstanceFlowEntity.setUserOpId(startFlowVO.getCreateUserOpId());
-        flowInstanceFlowEntity.setFlowStatus(1); //0:未操作;1:已操作;注意这里仅仅是是否操作过，如果不通过也是属于操作的也就是1
+        flowInstanceFlowEntity.setFlowResult(FlowResultEnum.PASS.getValue());
+        flowInstanceFlowEntity.setFlowStatus(FlowInstanceFlowFlowStatusEnum.OPERATED.getValue()); //0:未操作;1:已操作;注意这里仅仅是是否操作过，如果不通过也是属于操作的也就是1
         _publicFlowInstanceFlowMapper.insert(flowInstanceFlowEntity);
         //插入一条当前自己的发起的流程数据后要插入下一条流程的信息，意思就是转发给下一个用户的流程数据
-
+        PublicFlowInstanceFlowEntity nextFlowInstanceFlowEntity = new PublicFlowInstanceFlowEntity();
+        nextFlowInstanceFlowEntity.setOpId(UUIDGenerator.getUUID());
+        nextFlowInstanceFlowEntity.setInstanceId(flowInstanceFlowEntity.getInstanceId());
+        nextFlowInstanceFlowEntity.setTaskOpId(flowInstanceFlowEntity.getTaskOpId());
+        nextFlowInstanceFlowEntity.setCreateTime(flowInstanceFlowEntity.getCreateTime());
+        nextFlowInstanceFlowEntity.setNodeId(flowInstanceFlowEntity.getNextNodeId());
+        nextFlowInstanceFlowEntity.setNodeKey(flowInstanceFlowEntity.getNextNodeKey());
+        nextFlowInstanceFlowEntity.setOrgId(flowInstanceFlowEntity.getOrgId());
+        nextFlowInstanceFlowEntity.setDeptId(flowInstanceFlowEntity.getDeptId());
+        nextFlowInstanceFlowEntity.setLastNodeId(flowInstanceFlowEntity.getNodeId());
+        nextFlowInstanceFlowEntity.setLastNodeKey(flowInstanceFlowEntity.getNodeKey());
+        nextFlowInstanceFlowEntity.setLastOpId(flowInstanceFlowEntity.getOpId());
+        nextFlowInstanceFlowEntity.setFlowStatus(FlowInstanceFlowFlowStatusEnum.WAIT_OPERATE.getValue());
+        nextFlowInstanceFlowEntity.setFlowSort(2);
+        nextFlowInstanceFlowEntity.setRefType(refType);
+        nextFlowInstanceFlowEntity.setRefId(refId);
+        _publicFlowInstanceFlowMapper.insert(nextFlowInstanceFlowEntity);
     }
 
     @Override

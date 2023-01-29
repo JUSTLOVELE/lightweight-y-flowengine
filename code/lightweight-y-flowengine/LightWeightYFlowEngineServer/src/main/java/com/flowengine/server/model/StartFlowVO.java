@@ -17,7 +17,7 @@ public class StartFlowVO {
     private String deptId ;
     /** 创建人主键 */
     private String createUserOpId;
-    /**若不为空则表示**/
+    /**通常设为start**/
     private String key;
 
     public String getTaskOpId() {

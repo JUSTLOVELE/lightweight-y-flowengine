@@ -56,6 +56,12 @@ public class PublicFlowInstanceFlowEntity implements Serializable {
     /** 回退意见 */
     private String backComment ;
 
+    private Integer flowSort;
+
+    private Integer refType;
+
+    private String refId;
+
     public String getOpId() {
         return opId;
     }
@@ -222,5 +228,29 @@ public class PublicFlowInstanceFlowEntity implements Serializable {
 
     public void setBackComment(String backComment) {
         this.backComment = backComment;
+    }
+
+    public Integer getFlowSort() {
+        return flowSort;
+    }
+
+    public void setFlowSort(Integer flowSort) {
+        this.flowSort = flowSort;
+    }
+
+    public Integer getRefType() {
+        return refType;
+    }
+
+    public void setRefType(Integer refType) {
+        this.refType = refType;
+    }
+
+    public String getRefId() {
+        return refId;
+    }
+
+    public void setRefId(String refId) {
+        this.refId = refId;
     }
 }

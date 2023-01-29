@@ -22,6 +22,10 @@ public class Constant {
         public String NEXT_NODE_KEY = "nextNodeKey";
 
         public String KEY = "key";
+
+        public String REF_TYPE = "refType";
+
+        public String REF_ID = "refId";
     }
 
     public interface Value {
