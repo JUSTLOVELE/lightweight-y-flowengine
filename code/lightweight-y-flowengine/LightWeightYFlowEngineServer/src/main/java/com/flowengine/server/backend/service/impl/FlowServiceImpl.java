@@ -1,8 +1,12 @@
 package com.flowengine.server.backend.service.impl;
 
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.json.JSONArray;
+import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
 import com.flowengine.server.backend.service.FlowService;
 import com.flowengine.server.entity.PublicFlowInstanceEntity;
+import com.flowengine.server.entity.PublicFlowInstanceFlowEntity;
 import com.flowengine.server.entity.PublicFlowNodeEntity;
 import com.flowengine.server.mapper.PublicFlowInstanceFlowMapper;
 import com.flowengine.server.mapper.PublicFlowInstanceMapper;
@@ -36,6 +40,9 @@ public class FlowServiceImpl implements FlowService {
 
     @Autowired
     private PublicFlowNodeMapper _publicFlowNodeMapper;
+
+    @Autowired
+    private PublicFlowInstanceFlowMapper _publicFlowInstanceFlowMapper;
 
     @Override
     public void startFlow(StartFlowVO startFlowVO) {
@@ -82,10 +89,55 @@ public class FlowServiceImpl implements FlowService {
         //根据main去查询对应的流程和环节信息
         Map<String, Object> columns = new HashMap<>();
         columns.put(Constant.Column.MAIN_ID, startFlowVO.getMainId());
-        columns.put();
+        columns.put(Constant.Column.NODE_KEY, Constant.Value.START);
         //获取起始节点
         List<PublicFlowNodeEntity> publicFlowNodeEntities = _publicFlowNodeMapper.selectByMap(columns);
+        //正常起始节点只会有一个
+        if(publicFlowNodeEntities == null || publicFlowNodeEntities.size() != 1) {
+            throw new RuntimeException("起始节点必须要有一个");
+        }
 
+        PublicFlowNodeEntity startNode = publicFlowNodeEntities.get(0);
+        //生成流程实例表
+        PublicFlowInstanceFlowEntity flowInstanceFlowEntity = new PublicFlowInstanceFlowEntity();
+        flowInstanceFlowEntity.setOpId(UUIDGenerator.getUUID());
+        flowInstanceFlowEntity.setInstanceId(publicFlowInstanceEntity.getOpId());
+        flowInstanceFlowEntity.setTaskOpId(publicFlowInstanceEntity.getTaskOpId());
+        flowInstanceFlowEntity.setCreateTime(publicFlowInstanceEntity.getCreateTime());
+        flowInstanceFlowEntity.setNodeId(startNode.getOpId());
+        flowInstanceFlowEntity.setNodeKey(startNode.getNodeKey());
+        flowInstanceFlowEntity.setOrgId(publicFlowInstanceEntity.getOrgId());
+        flowInstanceFlowEntity.setDeptId(publicFlowInstanceEntity.getDeptId());
+        flowInstanceFlowEntity.setLastNodeId(startNode.getLastNodeId());
+        flowInstanceFlowEntity.setLastNodeKey(startNode.getLastNodeKey());
+        String nextNode = startNode.getNextNode();
+        JSONArray nextArray = JSONUtil.parseArray(nextNode);
+
+        if(StrUtil.isEmpty(startFlowVO.getKey())) {
+            //如果没有指定key就说明是第一个
+            JSONObject nextJSON = nextArray.getJSONObject(0);
+            flowInstanceFlowEntity.setNextNodeId(nextJSON.getStr(Constant.Key.NEXT_NODE_ID));
+            flowInstanceFlowEntity.setNextNodeKey(nextJSON.getStr(Constant.Key.NEXT_NODE_KEY));
+        }else{
+            //循环寻找key
+            for(int i=0; i<nextArray.size(); i++) {
+
+                JSONObject jsonObject = nextArray.getJSONObject(i);
+                String key = jsonObject.getStr(Constant.Key.KEY);
+
+                if(startFlowVO.getKey().equals(key)) {
+
+                    flowInstanceFlowEntity.setNextNodeId(jsonObject.getStr(Constant.Key.NEXT_NODE_ID));
+                    flowInstanceFlowEntity.setNextNodeKey(jsonObject.getStr(Constant.Key.NEXT_NODE_KEY));
+                }
+            }
+        }
+
+        flowInstanceFlowEntity.setOperationTime(new Date());
+        flowInstanceFlowEntity.setUserOpId(startFlowVO.getCreateUserOpId());
+        flowInstanceFlowEntity.setFlowStatus(1); //0:未操作;1:已操作;注意这里仅仅是是否操作过，如果不通过也是属于操作的也就是1
+        _publicFlowInstanceFlowMapper.insert(flowInstanceFlowEntity);
+        //插入一条当前自己的发起的流程数据后要插入下一条流程的信息，意思就是转发给下一个用户的流程数据
 
     }
 

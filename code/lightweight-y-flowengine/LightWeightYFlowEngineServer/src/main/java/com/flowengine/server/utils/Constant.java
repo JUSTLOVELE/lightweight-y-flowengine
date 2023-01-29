@@ -11,5 +11,21 @@ public class Constant {
     public interface Column {
 
         String MAIN_ID = "main_id";
+
+        String NODE_KEY = "node_key";
+    }
+
+    public interface Key {
+
+        public String NEXT_NODE_ID = "nextNodeId";
+
+        public String NEXT_NODE_KEY = "nextNodeKey";
+
+        public String KEY = "key";
+    }
+
+    public interface Value {
+
+        String START = "start";
     }
 }

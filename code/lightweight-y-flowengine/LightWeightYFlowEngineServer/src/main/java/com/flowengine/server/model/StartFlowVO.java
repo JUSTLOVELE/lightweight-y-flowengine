@@ -17,6 +17,8 @@ public class StartFlowVO {
     private String deptId ;
     /** 创建人主键 */
     private String createUserOpId;
+    /**若不为空则表示**/
+    private String key;
 
     public String getTaskOpId() {
         return taskOpId;
@@ -56,5 +58,13 @@ public class StartFlowVO {
 
     public void setCreateUserOpId(String createUserOpId) {
         this.createUserOpId = createUserOpId;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 }
