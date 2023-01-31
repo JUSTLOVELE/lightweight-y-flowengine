@@ -6,7 +6,7 @@ package com.flowengine.server.model;
  * @version 1.00.00
  * @history:
  */
-public class StartFlowVO {
+public class StartFlowBO {
     /** 绑定的业务主键 */
     private String taskOpId ;
     /** 流程id */

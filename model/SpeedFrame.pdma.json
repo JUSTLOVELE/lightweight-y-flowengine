@@ -4,7 +4,7 @@
   "avatar": "",
   "version": "4.2.0",
   "createdTime": "2022-12-9 22:49:27",
-  "updatedTime": "2023-1-29 17:06:37",
+  "updatedTime": "2023-1-31 10:13:24",
   "dbConns": [],
   "profile": {
     "default": {
@@ -1686,23 +1686,6 @@
           "extProps": {},
           "domain": "",
           "id": "418AF1DB-4D25-4276-A86F-F9E1687C89BB"
-        },
-        {
-          "defKey": "user_name",
-          "defName": "",
-          "comment": "",
-          "type": "VARCHAR",
-          "len": 32,
-          "scale": "",
-          "primaryKey": false,
-          "notNull": false,
-          "autoIncrement": false,
-          "defaultValue": "",
-          "hideInGraph": true,
-          "refDict": "",
-          "extProps": {},
-          "domain": "",
-          "id": "12F71832-F727-449F-B31B-4A974268930E"
         },
         {
           "defKey": "last_op_id",

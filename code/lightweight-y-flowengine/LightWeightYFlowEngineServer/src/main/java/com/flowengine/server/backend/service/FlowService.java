@@ -1,7 +1,7 @@
 package com.flowengine.server.backend.service;
 
-import com.flowengine.server.entity.PublicFlowInstanceEntity;
-import com.flowengine.server.model.StartFlowVO;
+import com.flowengine.server.model.NextFlowBO;
+import com.flowengine.server.model.StartFlowBO;
 
 /**
  * @Description:
@@ -14,12 +14,12 @@ public interface FlowService {
     /**
      * 启动流程
      */
-    public void startFlow(StartFlowVO startFlowVO);
+    public void startFlow(StartFlowBO startFlowVO);
 
     /**
      * 下一个环节
      */
-    public void next();
+    public void next(NextFlowBO nextFlowVO);
 
     /**
      * 回退

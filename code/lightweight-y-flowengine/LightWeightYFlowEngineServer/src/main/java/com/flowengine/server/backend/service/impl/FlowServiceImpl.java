@@ -11,7 +11,9 @@ import com.flowengine.server.entity.PublicFlowNodeEntity;
 import com.flowengine.server.mapper.PublicFlowInstanceFlowMapper;
 import com.flowengine.server.mapper.PublicFlowInstanceMapper;
 import com.flowengine.server.mapper.PublicFlowNodeMapper;
-import com.flowengine.server.model.StartFlowVO;
+import com.flowengine.server.model.NextFlowBO;
+import com.flowengine.server.model.OpinionBO;
+import com.flowengine.server.model.StartFlowBO;
 import com.flowengine.server.model.enums.FlowInstanceFlowFlowStatusEnum;
 import com.flowengine.server.model.enums.FlowResultEnum;
 import com.flowengine.server.model.enums.FlowStatusEnum;
@@ -46,8 +48,11 @@ public class FlowServiceImpl implements FlowService {
     @Autowired
     private PublicFlowInstanceFlowMapper _publicFlowInstanceFlowMapper;
 
+    @Autowired
+    private PublicFlowNodeMapper _flowNodeMapper;
+
     @Override
-    public void startFlow(StartFlowVO startFlowVO) {
+    public void startFlow(StartFlowBO startFlowVO) {
 
         if(StrUtil.isEmpty(startFlowVO.getTaskOpId())) {
             throw new RuntimeException("绑定的业务主键不可以为空");
@@ -135,6 +140,13 @@ public class FlowServiceImpl implements FlowService {
         flowInstanceFlowEntity.setFlowStatus(FlowInstanceFlowFlowStatusEnum.OPERATED.getValue()); //0:未操作;1:已操作;注意这里仅仅是是否操作过，如果不通过也是属于操作的也就是1
         _publicFlowInstanceFlowMapper.insert(flowInstanceFlowEntity);
         //插入一条当前自己的发起的流程数据后要插入下一条流程的信息，意思就是转发给下一个用户的流程数据
+        _publicFlowInstanceFlowMapper.insert(getFlowInstanceFlowEntity(flowInstanceFlowEntity, refType, refId));
+    }
+
+    private PublicFlowInstanceFlowEntity getFlowInstanceFlowEntity(PublicFlowInstanceFlowEntity flowInstanceFlowEntity,
+                                                                   Integer refType,
+                                                                   String refId) {
+
         PublicFlowInstanceFlowEntity nextFlowInstanceFlowEntity = new PublicFlowInstanceFlowEntity();
         nextFlowInstanceFlowEntity.setOpId(UUIDGenerator.getUUID());
         nextFlowInstanceFlowEntity.setInstanceId(flowInstanceFlowEntity.getInstanceId());
@@ -143,20 +155,66 @@ public class FlowServiceImpl implements FlowService {
         nextFlowInstanceFlowEntity.setNodeId(flowInstanceFlowEntity.getNextNodeId());
         nextFlowInstanceFlowEntity.setNodeKey(flowInstanceFlowEntity.getNextNodeKey());
         nextFlowInstanceFlowEntity.setOrgId(flowInstanceFlowEntity.getOrgId());
-        nextFlowInstanceFlowEntity.setDeptId(flowInstanceFlowEntity.getDeptId());
+        //nextFlowInstanceFlowEntity.setDeptId(flowInstanceFlowEntity.getDeptId());
         nextFlowInstanceFlowEntity.setLastNodeId(flowInstanceFlowEntity.getNodeId());
         nextFlowInstanceFlowEntity.setLastNodeKey(flowInstanceFlowEntity.getNodeKey());
         nextFlowInstanceFlowEntity.setLastOpId(flowInstanceFlowEntity.getOpId());
         nextFlowInstanceFlowEntity.setFlowStatus(FlowInstanceFlowFlowStatusEnum.WAIT_OPERATE.getValue());
-        nextFlowInstanceFlowEntity.setFlowSort(2);
+        nextFlowInstanceFlowEntity.setFlowSort(flowInstanceFlowEntity.getFlowSort()+1);
         nextFlowInstanceFlowEntity.setRefType(refType);
         nextFlowInstanceFlowEntity.setRefId(refId);
-        _publicFlowInstanceFlowMapper.insert(nextFlowInstanceFlowEntity);
+
+        return nextFlowInstanceFlowEntity;
     }
 
     @Override
-    public void next() {
+    public void next(NextFlowBO nextFlowVO) {
 
+        if(StrUtil.isEmpty(nextFlowVO.getFlowRunBO().getInstanceFlowId())) {
+            throw new RuntimeException("流程流转id不能为空");
+        }
+
+        PublicFlowInstanceFlowEntity flowInstanceFlowEntity = _publicFlowInstanceFlowMapper.selectById(nextFlowVO.getFlowRunBO().getInstanceFlowId());
+
+        if(flowInstanceFlowEntity == null) {
+            throw new RuntimeException("根据流程流转id查询不到流程流转对象");
+        }
+
+        if(StrUtil.isNotEmpty(nextFlowVO.getFlowRunBO().getOrgId())) {
+            flowInstanceFlowEntity.setOrgId(nextFlowVO.getFlowRunBO().getOrgId());
+        }
+
+        if(StrUtil.isNotEmpty(nextFlowVO.getFlowRunBO().getDeptId())) {
+            flowInstanceFlowEntity.setDeptId(nextFlowVO.getFlowRunBO().getDeptId());
+        }
+
+        flowInstanceFlowEntity.setOperationTime(new Date());
+        flowInstanceFlowEntity.setUserOpId(nextFlowVO.getFlowRunBO().getUserOpId());
+        flowInstanceFlowEntity.setFlowStatus(FlowInstanceFlowFlowStatusEnum.OPERATED.getValue());
+        //下一个环节通常都是pass
+        if(nextFlowVO.getFlowRunBO().getFlowResultEnum() == null) {
+            flowInstanceFlowEntity.setFlowResult(FlowResultEnum.PASS.getValue());
+        }else {
+            flowInstanceFlowEntity.setFlowResult(nextFlowVO.getFlowRunBO().getFlowResultEnum().getValue());
+        }
+
+        setOpinion(flowInstanceFlowEntity, nextFlowVO.getOpinionBO());
+        PublicFlowNodeEntity publicFlowNodeEntity = _flowNodeMapper.selectById(flowInstanceFlowEntity.getNodeId());
+        JSONObject nextJson = JSONUtil.parseObj(publicFlowNodeEntity.getNextNode());
+        JSONObject jsonObject = nextJson.getJSONObject((StrUtil.isNotEmpty(nextFlowVO.getFlowRunBO().getKey()) ? nextFlowVO.getFlowRunBO().getKey() : Constant.Key.NEXT));
+        flowInstanceFlowEntity.setNextNodeKey(jsonObject.getStr(Constant.Key.NEXT_NODE_KEY));
+        flowInstanceFlowEntity.setNextNodeId(jsonObject.getStr(Constant.Key.NEXT_NODE_ID));
+        _publicFlowInstanceFlowMapper.updateById(flowInstanceFlowEntity);
+        Integer refType = jsonObject.getInt(Constant.Key.REF_TYPE);
+        String refId = jsonObject.getStr(Constant.Key.REF_ID);
+        _publicFlowInstanceFlowMapper.insert(getFlowInstanceFlowEntity(flowInstanceFlowEntity, refType, refId));
+    }
+
+    private void setOpinion(PublicFlowInstanceFlowEntity flowInstanceFlowEntity, OpinionBO opinionBO) {
+
+        flowInstanceFlowEntity.setHeaderComment(opinionBO.getHeaderComment());
+        flowInstanceFlowEntity.setBackComment(opinionBO.getBackComment());
+        flowInstanceFlowEntity.setFlowComment(opinionBO.getFlowComment());
     }
 
     @Override

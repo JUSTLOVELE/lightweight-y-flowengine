@@ -26,6 +26,8 @@ public class Constant {
         public String REF_TYPE = "refType";
 
         public String REF_ID = "refId";
+
+        public String NEXT = "next";
     }
 
     public interface Value {
