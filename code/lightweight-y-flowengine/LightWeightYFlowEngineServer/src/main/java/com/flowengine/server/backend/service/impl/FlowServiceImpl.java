@@ -118,25 +118,26 @@ public class FlowServiceImpl implements FlowService {
         flowInstanceFlowEntity.setLastNodeId(startNode.getLastNodeId());
         flowInstanceFlowEntity.setLastNodeKey(startNode.getLastNodeKey());
         String nextNode = startNode.getNextNode();
-        JSONArray nextArray = JSONUtil.parseArray(nextNode);
+        JSONObject nextJson = JSONUtil.parseObj(nextNode);
         Integer refType = null;
         String refId = null;
+        JSONObject jsonObject = nextJson.getJSONObject((StrUtil.isNotEmpty(startFlowVO.getKey()) ? startFlowVO.getKey() : Constant.Value.START));
 
-        if(Constant.Value.START.equals(startFlowVO.getKey())) {
-            //如果没有指定key就说明是第一个
-            JSONObject nextJSON = nextArray.getJSONObject(0);
-            flowInstanceFlowEntity.setNextNodeId(nextJSON.getStr(Constant.Key.NEXT_NODE_ID));
-            flowInstanceFlowEntity.setNextNodeKey(nextJSON.getStr(Constant.Key.NEXT_NODE_KEY));
-            refType = nextJSON.getInt(Constant.Key.REF_TYPE);
-            refId = nextJSON.getStr(Constant.Key.REF_ID);
-        }else{
+        if(jsonObject != null) {
+
+            flowInstanceFlowEntity.setNextNodeId(jsonObject.getStr(Constant.Key.NEXT_NODE_ID));
+            flowInstanceFlowEntity.setNextNodeKey(jsonObject.getStr(Constant.Key.NEXT_NODE_KEY));
+            refType = jsonObject.getInt(Constant.Key.REF_TYPE);
+            refId = jsonObject.getStr(Constant.Key.REF_ID);
+        }else {
             throw new RuntimeException("初始节点必须配置为start");
         }
 
         flowInstanceFlowEntity.setFlowSort(1);//初始
         flowInstanceFlowEntity.setOperationTime(new Date());
         flowInstanceFlowEntity.setUserOpId(startFlowVO.getCreateUserOpId());
-        flowInstanceFlowEntity.setFlowResult(FlowResultEnum.PASS.getValue());
+        flowInstanceFlowEntity.setFlowResult(FlowResultEnum.PASS.
+                getValue());
         flowInstanceFlowEntity.setFlowStatus(FlowInstanceFlowFlowStatusEnum.OPERATED.getValue()); //0:未操作;1:已操作;注意这里仅仅是是否操作过，如果不通过也是属于操作的也就是1
         _publicFlowInstanceFlowMapper.insert(flowInstanceFlowEntity);
         //插入一条当前自己的发起的流程数据后要插入下一条流程的信息，意思就是转发给下一个用户的流程数据
