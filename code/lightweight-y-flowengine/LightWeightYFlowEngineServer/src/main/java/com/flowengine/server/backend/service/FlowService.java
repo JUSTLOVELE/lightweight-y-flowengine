@@ -1,5 +1,7 @@
 package com.flowengine.server.backend.service;
 
+import com.flowengine.server.model.BackFlowBO;
+import com.flowengine.server.model.EndFlowBO;
 import com.flowengine.server.model.NextFlowBO;
 import com.flowengine.server.model.StartFlowBO;
 
@@ -24,10 +26,10 @@ public interface FlowService {
     /**
      * 回退
      */
-    public void back();
+    public void back(BackFlowBO backFlowBO);
 
     /**
      * 结束流程
      */
-    public void endFlow();
+    public void endFlow(EndFlowBO endFlowBO);
 }

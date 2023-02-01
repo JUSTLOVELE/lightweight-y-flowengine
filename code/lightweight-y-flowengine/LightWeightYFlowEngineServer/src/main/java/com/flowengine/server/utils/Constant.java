@@ -28,6 +28,10 @@ public class Constant {
         public String REF_ID = "refId";
 
         public String NEXT = "next";
+
+        public String BACK = "back";
+
+        public String END = "end";
     }
 
     public interface Value {

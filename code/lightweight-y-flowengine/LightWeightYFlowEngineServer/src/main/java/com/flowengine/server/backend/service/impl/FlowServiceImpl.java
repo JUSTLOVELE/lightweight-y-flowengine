@@ -11,14 +11,13 @@ import com.flowengine.server.entity.PublicFlowNodeEntity;
 import com.flowengine.server.mapper.PublicFlowInstanceFlowMapper;
 import com.flowengine.server.mapper.PublicFlowInstanceMapper;
 import com.flowengine.server.mapper.PublicFlowNodeMapper;
-import com.flowengine.server.model.NextFlowBO;
-import com.flowengine.server.model.OpinionBO;
-import com.flowengine.server.model.StartFlowBO;
+import com.flowengine.server.model.*;
 import com.flowengine.server.model.enums.FlowInstanceFlowFlowStatusEnum;
 import com.flowengine.server.model.enums.FlowResultEnum;
 import com.flowengine.server.model.enums.FlowStatusEnum;
 import com.flowengine.server.model.enums.OverTimeEnum;
 import com.flowengine.server.utils.Constant;
+import com.flowengine.server.utils.DateUtil;
 import com.flowengine.server.utils.UUIDGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -219,12 +218,105 @@ public class FlowServiceImpl implements FlowService {
     }
 
     @Override
-    public void back() {
+    public void back(BackFlowBO backFlowBO) {
 
+        if(StrUtil.isEmpty(backFlowBO.getFlowRunBO().getInstanceFlowId())) {
+            throw new RuntimeException("流程流转id不能为空");
+        }
+
+        PublicFlowInstanceFlowEntity flowInstanceFlowEntity = _publicFlowInstanceFlowMapper.selectById(backFlowBO.getFlowRunBO().getInstanceFlowId());
+
+        if(flowInstanceFlowEntity == null) {
+            throw new RuntimeException("根据流程流转id查询不到流程流转对象");
+        }
+
+        if(StrUtil.isNotEmpty(backFlowBO.getFlowRunBO().getOrgId())) {
+            flowInstanceFlowEntity.setOrgId(backFlowBO.getFlowRunBO().getOrgId());
+        }
+
+        if(StrUtil.isNotEmpty(backFlowBO.getFlowRunBO().getDeptId())) {
+            flowInstanceFlowEntity.setDeptId(backFlowBO.getFlowRunBO().getDeptId());
+        }
+
+        flowInstanceFlowEntity.setOperationTime(new Date());
+        flowInstanceFlowEntity.setUserOpId(backFlowBO.getFlowRunBO().getUserOpId());
+        flowInstanceFlowEntity.setFlowStatus(FlowInstanceFlowFlowStatusEnum.OPERATED.getValue());
+        //这里是回退所以通常是back
+        if(backFlowBO.getFlowRunBO().getFlowResultEnum() == null) {
+            flowInstanceFlowEntity.setFlowResult(FlowResultEnum.NO_PASS.getValue());
+        }else {
+            flowInstanceFlowEntity.setFlowResult(backFlowBO.getFlowRunBO().getFlowResultEnum().getValue());
+        }
+
+        setOpinion(flowInstanceFlowEntity, backFlowBO.getOpinionBO());
+        PublicFlowNodeEntity publicFlowNodeEntity = _flowNodeMapper.selectById(flowInstanceFlowEntity.getNodeId());
+        JSONObject nextJson = JSONUtil.parseObj(publicFlowNodeEntity.getNextNode());
+        JSONObject jsonObject = nextJson.getJSONObject((StrUtil.isNotEmpty(backFlowBO.getFlowRunBO().getKey()) ? backFlowBO.getFlowRunBO().getKey() : Constant.Key.BACK));
+        flowInstanceFlowEntity.setNextNodeKey(jsonObject.getStr(Constant.Key.NEXT_NODE_KEY));
+        flowInstanceFlowEntity.setNextNodeId(jsonObject.getStr(Constant.Key.NEXT_NODE_ID));
+        _publicFlowInstanceFlowMapper.updateById(flowInstanceFlowEntity);
+        Integer refType = jsonObject.getInt(Constant.Key.REF_TYPE);
+        String refId = jsonObject.getStr(Constant.Key.REF_ID);
+        _publicFlowInstanceFlowMapper.insert(getFlowInstanceFlowEntity(flowInstanceFlowEntity, refType, refId));
     }
 
     @Override
-    public void endFlow() {
+    public void endFlow(EndFlowBO endFlowBO) {
 
+        if(StrUtil.isEmpty(endFlowBO.getFlowRunBO().getInstanceFlowId())) {
+            throw new RuntimeException("流程流转id不能为空");
+        }
+
+        PublicFlowInstanceFlowEntity flowInstanceFlowEntity = _publicFlowInstanceFlowMapper.selectById(endFlowBO.getFlowRunBO().getInstanceFlowId());
+
+        if(flowInstanceFlowEntity == null) {
+            throw new RuntimeException("根据流程流转id查询不到流程流转对象");
+        }
+
+        if(StrUtil.isNotEmpty(endFlowBO.getFlowRunBO().getOrgId())) {
+            flowInstanceFlowEntity.setOrgId(endFlowBO.getFlowRunBO().getOrgId());
+        }
+
+        if(StrUtil.isNotEmpty(endFlowBO.getFlowRunBO().getDeptId())) {
+            flowInstanceFlowEntity.setDeptId(endFlowBO.getFlowRunBO().getDeptId());
+        }
+
+        flowInstanceFlowEntity.setOperationTime(new Date());
+        flowInstanceFlowEntity.setUserOpId(endFlowBO.getFlowRunBO().getUserOpId());
+        flowInstanceFlowEntity.setFlowStatus(FlowInstanceFlowFlowStatusEnum.OPERATED.getValue());
+        //这里是流程结束所以应该是要pass
+        if(endFlowBO.getFlowRunBO().getFlowResultEnum() == null) {
+            flowInstanceFlowEntity.setFlowResult(FlowResultEnum.PASS.getValue());
+        }else {
+            flowInstanceFlowEntity.setFlowResult(endFlowBO.getFlowRunBO().getFlowResultEnum().getValue());
+        }
+
+        setOpinion(flowInstanceFlowEntity, endFlowBO.getOpinionBO());
+        PublicFlowNodeEntity publicFlowNodeEntity = _flowNodeMapper.selectById(flowInstanceFlowEntity.getNodeId());
+        JSONObject nextJson = JSONUtil.parseObj(publicFlowNodeEntity.getNextNode());
+        JSONObject jsonObject = nextJson.getJSONObject(Constant.Key.END);//这里是END环节所以只能要end
+        flowInstanceFlowEntity.setNextNodeKey(jsonObject.getStr(Constant.Key.NEXT_NODE_KEY));
+        flowInstanceFlowEntity.setNextNodeId(jsonObject.getStr(Constant.Key.NEXT_NODE_ID));
+        _publicFlowInstanceFlowMapper.updateById(flowInstanceFlowEntity);
+        PublicFlowInstanceFlowEntity endEntity = getFlowInstanceFlowEntity(flowInstanceFlowEntity, null, null);
+        endEntity.setFlowStatus(FlowInstanceFlowFlowStatusEnum.OPERATED.getValue());
+        endEntity.setFlowResult(FlowResultEnum.PASS.getValue());
+        _publicFlowInstanceFlowMapper.insert(endEntity);
+        PublicFlowInstanceEntity publicFlowInstanceEntity = _publicFlowInstanceMapper.selectById(endEntity.getInstanceId());
+        publicFlowInstanceEntity.setFlowStatus(FlowStatusEnum.END.getValue());
+        publicFlowInstanceEntity.setEndTime(new Date());
+        //计算所有环节的总时间
+        Map<String, Object> columns = new HashMap<>();
+        columns.put(Constant.Column.MAIN_ID, publicFlowInstanceEntity.getMainId());
+        List<PublicFlowNodeEntity> publicFlowNodeEntities = _publicFlowNodeMapper.selectByMap(columns);
+        int totalTime = 0;
+        for(PublicFlowNodeEntity entity: publicFlowNodeEntities) {
+            totalTime += entity.getLimitTime();
+        }
+        //计算到创建时间位置的时间
+        int days = DateUtil.differentDaysByMillisecond(publicFlowInstanceEntity.getCreateTime(), publicFlowInstanceEntity.getEndTime());
+        publicFlowInstanceEntity.setTotalTime(days);
+        publicFlowInstanceEntity.setIsOverTime((totalTime > days) ? 0 : 1);
+        _publicFlowInstanceMapper.updateById(publicFlowInstanceEntity);
     }
 }
