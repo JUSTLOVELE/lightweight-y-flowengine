@@ -4,8 +4,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.mobile.device.DeviceHandlerMethodArgumentResolver;
-import org.springframework.mobile.device.DeviceResolverHandlerInterceptor;
 import org.springframework.validation.MessageCodesResolver;
 import org.springframework.validation.Validator;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
@@ -28,31 +26,31 @@ import java.util.List;
 @EnableWebMvc
 public class SpringWebMvcConfigurer implements WebMvcConfigurer {
 
-	@Bean
-	public DeviceResolverHandlerInterceptor 
-	        deviceResolverHandlerInterceptor() {
-	    return new DeviceResolverHandlerInterceptor();
-	}
-
-	@Bean
-	public DeviceHandlerMethodArgumentResolver 
-	        deviceHandlerMethodArgumentResolver() {
-	    return new DeviceHandlerMethodArgumentResolver();
-	}
+//	@Bean
+//	public DeviceResolverHandlerInterceptor
+//	        deviceResolverHandlerInterceptor() {
+//	    return new DeviceResolverHandlerInterceptor();
+//	}
+//
+//	@Bean
+//	public DeviceHandlerMethodArgumentResolver
+//	        deviceHandlerMethodArgumentResolver() {
+//	    return new DeviceHandlerMethodArgumentResolver();
+//	}
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		
 		//registry.addInterceptor(new ProcessorInterceptors());
 		//引入spring-mobile
-		registry.addInterceptor(deviceResolverHandlerInterceptor());
+		//registry.addInterceptor(deviceResolverHandlerInterceptor());
 		//registry.addInterceptor(new ProcessorInterceptors()).addPathPatterns("/**");
 	}
 	
 	@Override
 	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> arg0) {
 		//引入springmobile
-		arg0.add(deviceHandlerMethodArgumentResolver());
+		//arg0.add(deviceHandlerMethodArgumentResolver());
 	}
 	//最新的方式已经修改在配置文件中了不需要在这里配置了
 //	@Bean

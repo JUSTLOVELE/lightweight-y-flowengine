@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>个人奖项审核</title>
+    <link rel="stylesheet" href="/srm/static/lib/element-ui/element.css">
+    <script src="/srm/static/common/constant.js"></script>
+    <script src="/srm/static/common/utils.js"></script>
+    <script src="/srm/static/lib/vue/vue.js"></script>
+    <script src="/srm/static/lib/element-ui/element.js"></script>
+    <script src="/srm/static/lib/jquery/jquery3.5.1.js"></script>
+    <script src="/srm/static/component/base/base.js"></script>
+    <link rel="stylesheet" href="/srm/static/component/table/table.css">
+    <script src="/srm/static/component/table/table.js"></script>
+    <script src="/srm/static/component/formDialog/formDialog.js"></script>
+    <link rel="stylesheet" href="/srm/static/component/formDialog/formDialog.css">
+</head>
+<body>
+<div id="app">
+    <base-component ref="base"
+                    @current-row-change="currentRowChange"
+                    @row-click="rowClick"
+                    :dialogs="dialogs"
+                    :table="table"
+                    :form="form">
+
+        <template slot="addDialogSlot">
+            <el-form :inline="true" status-icon class="action-form" ref="producForm" :rules="activeFormRules" :model="activeModel" size="mini" label-position="right" label-width="100px">
+                <el-col>
+                    <el-form-item label="通知标题" prop="title">
+                        <el-input placeholder="请输入通知标题" v-model="activeModel.title" size="small"  style="width:350px;"></el-input>
+                    </el-form-item>
+                </el-col>
+                <el-col>
+                    <el-form-item label="通知内容" prop="content">
+                        <el-input placeholder="请输入通知内容" :rows="5" type="textarea"  v-model="activeModel.content" style="width:350px"></el-input>
+                    </el-form-item>
+                </el-col>
+                <el-col>
+                    <el-form-item label="发布状态" prop="status">
+                        <el-select v-model="activeModel.status" placeholder="请选择">
+                            <el-option
+                                    v-for="item in statuses"
+                                    :key="item.value"
+                                    :label="item.label"
+                                    :value="item.value">
+                            </el-option>
+                        </el-select>
+                    </el-form-item>
+                </el-col>
+            </el-form>
+        </template>
+
+        <template slot="editDialogSlot">
+            <el-form :inline="true" status-icon class="action-form" ref="editProducForm" :rules="activeFormRules" :model="activeModel" size="mini" label-position="right" label-width="100px">
+                <el-col>
+                    <el-form-item label="通知标题" prop="title">
+                        <el-input placeholder="请输入作品标题" v-model="activeModel.title" size="small"  style="width:350px;"></el-input>
+                    </el-form-item>
+                </el-col>
+                <el-col>
+                    <el-form-item label="通知内容" prop="content">
+                        <el-input placeholder="请输入备注内容" :rows="5" type="textarea"  v-model="activeModel.content" style="width:350px"></el-input>
+                    </el-form-item>
+                </el-col>
+                <el-col>
+                    <el-form-item label="发布状态" prop="status">
+                        <el-select v-model="activeModel.status" placeholder="请选择">
+                            <el-option
+                                    v-for="item in statuses"
+                                    :key="item.value"
+                                    :label="item.label"
+                                    :value="item.value">
+                            </el-option>
+                        </el-select>
+                    </el-form-item>
+                </el-col>
+            </el-form>
+        </template>
+
+
+    </base-component>
+</div>
+<script>
+
+    var vueObj = new Vue({
+        el: '#app',
+        data: function() {
+
+            var addUploaderMod = {
+                uploader:
+                    {
+                        fileUrls: '', //文件url
+                        thumbUrls: '',//如果有缩略图的话有值
+                        label: '上传附件（支持图片、PDF、Word。仅供内部查阅，不对外公开）',
+                        accept: 'image/*,.pdf,.doc,.docx', //可以接受的文件类型
+                        size: 6,
+                        props: {
+                            split: ';',
+                            name: 'mediaFiles' //传到后台的key
+                        },
+                        list:true
+                    }
+            };
+
+            let _this = this
+            return {
+                currentRow: null,
+                productTypes: [],
+                activeModel: {
+                    title: '',
+                    content: '',
+                    status: '',
+                },
+                statuses:[
+                    {
+                        value: '1',
+                        label: '发布'
+                    }, {
+                        value: '2',
+                        label: '待发布',
+                    }, {
+                        value: '3',
+                        label: '撤销'
+                    },
+                ],
+                activeFormRules: {
+                    title: [
+                        { required: true, message: '请输入通知标题', trigger: 'blur' },
+                    ],
+                    content: [
+                        { required: true, message: '请输入通知内容', trigger: 'blur' },
+                    ],
+                    status: [
+                        { required: true, message: '请选择状态', trigger: 'blur' },
+                    ]
+                },
+                form: {
+                    //操作按钮
+                    buttons: [
+                        {type: 'add', bindRef: 'addDialog', label: '新增通知'},
+                    ],
+                    //查询条件
+                    inputs: [
+                        {name: 'title', placeholder: '请输入通知标题'}
+                    ],
+                },
+                table: {
+                    url: GLOBAL_API.NOTICE.QUERY,
+                    cols: [
+                        {
+                            prop: "createUserName",
+                            label: "发布人员",
+                            //width: 100
+                        },
+                        {
+                            prop: "title",
+                            label: "标题",
+                        },
+                        {
+                            prop: "createTime",
+                            label: "创建时间"
+                        }
+                    ],
+                    enumMap:{
+                        //status: GLOBAL_ENUM.STATUS
+                    },
+                },
+                dialogs:[{
+                    ref: 'addDialog',
+                    type:'',
+                    title: '新增通知',
+                    items: [
+
+                    ],
+                    module: addUploaderMod,
+                    manual: true,
+                    submitUrl: GLOBAL_API.NOTICE.SUBMIT,
+                    handler: function (innerVm, formData, rawData, cb, ref, url) {
+
+                        _this.$refs.producForm.validate(function (valid, object) {
+
+                            if (!valid) {
+                                cb()
+                                return
+                            }
+
+                            formData.append("title", _this.activeModel.title)
+                            formData.append("content", _this.activeModel.content)
+                            formData.append("status", _this.activeModel.status)
+                            //formData.append("opId", rawData['opId'])
+
+                            $.ajax({
+                                method: "POST",
+                                url: url,
+                                data: formData,
+                                processData: false,
+                                contentType: false,
+
+                            }).done(function (resData) {
+
+                                if (resData.code !== 100) {
+                                    innerVm.$message.error(resData.desc || '操作失败');
+                                    cb()
+                                    return
+                                }
+                                innerVm.$message.success("操作成功");
+                                innerVm.refreshTable()
+                                innerVm.getComp(ref).hide()
+                                _this.$refs['producForm'].resetFields()
+                                cb()
+                            }).fail(function (res) {
+                                console.error(res)
+                                innerVm.$message.error("网络异常");
+                                cb()
+                            })
+                        })
+                    }
+                },{
+                    ref: 'editDialog',
+                    title: '编辑通知',
+                    items: [
+
+                    ],
+                    buttons:[{
+                        label: '删除',
+                        type: 'danger',
+                        url: GLOBAL_API.NOTICE.DELETE,
+                    },{
+                        label: '修改',
+                        type: 'primary',
+                        url: GLOBAL_API.NOTICE.EDIT,
+                    }],
+                    module: addUploaderMod,
+                    manual: true,
+                    paramFields: ['opId'],
+                    enumMap: {
+
+                    },
+                    requireRow: true,
+                    handler: function (innerVm, formData, rawData, cb, ref, url) {
+
+                        _this.$refs.editProducForm.validate(function (valid, object) {
+
+                            if (!valid) {
+                                cb()
+                                return
+                            }
+
+                            formData.append("title", _this.activeModel.title)
+                            formData.append("content", _this.activeModel.content)
+                            formData.append("opId", rawData['opId'])
+                            formData.append("status", _this.activeModel.status)
+
+                            $.ajax({
+                                method: "POST",
+                                url: url,
+                                data: formData,
+                                processData: false,
+                                contentType: false,
+
+                            }).done(function (resData) {
+
+                                if (resData.code !== 100) {
+                                    innerVm.$message.error(resData.desc || '操作失败');
+                                    cb()
+                                    return
+                                }
+                                innerVm.$message.success("操作成功");
+                                innerVm.refreshTable()
+                                innerVm.getComp(ref).hide()
+                                cb()
+                            }).fail(function (res) {
+                                console.error(res)
+                                innerVm.$message.error("网络异常");
+                                cb()
+                            })
+                        })
+                    }
+                }],
+            }
+        },
+        mounted: function (){
+            this.setProductType()
+        },
+        methods: {
+            setProductType: function () {
+                let _this = this
+
+                $.ajax({
+                    method: "get",
+                    url: GLOBAL_API.PRODUCT.GET_PRODUCT_TYPE_COMBOX,
+                    data: {},
+                }).done(function (resData) {
+                    _this.productTypes = resData
+                }).fail(function (res) {
+                    console.error(res)
+                })
+            },
+            rowClick: function (row) {
+                this.$refs.base.showFormDialog("editDialog", row)
+            },
+            currentRowChange: function (val) {
+
+                this.currentRow = val
+
+                if(val && val.title) {
+                    this.activeModel.title = val.title
+                    this.activeModel.content = val.content
+                    this.activeModel.status = val.status
+                }
+            },
+            getBaseQueryParam: function () {
+                var query = this.$refs.base.getQueryParam()
+                console.log(query)
+            },
+            queryParam: function(val) {
+                //base.js中有emit会调用这个参数,并传递val过来
+                console.log("监听到导航栏的值发生变化")
+                console.log(val)
+            }
+        }
+    })
+
+</script>
+</body>
+</html>

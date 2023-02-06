@@ -1,0 +1,82 @@
+CREATE TABLE public.public_menu (
+    op_id character varying(32) NOT NULL,
+    parent_id character varying(32),
+    url character varying(500),
+    text character varying(500),
+    type integer,
+    button_type integer,
+    available_flag smallint,
+    sort integer,
+    category integer,
+    sys integer,
+    icon character varying(150)
+);
+
+CREATE TABLE public.public_user_tbl (
+    op_id character varying(32) NOT NULL,
+    user_id character varying(50) NOT NULL,
+    user_phone character varying(50),
+    user_name character varying(100) NOT NULL,
+    user_password character varying(128) NOT NULL,
+    create_time timestamp(6) without time zone,
+    org_id character varying(32),
+    dept_id character varying(32),
+    user_category integer,
+    last_login timestamp(6) without time zone,
+    ref_entity_id character varying(32),
+    is_stop integer,
+    register_from integer,
+    user_sources integer,
+    bg_img character varying(500),
+    user_sex character varying(8),
+    head_image character varying(1024),
+    user_address character varying(2048),
+    street_address character varying(2048),
+    user_birthday date,
+    user_age integer,
+    user_email character varying(128),
+    work_address character varying(256)
+);
+
+CREATE TABLE public.public_role (
+    op_id character varying(32) NOT NULL,
+    org_id character varying(32),
+    name character varying(100) NOT NULL,
+    category integer,
+    create_time timestamp(6) without time zone,
+    description character varying(2000),
+    sys integer
+);
+
+
+CREATE TABLE public.public_user_role_grant (
+    user_op_id character varying(32) NOT NULL,
+    role_id character varying(32) NOT NULL
+);
+
+CREATE TABLE public.public_role_menu_grant (
+    menu_id character varying(32) NOT NULL,
+    role_id character varying(32) NOT NULL
+);
+
+ALTER TABLE ONLY public.public_role
+    ADD CONSTRAINT tba_role_pkey PRIMARY KEY (op_id);
+
+ALTER TABLE ONLY public.public_user_tbl
+    ADD CONSTRAINT public_user_tbl_pkey PRIMARY KEY (op_id);
+
+ALTER TABLE ONLY public.public_menu
+    ADD CONSTRAINT tba_menu_pkey PRIMARY KEY (op_id);
+
+
+ALTER TABLE ONLY public.public_user_role_grant
+    ADD CONSTRAINT tba_user_role_grant_ibfk_2 FOREIGN KEY (role_id) REFERENCES public.public_role(op_id);
+
+ALTER TABLE ONLY public.public_user_role_grant
+    ADD CONSTRAINT tba_user_role_grant_ibfk_1 FOREIGN KEY (user_op_id) REFERENCES public.public_user_tbl(op_id);
+
+ALTER TABLE ONLY public.public_role_menu_grant
+    ADD CONSTRAINT tba_role_menu_grant_ibfk_1 FOREIGN KEY (menu_id) REFERENCES public.public_menu(op_id);
+
+ALTER TABLE ONLY public.public_role_menu_grant
+    ADD CONSTRAINT tba_role_menu_grant_ibfk_2 FOREIGN KEY (role_id) REFERENCES public.public_role(op_id);
