@@ -23,7 +23,7 @@ import org.springframework.web.client.RestTemplate;
  * @history:
  */
 @Configuration
-@MapperScan({"com.flowengine.server.mapper"})
+@MapperScan({"com.flowengine.server.mapper", "com.flowengine.common.utils.mapper"})
 public class Config {
 
     private final static Log _logger = LogFactory.getLog(Config.class);
