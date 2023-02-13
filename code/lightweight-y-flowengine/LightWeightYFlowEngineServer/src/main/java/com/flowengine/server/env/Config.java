@@ -31,16 +31,6 @@ public class Config {
     @Autowired
     private YmlProjectConfig _ymlProjectConfig;
 
-    @Bean
-    public PropertySourcesPlaceholderConfigurer properties () {
-
-        PropertySourcesPlaceholderConfigurer configurer = new PropertySourcesPlaceholderConfigurer();
-        YamlPropertiesFactoryBean yaml = new YamlPropertiesFactoryBean();
-        //这里可以Import很多个
-        yaml.setResources(new ClassPathResource("myConfig.yml"));//File引入
-        configurer.setProperties(yaml.getObject());
-        return configurer;
-    }
 //
 //    @Bean
 //    public MinioClient minioClient() {

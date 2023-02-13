@@ -7,7 +7,7 @@ spring:
     name: LightWeightYFlowEngineServer
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/postgres
+    url: jdbc:postgresql://localhost:5433/postgres
     username: postgres
     password: 123456
     dbcp2:
@@ -28,7 +28,7 @@ server:
       timneout: 3000
 
 logging:
-  path: D:\\logs\\
+  path: C:\\logs\\
   level:
     root: info
 
@@ -36,4 +36,4 @@ logging:
 #  type-enums-package: com.work.common.utils.enums
 
 projectconfig:
-  encryptKey: lwyflwyflwyflwyflwyflwyf
+  encryptKey: hykjhykjhykjhykjhykjhykj

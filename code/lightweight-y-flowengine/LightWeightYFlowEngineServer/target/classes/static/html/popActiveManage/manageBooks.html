@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>个人书籍录入</title>
+    <link rel="stylesheet" href="/srm/static/lib/element-ui/element.css">
+    <script src="/srm/static/common/constant.js"></script>
+    <script src="/srm/static/common/utils.js"></script>
+    <script src="/srm/static/lib/vue/vue.js"></script>
+    <script src="/srm/static/lib/element-ui/element.js"></script>
+    <script src="/srm/static/lib/jquery/jquery3.5.1.js"></script>
+    <script src="/srm/static/component/base/base.js"></script>
+    <link rel="stylesheet" href="/srm/static/component/table/table.css">
+    <script src="/srm/static/component/table/table.js"></script>
+    <script src="/srm/static/component/formDialog/formDialog.js"></script>
+    <link rel="stylesheet" href="/srm/static/component/formDialog/formDialog.css">
+
+    <style>
+
+        .form-dialog-comp .el-input--mini .el-input__inner {
+            width: 250px;
+        }
+    </style>
+
+</head>
+<body>
+<div id="app">
+    <base-component ref="base"
+                    @current-row-change="currentRowChange"
+                    @row-click="rowClick"
+                    :dialogs="dialogs"
+                    :table="table"
+                    :form="form">
+
+        <template slot="addDialogSlot">
+            <el-form :inline="true" status-icon class="action-form" ref="producForm" :rules="activeFormRules" :model="activeModel" size="mini" label-position="right" label-width="100px">
+                <!--                <el-col>-->
+                <!--                    <el-form-item label="作品类型" prop="productType">-->
+                <!--                        <el-select v-model="activeModel.productType" placeholder="请选择">-->
+                <!--                            <el-option-->
+                <!--                                    v-for="item in productTypes"-->
+                <!--                                    :key="item.value"-->
+                <!--                                    :label="item.label"-->
+                <!--                                    :value="item.value">-->
+                <!--                            </el-option>-->
+                <!--                        </el-select>-->
+                <!--                    </el-form-item>-->
+                <!--                </el-col>-->
+                <el-col>
+                    <el-form-item label="书籍名称" prop="title">
+                        <el-input placeholder="请输入书籍名称" v-model="activeModel.title" size="small"  style="width:350px;"></el-input>
+                    </el-form-item>
+                </el-col>
+
+                <el-col>
+                    <el-form-item label="isbn号码" prop="isbn">
+                        <el-input placeholder="请输入isbn号码"   v-model="activeModel.isbn" size="small"  style="width:350px"></el-input>
+                    </el-form-item>
+                </el-col>
+
+                <el-col>
+                    <el-form-item label="院内作者" prop="authors">
+                        <el-select v-model="activeModel.authors" placeholder="仅能选择院内作者,院外不选" filterable  multiple style="width:250px">
+                            <el-option
+                                    v-for="item in authors"
+                                    :key="item.value"
+                                    :label="item.label"
+                                    :value="item.value">
+                            </el-option>
+                        </el-select>
+                    </el-form-item>
+                </el-col>
+
+                <el-col>
+                    <el-form-item label="备注内容" prop="remark">
+                        <el-input placeholder="请输入具体负责内容,例如第几章、独作、一作" :rows="5" type="textarea"  v-model="activeModel.remark" style="width:350px"></el-input>
+                    </el-form-item>
+                </el-col>
+            </el-form>
+        </template>
+
+        <template slot="editDialogSlot">
+            <el-form :inline="true" status-icon class="action-form" ref="editProducForm" :rules="activeFormRules" :model="activeModel" size="mini" label-position="right" label-width="100px">
+                <el-col>
+                    <el-form-item label="书籍名称" prop="title">
+                        <el-input placeholder="请输入书籍名称" v-model="activeModel.title" size="small"  style="width:350px;"></el-input>
+                    </el-form-item>
+                </el-col>
+
+                <el-col>
+                    <el-form-item label="isbn号码" prop="isbn">
+                        <el-input placeholder="请输入isbn号码"   v-model="activeModel.isbn" size="small"  style="width:350px"></el-input>
+                    </el-form-item>
+                </el-col>
+
+                <el-col>
+                    <el-form-item label="院内作者" prop="authors">
+                        <el-select v-model="activeModel.authors" placeholder="仅能选择院内作者,院外不选"  filterable  multiple style="width:250px">
+                            <el-option
+                                    v-for="item in authors"
+                                    :key="item.value"
+                                    :label="item.label"
+                                    :value="item.value">
+                            </el-option>
+                        </el-select>
+                    </el-form-item>
+                </el-col>
+
+                <el-col>
+                    <el-form-item label="备注内容" prop="remark">
+                        <el-input placeholder="请输入具体负责内容,例如第几章、独作、一作" :rows="5" type="textarea"  v-model="activeModel.remark" style="width:350px"></el-input>
+                    </el-form-item>
+                </el-col>
+
+                <el-col>
+                    <el-form-item label="审核意见">
+                        <el-input placeholder="请输入审核意见" :rows="5" type="textarea"  v-model="activeModel.backRemark" style="width:350px"></el-input>
+                    </el-form-item>
+                </el-col>
+            </el-form>
+        </template>
+
+
+    </base-component>
+</div>
+<script>
+
+    var vueObj = new Vue({
+        el: '#app',
+        data: function() {
+
+            var addUploaderMod = {
+                uploader:
+                    {
+                        fileUrls: '', //文件url
+                        thumbUrls: '',//如果有缩略图的话有值
+                        label: '上传附件（支持图片、PDF、Word。仅供内部查阅，不对外公开）',
+                        accept: 'image/*,.pdf,.doc,.docx', //可以接受的文件类型
+                        size: 6,
+                        props: {
+                            split: ';',
+                            name: 'mediaFiles' //传到后台的key
+                        },
+                        list:true,
+                    }
+            };
+
+            let _this = this
+            return {
+                currentRow: null,
+                productTypes: [],
+                authors:[],
+                activeModel: {
+                    title: '',
+                    isbn: '',
+                    authors: '',
+                    remark: '',
+                    backRemark: ''
+                },
+                activeFormRules: {
+                    title: [
+                        { required: true, message: '请输入书籍名称', trigger: 'blur' },
+                    ],
+                    isbn: [
+                        { required: true, message: '请输入isbn号码', trigger: 'blur' },
+                    ],
+                    authors: [
+                        { required: true, message: '仅能选择院内作者,院外不选', trigger: 'blur' },
+                    ],
+                    remark: [
+                        { required: true, message: '请输入具体负责内容,例如第几章、独作、一作', trigger: 'blur' },
+                    ]
+                },
+                form: {
+                    //操作按钮
+                    buttons: [
+                        {type: 'add', bindRef: 'addDialog', label: '个人书籍录入'},
+                    ],
+                    //查询条件
+                    inputs: [
+                        {name: 'isbn', placeholder: '请输入isbn号'},
+                        {name: 'title', placeholder: '请输入书籍名称'},
+                    ],
+
+                },
+                table: {
+                    url: GLOBAL_API.BOOK.MANAGE_BOOK,
+                    cols: [
+                        {
+                            prop: "title",
+                            label: "书籍名称",
+                        },{
+                            prop: "isbn",
+                            label: "isbn号",
+                        },
+                        {
+                            prop: "statusText",
+                            label: "状态",
+                        },
+                        {
+                            prop: "createTime",
+                            label: "创建时间"
+                        },
+                        {
+                            prop: "checkUserName",
+                            label: "审核人"
+                        },
+                        {
+                            prop: "checkTime",
+                            label: "审核时间"
+                        }
+                    ],
+                    enumMap:{
+                        //status: GLOBAL_ENUM.STATUS
+                    },
+                },
+                dialogs:[{
+                    ref: 'addDialog',
+                    type:'',
+                    title: '个人书籍录入',
+                    items: [
+
+                    ],
+                    module: addUploaderMod,
+                    manual: true,
+                    submitUrl: GLOBAL_API.BOOK.SUBMIT,
+                    handler: function (innerVm, formData, rawData, cb, ref, url) {
+
+                        _this.$refs.producForm.validate(function (valid, object) {
+
+                            if (!valid) {
+                                cb()
+                                return
+                            }
+
+                            formData.append("title", _this.activeModel.title)
+                            formData.append("isbn", _this.activeModel.isbn)
+                            formData.append("remark", _this.activeModel.remark)
+                            formData.append("authors", _this.activeModel.authors)
+                            //formData.append("opId", rawData['opId'])
+
+                            $.ajax({
+                                method: "POST",
+                                url: url,
+                                data: formData,
+                                processData: false,
+                                contentType: false,
+
+                            }).done(function (resData) {
+
+                                if (resData.code !== 100) {
+                                    innerVm.$message.error(resData.desc || '操作失败');
+                                    cb()
+                                    return
+                                }
+                                innerVm.$message.success("操作成功");
+                                innerVm.refreshTable()
+                                innerVm.getComp(ref).hide()
+                                _this.$refs['producForm'].resetFields()
+                                cb()
+                            }).fail(function (res) {
+                                console.error(res)
+                                innerVm.$message.error("网络异常");
+                                cb()
+                            })
+                        })
+                    }
+                },{
+                    ref: 'editDialog',
+                    title: '修改个人书籍',
+                    items: [
+
+                    ],
+                    buttons:[{
+                        label: '退回',
+                        type: 'danger',
+                        url: GLOBAL_API.BOOK.BACK,
+                    },{
+                        label: '通过',
+                        type: 'primary',
+                        url: GLOBAL_API.BOOK.PASS,
+                    }],
+                    module: addUploaderMod,
+                    manual: true,
+                    paramFields: ['opId'],
+                    enumMap: {
+
+                    },
+                    requireRow: true,
+                    handler: function (innerVm, formData, rawData, cb, ref, url) {
+
+                        _this.$refs.editProducForm.validate(function (valid, object) {
+
+                            if (!valid) {
+                                cb()
+                                return
+                            }
+
+                            formData.append("title", _this.activeModel.title)
+                            formData.append("isbn", _this.activeModel.isbn)
+                            formData.append("remark", _this.activeModel.remark)
+                            formData.append("authors", _this.activeModel.authors)
+                            formData.append("backRemark", _this.activeModel.backRemark)
+                            formData.append("opId", rawData['opId'])
+
+                            $.ajax({
+                                method: "POST",
+                                url: url,
+                                data: formData,
+                                processData: false,
+                                contentType: false,
+
+                            }).done(function (resData) {
+
+                                if (resData.code !== 100) {
+                                    innerVm.$message.error(resData.desc || '操作失败');
+                                    cb()
+                                    return
+                                }
+                                innerVm.$message.success("操作成功");
+                                innerVm.refreshTable()
+                                innerVm.getComp(ref).hide()
+                                cb()
+                            }).fail(function (res) {
+                                console.error(res)
+                                innerVm.$message.error("网络异常");
+                                cb()
+                            })
+                        })
+                    }
+                }],
+            }
+        },
+        mounted: function (){
+            this.setAuthors()
+        },
+        methods: {
+            setAuthors: function () {
+                let _this = this
+
+                $.ajax({
+                    method: "get",
+                    url: GLOBAL_API.ADMIN.GET_USER_COMBOX,
+                    data: {},
+                }).done(function (resData) {
+                    _this.authors = resData
+                }).fail(function (res) {
+                    console.error(res)
+                })
+            },
+            rowClick: function (row) {
+                this.$refs.base.showFormDialog("editDialog", row)
+            },
+            currentRowChange: function (val) {
+
+                this.currentRow = val
+
+                if(val && val.title) {
+                    this.activeModel.title = val.title
+                    this.activeModel.remark = val.remark
+                    this.activeModel.isbn = val.isbn
+                    this.activeModel.backRemark = val.backRemark
+
+                    if(val.authors) {
+                        this.activeModel.authors = val.authors.split(";");
+                    }
+                }
+            },
+            getBaseQueryParam: function () {
+                var query = this.$refs.base.getQueryParam()
+                console.log(query)
+            },
+            queryParam: function(val) {
+                //base.js中有emit会调用这个参数,并传递val过来
+                console.log("监听到导航栏的值发生变化")
+                console.log(val)
+            }
+        }
+    })
+
+</script>
+</body>
+</html>

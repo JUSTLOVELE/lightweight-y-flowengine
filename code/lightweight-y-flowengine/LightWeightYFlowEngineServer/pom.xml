@@ -75,6 +75,44 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <configuration>
+                    <nonFilteredFileExtensions>
+                        <nonFilteredFileExtension>woff</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>woff2</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>eot</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>ttf</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>svg</nonFilteredFileExtension>
+                    </nonFilteredFileExtensions>
+                </configuration>
+            </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <!--解决element.js报错问题,感觉代码被拦截-->
+                <!-- 在Springboot中运行前端代码时需要  -->
+                <!-- 不要过滤字体库，会造成字体库内容变化，显示不了 -->
+                <excludes>
+
+                    <exclude>static/lib/vue/**</exclude>
+                    <exclude>static/lib/element-ui/**</exclude>
+                    <exclude>static/lib/element-ui/fonts/**</exclude>
+                </excludes>
+            </resource>
+            <!-- 在Springboot中运行前端代码时需要  -->
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+                <includes>
+                    <include>static/lib/vue/**</include>
+                    <include>static/lib/element-ui/**</include>
+                    <include>static/lib/element-ui/fonts/**</include>
+                </includes>
+            </resource>
+        </resources>
     </build>
 </project>

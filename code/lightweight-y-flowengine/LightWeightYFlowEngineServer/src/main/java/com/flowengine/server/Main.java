@@ -15,6 +15,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @ServletComponentScan
 @EnableScheduling
 public class Main {
+    /**
+     * http://localhost:8080/flow/login
+     * @param args
+     */
     public static void main(String[] args) {
         SpringApplication.run(Main.class);
     }

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>demo01</title>
+    <link rel="stylesheet" href="/srm/static/lib/element-ui/element.css">
+    <script src="/srm/static/common/constant.js"></script>
+    <script src="/srm/static/common/utils.js"></script>
+    <script src="/srm/static/lib/vue/vue.js"></script>
+    <script src="/srm/static/lib/element-ui/element.js"></script>
+    <script src="/srm/static/lib/jquery/jquery3.5.1.js"></script>
+    <script src="/srm/static/component/base/base.js"></script>
+    <link rel="stylesheet" href="/srm/static/component/table/table.css">
+    <script src="/srm/static/component/table/table.js"></script>
+    <script src="/srm/static/component/formDialog/formDialog.js"></script>
+    <link rel="stylesheet" href="/srm/static/component/formDialog/formDialog.css">
+</head>
+<body>
+<div id="app">
+    <base-component ref="base"
+                    @current-row-change="currentRowChange"
+                    @row-click="rowClick"
+                    :dialogs="dialogs"
+                    :table="table"
+                    :form="form">
+
+        <template slot="editDialogSlot">
+            <el-form :inline="true" status-icon class="action-form" ref="editActiveForm" :rules="activeFormRules" :model="activeModel" size="mini">
+                <el-col>
+                    <el-form-item label="标题" prop="title">
+                        <el-input readonly="true" placeholder="请输入标题" v-model="activeModel.title" size="small"  style="width:350px;"></el-input>
+                    </el-form-item>
+                </el-col>
+                <el-col>
+                    <el-form-item label="主题" prop="theme">
+                        <el-input readonly="true" placeholder="请输入主题" :rows="3" type="textarea" v-model="activeModel.theme" style="width:350px"></el-input>
+                    </el-form-item>
+                </el-col>
+                <el-col>
+                    <el-form-item label="内容" prop="content">
+                        <el-input readonly="true" placeholder="请输入内容" :rows="5" type="textarea" v-model="activeModel.content" style="width:350px"></el-input>
+                    </el-form-item>
+                </el-col>
+            </el-form>
+        </template>
+
+    </base-component>
+</div>
+<script>
+
+    var vueObj = new Vue({
+        el: '#app',
+        data: function() {
+
+            var addUploaderMod = {
+                uploader:
+                    {
+                        fileUrls: '', //文件url
+                        thumbUrls: '',//如果有缩略图的话有值
+                        label: '附件',
+                        accept: 'image/*,.pdf,.doc,.docx', //可以接受的文件类型
+                        size: 6,
+                        props: {
+                            split: ';',
+                            diabled: true,
+                            name: 'mediaFiles' //传到后台的key
+                        },
+                        list:true,
+                    }
+            };
+
+            let _this = this
+            return {
+                currentRow: null,
+                activeModel: {
+                    title: '',
+                    theme: '',
+                    content: '',
+                },
+                activeFormRules: {
+                    title: [
+                        { required: true, message: '请输入科普活动标题', trigger: 'blur' },
+                    ],
+                    theme: [
+                        { required: true, message: '请输入科普活动主题', trigger: 'blur' },
+                    ],
+                    content: [
+                        { required: true, message: '请输入科普活动内容', trigger: 'blur' },
+                    ]
+                },
+                form: {
+                    //操作按钮
+                    buttons: [
+                        // {type: 'add', bindRef: 'addDialog', label: '发布科普活动'},
+                        // {type: 'edit', bindRef: 'editDialog', label: '修改科普活动'},
+                        // {
+                        //     type: 'delete',
+                        //     url: GLOBAL_API.POP_ACTIVE.DELETE,
+                        //     fields: ['opId'],
+                        //     label: '删除科普活动'
+                        // }
+                    ],
+                    //查询条件
+                    inputs: [
+                        {name: 'userName', placeholder: '请输入创建人姓名'},
+                        {name: 'title', placeholder: '请输入标题'},
+                    ],
+
+                },
+                table: {
+                    url: GLOBAL_API.IND_POP_ACTIVE.QUERY,
+                    cols: [
+                        {
+                            prop: "createUserName",
+                            label: "创建人",
+                            //width: 100
+                        },
+                        {
+                            prop: "title",
+                            label: "标题",
+                        },
+                        {
+                            prop: "statusText",
+                            label: "状态",
+                        },
+                        {
+                            prop: "createTime",
+                            label: "创建时间"
+                        },
+                        {
+                            prop: "enterStatus",
+                            label: "报名状态"
+                        }
+                    ],
+                    enumMap:{
+                        status: GLOBAL_ENUM.STATUS
+                    },
+                },
+                dialogs:[{
+                    ref: 'editDialog',
+                    title: '参加科普活动',
+                    items: [
+
+                    ],
+                    buttons:[{
+                        label: '报名',
+                        type: 'primary',
+                        url: GLOBAL_API.IND_POP_ACTIVE.ENTER,
+                    }],
+                    module: addUploaderMod,
+                    manual: true,
+                    paramFields: ['opId'],
+                    enumMap: {
+
+                    },
+                    requireRow: true,
+                    handler: function (innerVm, formData, rawData, cb, ref, url) {
+
+                        _this.$refs.editActiveForm.validate(function (valid, object) {
+
+                            if (!valid) {
+                                cb()
+                                return
+                            }
+
+                            formData.append("opId", rawData['opId'])
+
+                            $.ajax({
+                                method: "POST",
+                                url: url,
+                                data: formData,
+                                processData: false,
+                                contentType: false,
+
+                            }).done(function (resData) {
+
+                                if (resData.code !== 100) {
+                                    innerVm.$message.error(resData.desc || '操作失败');
+                                    cb()
+                                    return
+                                }
+                                innerVm.$message.success("操作成功");
+                                innerVm.refreshTable()
+                                innerVm.getComp(ref).hide()
+                                cb()
+                            }).fail(function (res) {
+                                console.error(res)
+                                innerVm.$message.error("网络异常");
+                                cb()
+                            })
+                        })
+                    }
+                }],
+            }
+        },
+        mounted: function (){
+
+        },
+        methods: {
+            rowClick: function (row) {
+                this.$refs.base.showFormDialog("editDialog", row)
+            },
+            currentRowChange: function (val) {
+
+                this.currentRow = val
+
+                if(val && val.title) {
+                    this.activeModel.title = val.title
+                    this.activeModel.content = val.content
+                    this.activeModel.theme = val.theme
+                }
+            },
+            getBaseQueryParam: function () {
+                var query = this.$refs.base.getQueryParam()
+                console.log(query)
+            },
+            queryParam: function(val) {
+                //base.js中有emit会调用这个参数,并传递val过来
+                console.log("监听到导航栏的值发生变化")
+                console.log(val)
+            }
+        }
+    })
+
+</script>
+</body>
+</html>
