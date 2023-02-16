@@ -162,12 +162,12 @@ Vue.component('frame-component',{
             //处理右上方个人设置
             if(command == "logout") {
 
-                $.get('/srm/loginAction/logout', function (resData) {
+                $.get('/flow/loginAction/logout', function (resData) {
                     /*关闭当前页*/
                     var userAgent = navigator.userAgent;
                     if (userAgent.indexOf("Firefox") !== -1 || userAgent.indexOf("Chrome") !== -1) {
                         // window.location.href = "about:blank";
-                        window.location.href = "/srm/login";
+                        window.location.href = "/flow/login";
                         window.close();
                     } else {
                         window.open("", "_self");
@@ -176,7 +176,7 @@ Vue.component('frame-component',{
                 })
 
             }else if(command == "editPwd") {
-                this.openTab("修改密码", "修改密码", "/srm/configMenuAction/editPwd");
+                this.openTab("修改密码", "修改密码", "/flow/configMenuAction/editPwd");
             }else{
                 this.$message({
                     message: '未知错误,请联系管理员',

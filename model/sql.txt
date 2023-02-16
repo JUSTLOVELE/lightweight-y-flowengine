@@ -59,6 +59,16 @@ CREATE TABLE public.public_role_menu_grant (
     role_id character varying(32) NOT NULL
 );
 
+
+CREATE TABLE public.public_org (
+    op_id character varying(32) NOT NULL,
+    category integer,
+    org_code character varying(50),
+    org_name character varying(50),
+    area_id character varying(32)
+);
+
+
 ALTER TABLE ONLY public.public_role
     ADD CONSTRAINT tba_role_pkey PRIMARY KEY (op_id);
 
@@ -80,3 +90,21 @@ ALTER TABLE ONLY public.public_role_menu_grant
 
 ALTER TABLE ONLY public.public_role_menu_grant
     ADD CONSTRAINT tba_role_menu_grant_ibfk_2 FOREIGN KEY (role_id) REFERENCES public.public_role(op_id);
+
+insert into public_org (op_id, org_name) values ('org_101', '测试');
+INSERT INTO public.public_user_tbl (op_id, user_id, user_phone, user_name, user_password, create_time, org_id, dept_id, user_category, last_login, ref_entity_id, is_stop, register_from, user_sources, bg_img, user_sex, head_image, user_address, street_address, user_birthday, user_age, user_email, work_address) VALUES ('101', 'admin', '13799118590', 'admin', '7SyPjdYHOGs=', '2022-08-24 12:20:13.000000', 'org_101', null, null, null, null, 1, null, null, null, null, null, null, null, null, null, null, null);
+
+INSERT INTO public.public_menu (op_id, parent_id, url, text, type, button_type, available_flag, sort, category, sys, icon) VALUES ('101', '21', null, '系统管理', 1, 21, 1, 1, 0, 1, null);
+INSERT INTO public.public_menu (op_id, parent_id, url, text, type, button_type, available_flag, sort, category, sys, icon) VALUES ('21', null, null, '后台管理', 0, 21, 1, 1, 0, 1, null);
+INSERT INTO public.public_menu (op_id, parent_id, url, text, type, button_type, available_flag, sort, category, sys, icon) VALUES ('1014', '101', '/srm/configMenuAction/rolePage', '角色管理', 2, 21, 1, 1, 0, 1, null);
+INSERT INTO public.public_menu (op_id, parent_id, url, text, type, button_type, available_flag, sort, category, sys, icon) VALUES ('10101', '101', '/srm/configMenuAction/userPage', '用户管理', 2, 21, 1, 2, 0, 1, null);
+
+
+INSERT INTO public.public_role (op_id, org_id, name, category, create_time, description, sys) VALUES ('role_101', 'org_101', '超级管理员', 0, '2022-08-26 10:24:31.000000', null, null);
+
+INSERT INTO public.public_user_role_grant (user_op_id, role_id) VALUES ('101', 'role_101');
+
+INSERT INTO public.public_role_menu_grant (menu_id, role_id) VALUES ('21', 'role_101');
+INSERT INTO public.public_role_menu_grant (menu_id, role_id) VALUES ('101', 'role_101');
+INSERT INTO public.public_role_menu_grant (menu_id, role_id) VALUES ('10101', 'role_101');
+INSERT INTO public.public_role_menu_grant (menu_id, role_id) VALUES ('1014', 'role_101');

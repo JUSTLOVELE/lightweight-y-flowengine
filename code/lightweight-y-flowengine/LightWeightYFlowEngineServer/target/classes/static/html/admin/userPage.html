@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>demo01</title>
-    <link rel="stylesheet" href="/srm/static/lib/element-ui/element.css">
-    <script src="/srm/static/common/constant.js"></script>
-    <script src="/srm/static/common/utils.js"></script>
-    <script src="/srm/static/lib/vue/vue.js"></script>
-    <script src="/srm/static/lib/element-ui/element.js"></script>
-    <script src="/srm/static/lib/jquery/jquery3.5.1.js"></script>
-    <script src="/srm/static/component/base/base.js"></script>
-    <link rel="stylesheet" href="/srm/static/component/table/table.css">
-    <script src="/srm/static/component/table/table.js"></script>
-    <script src="/srm/static/component/formDialog/formDialog.js"></script>
-    <link rel="stylesheet" href="/srm/static/component/formDialog/formDialog.css">
+    <link rel="stylesheet" href="/flow/static/lib/element-ui/element.css">
+    <script src="/flow/static/common/constant.js"></script>
+    <script src="/flow/static/common/utils.js"></script>
+    <script src="/flow/static/lib/vue/vue.js"></script>
+    <script src="/flow/static/lib/element-ui/element.js"></script>
+    <script src="/flow/static/lib/jquery/jquery3.5.1.js"></script>
+    <script src="/flow/static/component/base/base.js"></script>
+    <link rel="stylesheet" href="/flow/static/component/table/table.css">
+    <script src="/flow/static/component/table/table.js"></script>
+    <script src="/flow/static/component/formDialog/formDialog.js"></script>
+    <link rel="stylesheet" href="/flow/static/component/formDialog/formDialog.css">
 </head>
 <body>
 <div id="app">
@@ -120,15 +120,6 @@
                             },
                             rules: [{pattern: /^1[3456789]\d{9}$/, message: '请输入正确的手机', trigger: 'blur'}],
                         },{
-                            label: '所属机构',
-                            type: 'select',
-                            field: 'orgId',
-                            optionsUrl: GLOBAL_API.ORG.COMBOX,
-                            props: {
-                                filterable: true
-                            },
-                            rules: [{required: true, message: '请选择机构', trigger: 'blur'}],
-                        },{
                             label: '性别',
                             type: 'select',
                             field: 'sex',
@@ -202,15 +193,6 @@
                                 placeholder: '初始密码为手机号后六位'
                             },
                             rules: [{pattern: /^1[3456789]\d{9}$/, message: '请输入正确的手机', trigger: 'blur'}],
-                        },{
-                            label: '所属机构',
-                            type: 'select',
-                            field: 'orgId',
-                            optionsUrl: GLOBAL_API.ORG.COMBOX,
-                            props: {
-                                filterable: true
-                            },
-                            rules: [{required: true, message: '请选择机构', trigger: 'blur'}],
                         },{
                             label: '性别',
                             type: 'select',

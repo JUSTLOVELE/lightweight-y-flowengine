@@ -97,23 +97,23 @@
         methods: {
             getData: function () {
                 //一开始和服务器获取待办数据
-                var _this = this
-
-                $.ajax({
-                    method: "GET",
-                    url: GLOBAL_API.ADMIN.NOTICE,
-                    data: {},
-                }).done(function (resData) {
-                    // var resData = JSON.parse(res)
-                    if (!(resData.code === 100 || resData.success)) {
-                        _this.$message.error(resData.desc || '查询失败');
-                        return
-                    }
-                    _this.number = resData.number
-                    _this.todos = resData.datas
-                }).fail(function (res) {
-                    _this.$message.error("网络异常");
-                })
+                // var _this = this
+                //
+                // $.ajax({
+                //     method: "GET",
+                //     url: GLOBAL_API.ADMIN.NOTICE,
+                //     data: {},
+                // }).done(function (resData) {
+                //     // var resData = JSON.parse(res)
+                //     if (!(resData.code === 100 || resData.success)) {
+                //         _this.$message.error(resData.desc || '查询失败');
+                //         return
+                //     }
+                //     _this.number = resData.number
+                //     _this.todos = resData.datas
+                // }).fail(function (res) {
+                //     _this.$message.error("网络异常");
+                // })
             },
             openTaskWindow: function(event) {
                 //子组件调用父组件并弹出一个新的tab页

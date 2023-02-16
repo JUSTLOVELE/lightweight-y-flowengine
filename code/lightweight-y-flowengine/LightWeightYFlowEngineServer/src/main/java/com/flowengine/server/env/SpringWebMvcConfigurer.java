@@ -41,7 +41,7 @@ public class SpringWebMvcConfigurer implements WebMvcConfigurer {
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		
-		//registry.addInterceptor(new ProcessorInterceptors());
+		registry.addInterceptor(new ProcessorInterceptors());
 		//引入spring-mobile
 		//registry.addInterceptor(deviceResolverHandlerInterceptor());
 		//registry.addInterceptor(new ProcessorInterceptors()).addPathPatterns("/**");

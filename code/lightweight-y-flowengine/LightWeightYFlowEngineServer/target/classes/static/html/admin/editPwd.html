@@ -5,12 +5,12 @@
   <meta charset="UTF-8">
   <title>修改密码</title>
 
-  <link rel="stylesheet" href="/srm/static/lib/element-ui/element.css">
-  <script src="/srm/static/common/constant.js"></script>
-  <script src="/srm/static/common/utils.js"></script>
-  <script src="/srm/static/lib/vue/vue.js"></script>
-  <script src="/srm/static/lib/element-ui/element.js"></script>
-  <script src="/srm/static/lib/jquery/jquery3.5.1.js"></script>
+  <link rel="stylesheet" href="/flow/static/lib/element-ui/element.css">
+  <script src="/flow/static/common/constant.js"></script>
+  <script src="/flow/static/common/utils.js"></script>
+  <script src="/flow/static/lib/vue/vue.js"></script>
+  <script src="/flow/static/lib/element-ui/element.js"></script>
+  <script src="/flow/static/lib/jquery/jquery3.5.1.js"></script>
 </head>
 
 <body>
@@ -119,7 +119,7 @@
             if (valid) {
               $.ajax({
                 method: "POST",
-                url: "/srm/userAction/editSelf",
+                url: "/flow/userAction/editSelf",
                 data: {"pwd": pass,
                        "oldPwd": oldPwd,
                        "userName": _this.ruleForm.userName,
@@ -152,7 +152,7 @@
             var _this = this;
             $.ajax({
               method: "GET",
-              url: "/srm/userAction/getUserInfo",
+              url: "/flow/userAction/getUserInfo",
               data: {},
               dataType:'json',
             }).done(function (resData) {
