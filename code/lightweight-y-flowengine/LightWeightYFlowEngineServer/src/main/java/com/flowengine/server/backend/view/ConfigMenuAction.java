@@ -17,6 +17,11 @@ public class ConfigMenuAction {
 
     public final static String INDEX = "html/index";
 
+    @RequestMapping("flowPage")
+    public String flowPage() {
+        return "html/admin/flowPage";
+    }
+
     @RequestMapping("editPwd")
     public String editPwd() {
         return "html/admin/editPwd";

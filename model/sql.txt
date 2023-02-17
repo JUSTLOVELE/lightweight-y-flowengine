@@ -108,3 +108,8 @@ INSERT INTO public.public_role_menu_grant (menu_id, role_id) VALUES ('21', 'role
 INSERT INTO public.public_role_menu_grant (menu_id, role_id) VALUES ('101', 'role_101');
 INSERT INTO public.public_role_menu_grant (menu_id, role_id) VALUES ('10101', 'role_101');
 INSERT INTO public.public_role_menu_grant (menu_id, role_id) VALUES ('1014', 'role_101');
+
+-- 2023.02.17
+insert into public_menu (op_id, parent_id, url, text, type, button_type, available_flag, sort, category, sys, icon)
+VALUES ('10103', '101', '/flow/configMenuAction/flowPage', '流程配置', 2, 21,1,3,0,1,null);
+insert into public_role_menu_grant(menu_id, role_id) VALUES ('10103', 'role_101');
