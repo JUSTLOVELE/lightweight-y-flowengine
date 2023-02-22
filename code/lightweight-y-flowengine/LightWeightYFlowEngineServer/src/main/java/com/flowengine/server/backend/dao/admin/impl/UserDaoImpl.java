@@ -1,8 +1,8 @@
-package com.flowengine.server.backend.dao.impl;
+package com.flowengine.server.backend.dao.admin.impl;
 
 import cn.hutool.core.util.StrUtil;
 import com.flowengine.common.utils.mapper.PublicUserMapper;
-import com.flowengine.server.backend.dao.UserDao;
+import com.flowengine.server.backend.dao.admin.UserDao;
 import com.flowengine.server.core.BaseDao;
 import com.flowengine.server.model.UserCache;
 import com.flowengine.server.utils.Constant;

@@ -1,8 +1,8 @@
-package com.flowengine.server.backend.action;
+package com.flowengine.server.backend.action.admin;
 
 
 import com.flowengine.common.utils.CommonConstant;
-import com.flowengine.server.backend.service.MenuService;
+import com.flowengine.server.backend.service.admin.MenuService;
 import com.flowengine.server.core.BaseAction;
 import com.flowengine.server.model.MenuVO;
 import com.flowengine.server.model.UserCache;
@@ -19,8 +19,6 @@ import java.util.List;
 
 /**
  * @Description:
- * @Copyright: Copyright (c) 2017 HYKJ All Rights Reserved
- * @Company: 福建互医科技有限公司
  * @author yangzl 2019-12-03
  * @version 1.00.00
  * @history:

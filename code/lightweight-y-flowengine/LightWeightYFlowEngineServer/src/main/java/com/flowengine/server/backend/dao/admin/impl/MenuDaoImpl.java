@@ -1,8 +1,8 @@
-package com.flowengine.server.backend.dao.impl;
+package com.flowengine.server.backend.dao.admin.impl;
 
 
 import com.flowengine.common.utils.CommonConstant;
-import com.flowengine.server.backend.dao.MenuDao;
+import com.flowengine.server.backend.dao.admin.MenuDao;
 import com.flowengine.server.core.BaseDao;
 import com.flowengine.server.model.MenuVO;
 import com.flowengine.server.model.UserCache;

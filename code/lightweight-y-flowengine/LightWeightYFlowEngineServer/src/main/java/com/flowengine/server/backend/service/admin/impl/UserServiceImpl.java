@@ -1,4 +1,4 @@
-package com.flowengine.server.backend.service.impl;
+package com.flowengine.server.backend.service.admin.impl;
 
 import cn.hutool.core.util.StrUtil;
 
@@ -8,8 +8,8 @@ import com.flowengine.common.utils.EncryptUtil;
 import com.flowengine.common.utils.UUIDGenerator;
 import com.flowengine.common.utils.entity.PublicUserEntity;
 import com.flowengine.common.utils.mapper.PublicUserMapper;
-import com.flowengine.server.backend.dao.UserDao;
-import com.flowengine.server.backend.service.UserService;
+import com.flowengine.server.backend.dao.admin.UserDao;
+import com.flowengine.server.backend.service.admin.UserService;
 import com.flowengine.server.core.BaseService;
 import com.flowengine.server.env.YmlProjectConfig;
 import com.flowengine.server.model.UserCache;

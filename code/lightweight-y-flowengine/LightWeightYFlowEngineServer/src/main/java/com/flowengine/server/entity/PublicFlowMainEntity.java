@@ -31,6 +31,10 @@ public class PublicFlowMainEntity implements Serializable {
     private String createUserName ;
     /** 创建时间 */
     private Date createTime ;
+    /** 机构主键 */
+    private String orgId ;
+    /** 科室id */
+    private String deptId ;
 
     public String getOpId() {
         return opId;
@@ -102,5 +106,21 @@ public class PublicFlowMainEntity implements Serializable {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public String getOrgId() {
+        return orgId;
+    }
+
+    public void setOrgId(String orgId) {
+        this.orgId = orgId;
+    }
+
+    public String getDeptId() {
+        return deptId;
+    }
+
+    public void setDeptId(String deptId) {
+        this.deptId = deptId;
     }
 }

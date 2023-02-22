@@ -17,6 +17,11 @@ public class ConfigMenuAction {
 
     public final static String INDEX = "html/index";
 
+    @RequestMapping("flowManage")
+    public String flowManage() {
+        return "html/admin/flowManage";
+    }
+
     @RequestMapping("flowPage")
     public String flowPage() {
         return "html/admin/flowPage";

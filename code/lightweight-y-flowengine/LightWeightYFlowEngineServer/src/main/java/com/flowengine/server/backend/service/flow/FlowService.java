@@ -1,4 +1,4 @@
-package com.flowengine.server.backend.service;
+package com.flowengine.server.backend.service.flow;
 
 import com.flowengine.server.model.BackFlowBO;
 import com.flowengine.server.model.EndFlowBO;

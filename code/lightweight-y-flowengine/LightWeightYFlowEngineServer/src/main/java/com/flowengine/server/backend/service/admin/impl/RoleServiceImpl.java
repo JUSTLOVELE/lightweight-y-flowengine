@@ -1,12 +1,12 @@
-package com.flowengine.server.backend.service.impl;
+package com.flowengine.server.backend.service.admin.impl;
 
 import cn.hutool.core.util.StrUtil;
 import com.flowengine.common.utils.CommonConstant;
 import com.flowengine.common.utils.UUIDGenerator;
 import com.flowengine.common.utils.entity.PublicRoleEntity;
 import com.flowengine.common.utils.mapper.PublicRoleMapper;
-import com.flowengine.server.backend.dao.RoleDao;
-import com.flowengine.server.backend.service.RoleService;
+import com.flowengine.server.backend.dao.admin.RoleDao;
+import com.flowengine.server.backend.service.admin.RoleService;
 import com.flowengine.server.core.BaseService;
 import com.flowengine.server.model.RoleTreeVO;
 import com.flowengine.server.model.UserCache;

@@ -1,7 +1,7 @@
-package com.flowengine.server.backend.action;
+package com.flowengine.server.backend.action.admin;
 
 import com.flowengine.common.utils.CommonConstant;
-import com.flowengine.server.backend.service.UserService;
+import com.flowengine.server.backend.service.admin.UserService;
 import com.flowengine.server.core.BaseAction;
 import com.flowengine.server.model.UserCache;
 import com.flowengine.server.utils.Constant;
@@ -49,7 +49,6 @@ public class UserAction extends BaseAction {
 
 
     /**
-     * 获取作品类型的下拉框
      * @return
      */
     @GetMapping(value = "/userAction/getUserCombox", produces = "application/json; charset=utf-8")

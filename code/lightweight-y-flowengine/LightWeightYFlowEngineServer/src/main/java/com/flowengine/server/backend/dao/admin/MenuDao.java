@@ -1,4 +1,4 @@
-package com.flowengine.server.backend.dao;
+package com.flowengine.server.backend.dao.admin;
 
 
 import com.flowengine.server.model.MenuVO;

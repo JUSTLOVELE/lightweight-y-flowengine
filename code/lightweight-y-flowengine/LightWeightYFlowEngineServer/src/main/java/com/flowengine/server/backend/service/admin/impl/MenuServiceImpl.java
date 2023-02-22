@@ -1,8 +1,8 @@
-package com.flowengine.server.backend.service.impl;
+package com.flowengine.server.backend.service.admin.impl;
 
 
-import com.flowengine.server.backend.dao.MenuDao;
-import com.flowengine.server.backend.service.MenuService;
+import com.flowengine.server.backend.dao.admin.MenuDao;
+import com.flowengine.server.backend.service.admin.MenuService;
 import com.flowengine.server.core.BaseService;
 import com.flowengine.server.model.MenuVO;
 import com.flowengine.server.model.UserCache;

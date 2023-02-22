@@ -1,4 +1,4 @@
-package com.flowengine.server.backend.dao;
+package com.flowengine.server.backend.dao.admin;
 
 import java.util.List;
 import java.util.Map;

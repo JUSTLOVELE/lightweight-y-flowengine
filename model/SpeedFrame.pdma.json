@@ -4,7 +4,7 @@
   "avatar": "",
   "version": "4.2.0",
   "createdTime": "2022-12-9 22:49:27",
-  "updatedTime": "2023-1-31 10:13:24",
+  "updatedTime": "2023-2-22 10:37:38",
   "dbConns": [],
   "profile": {
     "default": {
@@ -712,6 +712,40 @@
           "extProps": {},
           "domain": "7CFFA0D3-6A93-4DDC-BC10-DF21211064DC",
           "id": "4F62BE04-EBDD-4A2C-81B7-BAA86ECE9937"
+        },
+        {
+          "defKey": "org_id",
+          "defName": "机构主键",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "extProps": {},
+          "domain": "9092C4E0-1A54-4859-ABBB-5B62DBC27573",
+          "id": "806AB34D-83B0-4B7A-9AD4-7057FCDCC962"
+        },
+        {
+          "defKey": "dept_id",
+          "defName": "科室id",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "extProps": {},
+          "domain": "9092C4E0-1A54-4859-ABBB-5B62DBC27573",
+          "id": "2163E4F7-24E0-4D59-A569-BE86E325F7EE"
         }
       ],
       "correlations": [],
