@@ -20,7 +20,7 @@ import java.util.Map;
 public class MainServiceImpl implements MainService {
 
     @Autowired
-    private MainDao _mainDao;
+    private MainDao mainDao;
 
     @Override
     public String query(Map<String, Object> param) {

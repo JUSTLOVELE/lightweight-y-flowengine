@@ -1,5 +1,6 @@
 package com.flowengine.server.backend.dao.flow.impl;
 
+import com.flowengine.server.backend.dao.flow.MainDao;
 import com.flowengine.server.core.BaseDao;
 import org.springframework.stereotype.Repository;
 
@@ -10,5 +11,5 @@ import org.springframework.stereotype.Repository;
  * @history:
  */
 @Repository
-public class MainDaoImpl extends BaseDao {
+public class MainDaoImpl extends BaseDao implements MainDao  {
 }
