@@ -19,14 +19,8 @@
                 <el-button type="primary">导出excel</el-button>
             </el-form-item>
             <el-form-item>
-                <el-input placeholder="请输入身份证号码"
-                          v-model="query.idCard"
-                          clearable
-                          prefix-icon="el-icon-search" ></el-input>
-            </el-form-item>
-            <el-form-item>
-                <el-input placeholder="请输入就诊卡号"
-                          v-model="query.card"
+                <el-input placeholder="流程名字"
+                          v-model="query.flowName"
                           clearable
                           prefix-icon="el-icon-search" ></el-input>
             </el-form-item>
@@ -64,16 +58,18 @@
                             label="地址">
                     </el-table-column>
                 </el-table>
-                <!--                <el-pagination :total="total"-->
-                <!--                               layout="total, sizes, prev, pager, next, jumper"-->
-                <!--                               :page-size="pageSize"-->
-                <!--                               :page-sizes="pageSizes || [10, 25, 50, 100]"-->
-                <!--                               :current-page="currentPage"-->
-                <!--                               :manual="manual"-->
-                <!--                               :handler="handler"-->
-                <!--                               @current-change="handleCurrentPageChange"-->
-                <!--                               @size-change="handleSizeChange">-->
-                <!--                </el-pagination>-->
+                <div style="margin-top: 30px">
+                    <el-pagination
+                            @size-change="handleSizeChange"
+                            @current-change="handleCurrentChange"
+                            :current-page="currentPage2"
+                            :page-sizes="[10]"
+                            :page-size="10"
+                            layout="total, sizes, prev, pager, next, jumper"
+                            :total="400">
+                    </el-pagination>
+                </div>
+
             </div>
         </el-col>
 
@@ -87,10 +83,10 @@
         data: function () {
             return {
                 query: {
-                    idCard: '',
-                    card: '',
+                    flowName: '',
                     time: null
                 },
+                currentPage2: 5,
                 tableData: [{
                     date: '2016-05-02',
                     name: '王小虎',
@@ -111,21 +107,35 @@
             }
         },
         created: function () {
-
+            this.conditionFormQuery()
         },
         methods: {
 
+            handleSizeChange(val) {
+                console.log(`每页 ${val} 条`);
+            },
+            handleCurrentChange(val) {
+                console.log(`当前页: ${val}`);
+            },
             conditionFormQuery: function() {
 
                 let _this = this;
+                var startTime = null
+                var endTime = null
+
+                if(_this.query.time) {
+
+                    startTime = formatDate(_this.query.time[0], 'yyyy-MM-dd')
+                    endTime = formatDate(_this.query.time[1], 'yyyy-MM-dd')
+                }
 
                 $.ajax({
-                    type:"post",
-                    url:'',
+                    type:"get",
+                    url:GLOBAL_API.FlowManage.QUERY,
                     data:Object.assign({
-                        idCard: _this.query.idCard,
-                        card: _this.query.card,
-                        time: _this.query.time
+                        flowName: _this.query.flowName,
+                        startTime: startTime,
+                        endTime: endTime
                     }),
                     dataType:'json',
                     success:function(data){

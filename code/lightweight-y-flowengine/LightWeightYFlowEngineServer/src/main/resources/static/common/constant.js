@@ -29,6 +29,9 @@ var GLOBAL_API = {
     },
     TREE: {
         ROLE: _SERVER + '/flow/roleAction/createRoleTree'
+    },
+    FlowManage: {
+        QUERY: _SERVER + '/flow/mainAction/query',
     }
 }
 

@@ -1,0 +1,64 @@
+DROP TABLE IF EXISTS public_flow_main_tbl;
+CREATE TABLE public_flow_main_tbl(
+    op_id VARCHAR(32),
+    key_code VARCHAR(255),
+    is_stop INTEGER,
+    flow_desc VARCHAR(255),
+    main_type INTEGER,
+    main_name VARCHAR(255),
+    create_user_id VARCHAR(32),
+    create_user_name VARCHAR(255),
+    create_time TIMESTAMP,
+    org_id VARCHAR(255),
+    dept_id VARCHAR(255)
+);
+
+COMMENT ON TABLE public_flow_main_tbl IS '流程主表';
+COMMENT ON COLUMN public_flow_main_tbl.op_id IS '主键';
+COMMENT ON COLUMN public_flow_main_tbl.key_code IS '关键字';
+COMMENT ON COLUMN public_flow_main_tbl.is_stop IS '是否启用;1:启用;0:不启用';
+COMMENT ON COLUMN public_flow_main_tbl.flow_desc IS '描述';
+COMMENT ON COLUMN public_flow_main_tbl.main_type IS '类型';
+COMMENT ON COLUMN public_flow_main_tbl.main_name IS '流程名称';
+COMMENT ON COLUMN public_flow_main_tbl.create_user_id IS '创建人主键';
+COMMENT ON COLUMN public_flow_main_tbl.create_user_name IS '创建人姓名';
+COMMENT ON COLUMN public_flow_main_tbl.create_time IS '创建时间';
+COMMENT ON COLUMN public_flow_main_tbl.org_id IS '机构主键';
+COMMENT ON COLUMN public_flow_main_tbl.dept_id IS '科室id';
+
+DROP TABLE IF EXISTS public_flow_node_tbl;
+CREATE TABLE public_flow_node_tbl(
+    op_id VARCHAR(32),
+    main_id VARCHAR(32),
+    last_node_id VARCHAR(32),
+    last_node_key VARCHAR(255),
+    limit_time INTEGER,
+    next_node VARCHAR(32),
+    node_name VARCHAR(255),
+    node_key VARCHAR(255),
+    node_sort INTEGER,
+    node_status INTEGER,
+    ref_id VARCHAR(32)
+);
+
+COMMENT ON TABLE public_flow_node_tbl IS '环节表';
+COMMENT ON COLUMN public_flow_node_tbl.op_id IS '主键';
+COMMENT ON COLUMN public_flow_node_tbl.main_id IS '流程主表id';
+COMMENT ON COLUMN public_flow_node_tbl.last_node_id IS '上一个环节';
+COMMENT ON COLUMN public_flow_node_tbl.last_node_key IS '上一个环节key';
+COMMENT ON COLUMN public_flow_node_tbl.limit_time IS '限制时间,单位天';
+COMMENT ON COLUMN public_flow_node_tbl.next_node IS '下一个环节;下一个环节
+[{
+"key":"",
+"nextNodeId":"",
+"nextNodeKey":""
+}]';
+COMMENT ON COLUMN public_flow_node_tbl.node_name IS '当前环节名称';
+COMMENT ON COLUMN public_flow_node_tbl.node_key IS '关键字
+start开始;
+ing:中间环节;
+或者其他指定的key也表示中间环节
+;end结束;';
+COMMENT ON COLUMN public_flow_node_tbl.node_sort IS '节点排序：1,2,3,4';
+COMMENT ON COLUMN public_flow_node_tbl.node_status IS '1:开始;2:常规节点;10:结束';
+COMMENT ON COLUMN public_flow_node_tbl.ref_id IS '引用id,有必要时使用';
