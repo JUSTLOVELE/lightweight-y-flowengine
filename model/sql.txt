@@ -96,8 +96,8 @@ INSERT INTO public.public_user_tbl (op_id, user_id, user_phone, user_name, user_
 
 INSERT INTO public.public_menu (op_id, parent_id, url, text, type, button_type, available_flag, sort, category, sys, icon) VALUES ('101', '21', null, '系统管理', 1, 21, 1, 1, 0, 1, null);
 INSERT INTO public.public_menu (op_id, parent_id, url, text, type, button_type, available_flag, sort, category, sys, icon) VALUES ('21', null, null, '后台管理', 0, 21, 1, 1, 0, 1, null);
-INSERT INTO public.public_menu (op_id, parent_id, url, text, type, button_type, available_flag, sort, category, sys, icon) VALUES ('1014', '101', '/srm/configMenuAction/rolePage', '角色管理', 2, 21, 1, 1, 0, 1, null);
-INSERT INTO public.public_menu (op_id, parent_id, url, text, type, button_type, available_flag, sort, category, sys, icon) VALUES ('10101', '101', '/srm/configMenuAction/userPage', '用户管理', 2, 21, 1, 2, 0, 1, null);
+INSERT INTO public.public_menu (op_id, parent_id, url, text, type, button_type, available_flag, sort, category, sys, icon) VALUES ('1014', '101', '/flow/configMenuAction/rolePage', '角色管理', 2, 21, 1, 1, 0, 1, null);
+INSERT INTO public.public_menu (op_id, parent_id, url, text, type, button_type, available_flag, sort, category, sys, icon) VALUES ('10101', '101', '/flow/configMenuAction/userPage', '用户管理', 2, 21, 1, 2, 0, 1, null);
 
 
 INSERT INTO public.public_role (op_id, org_id, name, category, create_time, description, sys) VALUES ('role_101', 'org_101', '超级管理员', 0, '2022-08-26 10:24:31.000000', null, null);

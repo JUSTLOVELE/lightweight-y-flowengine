@@ -36,44 +36,37 @@
             <el-button size="mini" icon="el-icon-search" @click="conditionFormQuery" style="margin-bottom: 12px;height: 32px;">查询</el-button>
         </div>
     </el-form>
-    <el-row>
-        <el-col>
-            <div>
-                <el-table
-                        :data="tableData"
-                        stripe
-                        style="width: 100%">
-                    <el-table-column
-                            prop="date"
-                            label="日期"
-                            width="180">
-                    </el-table-column>
-                    <el-table-column
-                            prop="name"
-                            label="姓名"
-                            width="180">
-                    </el-table-column>
-                    <el-table-column
-                            prop="address"
-                            label="地址">
-                    </el-table-column>
-                </el-table>
-                <div style="margin-top: 30px">
-                    <el-pagination
-                            @size-change="handleSizeChange"
-                            @current-change="handleCurrentChange"
-                            :current-page="currentPage2"
-                            :page-sizes="[10]"
-                            :page-size="10"
-                            layout="total, sizes, prev, pager, next, jumper"
-                            :total="400">
-                    </el-pagination>
-                </div>
-
-            </div>
-        </el-col>
-
-    </el-row>
+    <div>
+        <el-table
+                :data="tableData"
+                :style="TheStyle"
+                stripe border highlight-current-row>
+            <el-table-column
+                    prop="date"
+                    label="日期"
+                    width="180">
+            </el-table-column>
+            <el-table-column
+                    prop="name"
+                    label="姓名"
+                    width="180">
+            </el-table-column>
+            <el-table-column
+                    prop="address"
+                    label="地址">
+            </el-table-column>
+        </el-table>
+        <div style="height: 10px"></div>
+        <el-pagination
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page="currentPage"
+                :page-sizes="[10,15]"
+                :page-size="pageSize"
+                layout="total, sizes, prev, pager, next, jumper"
+                :total="total">
+        </el-pagination>
+    </div>
 </div>
 </body>
 
@@ -86,7 +79,16 @@
                     flowName: '',
                     time: null
                 },
-                currentPage2: 5,
+                TheStyle: {
+                    'min-height': '60px',
+                    'width': '100%',
+                    'height': '100%',
+                    'overflow': 'auto'
+                },
+                currentPage: 1,
+                pageSize: 10,
+                total:100,
+
                 tableData: [{
                     date: '2016-05-02',
                     name: '王小虎',
@@ -112,10 +114,10 @@
         methods: {
 
             handleSizeChange(val) {
-                console.log(`每页 ${val} 条`);
+                this.pageSize = val
             },
             handleCurrentChange(val) {
-                console.log(`当前页: ${val}`);
+                this.currentPage = val
             },
             conditionFormQuery: function() {
 
@@ -135,12 +137,15 @@
                     data:Object.assign({
                         flowName: _this.query.flowName,
                         startTime: startTime,
-                        endTime: endTime
+                        endTime: endTime,
+                        limit: _this.pageSize,
+                        page: _this.currentPage
                     }),
                     dataType:'json',
                     success:function(data){
-                        alert(data);
+
                     }
+
                 });
             }
         }
