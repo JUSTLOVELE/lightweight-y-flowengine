@@ -61,6 +61,7 @@ public class MainDaoImpl extends BaseDao implements MainDao  {
                     case when a.is_stop = 1 then '启用'
                         else '暂停' end "stopText",
                     a.main_name "mainName",
+                    to_char(a.create_time,'YYYY-MM-DD') as "createTime",
                     a.create_user_name "userName"
                     from public_flow_main_tbl a where 1=1
                 """;
