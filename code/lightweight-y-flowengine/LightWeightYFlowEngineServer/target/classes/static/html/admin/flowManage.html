@@ -16,7 +16,7 @@
     <el-form ref='base' size="small" :inline="true" class="query-from" @submit.native.prevent>
         <div style="background-color: #f2f2f2;padding-top: 5px" ref="formHeader">
             <el-form-item>
-                <el-button type="primary">导出excel</el-button>
+                <el-button  @click="dialogVisible=true" type="primary">新增流程</el-button>
             </el-form-item>
             <el-form-item>
                 <el-input placeholder="流程名字"
@@ -69,6 +69,29 @@
                 :total="total">
         </el-pagination>
     </div>
+    <el-dialog
+            :close-on-click-modal="false"
+            title="新增流程"
+            :visible.sync="dialogVisible"
+            width="55%"
+            :before-close="handleClose">
+        <el-form ref="addForm" :model="form" label-width="150px" size="mini" :inline="true" status-icon :label-position="right">
+            <el-form-item label="流程名称">
+                <el-input></el-input>
+            </el-form-item>
+            <el-form-item label="是否启用">
+                <el-radio v-model="mainMode.radio" label="1">启用</el-radio>
+                <el-radio v-model="mainMode.radio" label="2">停用</el-radio>
+            </el-form-item>
+            <el-divider></el-divider>
+            <el-button type="primary">新增节点</el-button>
+            <el-button type="danger">删除节点</el-button>
+        </el-form>
+        <span slot="footer" class="dialog-footer">
+    <el-button @click="dialogVisible = false">取 消</el-button>
+    <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+  </span>
+    </el-dialog>
 </div>
 </body>
 
@@ -77,6 +100,10 @@
         el: '#app',
         data: function () {
             return {
+                dialogVisible: false,
+                mainMode: {
+                    radio: 1,
+                },
                 query: {
                     flowName: '',
                     time: null
@@ -90,7 +117,6 @@
                 currentPage: 1,
                 pageSize: 10,
                 total:100,
-
                 tableData: []
             }
         },
@@ -98,7 +124,13 @@
             this.conditionFormQuery()
         },
         methods: {
-
+            handleClose(done) {
+                // this.$confirm('确认关闭？')
+                //     .then(_ => {
+                //         done();
+                //     })
+                //     .catch(_ => {});
+            },
             handleSizeChange(val) {
                 this.pageSize = val
             },
