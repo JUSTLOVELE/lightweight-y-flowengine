@@ -2,9 +2,9 @@
   "name": "SpeedFrame",
   "describe": "SpeedFrame",
   "avatar": "",
-  "version": "4.2.0",
+  "version": "4.4.0",
   "createdTime": "2022-12-9 22:49:27",
-  "updatedTime": "2023-2-22 10:37:38",
+  "updatedTime": "2023-3-16 23:01:31",
   "dbConns": [],
   "profile": {
     "default": {
@@ -875,7 +875,7 @@
         },
         {
           "defKey": "last_node_id",
-          "defName": "上一个环节",
+          "defName": "上一个环节;多个用;号分割",
           "comment": "",
           "type": "VARCHAR",
           "len": 32,
@@ -892,7 +892,7 @@
         },
         {
           "defKey": "last_node_key",
-          "defName": "上一个环节key",
+          "defName": "上一个环节key;多个用;号分割",
           "comment": "",
           "type": "",
           "len": "",

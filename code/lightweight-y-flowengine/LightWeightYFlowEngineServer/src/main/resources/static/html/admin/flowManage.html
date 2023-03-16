@@ -75,7 +75,7 @@
             :visible.sync="dialogVisible"
             width="55%"
             :before-close="handleClose">
-        <el-form ref="addForm" :model="form" label-width="150px" size="mini" :inline="true" status-icon :label-position="right">
+        <el-form ref="addForm" :model="form" label-width="100px" size="mini" :inline="true" status-icon :label-position="right">
             <el-form-item label="流程名称">
                 <el-input></el-input>
             </el-form-item>
@@ -84,8 +84,34 @@
                 <el-radio v-model="mainMode.radio" label="2">停用</el-radio>
             </el-form-item>
             <el-divider></el-divider>
-            <el-button type="primary">新增节点</el-button>
-            <el-button type="danger">删除节点</el-button>
+            <el-button size="mini" type="primary">新增节点</el-button>
+            <el-button size="mini" type="danger">删除节点</el-button>
+            <div style="height: 10px"></div>
+            <el-table
+                    :data="addNodeTableData"
+                    :style="TheStyle"
+                    stripe border highlight-current-row>
+                <el-table-column
+                        prop="nodeStatus"
+                        label="节点类型">
+                </el-table-column>
+                <el-table-column
+                        prop="nodeName"
+                        label="环节名称">
+                </el-table-column>
+                <el-table-column
+                        prop="limitTime"
+                        label="限时">
+                </el-table-column>
+                <el-table-column
+                        prop="waitNode"
+                        label="上一环节">
+                </el-table-column>
+                <el-table-column
+                        prop="nextNode"
+                        label="下一环节">
+                </el-table-column>
+            </el-table>
         </el-form>
         <span slot="footer" class="dialog-footer">
     <el-button @click="dialogVisible = false">取 消</el-button>
@@ -117,7 +143,8 @@
                 currentPage: 1,
                 pageSize: 10,
                 total:100,
-                tableData: []
+                tableData: [],
+                addNodeTableData:[]
             }
         },
         created: function () {

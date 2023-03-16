@@ -75,7 +75,7 @@
             :visible.sync="dialogVisible"
             width="55%"
             :before-close="handleClose">
-        <el-form ref="addForm" :model="form" label-width="150px" size="mini" :inline="true" status-icon :label-position="right">
+        <el-form ref="addForm" :model="form" label-width="100px" size="mini" :inline="true" status-icon :label-position="right">
             <el-form-item label="流程名称">
                 <el-input></el-input>
             </el-form-item>
@@ -84,8 +84,30 @@
                 <el-radio v-model="mainMode.radio" label="2">停用</el-radio>
             </el-form-item>
             <el-divider></el-divider>
-            <el-button type="primary">新增节点</el-button>
-            <el-button type="danger">删除节点</el-button>
+            <el-button size="mini" type="primary">新增节点</el-button>
+            <el-button size="mini" type="danger">删除节点</el-button>
+            <div style="height: 10px"></div>
+            <el-table
+                    :data="tableData"
+                    :style="TheStyle"
+                    stripe border highlight-current-row>
+                <el-table-column
+                        prop="userName"
+                        label="创建人">
+                </el-table-column>
+                <el-table-column
+                        prop="mainName"
+                        label="流程名称">
+                </el-table-column>
+                <el-table-column
+                        prop="stopText"
+                        label="状态">
+                </el-table-column>
+                <el-table-column
+                        prop="createTime"
+                        label="创建时间">
+                </el-table-column>
+            </el-table>
         </el-form>
         <span slot="footer" class="dialog-footer">
     <el-button @click="dialogVisible = false">取 消</el-button>
