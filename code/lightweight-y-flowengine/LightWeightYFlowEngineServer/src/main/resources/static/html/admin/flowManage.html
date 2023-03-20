@@ -16,7 +16,7 @@
     <el-form ref='base' size="small" :inline="true" class="query-from" @submit.native.prevent>
         <div style="background-color: #f2f2f2;padding-top: 5px" ref="formHeader">
             <el-form-item>
-                <el-button  @click="dialogVisible=true" type="primary">新增流程</el-button>
+                <el-button  @click="mainFormDialogVisible=true" type="primary">新增流程</el-button>
             </el-form-item>
             <el-form-item>
                 <el-input placeholder="流程名字"
@@ -72,10 +72,10 @@
     <el-dialog
             :close-on-click-modal="false"
             title="新增流程"
-            :visible.sync="dialogVisible"
+            :visible.sync="mainFormDialogVisible"
             width="55%"
             :before-close="handleClose">
-        <el-form ref="addForm" :model="form" label-width="100px" size="mini" :inline="true" status-icon :label-position="right">
+        <el-form ref="addForm" :model="mainForm" label-width="100px" size="mini" :inline="true" status-icon :label-position="labelPosition">
             <el-form-item label="流程名称">
                 <el-input></el-input>
             </el-form-item>
@@ -84,7 +84,7 @@
                 <el-radio v-model="mainMode.radio" label="2">停用</el-radio>
             </el-form-item>
             <el-divider></el-divider>
-            <el-button size="mini" type="primary">新增节点</el-button>
+            <el-button size="mini" type="primary" @click="nodeFormDialogVisible = true">新增节点</el-button>
             <el-button size="mini" type="danger">删除节点</el-button>
             <div style="height: 10px"></div>
             <el-table
@@ -114,8 +114,42 @@
             </el-table>
         </el-form>
         <span slot="footer" class="dialog-footer">
-    <el-button @click="dialogVisible = false">取 消</el-button>
-    <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+    <el-button @click="mainFormDialogVisible = false">取 消</el-button>
+    <el-button type="primary" @click="mainFormDialogVisible = false">确 定</el-button>
+  </span>
+    </el-dialog>
+
+    <el-dialog
+            title="新增节点"
+            :visible.sync="nodeFormDialogVisible"
+            width="70%"
+            :before-close="handleClose">
+        <el-form ref="nodeForm" :model="mainForm" label-width="100px" size="mini" :inline="true" status-icon :label-position="labelPosition">
+            <el-form-item label="环节名称">
+                <el-input placeholder="请输入环节名称"></el-input>
+            </el-form-item>
+            <el-form-item label="限时">
+                <el-input placeholder="请输入限时,单位为天" ></el-input>
+            </el-form-item>
+            <el-form-item label="节点类型">
+                <el-input placeholder="创建、常规、分支、结束归档" ></el-input>
+            </el-form-item>
+            <el-form-item label="指定类型">
+                <el-input placeholder="部门、角色、人员" ></el-input>
+            </el-form-item>
+            <el-form-item label="指定">
+                <el-input placeholder="部门、角色、人员" ></el-input>
+            </el-form-item>
+            <el-form-item label="上一环节">
+                <el-input placeholder="上一环节" ></el-input>
+            </el-form-item>
+            <el-form-item label="下一环节">
+                <el-input placeholder="下一环节" ></el-input>
+            </el-form-item>
+        </el-form>
+        <span slot="footer" class="dialog-footer">
+    <el-button @click="nodeFormDialogVisible = false">取 消</el-button>
+    <el-button type="primary" @click="nodeFormDialogVisible = false">确 定</el-button>
   </span>
     </el-dialog>
 </div>
@@ -126,9 +160,14 @@
         el: '#app',
         data: function () {
             return {
-                dialogVisible: false,
+                mainFormDialogVisible: false,
+                nodeFormDialogVisible: false,
+                labelPosition: "right",
                 mainMode: {
                     radio: 1,
+                },
+                mainForm: {
+
                 },
                 query: {
                     flowName: '',
@@ -152,11 +191,7 @@
         },
         methods: {
             handleClose(done) {
-                // this.$confirm('确认关闭？')
-                //     .then(_ => {
-                //         done();
-                //     })
-                //     .catch(_ => {});
+                done()
             },
             handleSizeChange(val) {
                 this.pageSize = val
