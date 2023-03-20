@@ -122,17 +122,27 @@
     <el-dialog
             title="新增节点"
             :visible.sync="nodeFormDialogVisible"
-            width="70%"
+            width="65%"
             :before-close="handleClose">
-        <el-form ref="nodeForm" :model="mainForm" label-width="100px" size="mini" :inline="true" status-icon :label-position="labelPosition">
+        <el-form ref="nodeForm" :model="nodeForm" label-width="100px" size="mini" :inline="true" status-icon :label-position="labelPosition">
             <el-form-item label="环节名称">
                 <el-input placeholder="请输入环节名称"></el-input>
             </el-form-item>
             <el-form-item label="限时">
-                <el-input placeholder="请输入限时,单位为天" ></el-input>
+                <el-input oninput="value=value.replace(/[^\d]/g,'')"
+                          maxLength='3'
+                          v-model="nodeForm.limit"
+                          placeholder="请输入限时,单位为天" ></el-input>
             </el-form-item>
             <el-form-item label="节点类型">
-                <el-input placeholder="创建、常规、分支、结束归档" ></el-input>
+                <el-select v-model="nodeForm.nodeTypeValue" placeholder="请选择">
+                    <el-option
+                            v-for="item in nodeForm.nodeTypes"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value">
+                    </el-option>
+                </el-select>
             </el-form-item>
             <el-form-item label="指定类型">
                 <el-input placeholder="部门、角色、人员" ></el-input>
@@ -168,6 +178,24 @@
                 },
                 mainForm: {
 
+                },
+                nodeForm: {
+                    limit:3,
+                    //创建、常规、分支、结束归档
+                    nodeTypes: [{
+                        value: '1',
+                        label: '创建'
+                    }, {
+                        value: '2',
+                        label: '常规'
+                    }, {
+                        value: '3',
+                        label: '分支'
+                    }, {
+                        value: '4',
+                        label: '结束归档'
+                    }],
+                    nodeTypeValue: ''
                 },
                 query: {
                     flowName: '',
