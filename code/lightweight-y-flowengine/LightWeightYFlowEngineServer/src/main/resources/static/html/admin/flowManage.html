@@ -126,16 +126,20 @@
             :before-close="handleClose">
         <el-form ref="nodeForm" :model="nodeForm" label-width="100px" size="mini" :inline="true" status-icon :label-position="labelPosition">
             <el-form-item label="环节名称">
-                <el-input placeholder="请输入环节名称"></el-input>
+                <el-input  style="width: 180px" placeholder="请输入环节名称"></el-input>
             </el-form-item>
-            <el-form-item label="限时">
+            <el-form-item label="当前key">
+                <el-input  style="width: 180px" placeholder="请输入环节名称"></el-input>
+            </el-form-item>
+            <el-form-item label="环节限时">
                 <el-input oninput="value=value.replace(/[^\d]/g,'')"
                           maxLength='3'
+                          style="width: 180px"
                           v-model="nodeForm.limit"
                           placeholder="请输入限时,单位为天" ></el-input>
             </el-form-item>
             <el-form-item label="节点类型">
-                <el-select v-model="nodeForm.nodeTypeValue" placeholder="请选择">
+                <el-select style="width: 180px" v-model="nodeForm.nodeTypeValue" placeholder="请选择">
                     <el-option
                             v-for="item in nodeForm.nodeTypes"
                             :key="item.value"
@@ -144,17 +148,31 @@
                     </el-option>
                 </el-select>
             </el-form-item>
-            <el-form-item label="指定类型">
-                <el-input placeholder="部门、角色、人员" ></el-input>
+            <el-form-item label="审批类型">
+                <el-select @change="approvalTypeChange($event)"  style="width: 180px" v-model="nodeForm.approvalTypeValue" placeholder="请选择">
+                    <el-option
+                            v-for="item in nodeForm.approvalTypes"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value">
+                    </el-option>
+                </el-select>
             </el-form-item>
-            <el-form-item label="指定">
-                <el-input placeholder="部门、角色、人员" ></el-input>
+            <el-form-item label="指定角色">
+                <el-select  style="width: 180px" v-model="nodeForm.specRoleValue" placeholder="请选择">
+                    <el-option
+                            v-for="item in nodeForm.specRoles"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value">
+                    </el-option>
+                </el-select>
             </el-form-item>
             <el-form-item label="上一环节">
-                <el-input placeholder="上一环节" ></el-input>
+                <el-input  style="width: 180px" placeholder="上一环节的key" ></el-input>
             </el-form-item>
             <el-form-item label="下一环节">
-                <el-input placeholder="下一环节" ></el-input>
+                <el-input  style="width: 180px" placeholder="下一环节的key" ></el-input>
             </el-form-item>
         </el-form>
         <span slot="footer" class="dialog-footer">
@@ -195,7 +213,22 @@
                         value: '4',
                         label: '结束归档'
                     }],
-                    nodeTypeValue: ''
+                    nodeTypeValue: '',
+                    approvalTypes:[
+                        {
+                            value: '1',
+                            label: '部门'
+                        }, {
+                            value: '2',
+                            label: '角色'
+                        }, {
+                            value: '3',
+                            label: '人员'
+                        },
+                    ],
+                    approvalTypeValue: '',
+                    specRoles:[],
+                    specRoleValue: ''
                 },
                 query: {
                     flowName: '',
@@ -218,6 +251,47 @@
             this.conditionFormQuery()
         },
         methods: {
+            approvalTypeChange(value) {
+
+                let _this = this;
+                var url;
+
+                switch(value) {
+                    case 1:
+                        //部门
+                        url = GLOBAL_API.Dept.SELECT_QUERY
+                        break;
+                    case 2:
+                        //角色
+                        url = GLOBAL_API.ROLE.COMBOX
+                        break;
+                    case 3:
+                        //人员
+                        url = GLOBAL_API.ADMIN.GET_USER_COMBOX
+                        break
+                    default:
+                        break
+                }
+
+                if(!url) {
+                    $.ajax({
+                        type:"get",
+                        url:url,
+                        data: {},
+                        // data:Object.assign({
+                        //     flowName: _this.query.flowName,
+                        //     startTime: startTime,
+                        //     endTime: endTime,
+                        //     limit: _this.pageSize,
+                        //     page: _this.currentPage
+                        // }),
+                        dataType:'json',
+                        success:function(data){
+                            _this.specRoles = data.datas
+                        }
+                    });
+                }
+            },
             handleClose(done) {
                 done()
             },

@@ -32,6 +32,9 @@ var GLOBAL_API = {
     },
     FlowManage: {
         QUERY: _SERVER + '/flow/mainAction/query',
+    },
+    Dept: {
+        SELECT_QUERY: _SERVER + '/flow/DeptAction/selectQuery',
     }
 }
 
