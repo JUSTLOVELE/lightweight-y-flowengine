@@ -122,7 +122,7 @@
     <el-dialog
             title="新增节点"
             :visible.sync="nodeFormDialogVisible"
-            width="65%"
+            width="60%"
             :before-close="handleClose">
         <el-form ref="nodeForm" :model="nodeForm" label-width="100px" size="mini" :inline="true" status-icon :label-position="labelPosition">
             <el-form-item label="环节名称">
@@ -159,7 +159,7 @@
                 </el-select>
             </el-form-item>
             <el-form-item label="指定角色">
-                <el-select  style="width: 180px" v-model="nodeForm.specRoleValue" placeholder="请选择">
+                <el-select multiple :filterable="true" style="width: 180px" v-model="nodeForm.specRoleValue" placeholder="请选择">
                     <el-option
                             v-for="item in nodeForm.specRoles"
                             :key="item.value"
@@ -168,11 +168,8 @@
                     </el-option>
                 </el-select>
             </el-form-item>
-            <el-form-item label="上一环节">
-                <el-input  style="width: 180px" placeholder="上一环节的key" ></el-input>
-            </el-form-item>
-            <el-form-item label="下一环节">
-                <el-input  style="width: 180px" placeholder="下一环节的key" ></el-input>
+            <el-form-item label="环节配置">
+                <el-input type="textarea" :rows="20"  style="width: 400px" placeholder="上一环节的key" ></el-input>
             </el-form-item>
         </el-form>
         <span slot="footer" class="dialog-footer">
@@ -254,18 +251,20 @@
             approvalTypeChange(value) {
 
                 let _this = this;
+                _this.nodeForm.specRoles = [];
+                _this.nodeForm.specRoleValue = '';
                 var url;
 
                 switch(value) {
-                    case 1:
+                    case "1":
                         //部门
                         url = GLOBAL_API.Dept.SELECT_QUERY
                         break;
-                    case 2:
+                    case "2":
                         //角色
                         url = GLOBAL_API.ROLE.COMBOX
                         break;
-                    case 3:
+                    case "3":
                         //人员
                         url = GLOBAL_API.ADMIN.GET_USER_COMBOX
                         break
@@ -273,7 +272,7 @@
                         break
                 }
 
-                if(!url) {
+                if(url) {
                     $.ajax({
                         type:"get",
                         url:url,
@@ -287,7 +286,7 @@
                         // }),
                         dataType:'json',
                         success:function(data){
-                            _this.specRoles = data.datas
+                            _this.nodeForm.specRoles = data.datas
                         }
                     });
                 }

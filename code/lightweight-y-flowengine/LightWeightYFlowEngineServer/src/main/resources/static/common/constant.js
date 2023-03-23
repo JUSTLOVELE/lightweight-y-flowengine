@@ -34,7 +34,7 @@ var GLOBAL_API = {
         QUERY: _SERVER + '/flow/mainAction/query',
     },
     Dept: {
-        SELECT_QUERY: _SERVER + '/flow/DeptAction/selectQuery',
+        SELECT_QUERY: _SERVER + '/flow/deptAction/selectQuery',
     }
 }
 
