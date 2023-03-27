@@ -44,6 +44,8 @@ public class Constant {
 
         public String USER_ID = "user_id";
 
+        public String USERID = "userId";
+
         public String USER_PASSWORD = "user_password";
 
         public String LIMIT = "limit";

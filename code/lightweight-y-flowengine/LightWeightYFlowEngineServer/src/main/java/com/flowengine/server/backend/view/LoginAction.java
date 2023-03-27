@@ -2,6 +2,8 @@ package com.flowengine.server.backend.view;
 
 import cn.hutool.core.util.StrUtil;
 
+import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
 import com.flowengine.common.utils.CommonConstant;
 import com.flowengine.common.utils.entity.PublicUserEntity;
 import com.flowengine.server.backend.service.admin.UserService;
@@ -13,6 +15,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -46,8 +50,12 @@ public class LoginAction extends BaseAction {
         return renderLogOutSuccess();
     }
 
-    @RequestMapping(value = "/loginAction/login", produces = "application/json; charset=utf-8")
-    public String login(HttpServletRequest request, String userId, String password, HttpServletResponse httpServletResponse) {
+    @PostMapping(value = "/loginAction/login", produces = "application/json; charset=utf-8")
+    public String login(HttpServletRequest request, @RequestBody String param, HttpServletResponse httpServletResponse) {
+
+        JSONObject entries = JSONUtil.parseObj(param);
+        String userId = entries.getStr(Constant.Key.USERID);
+        String password = entries.getStr(Constant.Key.PASSWORD);
 
         if(StrUtil.isEmpty(userId)) {
             return  renderFailureList(CommonConstant.USER_ID_IS_NOT_NULL);
