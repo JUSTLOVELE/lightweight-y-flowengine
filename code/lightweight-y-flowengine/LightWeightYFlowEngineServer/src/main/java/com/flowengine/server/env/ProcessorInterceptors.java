@@ -23,7 +23,7 @@ import java.util.Map;
 public class ProcessorInterceptors implements HandlerInterceptor{
 	
 	private static final Log _logger = LogFactory.getLog(ProcessorInterceptors.class);
-	private static final String[] IGNORE_URI = {"test", "api", "404", "error","login","/js/","/image/", "/img/", "/component/", "/css/", "lib", "bigData"};
+	private static final String[] IGNORE_URI = {"index","test", "api", "404", "error","login","/js/","/image/", "/img/", "/component/", "/css/", "lib", "bigData"};
 
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
