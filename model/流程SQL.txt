@@ -10,7 +10,9 @@ CREATE TABLE public_flow_main_tbl(
     create_user_name VARCHAR(255),
     create_time TIMESTAMP,
     org_id VARCHAR(255),
-    dept_id VARCHAR(255)
+    dept_id VARCHAR(255),
+    primary key (op_id)
+
 );
 
 COMMENT ON TABLE public_flow_main_tbl IS '流程主表';
@@ -40,8 +42,10 @@ CREATE TABLE public_flow_node_tbl(
     node_sort INTEGER,
     node_status INTEGER,
     check_type VARCHAR(255),
-    primary key (op_id)
+    primary key (op_id),
+    foreign key (main_id) references public_flow_main_tbl(op_id)
 );
+
 
 COMMENT ON TABLE public_flow_node_tbl IS '环节表';
 COMMENT ON COLUMN public_flow_node_tbl.op_id IS '主键';
