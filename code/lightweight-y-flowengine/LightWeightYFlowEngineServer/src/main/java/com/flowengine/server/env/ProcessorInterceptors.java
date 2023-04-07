@@ -21,7 +21,7 @@ import java.util.Map;
  * @history:
  */
 public class ProcessorInterceptors implements HandlerInterceptor{
-	
+
 	private static final Log _logger = LogFactory.getLog(ProcessorInterceptors.class);
 	private static final String[] IGNORE_URI = {"index","test", "api", "404", "error","login","/js/","/image/", "/img/", "/component/", "/css/", "lib", "bigData"};
 
@@ -29,10 +29,16 @@ public class ProcessorInterceptors implements HandlerInterceptor{
 			throws Exception {
 
 		response.setHeader("Access-Control-Allow-Origin",request.getHeader("Origin"));//支持跨域请求
+//		response.setHeader("Access-Control-Allow-Origin", "http://localhost:8080");//支持跨域请求
 		response.setHeader("Access-Control-Allow-Methods", "*");
 		response.setHeader("Access-Control-Allow-Credentials", "true");//是否支持cookie跨域
 		response.setHeader("Access-Control-Allow-Headers", "Authorization,Origin, X-Requested-With, Content-Type, Accept,Access-Token");//Origin, X-Requested-With, Content-Type, Accept,Access-Token
         String url = request.getRequestURL().toString();
+		System.out.println(request.getHeader("Origin"));
+		System.out.println(url + ";拦截器:" + request.getSession().getId());
+//		if(true) {
+//			return true;
+//		}
 
         for (String s : IGNORE_URI) {
 
@@ -60,20 +66,20 @@ public class ProcessorInterceptors implements HandlerInterceptor{
 
         return true;
     }
-	
+
 	public String renderFailureList(String errorMsg) {
-		
+
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put(CommonConstant.Key.CODE, CommonConstant.Status.FAILURE_CODE);
 		map.put(CommonConstant.Key.SUCCESS, false);
 		map.put(CommonConstant.Key.TOTAL, 0);
 		map.put(CommonConstant.Key.DESC, errorMsg);
-		
+
 		return getJSON(map);
 	}
-	
+
 	public String getJSON(Object obj) {
-		
+
 		ObjectMapper mapper = new ObjectMapper();
 		String msg = "";
 		try {
@@ -86,14 +92,14 @@ public class ProcessorInterceptors implements HandlerInterceptor{
 	}
 
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
-			ModelAndView modelAndView) throws Exception {
+						   ModelAndView modelAndView) throws Exception {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

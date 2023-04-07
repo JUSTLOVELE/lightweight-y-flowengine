@@ -56,6 +56,7 @@ public class LoginAction extends BaseAction {
         JSONObject entries = JSONUtil.parseObj(param);
         String userId = entries.getStr(Constant.Key.USERID);
         String password = entries.getStr(Constant.Key.PASSWORD);
+        System.out.println("login session id = " + request.getSession().getId());
 
         if(StrUtil.isEmpty(userId)) {
             return  renderFailureList(CommonConstant.USER_ID_IS_NOT_NULL);

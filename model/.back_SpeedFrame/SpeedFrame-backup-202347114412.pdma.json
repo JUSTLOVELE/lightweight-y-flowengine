@@ -4,7 +4,7 @@
   "avatar": "",
   "version": "4.2.0",
   "createdTime": "2022-12-9 22:49:27",
-  "updatedTime": "2023-3-31 15:26:32",
+  "updatedTime": "2023-4-7 11:42:58",
   "dbConns": [],
   "profile": {
     "default": {
@@ -469,7 +469,7 @@
         "hideInGraph": true
       }
     ],
-    "menuWidth": "449px"
+    "menuWidth": "292px"
   },
   "entities": [
     {
@@ -846,8 +846,8 @@
           "type": "",
           "len": "",
           "scale": "",
-          "primaryKey": false,
-          "notNull": false,
+          "primaryKey": true,
+          "notNull": true,
           "autoIncrement": false,
           "defaultValue": "",
           "hideInGraph": true,
@@ -1336,8 +1336,8 @@
           "type": "",
           "len": 32,
           "scale": "",
-          "primaryKey": false,
-          "notNull": false,
+          "primaryKey": true,
+          "notNull": true,
           "autoIncrement": false,
           "defaultValue": "",
           "hideInGraph": true,
@@ -1598,7 +1598,7 @@
           "hideInGraph": false,
           "refDict": "",
           "extProps": {},
-          "domain": "9092C4E0-1A54-4859-ABBB-5B62DBC27573",
+          "domain": "16120F75-6AA7-4483-868D-F07F511BB081",
           "id": "91B33C9B-7731-4A3C-ABB0-6AD8D7C5DD71"
         }
       ],
@@ -1700,8 +1700,8 @@
           "type": "",
           "len": 32,
           "scale": "",
-          "primaryKey": false,
-          "notNull": false,
+          "primaryKey": true,
+          "notNull": true,
           "autoIncrement": false,
           "defaultValue": "",
           "hideInGraph": true,
@@ -1714,8 +1714,8 @@
           "defKey": "instance_id",
           "defName": "流程实例表主键",
           "comment": "",
-          "type": "VARCHAR",
-          "len": 32,
+          "type": "",
+          "len": "",
           "scale": "",
           "primaryKey": false,
           "notNull": false,
@@ -1724,15 +1724,15 @@
           "hideInGraph": false,
           "refDict": "",
           "extProps": {},
-          "domain": "",
+          "domain": "16120F75-6AA7-4483-868D-F07F511BB081",
           "id": "0DE448EA-758A-4398-99F0-4EF6C1FAD509"
         },
         {
           "defKey": "task_op_id",
           "defName": "绑定的业务主键",
           "comment": "",
-          "type": "VARCHAR",
-          "len": 32,
+          "type": "",
+          "len": "",
           "scale": "",
           "primaryKey": false,
           "notNull": false,
@@ -1742,7 +1742,8 @@
           "refDict": "",
           "extProps": {},
           "notes": {},
-          "id": "C2F029A0-600F-4AE5-B36F-4EAA262F1587"
+          "id": "C2F029A0-600F-4AE5-B36F-4EAA262F1587",
+          "domain": "16120F75-6AA7-4483-868D-F07F511BB081"
         },
         {
           "defKey": "create_time",
@@ -1766,8 +1767,8 @@
           "defKey": "node_id",
           "defName": "环节id",
           "comment": "",
-          "type": "VARCHAR",
-          "len": 32,
+          "type": "",
+          "len": "",
           "scale": "",
           "primaryKey": false,
           "notNull": false,
@@ -1776,15 +1777,15 @@
           "hideInGraph": false,
           "refDict": "",
           "extProps": {},
-          "domain": "",
+          "domain": "16120F75-6AA7-4483-868D-F07F511BB081",
           "id": "092132B4-1E46-487C-8D8A-766EFE74F5E4"
         },
         {
           "defKey": "node_key",
           "defName": "",
           "comment": "",
-          "type": "VARCHAR",
-          "len": 32,
+          "type": "",
+          "len": "",
           "scale": "",
           "primaryKey": false,
           "notNull": false,
@@ -1793,15 +1794,15 @@
           "hideInGraph": false,
           "refDict": "",
           "extProps": {},
-          "domain": "",
+          "domain": "9092C4E0-1A54-4859-ABBB-5B62DBC27573",
           "id": "4991C7A4-1860-434A-B4E3-84657DA263FA"
         },
         {
           "defKey": "org_id",
           "defName": "机构id",
           "comment": "",
-          "type": "VARCHAR",
-          "len": 32,
+          "type": "",
+          "len": "",
           "scale": "",
           "primaryKey": false,
           "notNull": false,
@@ -1811,14 +1812,15 @@
           "refDict": "",
           "extProps": {},
           "notes": {},
-          "id": "B90A3F65-EADC-4B46-862A-33F36221776C"
+          "id": "B90A3F65-EADC-4B46-862A-33F36221776C",
+          "domain": "16120F75-6AA7-4483-868D-F07F511BB081"
         },
         {
           "defKey": "dept_id",
           "defName": "部门id",
           "comment": "",
-          "type": "VARCHAR",
-          "len": 32,
+          "type": "",
+          "len": "",
           "scale": "",
           "primaryKey": false,
           "notNull": false,
@@ -1828,14 +1830,15 @@
           "refDict": "",
           "extProps": {},
           "notes": {},
-          "id": "B20030F5-9619-4DBC-8C8B-E1E0480FE204"
+          "id": "B20030F5-9619-4DBC-8C8B-E1E0480FE204",
+          "domain": "16120F75-6AA7-4483-868D-F07F511BB081"
         },
         {
           "defKey": "last_node_id",
           "defName": "",
           "comment": "",
-          "type": "VARCHAR",
-          "len": 32,
+          "type": "",
+          "len": "",
           "scale": "",
           "primaryKey": false,
           "notNull": false,
@@ -1844,15 +1847,15 @@
           "hideInGraph": false,
           "refDict": "",
           "extProps": {},
-          "domain": "",
+          "domain": "16120F75-6AA7-4483-868D-F07F511BB081",
           "id": "104E4C75-4594-4001-BDE9-DA2FE5585D63"
         },
         {
           "defKey": "last_node_key",
           "defName": "",
           "comment": "",
-          "type": "VARCHAR",
-          "len": 32,
+          "type": "",
+          "len": "",
           "scale": "",
           "primaryKey": false,
           "notNull": false,
@@ -1861,15 +1864,15 @@
           "hideInGraph": false,
           "refDict": "",
           "extProps": {},
-          "domain": "",
+          "domain": "9092C4E0-1A54-4859-ABBB-5B62DBC27573",
           "id": "2CC6C06D-0C3D-4344-AD9D-3A1F665DD33B"
         },
         {
           "defKey": "next_node_id",
           "defName": "",
           "comment": "",
-          "type": "VARCHAR",
-          "len": 32,
+          "type": "",
+          "len": "",
           "scale": "",
           "primaryKey": false,
           "notNull": false,
@@ -1878,15 +1881,15 @@
           "hideInGraph": false,
           "refDict": "",
           "extProps": {},
-          "domain": "",
+          "domain": "16120F75-6AA7-4483-868D-F07F511BB081",
           "id": "90F9CD9C-C936-413C-B65D-7DCE4BF7C08B"
         },
         {
           "defKey": "next_node_key",
           "defName": "",
           "comment": "",
-          "type": "VARCHAR",
-          "len": 32,
+          "type": "",
+          "len": "",
           "scale": "",
           "primaryKey": false,
           "notNull": false,
@@ -1895,7 +1898,7 @@
           "hideInGraph": false,
           "refDict": "",
           "extProps": {},
-          "domain": "",
+          "domain": "3E948CEC-3070-472C-AF92-F3CA11EC9D15",
           "id": "DD3055D3-1717-497A-910A-CE111DD1A925"
         },
         {
@@ -1919,8 +1922,8 @@
           "defKey": "user_op_id",
           "defName": "",
           "comment": "",
-          "type": "VARCHAR",
-          "len": 32,
+          "type": "",
+          "len": "",
           "scale": "",
           "primaryKey": false,
           "notNull": false,
@@ -1929,15 +1932,15 @@
           "hideInGraph": true,
           "refDict": "",
           "extProps": {},
-          "domain": "",
+          "domain": "16120F75-6AA7-4483-868D-F07F511BB081",
           "id": "418AF1DB-4D25-4276-A86F-F9E1687C89BB"
         },
         {
           "defKey": "last_op_id",
           "defName": "就这个表的上一个环节的主键",
           "comment": "",
-          "type": "VARCHAR",
-          "len": 32,
+          "type": "",
+          "len": "",
           "scale": "",
           "primaryKey": false,
           "notNull": false,
@@ -1946,7 +1949,7 @@
           "hideInGraph": true,
           "refDict": "",
           "extProps": {},
-          "domain": "",
+          "domain": "16120F75-6AA7-4483-868D-F07F511BB081",
           "id": "9E7D1BB1-D044-4B84-A3CE-526431E50C6C"
         },
         {
@@ -2050,40 +2053,6 @@
           "extProps": {},
           "domain": "6BC8F04B-6CFA-4995-98D3-318F5CDD774E",
           "id": "A1473DA1-4F77-4EBF-A19E-A62C2E39B443"
-        },
-        {
-          "defKey": "ref_type",
-          "defName": "1:角色、组;2:用户",
-          "comment": "",
-          "type": "",
-          "len": "",
-          "scale": "",
-          "primaryKey": false,
-          "notNull": false,
-          "autoIncrement": false,
-          "defaultValue": "",
-          "hideInGraph": true,
-          "refDict": "",
-          "extProps": {},
-          "domain": "6BC8F04B-6CFA-4995-98D3-318F5CDD774E",
-          "id": "E63A43D5-1661-420A-8753-443C8099C81F"
-        },
-        {
-          "defKey": "ref_id",
-          "defName": "",
-          "comment": "",
-          "type": "",
-          "len": "",
-          "scale": "",
-          "primaryKey": false,
-          "notNull": false,
-          "autoIncrement": false,
-          "defaultValue": "",
-          "hideInGraph": true,
-          "refDict": "",
-          "extProps": {},
-          "domain": "9092C4E0-1A54-4859-ABBB-5B62DBC27573",
-          "id": "C31798EF-06EC-44A8-871E-F362E3563BB6"
         }
       ],
       "correlations": [],
@@ -2458,6 +2427,200 @@
           "extProps": {},
           "domain": "9092C4E0-1A54-4859-ABBB-5B62DBC27573",
           "id": "5E433262-D554-4686-BDF2-614C9A59B766"
+        }
+      ],
+      "correlations": [],
+      "indexes": []
+    },
+    {
+      "id": "381BC7E5-B5E3-4D87-BAA0-EAA85FB49E50",
+      "env": {
+        "base": {
+          "nameSpace": "",
+          "codeRoot": ""
+        }
+      },
+      "defKey": "public_user_access_tbl",
+      "defName": "用户访问表",
+      "comment": "",
+      "properties": {
+        "partitioned by": "(date string)",
+        "row format delimited": "",
+        "fields terminated by ','": "",
+        "collection items terminated by '-'": "",
+        "map keys terminated by ':'": "",
+        "store as textfile;": ""
+      },
+      "nameTemplate": "{defKey}[{defName}]",
+      "notes": {},
+      "headers": [
+        {
+          "refKey": "hideInGraph",
+          "hideInGraph": true
+        },
+        {
+          "refKey": "defKey",
+          "hideInGraph": false
+        },
+        {
+          "refKey": "defName",
+          "hideInGraph": false
+        },
+        {
+          "refKey": "primaryKey",
+          "hideInGraph": false
+        },
+        {
+          "refKey": "notNull",
+          "hideInGraph": true
+        },
+        {
+          "refKey": "autoIncrement",
+          "hideInGraph": true
+        },
+        {
+          "refKey": "domain",
+          "hideInGraph": true
+        },
+        {
+          "refKey": "type",
+          "hideInGraph": false
+        },
+        {
+          "refKey": "len",
+          "hideInGraph": false
+        },
+        {
+          "refKey": "scale",
+          "hideInGraph": false
+        },
+        {
+          "refKey": "comment",
+          "hideInGraph": true
+        },
+        {
+          "refKey": "refDict",
+          "hideInGraph": true
+        },
+        {
+          "refKey": "defaultValue",
+          "hideInGraph": true
+        },
+        {
+          "refKey": "isStandard",
+          "hideInGraph": false
+        },
+        {
+          "refKey": "uiHint",
+          "hideInGraph": true
+        },
+        {
+          "refKey": "extProps",
+          "hideInGraph": true
+        }
+      ],
+      "fields": [
+        {
+          "defKey": "op_id",
+          "defName": "主键",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": true,
+          "notNull": true,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": true,
+          "domain": "16120F75-6AA7-4483-868D-F07F511BB081",
+          "refDict": "",
+          "uiHint": "",
+          "id": "AA037C35-6283-42BC-BE21-D63655D8DF4A"
+        },
+        {
+          "defKey": "user_op_id",
+          "defName": "用户主键",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "extProps": {},
+          "domain": "16120F75-6AA7-4483-868D-F07F511BB081",
+          "id": "51E58D81-1818-4206-9171-8880F6B912FE"
+        },
+        {
+          "defKey": "access_token",
+          "defName": "",
+          "comment": "",
+          "type": "VARCHAR",
+          "len": 32,
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "extProps": {},
+          "domain": "",
+          "id": "89C43F56-B6C1-444C-AC7C-468AAFE7488E"
+        },
+        {
+          "defKey": "access_token_limit",
+          "defName": "单位分钟",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "extProps": {},
+          "domain": "6BC8F04B-6CFA-4995-98D3-318F5CDD774E",
+          "id": "2C2BC9AF-8447-49CE-BA2D-88547F6290BD"
+        },
+        {
+          "defKey": "refresh_token",
+          "defName": "",
+          "comment": "",
+          "type": "VARCHAR",
+          "len": 32,
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "extProps": {},
+          "domain": "",
+          "id": "A7FE5DDF-8C97-4B09-BDD2-5F1D3426B4A9"
+        },
+        {
+          "defKey": "refresh_token_limit",
+          "defName": "单位天",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "extProps": {},
+          "domain": "6BC8F04B-6CFA-4995-98D3-318F5CDD774E",
+          "id": "3CCB6E42-5C4C-4500-8DCA-2C19D078E475"
         }
       ],
       "correlations": [],

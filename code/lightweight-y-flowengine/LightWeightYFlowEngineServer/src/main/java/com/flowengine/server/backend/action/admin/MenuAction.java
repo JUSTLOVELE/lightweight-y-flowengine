@@ -39,6 +39,7 @@ public class MenuAction extends BaseAction {
     public void createMenu(HttpServletRequest request, HttpServletResponse response) {
 
         try {
+            System.out.println("createMenu session id = " + request.getSession().getId());
             UserCache user = SessionUtils.getUserSession(request);
             MenuVO menuVO = _menuService.createMenuTree(user);
 
