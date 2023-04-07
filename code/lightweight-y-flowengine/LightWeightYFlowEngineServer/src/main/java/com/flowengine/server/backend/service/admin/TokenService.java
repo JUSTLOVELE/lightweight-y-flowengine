@@ -1,4 +1,7 @@
 package com.flowengine.server.backend.service.admin;
+
+import com.flowengine.common.utils.entity.PublicUserEntity;
+
 /**
  * @Description: token服务
  * @author yangzl 2019-11-29
@@ -6,6 +9,13 @@ package com.flowengine.server.backend.service.admin;
  * @history:
  */
 public interface TokenService {
+
+    /**
+     * 根据用户主键获得token
+     * @param user
+     * @return
+     */
+    public String getLoginToken(PublicUserEntity user);
 
     /**
      * 根据用户主键获得token
