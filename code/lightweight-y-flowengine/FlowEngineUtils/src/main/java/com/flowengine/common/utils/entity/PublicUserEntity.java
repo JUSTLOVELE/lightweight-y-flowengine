@@ -67,6 +67,46 @@ public class PublicUserEntity implements Serializable {
 
     private String workAddress;
 
+    private String accessToken ;
+    /** 单位分钟 */
+    private Integer accessTokenLimit ;
+    /**  */
+    private String refreshToken ;
+    /** 单位天 */
+    private Integer refreshTokenLimit ;
+
+    public String getAccessToken() {
+        return accessToken;
+    }
+
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
+    }
+
+    public Integer getAccessTokenLimit() {
+        return accessTokenLimit;
+    }
+
+    public void setAccessTokenLimit(Integer accessTokenLimit) {
+        this.accessTokenLimit = accessTokenLimit;
+    }
+
+    public String getRefreshToken() {
+        return refreshToken;
+    }
+
+    public void setRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
+    }
+
+    public Integer getRefreshTokenLimit() {
+        return refreshTokenLimit;
+    }
+
+    public void setRefreshTokenLimit(Integer refreshTokenLimit) {
+        this.refreshTokenLimit = refreshTokenLimit;
+    }
+
     public String getOpId() {
         return opId;
     }

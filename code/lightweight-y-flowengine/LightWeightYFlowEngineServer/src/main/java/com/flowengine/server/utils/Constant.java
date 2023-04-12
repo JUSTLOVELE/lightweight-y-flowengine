@@ -19,6 +19,17 @@ public class Constant {
         String NODE_KEY = "node_key";
     }
 
+    public interface Token {
+
+        String SIGN = "sign";
+
+        String TIMESTAMP = "timestamp";
+
+        String ACCESS_TOKEN = "access_token";
+
+        String REFRESH_TOKEN = "refresh_token";
+    }
+
     public interface Key {
 
         public String NEXT_NODE_ID = "nextNodeId";
