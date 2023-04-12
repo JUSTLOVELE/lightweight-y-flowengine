@@ -2,6 +2,7 @@ package com.flowengine.server.backend.service.admin.impl;
 
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.flowengine.common.utils.RSA;
 import com.flowengine.common.utils.entity.PublicUserEntity;
 import com.flowengine.common.utils.mapper.PublicUserMapper;
@@ -15,6 +16,7 @@ import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Wrapper;
 import java.util.*;
 
 @Service
@@ -37,12 +39,14 @@ public class TokenServiceImpl extends BaseService implements TokenService {
         user.setLastLogin(new Date());
         String accessToken = UUIDGenerator.getUUID();
         String refreshToken = UUIDGenerator.getUUID();
+        String signToken = UUIDGenerator.getUUID();
         String timestamp = DateUtil.toString(user.getLastLogin(), DateUtil.YMDHMS);
         user.setAccessToken(accessToken);
         user.setAccessTokenLimit(120);
         user.setRefreshToken(refreshToken);
         user.setRefreshTokenLimit(2);
-        String content = timestamp + ";" + accessToken + ";" + refreshToken;
+        user.setSignToken(signToken);
+        String content = timestamp + ";" + accessToken + ";" + refreshToken + ";" + signToken;
         Map<String, Object> webToken = new HashMap<>();
         webToken.put(Constant.Token.SIGN, RSA.signBySHA256WithRSA(content, _ymlProjectConfig.getSk()));
         webToken.put(Constant.Token.TIMESTAMP, timestamp);
@@ -77,11 +81,12 @@ public class TokenServiceImpl extends BaseService implements TokenService {
     public boolean verifyToken(String token) {
 
         JSONObject entries = JSONUtil.parseObj(token);
+        String accessToken = entries.getStr(Constant.Token.ACCESS_TOKEN);
+        String signToken = _publicUserMapper.getSignTokenByAccessToken(accessToken);
         String sign = entries.getStr(Constant.Token.SIGN);
         String timestamp = entries.getStr(Constant.Token.TIMESTAMP);
-        String accessToken = entries.getStr(Constant.Token.ACCESS_TOKEN);
         String refreshToken = entries.getStr(Constant.Token.REFRESH_TOKEN);
-        String content = timestamp + ";" + accessToken + ";" + refreshToken;
+        String content = timestamp + ";" + accessToken + ";" + refreshToken + ";" + signToken;
         boolean verify = RSA.verify(content, _ymlProjectConfig.getPk(), sign);
         return verify;
     }

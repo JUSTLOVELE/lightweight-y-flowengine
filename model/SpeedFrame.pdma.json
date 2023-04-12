@@ -4,7 +4,7 @@
   "avatar": "",
   "version": "4.4.0",
   "createdTime": "2022-12-9 22:49:27",
-  "updatedTime": "2023-4-7 20:24:48",
+  "updatedTime": "2023-4-13 00:09:25",
   "dbConns": [],
   "profile": {
     "default": {
@@ -2961,6 +2961,23 @@
           "extProps": {},
           "domain": "6BC8F04B-6CFA-4995-98D3-318F5CDD774E",
           "id": "3CCB6E42-5C4C-4500-8DCA-2C19D078E475"
+        },
+        {
+          "defKey": "sign_token",
+          "defName": "验证位",
+          "comment": "",
+          "type": "VARCHAR",
+          "len": 32,
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "extProps": {},
+          "domain": "",
+          "id": "78A7D04F-1C49-4CCF-BAD1-7BE2F183F6B3"
         },
         {
           "defKey": "last_login",
