@@ -23,14 +23,6 @@ import java.util.Map;
 public interface PublicUserMapper extends BaseMapper<PublicUserEntity> {
 
     /**
-     * 根据accessToken获取signToken
-     * @param accessToken
-     * @return
-     */
-    @Select("select a.sign_token signToken from public_user_tbl a where a.access_token = #{accessToken}")
-    public String getSignTokenByAccessToken(@Param("accessToken") String accessToken);
-
-    /**
      * 根据主键获取用户名
      * @param userOpId
      * @return

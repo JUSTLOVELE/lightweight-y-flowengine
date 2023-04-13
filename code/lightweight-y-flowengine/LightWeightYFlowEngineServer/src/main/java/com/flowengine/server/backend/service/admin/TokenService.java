@@ -13,29 +13,27 @@ public interface TokenService {
     /**
      * 根据用户主键获得token
      * @param user
-     * @return
      */
-    public String getLoginToken(PublicUserEntity user);
+    public void getLoginToken(PublicUserEntity user);
 
     /**
      * 根据用户主键获得token
      * @param userOpId
-     * @return
      */
-    public String getLoginToken(String userOpId);
+    public void getLoginToken(String userOpId);
 
     /**
-     * 验证token是否有效
-     * @param token
+     * 验证accessToken是否有效
+     * @param accessToken
      * @return
      */
-    public boolean verifyToken(String token);
+    public boolean verifyToken(String accessToken);
 
     /**
      * 根据refresh_token重新获得并刷新token
-     * @param refreshToken
+     * @param token
      * @return
      */
-    public String reAccessToken(String refreshToken);
+    public String reRefreshToken(String token);
 
 }

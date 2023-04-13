@@ -75,16 +75,6 @@ public class PublicUserEntity implements Serializable {
     /** 单位天 */
     private Integer refreshTokenLimit ;
 
-    private String signToken;
-
-    public String getSignToken() {
-        return signToken;
-    }
-
-    public void setSignToken(String signToken) {
-        this.signToken = signToken;
-    }
-
     public String getAccessToken() {
         return accessToken;
     }

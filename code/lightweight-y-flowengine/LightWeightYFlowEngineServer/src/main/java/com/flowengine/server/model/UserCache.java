@@ -62,6 +62,14 @@ private static final long serialVersionUID = 1L;
 
 	private String workAddress;
 
+	private String accessToken ;
+	/** 单位分钟 */
+	private Integer accessTokenLimit ;
+	/**  */
+	private String refreshToken ;
+	/** 单位天 */
+	private Integer refreshTokenLimit ;
+
 	private List<String> roleIds;
 
 	public UserCache() {
@@ -92,6 +100,10 @@ private static final long serialVersionUID = 1L;
 		this.userSources = userEntity.getUserSources();
 		this.workAddress = userEntity.getWorkAddress();
 		this.deptId = userEntity.getDeptId();
+		this.accessToken = userEntity.getAccessToken();
+		this.accessTokenLimit = userEntity.getAccessTokenLimit();
+		this.refreshToken = userEntity.getRefreshToken();
+		this.refreshTokenLimit = userEntity.getRefreshTokenLimit();
 	}
 
 	public void reCache(PublicUserEntity userEntity) {
@@ -118,6 +130,42 @@ private static final long serialVersionUID = 1L;
 		this.userSources = userEntity.getUserSources();
 		this.workAddress = userEntity.getWorkAddress();
 		this.deptId = userEntity.getDeptId();
+		this.accessToken = userEntity.getAccessToken();
+		this.accessTokenLimit = userEntity.getAccessTokenLimit();
+		this.refreshToken = userEntity.getRefreshToken();
+		this.refreshTokenLimit = userEntity.getRefreshTokenLimit();
+	}
+
+	public String getAccessToken() {
+		return accessToken;
+	}
+
+	public void setAccessToken(String accessToken) {
+		this.accessToken = accessToken;
+	}
+
+	public Integer getAccessTokenLimit() {
+		return accessTokenLimit;
+	}
+
+	public void setAccessTokenLimit(Integer accessTokenLimit) {
+		this.accessTokenLimit = accessTokenLimit;
+	}
+
+	public String getRefreshToken() {
+		return refreshToken;
+	}
+
+	public void setRefreshToken(String refreshToken) {
+		this.refreshToken = refreshToken;
+	}
+
+	public Integer getRefreshTokenLimit() {
+		return refreshTokenLimit;
+	}
+
+	public void setRefreshTokenLimit(Integer refreshTokenLimit) {
+		this.refreshTokenLimit = refreshTokenLimit;
 	}
 
 	public List<String> getRoleIds() {
