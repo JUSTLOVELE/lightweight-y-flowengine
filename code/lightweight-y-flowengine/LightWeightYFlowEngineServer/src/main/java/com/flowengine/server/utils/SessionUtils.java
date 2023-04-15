@@ -20,6 +20,11 @@ public class SessionUtils {
 
 	private final static Map<String, UserCache> cacheMap = new ConcurrentHashMap<String, UserCache>();
 
+	public static void addUserSession(HttpServletRequest request, UserCache userCache){
+		String accessToken = request.getHeader(Constant.Token.ACCESS_TOKEN);
+		addUserSession(accessToken, userCache);
+	}
+
 	public static void addUserSession(String accessToken, UserCache userCache){
 		cacheMap.put(accessToken, userCache);
 	}
@@ -28,8 +33,18 @@ public class SessionUtils {
 		return cacheMap.get(accessToken);
 	}
 
+	public static UserCache getUserSession(HttpServletRequest request){
+		String accessToken = request.getHeader(Constant.Token.ACCESS_TOKEN);
+		return getUserSession(accessToken);
+	}
+
 	public static void removeUserSession(String accessToken){
 		cacheMap.remove(accessToken);
+	}
+
+	public static void removeUserSession(HttpServletRequest request){
+		String accessToken = request.getHeader(Constant.Token.ACCESS_TOKEN);
+		removeUserSession(accessToken);
 	}
 
 //	public static void addUserSession(HttpServletRequest request, Object object){

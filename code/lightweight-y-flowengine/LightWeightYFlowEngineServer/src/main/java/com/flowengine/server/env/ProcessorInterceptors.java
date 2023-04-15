@@ -3,6 +3,7 @@ package com.flowengine.server.env;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.flowengine.common.utils.CommonConstant;
 import com.flowengine.server.model.UserCache;
+import com.flowengine.server.utils.Constant;
 import com.flowengine.server.utils.SessionUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -32,10 +33,9 @@ public class ProcessorInterceptors implements HandlerInterceptor{
 //		response.setHeader("Access-Control-Allow-Origin", "http://localhost:8080");//支持跨域请求
 		response.setHeader("Access-Control-Allow-Methods", "*");
 		response.setHeader("Access-Control-Allow-Credentials", "true");//是否支持cookie跨域
-		response.setHeader("Access-Control-Allow-Headers", "Authorization,Origin, X-Requested-With, Content-Type, Accept,Access-Token");//Origin, X-Requested-With, Content-Type, Accept,Access-Token
+		response.setHeader("Access-Control-Allow-Headers", "Authorization,Origin, X-Requested-With, Content-Type, Accept,access_token");//Origin, X-Requested-With, Content-Type, Accept,Access-Token
         String url = request.getRequestURL().toString();
-		System.out.println(request.getHeader("Origin"));
-		System.out.println(url + ";拦截器:" + request.getSession().getId());
+
 //		if(true) {
 //			return true;
 //		}
@@ -48,9 +48,11 @@ public class ProcessorInterceptors implements HandlerInterceptor{
             }
         }
 
-        UserCache user = (UserCache) request.getSession().getAttribute(SessionUtils.USER_SESSION);
 
-        if (user == null) {
+		String accessToken = request.getHeader(Constant.Token.ACCESS_TOKEN);
+		UserCache user = SessionUtils.getUserSession(accessToken);
+
+		if (user == null) {
             _logger.info("session outtime");
             if (request.getHeader("x-requested-with") != null &&
                     request.getHeader("x-requested-with").equalsIgnoreCase("XMLHttpRequest")) {
