@@ -29,16 +29,8 @@ public class ProcessorInterceptors implements HandlerInterceptor{
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 
-		response.setHeader("Access-Control-Allow-Origin",request.getHeader("Origin"));//支持跨域请求
-//		response.setHeader("Access-Control-Allow-Origin", "http://localhost:8080");//支持跨域请求
-		response.setHeader("Access-Control-Allow-Methods", "*");
-		response.setHeader("Access-Control-Allow-Credentials", "true");//是否支持cookie跨域
-		response.setHeader("Access-Control-Allow-Headers", "Authorization,Origin, X-Requested-With, Content-Type, Accept,access_token");//Origin, X-Requested-With, Content-Type, Accept,Access-Token
-        String url = request.getRequestURL().toString();
-
-//		if(true) {
-//			return true;
-//		}
+		String url = request.getRequestURL().toString();
+		String accessToken = request.getHeader(Constant.Token.ACCESS_TOKEN);
 
         for (String s : IGNORE_URI) {
 
@@ -48,8 +40,6 @@ public class ProcessorInterceptors implements HandlerInterceptor{
             }
         }
 
-
-		String accessToken = request.getHeader(Constant.Token.ACCESS_TOKEN);
 		UserCache user = SessionUtils.getUserSession(accessToken);
 
 		if (user == null) {
@@ -68,6 +58,12 @@ public class ProcessorInterceptors implements HandlerInterceptor{
 
         return true;
     }
+
+	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
+						   ModelAndView modelAndView) throws Exception {
+		// TODO Auto-generated method stub
+
+	}
 
 	public String renderFailureList(String errorMsg) {
 
@@ -91,12 +87,6 @@ public class ProcessorInterceptors implements HandlerInterceptor{
 		}
 		_logger.info(msg);
 		return msg ;
-	}
-
-	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
-						   ModelAndView modelAndView) throws Exception {
-		// TODO Auto-generated method stub
-
 	}
 
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)

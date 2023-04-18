@@ -86,6 +86,18 @@ public class SpringWebMvcConfigurer implements WebMvcConfigurer {
 //				.allowCredentials(true)
 //				.allowedMethods("POST", "GET", "PUT", "OPTIONS", "DELETE")
 //				.maxAge(3600);
+
+//		arg0.addMapping("/**")
+//				.allowedOriginPatterns("http://localhost:8080")
+//				.allowedMethods("GET", "HEAD", "POST", "PUT", "DELETE", "OPTIONS")
+//				.allowedHeaders("*")
+//				.exposedHeaders("access-control-allow-headers",
+//						"access-control-allow-methods",
+//						"access-control-allow-origin",
+//						"access-control-max-age",
+//						"access_token",
+//						"X-Frame-Options")
+//				.allowCredentials(true).maxAge(3600);
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package com.flowengine.server.utils;
 
 
+import cn.hutool.core.util.StrUtil;
 import com.flowengine.common.utils.CacheObject;
 import com.flowengine.server.model.UserCache;
 import jakarta.servlet.http.HttpServletRequest;
@@ -30,6 +31,11 @@ public class SessionUtils {
 	}
 
 	public static UserCache getUserSession(String accessToken){
+
+		if(StrUtil.isEmpty(accessToken)) {
+			return null;
+		}
+
 		return cacheMap.get(accessToken);
 	}
 
