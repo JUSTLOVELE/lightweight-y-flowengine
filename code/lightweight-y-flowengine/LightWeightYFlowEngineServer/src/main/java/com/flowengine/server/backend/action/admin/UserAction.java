@@ -1,5 +1,7 @@
 package com.flowengine.server.backend.action.admin;
 
+import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
 import com.flowengine.common.utils.CommonConstant;
 import com.flowengine.server.backend.service.admin.UserService;
 import com.flowengine.server.core.BaseAction;
@@ -60,23 +62,19 @@ public class UserAction extends BaseAction {
      * 编辑用户
      * @return
      */
-    @RequestMapping(value = "/userAction/editSelf", produces = "application/json; charset=utf-8")
-    public String editSelf(String pwd,
-                           String oldPwd,
-                           String userId,
-                           String userName,
-                           String userPhone,
-                           String orgId,
+    @PostMapping(value = "/userAction/editSelf", produces = "application/json; charset=utf-8")
+    public String editSelf(@RequestBody String param,
                            HttpServletRequest request) {
 
+        JSONObject entries = JSONUtil.parseObj(param);
         Map<String, Object> data = new HashMap<>();
-        data.put(Constant.Key.NAME, userName);
-        data.put(Constant.Key.USER_ID, userId);
-        data.put(Constant.Key.USER_PHONE, userPhone);
-        data.put(Constant.Key.ORG_ID, orgId);
+        data.put(Constant.Key.NAME, entries.get(Constant.Key.USER_NAME));
+        data.put(Constant.Key.USER_ID, entries.get(Constant.Key.USERID));
+        data.put(Constant.Key.USER_PHONE, entries.get(Constant.Key.USER_PHONE));
+        data.put(Constant.Key.ORG_ID, entries.get(Constant.Key.ORG_ID));
         data.put(SessionUtils.USER_SESSION, SessionUtils.getUserSession(request));
-        data.put(Constant.Key.OLD_PWD, oldPwd);
-        data.put(Constant.Key.PASSWORD, pwd);
+        data.put(Constant.Key.OLD_PWD, entries.get(Constant.Key.OLD_PWD));
+        data.put(Constant.Key.PASSWORD, entries.get(Constant.Key.PASSWORD));
 
         return _userService.editSelf(request,data);
     }

@@ -11,6 +11,11 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class TestAction extends BaseAction {
 
+    @GetMapping(value = "/test/test2", produces = "application/json; charset=utf-8")
+    public String queryTest() {
+        return "hello world!";
+    }
+
     @RequestMapping(value = "/test/test1", produces = "application/json; charset=utf-8")
     public String queryToDeal(HttpServletRequest request, @RequestBody String opId) {
 
