@@ -20,6 +20,6 @@ import java.util.Map;
 @Repository
 public interface PublicRoleMapper extends BaseMapper<PublicRoleEntity> {
 
-    @Select("select a.op_id value, a.name name from public_role a where a.org_id = #{orgId}")
+    @Select("select a.op_id value, a.name label from public_role a where a.org_id = #{orgId}")
     public List<Map<String, Object>> getCombox(@Param("orgId") String orgId);
 }
