@@ -7,9 +7,29 @@ import com.flowengine.server.utils.SessionUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 public class TestAction extends BaseAction {
+
+    @PostMapping(value = "/upload/del", produces = "application/json; charset=utf-8")
+    public String del(String uploadKey, String fileName) {
+
+        return renderQuerySuccessList(1);
+    }
+
+    @PostMapping(value = "/upload/hello", produces = "application/json; charset=utf-8")
+    public String uploadTest(HttpServletRequest request,
+                             String key,
+                             MultipartFile mediaFile) {
+        System.out.println( request.getParameter("key"));
+
+        if(mediaFile != null) {
+            System.out.println(mediaFile.getName());
+        }
+
+        return "hello world!";
+    }
 
     @GetMapping(value = "/test/test2", produces = "application/json; charset=utf-8")
     public String queryTest() {
