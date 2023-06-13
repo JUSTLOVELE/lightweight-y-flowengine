@@ -31,6 +31,7 @@ public class ProcessorInterceptors implements HandlerInterceptor{
 
 		String url = request.getRequestURL().toString();
 		String accessToken = request.getHeader(Constant.Token.ACCESS_TOKEN);
+		System.out.println(accessToken);
 
         for (String s : IGNORE_URI) {
 

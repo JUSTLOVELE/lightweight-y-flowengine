@@ -15,14 +15,15 @@ public class TestAction extends BaseAction {
     @PostMapping(value = "/upload/del", produces = "application/json; charset=utf-8")
     public String del(String uploadKey, String fileName) {
 
+        System.out.println("删除:" + uploadKey + ";" + fileName);
         return renderQuerySuccessList(1);
     }
 
     @PostMapping(value = "/upload/hello", produces = "application/json; charset=utf-8")
     public String uploadTest(HttpServletRequest request,
-                             String key,
+                             String uploadKey,
                              MultipartFile mediaFile) {
-        System.out.println( request.getParameter("key"));
+        System.out.println("删除:" + uploadKey + ";" + mediaFile.getName());
 
         if(mediaFile != null) {
             System.out.println(mediaFile.getName());
