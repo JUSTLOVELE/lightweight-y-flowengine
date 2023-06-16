@@ -78,7 +78,7 @@ public class RoleDaoImpl extends BaseDao implements RoleDao {
     @Override
     public List<RoleTreeVO> findMenusByRoles(String roleIds) {
 
-        String sql = "select op_id id, parent_id \"parentId\", text, type from public_menu where op_id in ( ";
+        String sql = "select op_id id, parent_id \"parentId\", text \"label\", type from public_menu where op_id in ( ";
         sql += "select menu_id from public_role_menu_grant where role_id in ("+roleIds+")) ORDER BY sort ASC ";
         _logger.info(sql);
         RowMapper<RoleTreeVO> rowMapper = new BeanPropertyRowMapper<RoleTreeVO>(RoleTreeVO.class);

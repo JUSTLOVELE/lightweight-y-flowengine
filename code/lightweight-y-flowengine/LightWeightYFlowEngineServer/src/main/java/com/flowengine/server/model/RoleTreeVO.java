@@ -14,7 +14,7 @@ public class RoleTreeVO {
 
     private String id;
     private boolean leaf = true;
-    private String text;
+    private String label;
     private boolean expanded = false;
     private Integer type;
     private String parentId;
@@ -33,12 +33,15 @@ public class RoleTreeVO {
     public void setLeaf(boolean leaf) {
         this.leaf = leaf;
     }
-    public String getText() {
-        return text;
+
+    public String getLabel() {
+        return label;
     }
-    public void setText(String text) {
-        this.text = text;
+
+    public void setLabel(String label) {
+        this.label = label;
     }
+
     public Integer getType() {
         return type;
     }
