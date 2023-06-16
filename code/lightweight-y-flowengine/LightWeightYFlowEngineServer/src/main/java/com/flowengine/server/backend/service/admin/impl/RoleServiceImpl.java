@@ -73,7 +73,6 @@ public class RoleServiceImpl extends BaseService implements RoleService {
 
             if(StrUtil.isNotEmpty(menuIds)) {
 
-                menuIds += "21";//固定加上顶级id,21
                 String[] array = menuIds.split(",");
                 _roleDao.editRoleMenus(opId, array);
             }
@@ -115,7 +114,6 @@ public class RoleServiceImpl extends BaseService implements RoleService {
 
             if(StrUtil.isNotEmpty(menuIds)) {
 
-                menuIds += "21"; //新增顶级id,21
                 String [] array = menuIds.split(",");
                 _roleDao.addRoleMenus(roleId, array);
             }

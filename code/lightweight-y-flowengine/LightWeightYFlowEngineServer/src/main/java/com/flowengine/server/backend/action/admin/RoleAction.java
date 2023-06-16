@@ -41,7 +41,7 @@ public class RoleAction extends BaseAction {
      * @param opId
      * @return
      */
-    @GetMapping(value = "/roleAction/delete", produces = "application/json; charset=utf-8")
+    @PostMapping(value = "/roleAction/delete", produces = "application/json; charset=utf-8")
     public String delete(String opId) {
         return _roleService.delete(opId);
     }
@@ -105,7 +105,7 @@ public class RoleAction extends BaseAction {
     public void createRoleTree(HttpSession session, HttpServletRequest request, HttpServletResponse response) {
 
         UserCache user = SessionUtils.getUserSession(request);
-        String roleId = request.getParameter(Constant.Key.ROLE_ID);
+        String roleId = request.getParameter(Constant.Key.OP_ID);
         RoleTreeVO roleTreeVO = null;
 
         if (StrUtil.isNotEmpty(roleId)) {// 存在表示回填
