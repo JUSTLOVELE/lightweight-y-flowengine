@@ -178,7 +178,8 @@ public class UserAction extends BaseAction {
                       String orgId,
                       String roleId,
                       String userCategory,
-                      String uploadKey,
+                      String uploadKey1,
+                      String uploadKey2,
                       String sex) {
 
         Map<String, Object> param = new HashMap<>();
