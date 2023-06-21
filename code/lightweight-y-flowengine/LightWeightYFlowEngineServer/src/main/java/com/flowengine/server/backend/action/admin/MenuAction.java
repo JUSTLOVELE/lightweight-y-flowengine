@@ -32,6 +32,8 @@ public class MenuAction extends BaseAction {
 
     private final static Log _logger = LogFactory.getLog(MenuAction.class);
 
+
+
 	/**
      * 	创建导航菜单
      */
