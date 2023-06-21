@@ -142,5 +142,7 @@ alter table public_user_tbl add access_token_limit int;
 alter table public_user_tbl add refresh_token varchar(32);
 alter table public_user_tbl add refresh_token_limit int;
 
-
+INSERT INTO public.public_menu (op_id, parent_id, url, text, type, button_type, available_flag, sort, category, sys, icon)
+VALUES ('10102', '101', 'menuPage', '菜单管理', 2, 21, 1, 2, 0, 1, null);
+insert into public_role_menu_grant(menu_id, role_id) VALUES ('10102', 'role_101');
 

@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * @Description:
  * @author yangzl 2019-12-03
@@ -22,6 +25,19 @@ public class MenuServiceImpl extends BaseService implements MenuService {
 	
 	@Autowired
 	private MenuDao _menuDao;
+
+	@Override
+	public String query(Map<String, Object> param) {
+
+		List<Map<String, Object>> datas = _menuDao.query(param);
+
+		if(datas != null && datas.size() > 1) {
+
+			return renderQuerySuccessList(_menuDao.queryTotal(param), datas);
+		}else  {
+			return renderQuerySuccessList(0);
+		}
+	}
 
 	@Override
 	public MenuVO createMenuTree(UserCache user) {

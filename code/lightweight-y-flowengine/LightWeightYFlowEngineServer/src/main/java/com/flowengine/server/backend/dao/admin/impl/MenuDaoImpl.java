@@ -6,13 +6,16 @@ import com.flowengine.server.backend.dao.admin.MenuDao;
 import com.flowengine.server.core.BaseDao;
 import com.flowengine.server.model.MenuVO;
 import com.flowengine.server.model.UserCache;
+import com.flowengine.server.utils.Constant;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Description:
@@ -24,7 +27,51 @@ import java.util.List;
 public class MenuDaoImpl extends BaseDao implements MenuDao {
 
 	private final static Log _logger = LogFactory.getLog(MenuDaoImpl.class);
-	
+
+	@Override
+	public int queryTotal(Map<String, Object> param) {
+
+		String sql = """
+				select count(*)  from public_menu a
+				""";
+		StringBuffer sb = new StringBuffer(sql);
+		sql = sb.toString();
+		_logger.info(sql);
+
+		return this.getJdbcTemplate().queryForObject(sql, Integer.class);
+	}
+
+	@Override
+	public List<Map<String, Object>> query(Map<String, Object> param) {
+
+		Integer page = (Integer) param.get(Constant.Key.PAGE);
+		Integer limit = (Integer) param.get(Constant.Key.LIMIT);
+		List<Object> array = new ArrayList<>();
+		String sql = """
+				select
+				    a.op_id "opId",
+				    a.parent_id "parentId",
+				    a.url "url",
+				    a.text "text",
+				    a.type "type",
+				    a.available_flag "availableFlag",
+				    a.sort "sort",
+				    a.sys "sys",
+				    a.icon "icon",
+				    a.category "category"
+				    from public_menu a
+								
+				""";
+		StringBuffer sb = new StringBuffer(sql);
+		sb.append(" ORDER BY a.op_id desc LIMIT ? offset ? ");
+		array.add(limit);
+		array.add(limit*(page-1));
+		sql = sb.toString();
+		_logger.info(sql);
+
+		return this.getJdbcTemplate().queryForList(sql, array.toArray());
+	}
+
 	@Override
 	public MenuVO createMenuTree(UserCache user) {
 		
