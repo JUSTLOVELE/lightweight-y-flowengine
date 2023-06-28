@@ -77,9 +77,9 @@ public class MenuDaoImpl extends BaseDao implements MenuDao {
 				    a.parent_id "parentId",
 				    a.url "url",
 				    a.text "text",
-				    a.type "type",
-				    to_char(a.available_flag, '999') "availableFlag",
-				    to_char(a.sort, '999') "sort",
+				    a.type::TEXT "type",
+				    a.available_flag::TEXT "availableFlag",
+				    a.sort "sort",
 				    a.sys "sys",
 				    a.icon "icon",
 				    a.category "category"
