@@ -42,18 +42,26 @@ public class MenuAction extends BaseAction {
      * 查询登录用户
      * @param name
      * @param limit
+     * @param opId
+     * @param parentId
+     * @param menuText
      * @param page
+     * @return
      */
     @GetMapping(value = "/query", produces = "application/json; charset=utf-8")
     @ResponseBody
-    public String query(@RequestParam(required = false) String name,
-                        @RequestParam(required = true) Integer limit,
+    public String query(@RequestParam(required = true) Integer limit,
+                        String opId,
+                        String parentId,
+                        String menuText,
                         @RequestParam(required = true)  Integer page) {
 
         Map<String, Object> param = new HashMap<String, Object>();
-        param.put(Constant.Key.NAME, name);
         param.put(Constant.Key.PAGE, page);
         param.put(Constant.Key.LIMIT, limit);
+        param.put(Constant.Key.OP_ID, opId);
+        param.put(Constant.Key.PARENT_ID, parentId);
+        param.put(Constant.Key.MENU_TEXT, menuText);
 
         return _menuService.query(param);
     }

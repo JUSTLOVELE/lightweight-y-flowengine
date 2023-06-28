@@ -1,6 +1,7 @@
 package com.flowengine.server.backend.dao.admin.impl;
 
 
+import cn.hutool.core.util.StrUtil;
 import com.flowengine.common.utils.CommonConstant;
 import com.flowengine.server.backend.dao.admin.MenuDao;
 import com.flowengine.server.core.BaseDao;
@@ -31,14 +32,34 @@ public class MenuDaoImpl extends BaseDao implements MenuDao {
 	@Override
 	public int queryTotal(Map<String, Object> param) {
 
+		String opId = (String) param.get(Constant.Key.OP_ID);
+		String parentId = (String) param.get(Constant.Key.PARENT_ID);
+		String menuText = (String) param.get(Constant.Key.MENU_TEXT);
+		List<Object> array = new ArrayList<>();
 		String sql = """
-				select count(*)  from public_menu a
+				select count(*)  from public_menu a where 1=1 
 				""";
 		StringBuffer sb = new StringBuffer(sql);
+
+		if(StrUtil.isNotEmpty(opId)) {
+			sb.append(" and a.op_id = ? ");
+			array.add(opId);
+		}
+
+		if(StrUtil.isNotEmpty(parentId)) {
+			sb.append(" and a.parent_id = ? ");
+			array.add(parentId);
+		}
+
+		if(StrUtil.isNotEmpty(menuText)) {
+			sb.append(" and a.text like ? ");
+			array.add(menuText + "%");
+		}
+
 		sql = sb.toString();
 		_logger.info(sql);
 
-		return this.getJdbcTemplate().queryForObject(sql, Integer.class);
+		return this.getJdbcTemplate().queryForObject(sql, Integer.class, array.toArray());
 	}
 
 	@Override
@@ -46,6 +67,9 @@ public class MenuDaoImpl extends BaseDao implements MenuDao {
 
 		Integer page = (Integer) param.get(Constant.Key.PAGE);
 		Integer limit = (Integer) param.get(Constant.Key.LIMIT);
+		String opId = (String) param.get(Constant.Key.OP_ID);
+		String parentId = (String) param.get(Constant.Key.PARENT_ID);
+		String menuText = (String) param.get(Constant.Key.MENU_TEXT);
 		List<Object> array = new ArrayList<>();
 		String sql = """
 				select
@@ -54,16 +78,32 @@ public class MenuDaoImpl extends BaseDao implements MenuDao {
 				    a.url "url",
 				    a.text "text",
 				    a.type "type",
-				    a.available_flag "availableFlag",
-				    a.sort "sort",
+				    to_char(a.available_flag, '999') "availableFlag",
+				    to_char(a.sort, '999') "sort",
 				    a.sys "sys",
 				    a.icon "icon",
 				    a.category "category"
-				    from public_menu a
+				    from public_menu a where 1=1 
 								
 				""";
 		StringBuffer sb = new StringBuffer(sql);
-		sb.append(" ORDER BY a.op_id desc LIMIT ? offset ? ");
+
+		if(StrUtil.isNotEmpty(opId)) {
+			sb.append(" and a.op_id = ? ");
+			array.add(opId);
+		}
+
+		if(StrUtil.isNotEmpty(parentId)) {
+			sb.append(" and a.parent_id = ? ");
+			array.add(parentId);
+		}
+
+		if(StrUtil.isNotEmpty(menuText)) {
+			sb.append(" and a.text like ? ");
+			array.add(menuText + "%");
+		}
+
+		sb.append(" ORDER BY a.sort asc LIMIT ? offset ? ");
 		array.add(limit);
 		array.add(limit*(page-1));
 		sql = sb.toString();

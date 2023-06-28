@@ -80,6 +80,10 @@ public class Constant {
         String USER_CATEGORY = "userCategory";
         /**角色id**/
         public static final String MENU_ID = "menuId";
+
+        public String PARENT_ID = "parentId";
+
+        public String MENU_TEXT = "menuText";
     }
 
     public interface Value {

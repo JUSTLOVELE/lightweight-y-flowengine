@@ -31,7 +31,7 @@ public class MenuServiceImpl extends BaseService implements MenuService {
 
 		List<Map<String, Object>> datas = _menuDao.query(param);
 
-		if(datas != null && datas.size() > 1) {
+		if(datas != null && datas.size() > 0) {
 
 			return renderQuerySuccessList(_menuDao.queryTotal(param), datas);
 		}else  {
