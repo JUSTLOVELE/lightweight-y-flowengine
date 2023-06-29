@@ -2,6 +2,7 @@ package com.flowengine.server.backend.action.admin;
 
 
 import com.flowengine.common.utils.CommonConstant;
+import com.flowengine.common.utils.entity.PublicMenuEntity;
 import com.flowengine.server.backend.service.admin.MenuService;
 import com.flowengine.server.core.BaseAction;
 import com.flowengine.server.model.MenuVO;
@@ -14,10 +15,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -32,15 +30,53 @@ import java.util.Map;
 @RequestMapping("/menuAction")
 @Controller
 public class MenuAction extends BaseAction {
-	
-	@Autowired
-	private MenuService _menuService;
+
+    @Autowired
+    private MenuService _menuService;
 
     private final static Log _logger = LogFactory.getLog(MenuAction.class);
 
     /**
+     * 删除
+     * @param opId
+     * @return
+     */
+    @PostMapping(value = "/delete", produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public String delete(String opId) {
+        return _menuService.delete(opId);
+    }
+
+    /**
+     * 编辑
+     * @param menuEntity
+     * @return
+     */
+    @PostMapping(value = "/edit", produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public String edit(PublicMenuEntity menuEntity) {
+        return _menuService.edit(menuEntity);
+    }
+
+    /**
+     * 新增
+     * @param menuEntity
+     * @return
+     */
+    @PostMapping(value = "/add", produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public String add(PublicMenuEntity menuEntity) {
+
+        menuEntity.setButtonType(21);//默认值
+        menuEntity.setSys(1);//默认值
+        menuEntity.setCategory(0); //默认值
+
+        return _menuService.add(menuEntity);
+    }
+
+
+    /**
      * 查询登录用户
-     * @param name
      * @param limit
      * @param opId
      * @param parentId
@@ -66,7 +102,7 @@ public class MenuAction extends BaseAction {
         return _menuService.query(param);
     }
 
-	/**
+    /**
      * 	创建导航菜单
      */
     @RequestMapping(value = "/createMenu")

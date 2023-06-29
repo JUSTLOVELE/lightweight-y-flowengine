@@ -4,7 +4,7 @@
   "avatar": "",
   "version": "4.6.0",
   "createdTime": "2022-12-9 22:49:27",
-  "updatedTime": "2023-6-29 15:37:50",
+  "updatedTime": "2023-6-29 12:41:24",
   "dbConns": [],
   "profile": {
     "default": {
@@ -3123,23 +3123,6 @@
           "id": "1FC93CD2-D608-43B9-93C9-A2A88B8EF3D7"
         },
         {
-          "defKey": "text",
-          "defName": "菜单名",
-          "comment": "",
-          "type": "",
-          "len": "",
-          "scale": "",
-          "primaryKey": false,
-          "notNull": false,
-          "autoIncrement": false,
-          "defaultValue": "",
-          "hideInGraph": false,
-          "refDict": "",
-          "extProps": {},
-          "domain": "9092C4E0-1A54-4859-ABBB-5B62DBC27573",
-          "id": "8F1D3EC6-E397-489C-81B0-FAD432CF75CD"
-        },
-        {
           "defKey": "type",
           "defName": "0:根节点;1:叶节点;2:叶子节点",
           "comment": "",
@@ -3206,23 +3189,6 @@
           "extProps": {},
           "domain": "6BC8F04B-6CFA-4995-98D3-318F5CDD774E",
           "id": "4472BC6D-417F-4DB4-84A1-4482DF9AC71F"
-        },
-        {
-          "defKey": "category",
-          "defName": "类别",
-          "comment": "",
-          "type": "",
-          "len": "",
-          "scale": "",
-          "primaryKey": false,
-          "notNull": false,
-          "autoIncrement": false,
-          "defaultValue": "",
-          "hideInGraph": false,
-          "refDict": "",
-          "extProps": {},
-          "domain": "6BC8F04B-6CFA-4995-98D3-318F5CDD774E",
-          "id": "1AB7C881-AE0F-47F6-882E-4AB47AE47A52"
         },
         {
           "defKey": "sys",
