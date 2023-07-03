@@ -84,6 +84,8 @@ public class Constant {
         public String PARENT_ID = "parentId";
 
         public String MENU_TEXT = "menuText";
+
+        public String MODULE_NAME = "moduleName";
     }
 
     public interface Value {
