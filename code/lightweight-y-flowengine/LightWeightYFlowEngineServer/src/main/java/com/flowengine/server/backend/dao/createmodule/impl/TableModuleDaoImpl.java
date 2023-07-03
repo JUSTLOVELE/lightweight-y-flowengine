@@ -24,48 +24,47 @@ public class TableModuleDaoImpl extends BaseDao implements TableModuleDao {
     private final static Log _logger = LogFactory.getLog(TableModuleDaoImpl.class);
 
     @Override
-    public List<Map<String, Object>> query(Map<String, Object> param) {
+    public int queryTotal(Map<String, Object> param) {
 
+        String moduleName = (String) param.get(Constant.Key.MODULE_NAME);
+        List<Object> array = new ArrayList<>();
+        String sql = """
+				select count(*) from public_flow_table_module_tbl a where 1=1 
+				""";
+        StringBuffer sb = new StringBuffer(sql);
+
+        if(StrUtil.isNotEmpty(moduleName)) {
+            sb.append(" and a.module_name like ? ");
+            array.add(moduleName + "%");
+        }
+
+        sql = sb.toString();
+        _logger.info(sql);
+
+        return this.getJdbcTemplate().queryForObject(sql, array.toArray(), Integer.class);
+    }
+
+    @Override
+    public List<Map<String, Object>> query(Map<String, Object> param) {
 
         Integer page = (Integer) param.get(Constant.Key.PAGE);
         Integer limit = (Integer) param.get(Constant.Key.LIMIT);
-        String opId = (String) param.get(Constant.Key.OP_ID);
-        String parentId = (String) param.get(Constant.Key.PARENT_ID);
-        String menuText = (String) param.get(Constant.Key.MENU_TEXT);
+        String moduleName = (String) param.get(Constant.Key.MODULE_NAME);
         List<Object> array = new ArrayList<>();
         String sql = """
 				select
 				    a.op_id "opId",
-				    a.parent_id "parentId",
-				    a.url "url",
-				    a.text "text",
-				    a.type::TEXT "type",
-				    a.available_flag::TEXT "availableFlag",
-				    a.sort "sort",
-				    a.sys "sys",
-				    a.icon "icon",
-				    a.category "category"
-				    from public_menu a where 1=1 
-								
+				    a.module_name "moduleName",
+				    a.authority "authority" from public_flow_table_module_tbl a where 1=1 
 				""";
         StringBuffer sb = new StringBuffer(sql);
 
-        if(StrUtil.isNotEmpty(opId)) {
-            sb.append(" and a.op_id = ? ");
-            array.add(opId);
+        if(StrUtil.isNotEmpty(moduleName)) {
+            sb.append(" and a.module_name like ? ");
+            array.add(moduleName + "%");
         }
 
-        if(StrUtil.isNotEmpty(parentId)) {
-            sb.append(" and a.parent_id = ? ");
-            array.add(parentId);
-        }
-
-        if(StrUtil.isNotEmpty(menuText)) {
-            sb.append(" and a.text like ? ");
-            array.add(menuText + "%");
-        }
-
-        sb.append(" ORDER BY a.sort asc LIMIT ? offset ? ");
+        sb.append(" ORDER BY a.op_id asc LIMIT ? offset ? ");
         array.add(limit);
         array.add(limit*(page-1));
         sql = sb.toString();

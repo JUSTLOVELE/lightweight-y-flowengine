@@ -12,6 +12,13 @@ import java.util.Map;
 public interface TableModuleDao {
 
     /**
+     * 查询总数
+     * @param param
+     * @return
+     */
+    public  int queryTotal(Map<String, Object> param);
+
+    /**
      * 查询
      * @param param
      * @return

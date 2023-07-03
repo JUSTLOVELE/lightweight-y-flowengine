@@ -38,6 +38,6 @@ public class TableModuleAction extends BaseAction {
         param.put(Constant.Key.PAGE, page);
         param.put(Constant.Key.MODULE_NAME, moduleName);
 
-        return null;
+        return _tableModuleService.query(param);
     }
 }
