@@ -1,5 +1,7 @@
 package com.flowengine.server.backend.service.createmodule;
 
+import com.flowengine.common.utils.entity.PublicFlowTableModuleEntity;
+
 import java.util.Map;
 
 /**
@@ -9,6 +11,27 @@ import java.util.Map;
  * @history:
  */
 public interface TableModuleService {
+
+    /**
+     * 删除
+     * @param opId
+     * @return
+     */
+    public String delete(String opId);
+
+    /**
+     * 编辑表模块
+     * @param entity
+     * @return
+     */
+    public String edit(PublicFlowTableModuleEntity entity);
+
+    /**
+     * 新增表模块
+     * @param entity
+     * @return
+     */
+    public String add(PublicFlowTableModuleEntity entity);
 
     /**
      * 查询

@@ -1,5 +1,7 @@
 package com.flowengine.server.backend.service.createmodule.impl;
 
+import com.flowengine.common.utils.entity.PublicFlowTableModuleEntity;
+import com.flowengine.common.utils.mapper.PublicFlowTableModuleMapper;
 import com.flowengine.server.backend.dao.createmodule.TableModuleDao;
 import com.flowengine.server.backend.service.createmodule.TableModuleService;
 import com.flowengine.server.core.Base;
@@ -22,6 +24,40 @@ public class TableModuleServiceImpl extends Base implements TableModuleService {
 
     @Resource
     private TableModuleDao _tableModuleDao;
+
+    @Resource
+    private PublicFlowTableModuleMapper _publicFlowTableModuleMapper;
+
+    @Override
+    public String delete(String opId) {
+
+        _publicFlowTableModuleMapper.deleteById(opId);
+        return renderDeleteSuccessList(1);
+    }
+
+    @Override
+    public String edit(PublicFlowTableModuleEntity entity) {
+
+        PublicFlowTableModuleEntity publicFlowTableModuleEntity = _publicFlowTableModuleMapper.selectById(entity.getOpId());
+
+        if(!publicFlowTableModuleEntity.getModuleName().equals(entity.getModuleName())) {
+            publicFlowTableModuleEntity.setModuleName(entity.getModuleName());
+        }
+
+        if(!publicFlowTableModuleEntity.getAuthority().equals(entity.getAuthority())) {
+            publicFlowTableModuleEntity.setAuthority(entity.getAuthority());
+        }
+
+        _publicFlowTableModuleMapper.updateById(publicFlowTableModuleEntity);
+        return renderOpSuccessList(1);
+    }
+
+    @Override
+    public String add(PublicFlowTableModuleEntity entity) {
+
+        _publicFlowTableModuleMapper.insert(entity);
+        return renderOpSuccessList(1);
+    }
 
     @Override
     public String query(Map<String, Object> param) {
