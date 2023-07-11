@@ -6,6 +6,7 @@ import com.flowengine.server.backend.dao.createmodule.TableModuleDao;
 import com.flowengine.server.backend.service.createmodule.TableModuleService;
 import com.flowengine.server.core.Base;
 import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,37 +26,37 @@ public class TableModuleServiceImpl extends Base implements TableModuleService {
     @Resource
     private TableModuleDao _tableModuleDao;
 
-    @Resource
+    @Autowired
     private PublicFlowTableModuleMapper _publicFlowTableModuleMapper;
+
+    @Override
+    public String edit(PublicFlowTableModuleEntity tableModuleEntity) {
+
+        PublicFlowTableModuleEntity entity = _publicFlowTableModuleMapper.selectById(tableModuleEntity.getOpId());
+
+        if(!entity.getModuleName().equals(tableModuleEntity.getModuleName())) {
+            entity.setModuleName(tableModuleEntity.getModuleName());
+        }
+
+        if(entity.getAuthority() != tableModuleEntity.getAuthority() && tableModuleEntity.getAuthority() != null) {
+            entity.setAuthority(tableModuleEntity.getAuthority());
+        }
+
+        _publicFlowTableModuleMapper.updateById(entity);
+        return renderOpSuccessList(1);
+    }
 
     @Override
     public String delete(String opId) {
 
         _publicFlowTableModuleMapper.deleteById(opId);
-        return renderDeleteSuccessList(1);
-    }
-
-    @Override
-    public String edit(PublicFlowTableModuleEntity entity) {
-
-        PublicFlowTableModuleEntity publicFlowTableModuleEntity = _publicFlowTableModuleMapper.selectById(entity.getOpId());
-
-        if(!publicFlowTableModuleEntity.getModuleName().equals(entity.getModuleName())) {
-            publicFlowTableModuleEntity.setModuleName(entity.getModuleName());
-        }
-
-        if(!publicFlowTableModuleEntity.getAuthority().equals(entity.getAuthority())) {
-            publicFlowTableModuleEntity.setAuthority(entity.getAuthority());
-        }
-
-        _publicFlowTableModuleMapper.updateById(publicFlowTableModuleEntity);
         return renderOpSuccessList(1);
     }
 
     @Override
-    public String add(PublicFlowTableModuleEntity entity) {
+    public String add(PublicFlowTableModuleEntity tableModuleEntity) {
 
-        _publicFlowTableModuleMapper.insert(entity);
+        _publicFlowTableModuleMapper.insert(tableModuleEntity);
         return renderOpSuccessList(1);
     }
 
