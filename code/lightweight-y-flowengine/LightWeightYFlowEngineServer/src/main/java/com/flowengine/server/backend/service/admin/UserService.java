@@ -17,6 +17,14 @@ import java.util.Map;
 public interface UserService {
 
     /**
+     * 改变模式
+     * @param opId
+     * @param darkMode
+     * @return
+     */
+    public String changeMode(String opId, Integer darkMode);
+
+    /**
      * 获取下拉框
      * @return
      */

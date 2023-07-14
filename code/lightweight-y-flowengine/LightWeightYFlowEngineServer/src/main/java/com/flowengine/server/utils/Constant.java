@@ -28,6 +28,10 @@ public class Constant {
         String ACCESS_TOKEN = "access_token";
 
         String REFRESH_TOKEN = "refresh_token";
+
+        String DARK_MODE = "dark_mode";
+
+        String OP_ID = "op_id";
     }
 
     public interface Key {

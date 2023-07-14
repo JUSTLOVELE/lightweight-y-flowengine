@@ -74,6 +74,16 @@ public class PublicUserEntity implements Serializable {
     private String refreshToken ;
     /** 单位天 */
     private Integer refreshTokenLimit ;
+    /**黑暗模式**/
+    private Integer darkMode;
+
+    public Integer getDarkMode() {
+        return darkMode;
+    }
+
+    public void setDarkMode(Integer darkMode) {
+        this.darkMode = darkMode;
+    }
 
     public String getAccessToken() {
         return accessToken;

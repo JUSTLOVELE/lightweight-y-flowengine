@@ -70,6 +70,8 @@ private static final long serialVersionUID = 1L;
 	/** 单位天 */
 	private Integer refreshTokenLimit ;
 
+	private Integer darkMode;
+
 	private List<String> roleIds;
 
 	public UserCache() {
@@ -104,6 +106,7 @@ private static final long serialVersionUID = 1L;
 		this.accessTokenLimit = userEntity.getAccessTokenLimit();
 		this.refreshToken = userEntity.getRefreshToken();
 		this.refreshTokenLimit = userEntity.getRefreshTokenLimit();
+		this.darkMode = userEntity.getDarkMode();
 	}
 
 	public void reCache(PublicUserEntity userEntity) {
@@ -134,6 +137,15 @@ private static final long serialVersionUID = 1L;
 		this.accessTokenLimit = userEntity.getAccessTokenLimit();
 		this.refreshToken = userEntity.getRefreshToken();
 		this.refreshTokenLimit = userEntity.getRefreshTokenLimit();
+		this.darkMode = userEntity.getDarkMode();
+	}
+
+	public Integer getDarkMode() {
+		return darkMode;
+	}
+
+	public void setDarkMode(Integer darkMode) {
+		this.darkMode = darkMode;
 	}
 
 	public String getAccessToken() {

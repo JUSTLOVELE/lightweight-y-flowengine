@@ -29,6 +29,11 @@ public class UserAction extends BaseAction {
     @Autowired
     private UserService _userService;
 
+    @PostMapping(value = "/userAction/changeMode", produces = "application/json; charset=utf-8")
+    public String changeMode(String opId, Integer darkMode) {
+        return _userService.changeMode(opId, darkMode);
+    }
+
     /**
      * 获取待办
      * @return

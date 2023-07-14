@@ -2,10 +2,7 @@ package com.flowengine.common.utils.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.flowengine.common.utils.entity.PublicUserEntity;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -21,6 +18,14 @@ import java.util.Map;
  */
 @Repository
 public interface PublicUserMapper extends BaseMapper<PublicUserEntity> {
+
+    /**
+     * 更新模式
+     * @param opId
+     * @param darkMode
+     */
+    @Update("update public_user_tbl set dark_mode = #{darkMode} where op_id = #{opId}")
+    public void updateMode(@Param("opId") String opId, @Param("darkMode") Integer darkMode);
 
     /**
      * 根据主键获取用户名

@@ -107,6 +107,8 @@ public class LoginAction extends BaseAction {
         data.put(Constant.Token.TIMESTAMP, timestamp);
         data.put(Constant.Token.ACCESS_TOKEN, user.getAccessToken());
         data.put(Constant.Token.REFRESH_TOKEN, user.getRefreshToken());
+        data.put(Constant.Token.DARK_MODE, user.getDarkMode());
+        data.put(Constant.Token.OP_ID, user.getOpId());
         datas.add(data);
         return renderQuerySuccessList(1, datas);
     }

@@ -45,6 +45,13 @@ public class UserServiceImpl extends BaseService implements UserService {
     private UserDao _userDao;
 
     @Override
+    public String changeMode(String opId, Integer darkMode) {
+
+        _userMapper.updateMode(opId, darkMode);
+        return renderQuerySuccessList(1);
+    }
+
+    @Override
     public String getUserCombox() {
 
         List<Map<String, Object>> userCombox = _userMapper.getUserCombox();
@@ -178,16 +185,16 @@ public class UserServiceImpl extends BaseService implements UserService {
 
         List<Map<String, Object>> users = _userDao.query(param);
 
-        users.forEach(item -> {
-            //测试
-            //[{name: 'food.jpg', url: 'https://xxx.cdn.com/xxx.jpg'}]
-            Map<String, Object> file = new HashMap<>();
-            file.put("name", "food.jpg");
-            file.put("url", "https://xxx.cdn.com/xxx.jpg");
-            List<Map<String, Object>> fileList = new ArrayList<>();
-            fileList.add(file);
-            item.put("mediaFile", fileList);
-        });
+//        users.forEach(item -> {
+//            //测试
+//            //[{name: 'food.jpg', url: 'https://xxx.cdn.com/xxx.jpg'}]
+//            Map<String, Object> file = new HashMap<>();
+//            file.put("name", "food.jpg");
+//            file.put("url", "https://xxx.cdn.com/xxx.jpg");
+//            List<Map<String, Object>> fileList = new ArrayList<>();
+//            fileList.add(file);
+//            item.put("mediaFile", fileList);
+//        });
 
         if(users != null && users.size() > 0) {
             return renderQuerySuccessList(_userDao.queryTotal(param), users);

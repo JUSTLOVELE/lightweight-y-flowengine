@@ -4,7 +4,7 @@
   "avatar": "",
   "version": "4.6.0",
   "createdTime": "2022-12-9 22:49:27",
-  "updatedTime": "2023-7-14 22:52:09",
+  "updatedTime": "2023-7-14 22:09:09",
   "dbConns": [],
   "profile": {
     "default": {
@@ -3615,7 +3615,7 @@
           "id": "4DE2928C-D62B-47B8-8848-4ED30150215F"
         },
         {
-          "defKey": "dark_mode",
+          "defKey": "dark_model",
           "defName": "黑暗模式;1:黑暗;0:白色",
           "comment": "",
           "type": "",
