@@ -1,0 +1,253 @@
+create table public_menu
+(
+    op_id          varchar(32) not null
+        constraint tba_menu_pkey
+            primary key,
+    parent_id      varchar(32),
+    url            varchar(500),
+    text           varchar(500),
+    type           integer,
+    button_type    integer,
+    available_flag smallint,
+    sort           integer,
+    category       integer,
+    sys            integer,
+    icon           varchar(150)
+);
+
+alter table public_menu
+    owner to postgres;
+
+create table public_user_tbl
+(
+    op_id               varchar(32)  not null
+        primary key,
+    user_id             varchar(50)  not null,
+    user_phone          varchar(50),
+    user_name           varchar(100) not null,
+    user_password       varchar(128) not null,
+    create_time         timestamp(6),
+    org_id              varchar(32),
+    dept_id             varchar(32),
+    user_category       integer,
+    last_login          timestamp(6),
+    ref_entity_id       varchar(32),
+    is_stop             integer,
+    register_from       integer,
+    user_sources        integer,
+    bg_img              varchar(500),
+    user_sex            varchar(8),
+    head_image          varchar(1024),
+    user_address        varchar(2048),
+    street_address      varchar(2048),
+    user_birthday       date,
+    user_age            integer,
+    user_email          varchar(128),
+    work_address        varchar(256),
+    access_token        varchar(32),
+    access_token_limit  integer,
+    refresh_token       varchar(32),
+    refresh_token_limit integer,
+    dark_mode           smallint default 1
+);
+
+alter table public_user_tbl
+    owner to postgres;
+
+create table public_role
+(
+    op_id       varchar(32)  not null
+        constraint tba_role_pkey
+            primary key,
+    org_id      varchar(32),
+    name        varchar(100) not null,
+    category    integer,
+    create_time timestamp(6),
+    description varchar(2000),
+    sys         integer
+);
+
+alter table public_role
+    owner to postgres;
+
+create table public_user_role_grant
+(
+    user_op_id varchar(32) not null
+        constraint tba_user_role_grant_ibfk_1
+            references public_user_tbl,
+    role_id    varchar(32) not null
+        constraint tba_user_role_grant_ibfk_2
+            references public_role
+);
+
+alter table public_user_role_grant
+    owner to postgres;
+
+create table public_role_menu_grant
+(
+    menu_id varchar(32) not null
+        constraint tba_role_menu_grant_ibfk_1
+            references public_menu,
+    role_id varchar(32) not null
+        constraint tba_role_menu_grant_ibfk_2
+            references public_role
+);
+
+alter table public_role_menu_grant
+    owner to postgres;
+
+create table public_flow_main_tbl
+(
+    op_id            varchar(32),
+    key_code         varchar(255),
+    is_stop          integer,
+    flow_desc        varchar(255),
+    main_type        integer,
+    main_name        varchar(255),
+    create_user_id   varchar(32),
+    create_user_name varchar(255),
+    create_time      timestamp,
+    org_id           varchar(255),
+    dept_id          varchar(255)
+);
+
+comment on table public_flow_main_tbl is '流程主表';
+
+comment on column public_flow_main_tbl.op_id is '主键';
+
+comment on column public_flow_main_tbl.key_code is '关键字';
+
+comment on column public_flow_main_tbl.is_stop is '是否启用;1:启用;0:不启用';
+
+comment on column public_flow_main_tbl.flow_desc is '描述';
+
+comment on column public_flow_main_tbl.main_type is '类型';
+
+comment on column public_flow_main_tbl.main_name is '流程名称';
+
+comment on column public_flow_main_tbl.create_user_id is '创建人主键';
+
+comment on column public_flow_main_tbl.create_user_name is '创建人姓名';
+
+comment on column public_flow_main_tbl.create_time is '创建时间';
+
+comment on column public_flow_main_tbl.org_id is '机构主键';
+
+comment on column public_flow_main_tbl.dept_id is '科室id';
+
+alter table public_flow_main_tbl
+    owner to postgres;
+
+create table public_flow_node_tbl
+(
+    op_id         varchar(32),
+    main_id       varchar(32),
+    last_node_id  varchar(32),
+    last_node_key varchar(255),
+    limit_time    integer,
+    next_node     varchar(32),
+    node_name     varchar(255),
+    node_key      varchar(255),
+    node_sort     integer,
+    node_status   integer,
+    ref_id        varchar(32)
+);
+
+comment on table public_flow_node_tbl is '环节表';
+
+comment on column public_flow_node_tbl.op_id is '主键';
+
+comment on column public_flow_node_tbl.main_id is '流程主表id';
+
+comment on column public_flow_node_tbl.last_node_id is '上一个环节';
+
+comment on column public_flow_node_tbl.last_node_key is '上一个环节key';
+
+comment on column public_flow_node_tbl.limit_time is '限制时间,单位天';
+
+comment on column public_flow_node_tbl.next_node is '下一个环节;下一个环节
+[{
+"key":"",
+"nextNodeId":"",
+"nextNodeKey":""
+}]';
+
+comment on column public_flow_node_tbl.node_name is '当前环节名称';
+
+comment on column public_flow_node_tbl.node_key is '关键字
+start开始;
+ing:中间环节;
+或者其他指定的key也表示中间环节
+;end结束;';
+
+comment on column public_flow_node_tbl.node_sort is '节点排序：1,2,3,4';
+
+comment on column public_flow_node_tbl.node_status is '1:开始;2:常规节点;10:结束';
+
+comment on column public_flow_node_tbl.ref_id is '引用id,有必要时使用';
+
+alter table public_flow_node_tbl
+    owner to postgres;
+
+create table public_dept
+(
+    op_id       varchar(32) not null
+        primary key,
+    org_id      varchar(32),
+    dept_name   varchar(32),
+    create_time timestamp
+);
+
+comment on table public_dept is '科室表';
+
+comment on column public_dept.op_id is '主键';
+
+comment on column public_dept.org_id is '机构id';
+
+comment on column public_dept.dept_name is '科室名称';
+
+comment on column public_dept.create_time is '创建时间';
+
+alter table public_dept
+    owner to postgres;
+
+create table public_org
+(
+    op_id    varchar(32) not null
+        primary key,
+    category integer,
+    org_code varchar(50),
+    org_name varchar(50),
+    area_id  varchar(32)
+);
+
+alter table public_org
+    owner to postgres;
+
+create table public_flow_table_module_tbl
+(
+    op_id       varchar(32) not null
+        primary key,
+    module_name varchar(255),
+    authority   integer,
+    role_op_id  varchar(900),
+    dept_op_id  varchar(900),
+    user_op_id  varchar(900)
+);
+
+alter table public_flow_table_module_tbl
+    owner to postgres;
+
+create table accounts
+(
+    id     integer generated by default as identity
+        primary key,
+    client text,
+    amount numeric
+        constraint myuniqueconstraint
+            check (amount >= (0)::numeric)
+);
+
+alter table accounts
+    owner to postgres;
+
