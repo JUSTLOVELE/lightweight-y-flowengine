@@ -4,7 +4,7 @@
   "avatar": "",
   "version": "4.6.0",
   "createdTime": "2022-12-9 22:49:27",
-  "updatedTime": "2023-7-19 10:44:01",
+  "updatedTime": "2023-7-19 10:26:53",
   "dbConns": [],
   "profile": {
     "default": {
@@ -2436,33 +2436,6 @@
           "id": "80CFDFA5-6595-48DB-8F5A-A1CB70636F84"
         },
         {
-          "defKey": "table_name_desc",
-          "defName": "中文描述",
-          "comment": "",
-          "type": "",
-          "len": "",
-          "scale": "",
-          "primaryKey": false,
-          "notNull": false,
-          "autoIncrement": false,
-          "defaultValue": "",
-          "hideInGraph": false,
-          "domain": "9092C4E0-1A54-4859-ABBB-5B62DBC27573",
-          "refDict": "",
-          "extProps": {},
-          "notes": {},
-          "attr1": "",
-          "attr2": "",
-          "attr3": "",
-          "attr4": "",
-          "attr5": "",
-          "attr6": "",
-          "attr7": "",
-          "attr8": "",
-          "attr9": "",
-          "id": "0E76CC3C-D761-47EC-B29F-1A5CC30A7B96"
-        },
-        {
           "defKey": "table_module_id",
           "defName": "表所属模块id",
           "comment": "",
@@ -2725,7 +2698,7 @@
         },
         {
           "defKey": "table_name",
-          "defName": "表名（数据库表名）",
+          "defName": "表名",
           "comment": "",
           "type": "",
           "len": "",

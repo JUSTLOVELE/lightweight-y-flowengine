@@ -4,7 +4,7 @@
   "avatar": "",
   "version": "4.6.0",
   "createdTime": "2022-12-9 22:49:27",
-  "updatedTime": "2023-7-19 10:44:01",
+  "updatedTime": "2023-7-19 10:40:15",
   "dbConns": [],
   "profile": {
     "default": {
@@ -2722,6 +2722,23 @@
           "attr8": "",
           "attr9": "",
           "id": "BE123EA8-F0F5-45DC-BD9C-CB62656B84C1"
+        },
+        {
+          "defKey": "table_name_desc",
+          "defName": "中文描述",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "extProps": {},
+          "domain": "9092C4E0-1A54-4859-ABBB-5B62DBC27573",
+          "id": "EAE8C041-7083-44F5-98DB-81174940E425"
         },
         {
           "defKey": "table_name",

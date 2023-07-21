@@ -90,6 +90,10 @@ public class Constant {
         public String MENU_TEXT = "menuText";
 
         public String MODULE_NAME = "moduleName";
+
+        public String TABLE_NAME = "tableName";
+
+        public String TABLE_NAME_DESC = "tableNameDesc";
     }
 
     public interface Value {
