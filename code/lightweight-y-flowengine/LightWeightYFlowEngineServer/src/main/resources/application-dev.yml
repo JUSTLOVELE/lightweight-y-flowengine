@@ -28,9 +28,10 @@ server:
       timneout: 3000
 
 logging:
-  path: C:\\logs\\
   level:
     root: info
+  file:
+    path: C:\\logs\\
 
 camel:
   springboot:
