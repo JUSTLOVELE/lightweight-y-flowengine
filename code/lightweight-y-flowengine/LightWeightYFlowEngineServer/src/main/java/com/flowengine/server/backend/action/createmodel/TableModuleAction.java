@@ -30,6 +30,16 @@ public class TableModuleAction extends BaseAction {
     private TableModuleService _tableModuleService;
 
     /**
+     * 查询角色
+     *
+     * @return
+     */
+    @GetMapping(value = "/tableModuleAction/getCombobox", produces = "application/json; charset=utf-8")
+    public String getCombobox() {
+        return _tableModuleService.getCombobox();
+    }
+
+    /**
      * 删除角色
      *
      * @param opId

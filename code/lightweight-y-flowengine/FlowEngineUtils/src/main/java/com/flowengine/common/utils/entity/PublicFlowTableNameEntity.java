@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 建模引擎-表模块;
@@ -33,6 +34,8 @@ public class PublicFlowTableNameEntity implements Serializable {
     private String deptOpId ;
     /** 所属人员，逗号分割 */
     private String userOpId ;
+
+    private Date createTime = new Date();
 
     public String getOpId() {
         return opId;
@@ -104,5 +107,13 @@ public class PublicFlowTableNameEntity implements Serializable {
 
     public void setUserOpId(String userOpId) {
         this.userOpId = userOpId;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }

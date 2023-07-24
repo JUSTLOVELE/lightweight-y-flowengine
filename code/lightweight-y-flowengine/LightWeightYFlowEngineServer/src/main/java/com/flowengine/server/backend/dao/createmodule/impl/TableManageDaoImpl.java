@@ -64,6 +64,8 @@ public class TableManageDaoImpl extends BaseDao implements TableManageDao {
 				    a.op_id "opId",
 				    a.table_name "tableName",
 				    a.table_module_id "tableModuleId",
+                    a.table_module_name "tableModuleName",
+                    to_char(a.create_time, 'YYYY-MM-DD') as "createTime",
 				    a.table_name_desc "tableNameDesc" from public_flow_table_name_tbl a where 1=1 
 				""";
         StringBuffer sb = new StringBuffer(sql);

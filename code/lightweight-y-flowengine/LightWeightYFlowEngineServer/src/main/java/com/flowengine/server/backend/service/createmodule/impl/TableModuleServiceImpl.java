@@ -47,6 +47,11 @@ public class TableModuleServiceImpl extends Base implements TableModuleService {
     }
 
     @Override
+    public String getCombobox() {
+        return getJSON(_tableModuleDao.getCombobox());
+    }
+
+    @Override
     public String delete(String opId) {
 
         _publicFlowTableModuleMapper.deleteById(opId);

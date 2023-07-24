@@ -13,6 +13,12 @@ import java.util.Map;
 public interface TableModuleService {
 
     /**
+     * 获取下拉框数据
+     * @return
+     */
+    public String getCombobox();
+
+    /**
      * 删除
      * @param opId
      * @return

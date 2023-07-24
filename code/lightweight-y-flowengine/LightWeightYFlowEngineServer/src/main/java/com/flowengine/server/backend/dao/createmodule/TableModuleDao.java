@@ -12,6 +12,12 @@ import java.util.Map;
 public interface TableModuleDao {
 
     /**
+     * 获取下拉框数据
+     * @return
+     */
+    public List<Map<String, Object>> getCombobox();
+
+    /**
      * 查询总数
      * @param param
      * @return

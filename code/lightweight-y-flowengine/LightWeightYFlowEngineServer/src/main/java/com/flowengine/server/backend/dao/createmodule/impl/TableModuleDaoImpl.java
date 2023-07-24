@@ -24,6 +24,17 @@ public class TableModuleDaoImpl extends BaseDao implements TableModuleDao {
     private final static Log _logger = LogFactory.getLog(TableModuleDaoImpl.class);
 
     @Override
+    public List<Map<String, Object>> getCombobox() {
+
+        String sql = """
+                select a.op_id  value , a.module_name label from public_flow_table_module_tbl a
+                """;
+        _logger.info(sql);
+
+        return this.getJdbcTemplate().queryForList(sql);
+    }
+
+    @Override
     public int queryTotal(Map<String, Object> param) {
 
         String moduleName = (String) param.get(Constant.Key.MODULE_NAME);

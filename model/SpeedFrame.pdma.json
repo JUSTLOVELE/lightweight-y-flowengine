@@ -2,9 +2,9 @@
   "name": "SpeedFrame",
   "describe": "SpeedFrame",
   "avatar": "",
-  "version": "4.6.0",
+  "version": "4.6.1",
   "createdTime": "2022-12-9 22:49:27",
-  "updatedTime": "2023-7-19 10:44:01",
+  "updatedTime": "2023-7-24 10:01:20",
   "dbConns": [],
   "profile": {
     "default": {
@@ -2603,6 +2603,23 @@
           "attr8": "",
           "attr9": "",
           "id": "45ACE06B-F764-46EF-ABAC-C3A02C22E5CD"
+        },
+        {
+          "defKey": "create_time",
+          "defName": "创建时间",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "extProps": {},
+          "domain": "7CFFA0D3-6A93-4DDC-BC10-DF21211064DC",
+          "id": "6E4C301A-F071-4485-8CBD-19EE53F8B7D6"
         }
       ],
       "correlations": [],
@@ -5476,6 +5493,34 @@
       "refDiagrams": [],
       "refDicts": [],
       "id": "9A1CAE5A-98A2-48ED-8001-24D4BB52B5D9"
+    },
+    {
+      "defKey": "table",
+      "defName": "建模引擎",
+      "refEntities": [
+        "3531B396-5AE9-4AA2-8A79-4C3E2A1D02BB",
+        "70725201-8C5D-45F6-82CC-DD14323C4836",
+        "8A62B2DC-8D6A-4A06-A3F9-22F690B96ED8"
+      ],
+      "refViews": [],
+      "refDiagrams": [],
+      "refDicts": [],
+      "id": "14E53A63-2F8D-4247-86E5-1DD61461972F"
+    },
+    {
+      "defKey": "flow",
+      "defName": "工作流引擎",
+      "refEntities": [
+        "E6F64516-7067-4C65-B655-24C50A19FF4D",
+        "1E153517-694E-4CE1-AA2C-A74C30B72ABB",
+        "6E4E8198-72FA-4D29-B7E1-2F56A97F49F2",
+        "30A0C9C5-C89B-46A1-863A-88F50B04325D",
+        "1AB4BB21-4524-4BF2-A05A-3BA64D21D52E"
+      ],
+      "refViews": [],
+      "refDiagrams": [],
+      "refDicts": [],
+      "id": "94B81F0D-873C-473B-9A4E-AFC270473C8D"
     }
   ],
   "dataTypeMapping": {
