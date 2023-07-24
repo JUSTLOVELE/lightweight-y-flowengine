@@ -32,7 +32,7 @@ logging:
     root: info
   file:
     path: C:\\logs\\
-
+  config: classpath:logConfig.xml
 #mybatis-plus:
 #  type-enums-package: com.work.common.utils.enums
 
