@@ -21,6 +21,8 @@ public class Constant {
         public String COLUMN_NAME = "column_name";
 
         public String DATA_TYPE = "data_type";
+
+        public String TABLE_OP_ID = "table_op_id";
     }
 
     public interface Key {

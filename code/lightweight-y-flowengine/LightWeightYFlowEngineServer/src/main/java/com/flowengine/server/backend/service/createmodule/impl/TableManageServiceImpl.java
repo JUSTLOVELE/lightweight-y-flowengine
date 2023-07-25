@@ -1,5 +1,6 @@
 package com.flowengine.server.backend.service.createmodule.impl;
 
+import cn.hutool.core.util.StrUtil;
 import com.flowengine.common.utils.UUIDGenerator;
 import com.flowengine.common.utils.entity.PublicFlowTableColumnEntity;
 import com.flowengine.common.utils.entity.PublicFlowTableNameEntity;
@@ -46,6 +47,62 @@ public class TableManageServiceImpl extends BaseService implements TableManageSe
     private final static Log _logger = LogFactory.getLog(TableManageServiceImpl.class);
 
     @Override
+    public String edit(PublicFlowTableNameEntity entity) {
+
+        PublicFlowTableNameEntity publicFlowTableNameEntity = _flowTableNameMapper.selectById(entity.getOpId());
+        publicFlowTableNameEntity.setTableName(entity.getTableName());
+        publicFlowTableNameEntity.setTableNameDesc(entity.getTableNameDesc());
+
+        if(!entity.getTableModuleId().equals(publicFlowTableNameEntity.getTableModuleId())) {
+
+            publicFlowTableNameEntity.setTableModuleId(entity.getTableModuleId());
+            String moduleName = _flowTableModuleMapper.queryModuleNameById(entity.getTableModuleId());
+            publicFlowTableNameEntity.setTableModuleName(moduleName);
+        }
+
+        _flowTableNameMapper.updateById(publicFlowTableNameEntity);
+
+        if(StrUtil.isNotEmpty(entity.getSql())) {
+
+            _tableManageDao.executeAlterSQL(entity.getSql());
+            insertColumns(publicFlowTableNameEntity);
+        }
+
+        return renderQuerySuccessList(1);
+    }
+
+    private void insertColumns(PublicFlowTableNameEntity entity) {
+
+        Map<String,Object> p = new HashMap<>();
+        p.put(Constant.Column.TABLE_OP_ID, entity.getOpId());
+        _flowTableColumnMapper.deleteByMap(p);
+        List<Map<String, Object>> columns = _tableManageDao.queryInformationSchema(entity.getTableName());
+
+        for(Map<String, Object> column: columns) {
+
+            PublicFlowTableColumnEntity columnEntity = new PublicFlowTableColumnEntity();
+            columnEntity.setOpId(UUIDGenerator.getUUID());
+            columnEntity.setTableName(entity.getTableName());
+            columnEntity.setTableOpId(entity.getOpId());
+            columnEntity.setColumnName((String) column.get(Constant.Column.COLUMN_NAME));
+            columnEntity.setColumnType((String) column.get(Constant.Column.DATA_TYPE));
+            _flowTableColumnMapper.insert(columnEntity);
+        }
+    }
+
+    @Override
+    public String columnTableQuery(Map<String, Object> param) {
+
+        List<Map<String, Object>> datas = _tableManageDao.columnQuery(param);
+
+        if(datas != null && datas.size() > 0) {
+            return renderQuerySuccessList(datas.size(), datas);
+        }else {
+            return renderQuerySuccessList(0, datas);
+        }
+    }
+
+    @Override
     public String delete(Map<String, Object> param) {
 
         String tableName = (String) param.get(Constant.Key.TABLE_NAME);
@@ -58,7 +115,7 @@ public class TableManageServiceImpl extends BaseService implements TableManageSe
         _tableManageDao.executeDropSQL(tableName);
         String opId = (String) param.get(Constant.Key.OP_ID);
         Map<String,Object> p = new HashMap<>();
-        p.put("table_op_id", opId);
+        p.put(Constant.Column.TABLE_OP_ID, opId);
         _flowTableColumnMapper.deleteByMap(p);
         _flowTableNameMapper.deleteById(opId);
 
@@ -74,18 +131,7 @@ public class TableManageServiceImpl extends BaseService implements TableManageSe
             entity.setTableModuleName(moduleName);
             _tableManageDao.executeCreateSQL(entity.getSql());
             _flowTableNameMapper.insert(entity);
-            List<Map<String, Object>> columns = _tableManageDao.queryInformationSchema(entity.getTableName());
-
-            for(Map<String, Object> column: columns) {
-
-                PublicFlowTableColumnEntity columnEntity = new PublicFlowTableColumnEntity();
-                columnEntity.setOpId(UUIDGenerator.getUUID());
-                columnEntity.setTableName(entity.getTableName());
-                columnEntity.setTableOpId(entity.getOpId());
-                columnEntity.setColumnName((String) column.get(Constant.Column.COLUMN_NAME));
-                columnEntity.setColumnType((String) column.get(Constant.Column.DATA_TYPE));
-                _flowTableColumnMapper.insert(columnEntity);
-            }
+            insertColumns(entity);
 
             return renderOpSuccessList(1);
         }catch (Exception e) {

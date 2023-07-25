@@ -4,7 +4,7 @@
   "avatar": "",
   "version": "4.6.1",
   "createdTime": "2022-12-9 22:49:27",
-  "updatedTime": "2023-7-25 09:42:07",
+  "updatedTime": "2023-7-25 16:35:05",
   "dbConns": [],
   "profile": {
     "default": {
@@ -469,7 +469,7 @@
         "hideInGraph": true
       }
     ],
-    "menuWidth": "420px",
+    "menuWidth": "328px",
     "modelType": "modalGroup"
   },
   "entities": [

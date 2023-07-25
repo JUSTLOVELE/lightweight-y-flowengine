@@ -13,6 +13,20 @@ import java.util.Map;
 public interface TableManageService {
 
     /**
+     * 编辑
+     * @param entity
+     * @return
+     */
+    public String edit(PublicFlowTableNameEntity entity);
+
+    /**
+     * 表格查询
+     * @param param
+     * @return
+     */
+    public String columnTableQuery(Map<String, Object> param);
+
+    /**
      * 删除
      * @param param
      * @return
@@ -26,7 +40,7 @@ public interface TableManageService {
      */
     public String add(PublicFlowTableNameEntity entity);
 
-                      /**
+    /**
      * 表格查询
      * @param param
      * @return

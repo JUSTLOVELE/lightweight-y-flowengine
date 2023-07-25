@@ -27,6 +27,31 @@ public class TableManageAction extends BaseAction {
     private TableManageService _tableManageService;
 
     /**
+     * 新增表
+     * @param entity
+     * @param request
+     * @return
+     */
+    @PostMapping(value = "/tableManageAction/edit", produces = "application/json; charset=utf-8")
+    public String edit(PublicFlowTableNameEntity entity, HttpServletRequest request) {
+        return _tableManageService.edit(entity);
+    }
+
+    /**
+     * 表-列查询
+     * @param opId
+     * @return
+     */
+    @GetMapping(value = "/tableManageAction/columnTableQuery", produces = "application/json; charset=utf-8")
+    public String columnTableQuery(String opId) {
+
+        Map<String, Object> param = new HashMap<>();
+        param.put(Constant.Key.OP_ID, opId);
+
+        return _tableManageService.columnTableQuery(param);
+    }
+
+    /**
      * 删除表
      * @param opId
      * @return

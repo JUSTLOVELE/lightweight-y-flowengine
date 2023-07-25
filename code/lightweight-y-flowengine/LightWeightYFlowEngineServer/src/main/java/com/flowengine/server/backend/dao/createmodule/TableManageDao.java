@@ -12,6 +12,13 @@ import java.util.Map;
 public interface TableManageDao {
 
     /**
+     * 列查询
+     * @param param
+     * @return
+     */
+    public List<Map<String, Object>> columnQuery(Map<String, Object> param);
+
+    /**
      * 查询表数据的总数
      * @param tableName
      * @return
@@ -31,6 +38,14 @@ public interface TableManageDao {
      * @return
      */
     public int executeDropSQL(String tableName);
+
+    /**
+     * 执行alter SQL
+     * @param sql
+     * @return
+     */
+    public int executeAlterSQL(String sql);
+
 
     /**
      * 执行SQL

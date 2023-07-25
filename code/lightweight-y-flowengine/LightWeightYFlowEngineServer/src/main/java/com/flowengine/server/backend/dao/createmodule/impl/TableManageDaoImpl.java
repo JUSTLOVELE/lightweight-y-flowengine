@@ -24,6 +24,20 @@ public class TableManageDaoImpl extends BaseDao implements TableManageDao {
     private final static Log _logger = LogFactory.getLog(TableManageDaoImpl.class);
 
     @Override
+    public List<Map<String, Object>> columnQuery(Map<String, Object> param) {
+
+        String opId = (String) param.get(Constant.Key.OP_ID);
+        String sql = """
+                select
+                    a.column_name "columnName",
+                    a.column_type  "columnType"
+                    from public_flow_table_column_tbl a where a.table_op_id = ? order by a.column_name
+                """;
+
+        return this.getJdbcTemplate().queryForList(sql, opId);
+    }
+
+    @Override
     public int queryTableCount(String tableName) {
 
         String sql = "select count(*) from " + tableName;
@@ -53,6 +67,13 @@ public class TableManageDaoImpl extends BaseDao implements TableManageDao {
             _logger.error("", e);
             return 0;
         }
+    }
+
+    @Override
+    public int executeAlterSQL(String sql) {
+
+        this.getJdbcTemplate().execute(sql);
+        return 1;
     }
 
     @Override
