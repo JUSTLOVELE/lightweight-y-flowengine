@@ -3,6 +3,7 @@ package com.flowengine.server.utils;
 
 import cn.hutool.core.util.StrUtil;
 import com.flowengine.common.utils.CacheObject;
+import com.flowengine.common.utils.CommonConstant;
 import com.flowengine.server.model.UserCache;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -22,7 +23,7 @@ public class SessionUtils {
 	private final static Map<String, UserCache> cacheMap = new ConcurrentHashMap<String, UserCache>();
 
 	public static void addUserSession(HttpServletRequest request, UserCache userCache){
-		String accessToken = request.getHeader(Constant.Token.ACCESS_TOKEN);
+		String accessToken = request.getHeader(CommonConstant.Token.ACCESS_TOKEN);
 		addUserSession(accessToken, userCache);
 	}
 
@@ -40,7 +41,7 @@ public class SessionUtils {
 	}
 
 	public static UserCache getUserSession(HttpServletRequest request){
-		String accessToken = request.getHeader(Constant.Token.ACCESS_TOKEN);
+		String accessToken = request.getHeader(CommonConstant.Token.ACCESS_TOKEN);
 		return getUserSession(accessToken);
 	}
 
@@ -49,7 +50,7 @@ public class SessionUtils {
 	}
 
 	public static void removeUserSession(HttpServletRequest request){
-		String accessToken = request.getHeader(Constant.Token.ACCESS_TOKEN);
+		String accessToken = request.getHeader(CommonConstant.Token.ACCESS_TOKEN);
 		removeUserSession(accessToken);
 	}
 

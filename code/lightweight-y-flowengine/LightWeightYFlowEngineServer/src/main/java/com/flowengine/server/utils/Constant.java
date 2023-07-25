@@ -17,21 +17,10 @@ public class Constant {
         String MAIN_ID = "main_id";
 
         String NODE_KEY = "node_key";
-    }
 
-    public interface Token {
+        public String COLUMN_NAME = "column_name";
 
-        String SIGN = "sign";
-
-        String TIMESTAMP = "timestamp";
-
-        String ACCESS_TOKEN = "access_token";
-
-        String REFRESH_TOKEN = "refresh_token";
-
-        String DARK_MODE = "dark_mode";
-
-        String OP_ID = "op_id";
+        public String DATA_TYPE = "data_type";
     }
 
     public interface Key {

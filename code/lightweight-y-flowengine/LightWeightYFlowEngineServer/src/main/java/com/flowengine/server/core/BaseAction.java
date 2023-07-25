@@ -9,8 +9,6 @@ import java.util.Map;
 
 /**
  * @Description:
- * @Copyright: Copyright (c) 2017 HYKJ All Rights Reserved
- * @Company: 福建互医科技有限公司
  * @author yangzl 2019-11-06
  * @version 1.00.00
  * @history:

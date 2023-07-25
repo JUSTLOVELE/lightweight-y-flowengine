@@ -13,6 +13,13 @@ import java.util.Map;
 public interface TableManageService {
 
     /**
+     * 删除
+     * @param param
+     * @return
+     */
+    public String delete(Map<String, Object> param);
+
+    /**
      * 新增
      * @param entity
      * @return

@@ -1,12 +1,10 @@
 package com.flowengine.server.backend.action.createmodel;
 
-import com.flowengine.common.utils.entity.PublicFlowTableModuleEntity;
 import com.flowengine.common.utils.entity.PublicFlowTableNameEntity;
 import com.flowengine.server.backend.service.createmodule.TableManageService;
 import com.flowengine.server.core.BaseAction;
 import com.flowengine.server.utils.Constant;
 import com.flowengine.server.utils.UUIDGenerator;
-import edu.princeton.cs.algs4.ST;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,7 +27,22 @@ public class TableManageAction extends BaseAction {
     private TableManageService _tableManageService;
 
     /**
-     * 新增表模块
+     * 删除表
+     * @param opId
+     * @return
+     */
+    @PostMapping(value = "/tableManageAction/delete", produces = "application/json; charset=utf-8")
+    public String delete(String opId, String tableName) {
+
+        Map<String, Object> param = new HashMap<>();
+        param.put(Constant.Key.OP_ID, opId);
+        param.put(Constant.Key.TABLE_NAME, tableName);
+
+        return _tableManageService.delete(param);
+    }
+
+    /**
+     * 新增表
      * @param entity
      * @param request
      * @return

@@ -37,6 +37,8 @@ public class PublicFlowTableNameEntity implements Serializable {
 
     private Date createTime = new Date();
 
+    private String sql;
+
     public String getOpId() {
         return opId;
     }
@@ -115,5 +117,13 @@ public class PublicFlowTableNameEntity implements Serializable {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public String getSql() {
+        return sql;
+    }
+
+    public void setSql(String sql) {
+        this.sql = sql;
     }
 }

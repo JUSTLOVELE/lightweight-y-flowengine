@@ -90,4 +90,19 @@ public class CommonConstant {
 		/**菜单根节点**/
 		public final static int MENU_ROOT = 21;
 	}
+
+	public interface Token {
+
+		String SIGN = "sign";
+
+		String TIMESTAMP = "timestamp";
+
+		String ACCESS_TOKEN = "access_token";
+
+		String REFRESH_TOKEN = "refresh_token";
+
+		String DARK_MODE = "dark_mode";
+
+		String OP_ID = "op_id";
+	}
 }

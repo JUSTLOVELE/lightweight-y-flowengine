@@ -103,12 +103,12 @@ public class LoginAction extends BaseAction {
         data.put(Constant.Key.USER_NAME, ( user.getUserName() != null) ? user.getUserName() : user.getUserId());
         String timestamp = DateUtil.toString(user.getLastLogin(), DateUtil.YMDHMS);
         String content = timestamp + ";" + user.getAccessToken() + ";" + user.getRefreshToken() + ";";
-        data.put(Constant.Token.SIGN, RSA.signBySHA256WithRSA(content, _ymlProjectConfig.getSk()));
-        data.put(Constant.Token.TIMESTAMP, timestamp);
-        data.put(Constant.Token.ACCESS_TOKEN, user.getAccessToken());
-        data.put(Constant.Token.REFRESH_TOKEN, user.getRefreshToken());
-        data.put(Constant.Token.DARK_MODE, user.getDarkMode());
-        data.put(Constant.Token.OP_ID, user.getOpId());
+        data.put(CommonConstant.Token.SIGN, RSA.signBySHA256WithRSA(content, _ymlProjectConfig.getSk()));
+        data.put(CommonConstant.Token.TIMESTAMP, timestamp);
+        data.put(CommonConstant.Token.ACCESS_TOKEN, user.getAccessToken());
+        data.put(CommonConstant.Token.REFRESH_TOKEN, user.getRefreshToken());
+        data.put(CommonConstant.Token.DARK_MODE, user.getDarkMode());
+        data.put(CommonConstant.Token.OP_ID, user.getOpId());
         datas.add(data);
         return renderQuerySuccessList(1, datas);
     }

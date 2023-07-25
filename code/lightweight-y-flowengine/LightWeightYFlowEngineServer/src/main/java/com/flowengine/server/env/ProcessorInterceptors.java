@@ -30,7 +30,7 @@ public class ProcessorInterceptors implements HandlerInterceptor{
 			throws Exception {
 
 		String url = request.getRequestURL().toString();
-		String accessToken = request.getHeader(Constant.Token.ACCESS_TOKEN);
+		String accessToken = request.getHeader(CommonConstant.Token.ACCESS_TOKEN);
 		System.out.println(accessToken);
 
         for (String s : IGNORE_URI) {

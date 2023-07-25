@@ -3,6 +3,8 @@ package com.flowengine.common.utils.entity;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
+import java.util.Date;
+
 /**
  * 建模引擎-列元素数据表;
  * @author yangzl 2023.07.19
@@ -17,7 +19,7 @@ public class PublicFlowTableColumnEntity {
     private String opId ;
     /** 表名 */
     private String tableName ;
-    /** 表所属模块id */
+    /** 列所属的表id */
     private String tableOpId ;
     /** 列名 */
     private String columnName ;
@@ -31,6 +33,8 @@ public class PublicFlowTableColumnEntity {
     private String deptOpId ;
     /** 所属人员，逗号分割 */
     private String userOpId ;
+
+    private Date createTime = new Date();
 
     public String getOpId() {
         return opId;
@@ -102,5 +106,13 @@ public class PublicFlowTableColumnEntity {
 
     public void setUserOpId(String userOpId) {
         this.userOpId = userOpId;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }

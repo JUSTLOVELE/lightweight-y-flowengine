@@ -24,6 +24,45 @@ public class TableManageDaoImpl extends BaseDao implements TableManageDao {
     private final static Log _logger = LogFactory.getLog(TableManageDaoImpl.class);
 
     @Override
+    public int queryTableCount(String tableName) {
+
+        String sql = "select count(*) from " + tableName;
+        return this.getJdbcTemplate().queryForObject(sql, Integer.class);
+    }
+
+    @Override
+    public List<Map<String, Object>> queryInformationSchema(String tableName) {
+
+        String sql = """
+                SELECT column_name, data_type, is_nullable, column_default
+                FROM information_schema.columns
+                WHERE table_name = ?;
+                """;
+
+        return this.getJdbcTemplate().queryForList(sql, tableName);
+    }
+
+    @Override
+    public int executeDropSQL(String tableName) {
+
+        try {
+            String sql = "drop table " + tableName;
+            this.getJdbcTemplate().execute(sql);
+            return 1;
+        }catch (Exception e) {
+            _logger.error("", e);
+            return 0;
+        }
+    }
+
+    @Override
+    public int executeCreateSQL(String sql) {
+
+        this.getJdbcTemplate().execute(sql);
+        return 1;
+    }
+
+    @Override
     public int queryTotal(Map<String, Object> param) {
 
         String tableName = (String) param.get(Constant.Key.TABLE_NAME);

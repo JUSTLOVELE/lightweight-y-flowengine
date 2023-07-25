@@ -4,7 +4,7 @@
   "avatar": "",
   "version": "4.6.1",
   "createdTime": "2022-12-9 22:49:27",
-  "updatedTime": "2023-7-24 10:01:20",
+  "updatedTime": "2023-7-25 09:42:07",
   "dbConns": [],
   "profile": {
     "default": {
@@ -2620,6 +2620,23 @@
           "extProps": {},
           "domain": "7CFFA0D3-6A93-4DDC-BC10-DF21211064DC",
           "id": "6E4C301A-F071-4485-8CBD-19EE53F8B7D6"
+        },
+        {
+          "defKey": "sql",
+          "defName": "sql语句",
+          "comment": "",
+          "type": "text",
+          "len": 255,
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "extProps": {},
+          "domain": "",
+          "id": "1F0B525A-1518-4522-A11A-044DFE6F12CF"
         }
       ],
       "correlations": [],
@@ -2769,7 +2786,7 @@
         },
         {
           "defKey": "table_op_id",
-          "defName": "表所属模块id",
+          "defName": "列所属的表id",
           "comment": "",
           "type": "",
           "len": "",
@@ -2867,7 +2884,7 @@
           "autoIncrement": false,
           "defaultValue": "",
           "hideInGraph": false,
-          "domain": "3E948CEC-3070-472C-AF92-F3CA11EC9D15",
+          "domain": "16120F75-6AA7-4483-868D-F07F511BB081",
           "refDict": "",
           "extProps": {},
           "notes": {},
@@ -2894,7 +2911,7 @@
           "autoIncrement": false,
           "defaultValue": "",
           "hideInGraph": false,
-          "domain": "3E948CEC-3070-472C-AF92-F3CA11EC9D15",
+          "domain": "16120F75-6AA7-4483-868D-F07F511BB081",
           "refDict": "",
           "extProps": {},
           "notes": {},
@@ -2921,7 +2938,7 @@
           "autoIncrement": false,
           "defaultValue": "",
           "hideInGraph": false,
-          "domain": "3E948CEC-3070-472C-AF92-F3CA11EC9D15",
+          "domain": "16120F75-6AA7-4483-868D-F07F511BB081",
           "refDict": "",
           "extProps": {},
           "notes": {},
@@ -2935,6 +2952,23 @@
           "attr8": "",
           "attr9": "",
           "id": "4E448CAF-260F-4151-A395-3123CC41218B"
+        },
+        {
+          "defKey": "create_time",
+          "defName": "",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "extProps": {},
+          "domain": "7CFFA0D3-6A93-4DDC-BC10-DF21211064DC",
+          "id": "9121AFDA-90E7-47CD-B5C9-8B4B5AA377DD"
         }
       ],
       "correlations": [],
