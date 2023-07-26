@@ -2,10 +2,7 @@ package com.flowengine.server.backend.service.admin.impl;
 
 import cn.hutool.core.util.StrUtil;
 
-import com.flowengine.common.utils.AccountValidatorUtil;
-import com.flowengine.common.utils.CommonConstant;
-import com.flowengine.common.utils.EncryptUtil;
-import com.flowengine.common.utils.UUIDGenerator;
+import com.flowengine.common.utils.*;
 import com.flowengine.common.utils.entity.PublicUserEntity;
 import com.flowengine.common.utils.mapper.PublicUserMapper;
 import com.flowengine.server.backend.dao.admin.UserDao;
@@ -88,7 +85,7 @@ public class UserServiceImpl extends BaseService implements UserService {
 
         if(StrUtil.isNotEmpty(oldPwd) && StrUtil.isNotEmpty(pwd)) {
 
-            oldPwd = EncryptUtil.get3DESEncrypt(oldPwd, _ymlProjectConfig.getEncryptKey());
+            oldPwd = AESUtils.encrypt(oldPwd, _ymlProjectConfig.getEncryptKey());
 
             if(!oldPwd.equals(userEntity.getUserPassword())) {
                 return renderPrintFailureList("请输入正确的旧密码");
@@ -98,9 +95,8 @@ public class UserServiceImpl extends BaseService implements UserService {
                 return renderPrintFailureList("新密码格式请输入数字和英文字母的组合");
             }
 
-            pwd = EncryptUtil.get3DESEncrypt(pwd, _ymlProjectConfig.getEncryptKey());
+            pwd = AESUtils.encrypt(pwd, _ymlProjectConfig.getEncryptKey());
             userEntity.setUserPassword(pwd);
-
         }
 
         _userMapper.updateById(userEntity);
@@ -159,7 +155,7 @@ public class UserServiceImpl extends BaseService implements UserService {
         userEntity.setUserPhone(userPhone);
         userEntity.setUserName(userName);
         userEntity.setIsStop(1);//启用
-        userEntity.setUserPassword(EncryptUtil.get3DESEncrypt(password, _ymlProjectConfig.getEncryptKey()));
+        userEntity.setUserPassword(AESUtils.encrypt(password, _ymlProjectConfig.getEncryptKey()));
         userEntity.setOrgId(orgId);
         userEntity.setUserSex(sex);
         userEntity.setUserCategory(Integer.valueOf(userCategory));
@@ -211,7 +207,8 @@ public class UserServiceImpl extends BaseService implements UserService {
     @Override
     public PublicUserEntity getPublicUserEntity(String userId, String password) {
 
-        password = EncryptUtil.get3DESEncrypt(password, _ymlProjectConfig.getEncryptKey());
+        //password = EncryptUtil.get3DESEncrypt(password, _ymlProjectConfig.getEncryptKey());
+        password = AESUtils.encrypt(password, _ymlProjectConfig.getEncryptKey());
         Map<String, Object> param = new HashMap<>();
         param.put(Constant.Key.USER_ID, userId);
         param.put(Constant.Key.USER_PASSWORD, password);
