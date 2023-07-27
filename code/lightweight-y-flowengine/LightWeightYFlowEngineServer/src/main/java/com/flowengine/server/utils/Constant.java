@@ -85,6 +85,8 @@ public class Constant {
         public String TABLE_NAME = "tableName";
 
         public String TABLE_NAME_DESC = "tableNameDesc";
+
+        public String SQL = "sql";
     }
 
     public interface Value {

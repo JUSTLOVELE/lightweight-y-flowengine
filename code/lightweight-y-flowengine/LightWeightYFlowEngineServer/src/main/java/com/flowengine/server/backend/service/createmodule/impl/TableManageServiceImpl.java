@@ -47,6 +47,18 @@ public class TableManageServiceImpl extends BaseService implements TableManageSe
     private final static Log _logger = LogFactory.getLog(TableManageServiceImpl.class);
 
     @Override
+    public String executeSQL(Map<String, Object> param) {
+
+        String tableOpId = (String) param.get(Constant.Key.OP_ID);
+        String tableName = (String) param.get(Constant.Key.TABLE_NAME);
+        String sql = (String) param.get(Constant.Key.SQL);
+        _tableManageDao.executeAlterSQL(sql);
+        insertColumns(tableOpId, tableName);
+
+        return renderOpSuccessList(1);
+    }
+
+    @Override
     public String edit(PublicFlowTableNameEntity entity) {
 
         PublicFlowTableNameEntity publicFlowTableNameEntity = _flowTableNameMapper.selectById(entity.getOpId());
@@ -72,18 +84,22 @@ public class TableManageServiceImpl extends BaseService implements TableManageSe
     }
 
     private void insertColumns(PublicFlowTableNameEntity entity) {
+        insertColumns(entity.getOpId(), entity.getTableName());
+    }
+
+    private void insertColumns(String tableOpId, String tableName) {
 
         Map<String,Object> p = new HashMap<>();
-        p.put(Constant.Column.TABLE_OP_ID, entity.getOpId());
+        p.put(Constant.Column.TABLE_OP_ID, tableOpId);
         _flowTableColumnMapper.deleteByMap(p);
-        List<Map<String, Object>> columns = _tableManageDao.queryInformationSchema(entity.getTableName());
+        List<Map<String, Object>> columns = _tableManageDao.queryInformationSchema(tableName);
 
         for(Map<String, Object> column: columns) {
 
             PublicFlowTableColumnEntity columnEntity = new PublicFlowTableColumnEntity();
             columnEntity.setOpId(UUIDGenerator.getUUID());
-            columnEntity.setTableName(entity.getTableName());
-            columnEntity.setTableOpId(entity.getOpId());
+            columnEntity.setTableName(tableName);
+            columnEntity.setTableOpId(tableOpId);
             columnEntity.setColumnName((String) column.get(Constant.Column.COLUMN_NAME));
             columnEntity.setColumnType((String) column.get(Constant.Column.DATA_TYPE));
             _flowTableColumnMapper.insert(columnEntity);

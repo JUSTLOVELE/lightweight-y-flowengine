@@ -13,6 +13,13 @@ import java.util.Map;
 public interface TableManageService {
 
     /**
+     * 执行SQL
+     * @param param
+     * @return
+     */
+    public String executeSQL(Map<String, Object> param);
+
+    /**
      * 编辑
      * @param entity
      * @return

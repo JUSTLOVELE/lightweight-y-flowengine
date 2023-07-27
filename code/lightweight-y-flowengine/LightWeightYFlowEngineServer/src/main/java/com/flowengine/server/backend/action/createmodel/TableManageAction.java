@@ -9,6 +9,7 @@ import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
@@ -25,6 +26,25 @@ public class TableManageAction extends BaseAction {
 
     @Resource
     private TableManageService _tableManageService;
+
+    /**
+     * 执行SQL
+     * @param tableOpId
+     * @param sql
+     * @return
+     */
+    @PostMapping(value = "/tableManageAction/excuteSQL", produces = "application/json; charset=utf-8")
+    public String excuteSQL(@RequestParam(required = true) String tableOpId,
+                            @RequestParam(required = true) String tableName,
+                            @RequestParam(required = true) String sql) {
+
+        Map<String, Object> param = new HashMap<>();
+        param.put(Constant.Key.OP_ID, tableOpId);
+        param.put(Constant.Key.TABLE_NAME, tableName);
+        param.put(Constant.Key.SQL, sql);
+
+        return _tableManageService.executeSQL(param);
+    }
 
     /**
      * 新增表
