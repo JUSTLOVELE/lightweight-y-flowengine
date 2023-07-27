@@ -44,7 +44,13 @@ public class MenuAction extends BaseAction {
     @PostMapping(value = "/delete", produces = "application/json; charset=utf-8")
     @ResponseBody
     public String delete(String opId) {
-        return _menuService.delete(opId);
+
+        try {
+            return _menuService.delete(opId);
+        }catch (Exception e) {
+            _logger.error("", e);
+            return renderPrintFailureList("该菜单已被引用,请联系开发人员!");
+        }
     }
 
     /**

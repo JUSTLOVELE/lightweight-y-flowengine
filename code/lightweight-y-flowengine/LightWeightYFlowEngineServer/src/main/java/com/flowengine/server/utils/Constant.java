@@ -8,7 +8,7 @@ package com.flowengine.server.utils;
  */
 public class Constant {
 
-    public static String ROOT_ROLE_ID = "root";
+    public static String ROOT_ROLE_ID = "role_101";
 
     public static String USER_ADMIN_ID = "admin";
 

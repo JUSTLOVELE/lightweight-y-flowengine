@@ -1,6 +1,7 @@
 package com.flowengine.server.backend.service.admin.impl;
 
 
+import cn.hutool.core.util.StrUtil;
 import com.flowengine.common.utils.entity.PublicMenuEntity;
 import com.flowengine.common.utils.mapper.PublicMenuMapper;
 import com.flowengine.server.backend.dao.admin.MenuDao;
@@ -8,6 +9,8 @@ import com.flowengine.server.backend.service.admin.MenuService;
 import com.flowengine.server.core.BaseService;
 import com.flowengine.server.model.MenuVO;
 import com.flowengine.server.model.UserCache;
+import com.flowengine.server.utils.Constant;
+import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,13 +31,23 @@ public class MenuServiceImpl extends BaseService implements MenuService {
 	@Autowired
 	private MenuDao _menuDao;
 
-	@Autowired
+	@Resource
 	private PublicMenuMapper _publicMenuMapper;
 
 	@Override
 	public String delete(String opId) {
+		//需要没有叶子节点
+		int count = _publicMenuMapper.queryCountWithParentId(opId);
 
+		if(count > 0) {
+			return renderPrintFailureList("该节点下存在子节点,请删除所有的子节点!");
+		}
+
+		//删除管理员引用
+		_publicMenuMapper.deleteRoleMenu(opId, Constant.ROOT_ROLE_ID);
+		//最后才删除
 		_publicMenuMapper.deleteById(opId);
+
 		return renderDeleteSuccessList(1);
 	}
 
@@ -47,7 +60,11 @@ public class MenuServiceImpl extends BaseService implements MenuService {
 			publicMenuEntity.setParentId(menuEntity.getParentId());
 		}
 
-		if(!publicMenuEntity.getUrl().equals(menuEntity.getUrl())) {
+		if(StrUtil.isEmpty(publicMenuEntity.getUrl()) && StrUtil.isNotEmpty(menuEntity.getUrl())) {
+			publicMenuEntity.setUrl(menuEntity.getUrl());
+		}else if(StrUtil.isNotEmpty(publicMenuEntity.getUrl()) && StrUtil.isEmpty(menuEntity.getUrl())) {
+			publicMenuEntity.setUrl(null);
+		}else if(StrUtil.isNotEmpty(publicMenuEntity.getUrl()) && StrUtil.isNotEmpty(menuEntity.getUrl()) && !publicMenuEntity.getUrl().equals(menuEntity.getUrl())) {
 			publicMenuEntity.setUrl(menuEntity.getUrl());
 		}
 
@@ -76,6 +93,7 @@ public class MenuServiceImpl extends BaseService implements MenuService {
 	public String add(PublicMenuEntity menuEntity) {
 
 		_publicMenuMapper.insert(menuEntity);
+		_publicMenuMapper.insertRoleMenu(menuEntity.getOpId(), Constant.ROOT_ROLE_ID);//新增权限后默认管理员要有
 		return renderOpSuccessList(1);
 	}
 
