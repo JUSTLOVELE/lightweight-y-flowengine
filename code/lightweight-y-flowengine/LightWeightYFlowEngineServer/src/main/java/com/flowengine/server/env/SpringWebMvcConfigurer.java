@@ -23,7 +23,7 @@ import java.util.List;
  * @history:
  */
 @Configuration
-@EnableWebMvc
+//@EnableWebMvc
 public class SpringWebMvcConfigurer implements WebMvcConfigurer {
 
 //	@Bean
