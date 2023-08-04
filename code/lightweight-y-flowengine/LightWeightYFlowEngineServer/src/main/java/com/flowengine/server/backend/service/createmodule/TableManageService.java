@@ -13,6 +13,12 @@ import java.util.Map;
 public interface TableManageService {
 
     /**
+     * 获取下拉框
+     * @return
+     */
+    public String getCombobox();
+
+    /**
      * 执行SQL
      * @param param
      * @return

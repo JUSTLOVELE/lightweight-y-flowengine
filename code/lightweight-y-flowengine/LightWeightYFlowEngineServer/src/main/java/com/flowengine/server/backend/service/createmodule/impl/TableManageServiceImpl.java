@@ -47,6 +47,11 @@ public class TableManageServiceImpl extends BaseService implements TableManageSe
     private final static Log _logger = LogFactory.getLog(TableManageServiceImpl.class);
 
     @Override
+    public String getCombobox() {
+        return getJSON(_flowTableNameMapper.getCombobox());
+    }
+
+    @Override
     public String executeSQL(Map<String, Object> param) {
 
         String tableOpId = (String) param.get(Constant.Key.OP_ID);

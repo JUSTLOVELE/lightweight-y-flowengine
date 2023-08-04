@@ -28,6 +28,15 @@ public class TableManageAction extends BaseAction {
     private TableManageService _tableManageService;
 
     /**
+     * 获得下拉框
+     * @return
+     */
+    @GetMapping(value = "/tableManageAction/getCombobox", produces = "application/json;charset=utf-8")
+    public String getCombobox() {
+        return _tableManageService.getCombobox();
+    }
+
+    /**
      * 执行SQL
      * @param tableOpId
      * @param sql
