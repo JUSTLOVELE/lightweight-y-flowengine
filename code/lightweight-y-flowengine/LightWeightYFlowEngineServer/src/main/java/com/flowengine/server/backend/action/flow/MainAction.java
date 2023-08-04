@@ -27,29 +27,29 @@ public class MainAction extends BaseAction {
     private MainService _mainService;
 
     /**
-     * flowManage页面查询
-     * @param flowName
-     * @param startTime
-     * @param endTime
+     * flowPage页面查询
+     * @param mainName
+     * @param isStop
+     * @param deptId
      * @param limit
      * @param page
      * @param request
      * @return
      */
     @GetMapping(value = "/mainAction/query", produces = "application/json; charset=utf-8")
-    public String query(@RequestParam(required = false) String flowName,
-                        String startTime,
-                        String endTime,
+    public String query(@RequestParam(required = false) String mainName,
+                        Integer isStop,
+                        String deptId,
                         @RequestParam(required = false) Integer limit,
                         @RequestParam(required = false)  Integer page,
                         HttpServletRequest request) {
 
-        UserCache userSession = SessionUtils.getUserSession(request);
         Map<String, Object> param = new HashMap<String, Object>();
-        param.put(Constant.Key.NAME, flowName);
+        param.put(Constant.Key.NAME, mainName);
         param.put(Constant.Key.PAGE, page);
         param.put(Constant.Key.LIMIT, limit);
-        param.put(SessionUtils.USER_SESSION, userSession);
+        param.put(Constant.Key.DEPT_ID, deptId);
+        param.put(Constant.Key.IS_STOP, isStop);
 
         return _mainService.query(param);
     }

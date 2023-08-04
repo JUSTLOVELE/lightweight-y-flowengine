@@ -27,6 +27,13 @@ public class DeptServiceImpl extends BaseService implements DeptService {
     private PublicDeptMapper _publicDeptMapper;
 
     @Override
+    public String getCombobox() {
+
+        List<Map<String, Object>> combobox = _publicDeptMapper.getCombobox();
+        return getJSON(_publicDeptMapper.getCombobox());
+    }
+
+    @Override
     public String selectQuery(Map<String, Object> param) {
 
         UserCache userCache = (UserCache) param.get(SessionUtils.USER_SESSION);

@@ -10,5 +10,16 @@ import java.util.Map;
  */
 public interface DeptService {
 
+    /**
+     * 获取科室下拉框
+     * @return
+     */
+    public String getCombobox();
+
+    /**
+     *
+     * @param param
+     * @return
+     */
     public String selectQuery(Map<String, Object> param);
 }

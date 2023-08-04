@@ -87,6 +87,10 @@ public class Constant {
         public String TABLE_NAME_DESC = "tableNameDesc";
 
         public String SQL = "sql";
+
+        public String DEPT_ID = "deptId";
+
+        public String IS_STOP = "isStop";
     }
 
     public interface Value {

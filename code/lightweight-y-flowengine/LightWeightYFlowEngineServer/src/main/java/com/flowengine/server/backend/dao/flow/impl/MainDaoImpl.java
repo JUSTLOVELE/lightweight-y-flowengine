@@ -26,7 +26,9 @@ public class MainDaoImpl extends BaseDao implements MainDao  {
     @Override
     public Integer queryFlowTotal(Map<String, Object> param) {
 
-        String flowName = (String) param.get(Constant.Key.NAME);
+        String mainName = (String) param.get(Constant.Key.NAME);
+        String deptId = (String) param.get(Constant.Key.DEPT_ID);
+        Integer isStop = (Integer) param.get(Constant.Key.IS_STOP);
         List<Object> array = new ArrayList<>();
         String text = """
                 select
@@ -35,10 +37,22 @@ public class MainDaoImpl extends BaseDao implements MainDao  {
                 """;
         StringBuffer sb = new StringBuffer(text);
 
-        if(StrUtil.isNotEmpty(flowName)) {
+        if(StrUtil.isNotEmpty(mainName)) {
 
-            sb.append(" and a.flowName like ? ");
-            array.add("%" + flowName +"%");
+            sb.append(" and a.main_name like ? ");
+            array.add("%" + mainName +"%");
+        }
+
+        if(isStop != null) {
+
+            sb.append(" and a.is_stop = ? ");
+            array.add(isStop);
+        }
+
+        if(StrUtil.isNotEmpty(deptId)) {
+
+            sb.append(" and a.dept_id = ? ");
+            array.add(deptId);
         }
 
         String sql = sb.toString();
@@ -52,7 +66,9 @@ public class MainDaoImpl extends BaseDao implements MainDao  {
 
         Integer limit = (Integer) param.get(Constant.Key.LIMIT);
         Integer page = (Integer) param.get(Constant.Key.PAGE);
-        String flowName = (String) param.get(Constant.Key.NAME);
+        String mainName = (String) param.get(Constant.Key.NAME);
+        String deptId = (String) param.get(Constant.Key.DEPT_ID);
+        Integer isStop = (Integer) param.get(Constant.Key.IS_STOP);
         List<Object> array = new ArrayList<>();
         String text = """
                 select
@@ -62,15 +78,29 @@ public class MainDaoImpl extends BaseDao implements MainDao  {
                         else '暂停' end "stopText",
                     a.main_name "mainName",
                     to_char(a.create_time,'YYYY-MM-DD') as "createTime",
-                    a.create_user_name "userName"
+                    a.reference_table_name "referenceTableName",
+                    (select b.dept_name from public_dept b where b.op_id = a.dept_id) "deptName",
+                    a.create_user_name "createUserName"
                     from public_flow_main_tbl a where 1=1
                 """;
         StringBuffer sb = new StringBuffer(text);
 
-        if(StrUtil.isNotEmpty(flowName)) {
+        if(StrUtil.isNotEmpty(mainName)) {
 
-            sb.append(" and a.flowName like ? ");
-            array.add("%" + flowName +"%");
+            sb.append(" and a.main_name like ? ");
+            array.add("%" + mainName +"%");
+        }
+
+        if(isStop != null) {
+
+            sb.append(" and a.is_stop = ? ");
+            array.add(isStop);
+        }
+
+        if(StrUtil.isNotEmpty(deptId)) {
+
+            sb.append(" and a.dept_id = ? ");
+            array.add(deptId);
         }
 
         sb.append(" ORDER BY a.create_time DESC LIMIT ? offset ? ");

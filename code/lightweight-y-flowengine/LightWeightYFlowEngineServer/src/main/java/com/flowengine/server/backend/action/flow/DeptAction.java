@@ -24,6 +24,15 @@ public class DeptAction extends BaseAction {
     @Resource
     private DeptService _deptService;
 
+    /**
+     * 获取下拉框
+     * @return
+     */
+    @GetMapping(value = "/deptAction/getCombobox", produces = "application/json;charset=utf-8")
+    public String getCombobox() {
+        return _deptService.getCombobox();
+    }
+
     @GetMapping(value = "/deptAction/selectQuery", produces = "application/json;charset=utf-8")
     public String selectQuery(HttpServletRequest request) {
 
