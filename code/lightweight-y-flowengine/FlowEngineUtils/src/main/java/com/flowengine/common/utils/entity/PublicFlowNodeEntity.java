@@ -1,5 +1,6 @@
 package com.flowengine.common.utils.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serializable;
@@ -14,8 +15,8 @@ import java.io.Serializable;
 public class PublicFlowNodeEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
     /** 主键 */
+    @TableId
     private String opId ;
     /** 流程主表id */
     private String mainId ;
@@ -25,104 +26,124 @@ public class PublicFlowNodeEntity implements Serializable {
     private String lastNodeKey ;
     /** 限制时间,单位天 */
     private Integer limitTime ;
-    /** 下一个环节;下一个环节*/
+    /** 下一个环节(json配置);下一个环节*/
     private String nextNode ;
     /** 当前环节名称 */
     private String nodeName ;
-
+    /** 当前环节key;关键字start开始;ing:中间环节;或者其他指定的key也表示中间环节;end结束; */
     private String nodeKey ;
+    /** 看说明;1:创建;2:常规;3:等待多人审批;100:结束归档 */
+    private String nodeType ;
     /** 节点排序：1,2,3,4 */
     private Integer nodeSort ;
     /** 1:开始;2:常规节点;10:结束 */
     private Integer nodeStatus ;
-    /** 引用id,有必要时使用 */
-    private String refId ;
-
-    public String getOpId() {
-        return opId;
+    /** 看说明;审批类型,可能为1,2,3;1:人员;2:部门;3:角色;可能为多个值 */
+    private String checkType ;
+    /** 主键 */
+    public String getOpId(){
+        return this.opId;
     }
-
-    public void setOpId(String opId) {
-        this.opId = opId;
+    /** 主键 */
+    public void setOpId(String opId){
+        this.opId=opId;
     }
-
-    public String getMainId() {
-        return mainId;
+    /** 流程主表id */
+    public String getMainId(){
+        return this.mainId;
     }
-
-    public void setMainId(String mainId) {
-        this.mainId = mainId;
+    /** 流程主表id */
+    public void setMainId(String mainId){
+        this.mainId=mainId;
     }
-
-    public String getLastNodeId() {
-        return lastNodeId;
+    /** 上一个环节 */
+    public String getLastNodeId(){
+        return this.lastNodeId;
     }
-
-    public void setLastNodeId(String lastNodeId) {
-        this.lastNodeId = lastNodeId;
+    /** 上一个环节 */
+    public void setLastNodeId(String lastNodeId){
+        this.lastNodeId=lastNodeId;
     }
-
-    public String getLastNodeKey() {
-        return lastNodeKey;
+    /** 上一个环节key */
+    public String getLastNodeKey(){
+        return this.lastNodeKey;
     }
-
-    public void setLastNodeKey(String lastNodeKey) {
-        this.lastNodeKey = lastNodeKey;
+    /** 上一个环节key */
+    public void setLastNodeKey(String lastNodeKey){
+        this.lastNodeKey=lastNodeKey;
     }
-
-    public Integer getLimitTime() {
-        return limitTime;
+    /** 限制时间,单位天 */
+    public Integer getLimitTime(){
+        return this.limitTime;
     }
-
-    public void setLimitTime(Integer limitTime) {
-        this.limitTime = limitTime;
+    /** 限制时间,单位天 */
+    public void setLimitTime(Integer limitTime){
+        this.limitTime=limitTime;
     }
-
-    public String getNextNode() {
-        return nextNode;
+    /** 下一个环节(json配置);下一个环节
+     [{
+     "key":"",
+     "nextNodeId":"",
+     "nextNodeKey":""
+     }] */
+    public String getNextNode(){
+        return this.nextNode;
     }
-
-    public void setNextNode(String nextNode) {
-        this.nextNode = nextNode;
+    /** 下一个环节(json配置);下一个环节
+     [{
+     "key":"",
+     "nextNodeId":"",
+     "nextNodeKey":""
+     }] */
+    public void setNextNode(String nextNode){
+        this.nextNode=nextNode;
     }
-
-    public String getNodeName() {
-        return nodeName;
+    /** 当前环节名称 */
+    public String getNodeName(){
+        return this.nodeName;
     }
-
-    public void setNodeName(String nodeName) {
-        this.nodeName = nodeName;
+    /** 当前环节名称 */
+    public void setNodeName(String nodeName){
+        this.nodeName=nodeName;
     }
-
-    public String getNodeKey() {
-        return nodeKey;
+    /** 当前环节key;关键字start开始;ing:中间环节;或者其他指定的key也表示中间环节;end结束; */
+    public String getNodeKey(){
+        return this.nodeKey;
     }
-
-    public void setNodeKey(String nodeKey) {
-        this.nodeKey = nodeKey;
+    /** 当前环节key;关键字start开始;ing:中间环节;或者其他指定的key也表示中间环节;end结束; */
+    public void setNodeKey(String nodeKey){
+        this.nodeKey=nodeKey;
     }
-
-    public Integer getNodeSort() {
-        return nodeSort;
+    /** 看说明;1:创建;2:常规;3:等待多人审批;100:结束归档 */
+    public String getNodeType(){
+        return this.nodeType;
     }
-
-    public void setNodeSort(Integer nodeSort) {
-        this.nodeSort = nodeSort;
+    /** 看说明;1:创建;2:常规;3:等待多人审批;100:结束归档 */
+    public void setNodeType(String nodeType){
+        this.nodeType=nodeType;
     }
-
-    public Integer getNodeStatus() {
-        return nodeStatus;
+    /** 节点排序：1,2,3,4 */
+    public Integer getNodeSort(){
+        return this.nodeSort;
     }
-
-    public void setNodeStatus(Integer nodeStatus) {
-        this.nodeStatus = nodeStatus;
+    /** 节点排序：1,2,3,4 */
+    public void setNodeSort(Integer nodeSort){
+        this.nodeSort=nodeSort;
     }
-
-    public String getRefId() {
-        return refId;
+    /** 1:开始;2:常规节点;10:结束 */
+    public Integer getNodeStatus(){
+        return this.nodeStatus;
     }
-
-    public void setRefId(String refId) {
-        this.refId = refId;
+    /** 1:开始;2:常规节点;10:结束 */
+    public void setNodeStatus(Integer nodeStatus){
+        this.nodeStatus=nodeStatus;
+    }
+    /** 看说明;审批类型,可能为1,2,3;1:人员;2:部门;3:角色;可能为多个值 */
+    public String getCheckType(){
+        return this.checkType;
+    }
+    /** 看说明;审批类型,可能为1,2,3;1:人员;2:部门;3:角色;可能为多个值 */
+    public void setCheckType(String checkType){
+        this.checkType=checkType;
     }
 }

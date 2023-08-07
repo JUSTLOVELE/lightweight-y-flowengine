@@ -1,0 +1,44 @@
+DROP TABLE IF EXISTS public_cfg;
+CREATE TABLE public_cfg(
+    op_id VARCHAR(32),
+    org_id VARCHAR(32),
+    cfg_name VARCHAR(32),
+    key_code VARCHAR(32)
+);
+
+COMMENT ON TABLE public_cfg IS '配置主表';
+COMMENT ON COLUMN public_cfg.op_id IS '主键';
+COMMENT ON COLUMN public_cfg.org_id IS '机构id';
+COMMENT ON COLUMN public_cfg.cfg_name IS '配置名';
+COMMENT ON COLUMN public_cfg.key_code IS '关键字';
+
+
+DROP TABLE IF EXISTS public_sub_cfg;
+CREATE TABLE public_sub_cfg(
+    op_id VARCHAR(32),
+    cfg_id VARCHAR(32),
+    sub_cfg_value VARCHAR(32),
+    sub_cfg_name VARCHAR(255),
+    key_code VARCHAR(32)
+);
+
+COMMENT ON TABLE public_sub_cfg IS '配置子表';
+COMMENT ON COLUMN public_sub_cfg.op_id IS '主键';
+COMMENT ON COLUMN public_sub_cfg.cfg_id IS '主表id';
+COMMENT ON COLUMN public_sub_cfg.sub_cfg_value IS '值';
+COMMENT ON COLUMN public_sub_cfg.sub_cfg_name IS 'name';
+COMMENT ON COLUMN public_sub_cfg.key_code IS '关键字';
+
+insert into  public_cfg (op_id, cfg_name, key_code) VALUES
+('flow_node_type_101', '环节类型', 'node_type');
+
+insert into public_sub_cfg(op_id, cfg_id, sub_cfg_value, sub_cfg_name, key_code) VALUES
+('flow_node_type_sub_101', 'flow_node_type_101', '1', '创建', 'node_type');
+insert into public_sub_cfg(op_id, cfg_id, sub_cfg_value, sub_cfg_name, key_code) VALUES
+('flow_node_type_sub_102', 'flow_node_type_101', '2', '常规', 'node_type');
+insert into public_sub_cfg(op_id, cfg_id, sub_cfg_value, sub_cfg_name, key_code) VALUES
+('flow_node_type_sub_103', 'flow_node_type_101', '3', '等待多人审批', 'node_type');
+insert into public_sub_cfg(op_id, cfg_id, sub_cfg_value, sub_cfg_name, key_code) VALUES
+('flow_node_type_sub_104', 'flow_node_type_10100', '100', '结束归档', 'node_type');
+
+

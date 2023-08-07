@@ -4,7 +4,7 @@
   "avatar": "",
   "version": "4.6.1",
   "createdTime": "2022-12-9 22:49:27",
-  "updatedTime": "2023-8-4 14:19:32",
+  "updatedTime": "2023-8-7 10:42:47",
   "dbConns": [],
   "profile": {
     "default": {
@@ -996,7 +996,7 @@
         {
           "defKey": "node_key",
           "defName": "当前环节key",
-          "comment": "关键字\nstart开始;\ning:中间环节;\n或者其他指定的key也表示中间环节\n;end结束;",
+          "comment": "关键字start开始;ing:中间环节;或者其他指定的key也表示中间环节;end结束;",
           "type": "",
           "len": "",
           "scale": "",
@@ -4410,7 +4410,7 @@
           "autoIncrement": false,
           "defaultValue": "",
           "hideInGraph": true,
-          "domain": "7CFFA0D3-6A93-4DDC-BC10-DF21211064DC",
+          "domain": "9092C4E0-1A54-4859-ABBB-5B62DBC27573",
           "refDict": "",
           "extProps": {},
           "notes": {},
