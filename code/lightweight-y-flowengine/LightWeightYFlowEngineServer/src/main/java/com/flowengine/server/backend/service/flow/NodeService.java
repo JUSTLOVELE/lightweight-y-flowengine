@@ -9,6 +9,18 @@ package com.flowengine.server.backend.service.flow;
 public interface NodeService {
 
     /**
+     * 获取审批类型下拉框
+     * @return
+     */
+    public String getCheckTypeCombobox();
+
+    /**
+     * 获取环节类型下拉框
+     * @return
+     */
+    public String getNodeStatusCombobox();
+
+    /**
      * 获取环节类型下拉框
      * @return
      */

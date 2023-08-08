@@ -19,6 +19,24 @@ public class NodeAction extends BaseAction {
     private NodeService _nodeService;
 
     /**
+     * 获取审批类型下拉框
+     * @return
+     */
+    @GetMapping(value = "/nodeAction/getCheckTypeCombobox")
+    public String getCheckTypeCombobox() {
+        return _nodeService.getCheckTypeCombobox();
+    }
+
+    /**
+     * 获取环节状态下拉框
+     * @return
+     */
+    @GetMapping(value = "/nodeAction/getNodeStatusCombobox")
+    public String getNodeStatusCombobox() {
+        return _nodeService.getNodeStatusCombobox();
+    }
+
+    /**
      * 获取环节类型下拉框
      * @return
      */

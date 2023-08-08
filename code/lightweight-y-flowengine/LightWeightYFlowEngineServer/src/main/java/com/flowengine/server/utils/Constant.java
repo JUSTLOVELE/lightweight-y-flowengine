@@ -23,6 +23,8 @@ public class Constant {
         public String DATA_TYPE = "data_type";
 
         public String TABLE_OP_ID = "table_op_id";
+
+        public String NODE_STATUS = "node_status";
     }
 
     public interface Key {
@@ -91,6 +93,8 @@ public class Constant {
         public String DEPT_ID = "deptId";
 
         public String IS_STOP = "isStop";
+
+        public String FLOW_NODE_CHECK_TYPE = "flow_node_check_type";
     }
 
     public interface Value {

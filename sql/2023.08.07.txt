@@ -29,6 +29,45 @@ COMMENT ON COLUMN public_sub_cfg.sub_cfg_value IS '值';
 COMMENT ON COLUMN public_sub_cfg.sub_cfg_name IS 'name';
 COMMENT ON COLUMN public_sub_cfg.key_code IS '关键字';
 
+
+DROP TABLE IF EXISTS public_flow_node_tbl;
+CREATE TABLE public_flow_node_tbl(
+    op_id VARCHAR(32) NOT NULL,
+    main_id VARCHAR(255),
+    last_node_id VARCHAR(255),
+    last_node_key VARCHAR(255),
+    limit_time INTEGER,
+    next_node VARCHAR(900),
+    node_name VARCHAR(255),
+    node_key VARCHAR(255),
+    node_type VARCHAR(255),
+    node_sort INTEGER,
+    node_status VARCHAR(255),
+    check_type VARCHAR(255),
+    PRIMARY KEY (op_id)
+);
+
+COMMENT ON TABLE public_flow_node_tbl IS '环节表';
+COMMENT ON COLUMN public_flow_node_tbl.op_id IS '主键';
+COMMENT ON COLUMN public_flow_node_tbl.main_id IS '流程主表id';
+COMMENT ON COLUMN public_flow_node_tbl.last_node_id IS '上一个环节';
+COMMENT ON COLUMN public_flow_node_tbl.last_node_key IS '上一个环节key';
+COMMENT ON COLUMN public_flow_node_tbl.limit_time IS '限制时间,单位天';
+COMMENT ON COLUMN public_flow_node_tbl.next_node IS '下一个环节(json配置);下一个环节
+[{
+"key":"",
+"nextNodeId":"",
+"nextNodeKey":""
+}]';
+COMMENT ON COLUMN public_flow_node_tbl.node_name IS '当前环节名称';
+COMMENT ON COLUMN public_flow_node_tbl.node_key IS '当前环节key;关键字start开始;ing:中间环节;或者其他指定的key也表示中间环节;end结束;';
+COMMENT ON COLUMN public_flow_node_tbl.node_type IS '看说明;1:创建;2:常规;3:等待多人审批;100:结束归档';
+COMMENT ON COLUMN public_flow_node_tbl.node_sort IS '节点排序：1,2,3,4';
+COMMENT ON COLUMN public_flow_node_tbl.node_status IS '1:开始;2:常规节点;10:结束';
+COMMENT ON COLUMN public_flow_node_tbl.check_type IS '看说明;审批类型,可能为1,2,3;1:人员;2:部门;3:角色;可能为多个值';
+
+
+
 insert into  public_cfg (op_id, cfg_name, key_code) VALUES
 ('flow_node_type_101', '环节类型', 'node_type');
 
@@ -41,4 +80,23 @@ insert into public_sub_cfg(op_id, cfg_id, sub_cfg_value, sub_cfg_name, key_code)
 insert into public_sub_cfg(op_id, cfg_id, sub_cfg_value, sub_cfg_name, key_code) VALUES
 ('flow_node_type_sub_104', 'flow_node_type_10100', '100', '结束归档', 'node_type');
 
+insert into  public_cfg (op_id, cfg_name, key_code) VALUES
+('flow_node_status_101', '节点状态', 'node_status');
+
+insert into public_sub_cfg(op_id, cfg_id, sub_cfg_value, sub_cfg_name, key_code) VALUES
+('flow_node_status_sub_101', 'flow_node_status_101', '1', '开始', 'node_status');
+insert into public_sub_cfg(op_id, cfg_id, sub_cfg_value, sub_cfg_name, key_code) VALUES
+('flow_node_status_sub_102', 'flow_node_status_101', '2', '常规节点', 'node_status');
+insert into public_sub_cfg(op_id, cfg_id, sub_cfg_value, sub_cfg_name, key_code) VALUES
+('flow_node_status_sub_103', 'flow_node_status_101', '10', '结束', 'node_status');
+
+insert into  public_cfg (op_id, cfg_name, key_code) VALUES
+('flow_check_type_101', '节点状态', 'flow_node_check_type');
+
+insert into public_sub_cfg(op_id, cfg_id, sub_cfg_value, sub_cfg_name, key_code) VALUES
+('flow_check_type_sub_101', 'flow_check_type_101', '1', '人员', 'flow_node_check_type');
+insert into public_sub_cfg(op_id, cfg_id, sub_cfg_value, sub_cfg_name, key_code) VALUES
+('flow_check_type_sub_102', 'flow_check_type_101', '2', '部门', 'flow_node_check_type');
+insert into public_sub_cfg(op_id, cfg_id, sub_cfg_value, sub_cfg_name, key_code) VALUES
+('flow_check_type_sub_103', 'flow_check_type_101', '10', '角色', 'flow_node_check_type');
 

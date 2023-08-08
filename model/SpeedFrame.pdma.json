@@ -4,7 +4,7 @@
   "avatar": "",
   "version": "4.6.1",
   "createdTime": "2022-12-9 22:49:27",
-  "updatedTime": "2023-8-7 10:42:47",
+  "updatedTime": "2023-8-8 16:47:10",
   "dbConns": [],
   "profile": {
     "default": {
@@ -767,7 +767,7 @@
         },
         {
           "defKey": "reference_table_id",
-          "defName": "绑定业务表id",
+          "defName": "绑定业务表id（默认主键是op_id）",
           "comment": "",
           "type": "",
           "len": "",
@@ -1058,7 +1058,7 @@
           "hideInGraph": false,
           "refDict": "",
           "extProps": {},
-          "domain": "6BC8F04B-6CFA-4995-98D3-318F5CDD774E",
+          "domain": "9092C4E0-1A54-4859-ABBB-5B62DBC27573",
           "id": "B7EA21A5-12FA-4C32-A9F3-82D69313E0BB"
         },
         {
