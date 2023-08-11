@@ -14,26 +14,36 @@ public interface TokenService {
      * 根据用户主键获得token
      * @param user
      */
-    public void getLoginToken(PublicUserEntity user);
+    public void setLoginToken(PublicUserEntity user);
 
     /**
      * 根据用户主键获得token
      * @param userOpId
      */
-    public void getLoginToken(String userOpId);
+    public void setLoginToken(String userOpId);
+
+    /**
+     * 生成并获取签名
+     * @param timestamp
+     * @param accessToken
+     * @param refreshToken
+     * @return
+     */
+    public String createAndGetSign(String timestamp, String accessToken, String refreshToken);
 
     /**
      * 验证accessToken是否有效
-     * @param accessToken
+     * @param sign
+     * @param user
      * @return
      */
-    public boolean verifyToken(String accessToken);
+    public boolean verifyToken(String sign, PublicUserEntity user);
 
     /**
      * 根据refresh_token重新获得并刷新token
-     * @param token
+     * @param accessToken
+     * @param sign
      * @return
      */
-    public String reRefreshToken(String token);
-
+    public String reRefreshToken(String accessToken, String sign);
 }

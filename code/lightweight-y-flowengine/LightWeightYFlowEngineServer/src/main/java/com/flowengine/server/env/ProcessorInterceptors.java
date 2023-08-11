@@ -3,14 +3,15 @@ package com.flowengine.server.env;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.flowengine.common.utils.CommonConstant;
 import com.flowengine.server.model.UserCache;
-import com.flowengine.server.utils.Constant;
-import com.flowengine.server.utils.SessionUtils;
+import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
+import com.flowengine.server.backend.system.SessionService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,7 +22,11 @@ import java.util.Map;
  * @version 1.00.00
  * @history:
  */
+@Component
 public class ProcessorInterceptors implements HandlerInterceptor{
+
+	@Resource
+	private SessionService _sessionService;
 
 	private static final Log _logger = LogFactory.getLog(ProcessorInterceptors.class);
 	private static final String[] IGNORE_URI = {"index","test", "api", "404", "error","login","/js/","/image/", "/img/", "/component/", "/css/", "lib", "bigData"};
@@ -41,7 +46,7 @@ public class ProcessorInterceptors implements HandlerInterceptor{
             }
         }
 
-		UserCache user = SessionUtils.getUserSession(accessToken);
+		UserCache user = _sessionService.getCache(accessToken);
 
 		if (user == null) {
             _logger.info("session outtime");

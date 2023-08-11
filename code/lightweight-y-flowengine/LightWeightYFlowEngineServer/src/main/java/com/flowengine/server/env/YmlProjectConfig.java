@@ -21,6 +21,26 @@ public class YmlProjectConfig {
 
 	private String sk;
 
+	private Integer accessTokenLimit;
+
+	private Integer refreshTokenLimit;
+
+	public Integer getAccessTokenLimit() {
+		return accessTokenLimit;
+	}
+
+	public void setAccessTokenLimit(Integer accessTokenLimit) {
+		this.accessTokenLimit = accessTokenLimit;
+	}
+
+	public Integer getRefreshTokenLimit() {
+		return refreshTokenLimit;
+	}
+
+	public void setRefreshTokenLimit(Integer refreshTokenLimit) {
+		this.refreshTokenLimit = refreshTokenLimit;
+	}
+
 	public String getPk() {
 		return pk;
 	}

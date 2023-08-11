@@ -5,6 +5,17 @@ spring:
       max-request-size: 100MB #一次性上传文件大小总上限
   application:
     name: LightWeightYFlowEngineServer
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      timeout: 3000
+      lettuce:
+        pool:
+          max-idle: 8
+          min-idle: 1
+          max-active: 8
+          max-wait: -1
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5433/postgres
@@ -43,6 +54,8 @@ camel:
 
 projectconfig:
   encryptKey: xybdxybdxybdxybdxybdxybd
+  accessTokenLimit: 120
+  refreshTokenLimit: 2
   pk: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAJYUUsdx4TMNFzMtbLi56d3Xew4uc1wIvTwf8ka4iv2PNkz68Ud8yDku7011J1pav8dgUwBlxwvY2sZ4lAT2nLcCAwEAAQ==
   sk: MIIBVAIBADANBgkqhkiG9w0BAQEFAASCAT4wggE6AgEAAkEAlhRSx3HhMw0XMy1suLnp3dd7Di5zXAi9PB/yRriK/Y82TPrxR3zIOS7vTXUnWlq/x2BTAGXHC9jaxniUBPactwIDAQABAkAEAk75HPBTGMpsh44b8SYaKE4VNuXF/kXFJrqmFk/q2K8YrIgH4cLltz4+4afbugaOTvT8elikb9osqb/5FyvhAiEA9uxgJViVjNja4YaRtZnxlMwpbhDmLsOlW01YKBLmViUCIQCbmJ3QKYXsfRD9FqWgibzeHOsnHThECVjw303B50UqqwIgKAggek2HSWNq8P9BJkEEAoyq9tY0i0Zay5eZgD24LCUCIFx7yEG0jJ/WbsSgM25KsHItKjCjk5ANJkp10FgSyO/lAiEA6Fx5KWtHJC3XD4FZAcD7l3YRY9gcNSaxc8wtSFlCNFA=
 

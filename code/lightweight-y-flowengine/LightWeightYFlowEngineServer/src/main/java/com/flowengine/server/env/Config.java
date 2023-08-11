@@ -5,12 +5,16 @@ import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
+import com.flowengine.server.backend.system.KeyExpiredListener;
+import jakarta.annotation.Resource;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -31,6 +35,9 @@ public class Config {
     @Autowired
     private YmlProjectConfig _ymlProjectConfig;
 
+    @Resource
+    private RedisConnectionFactory redisConnectionFactory;
+
     private CorsConfiguration corsConfiguration() {
 
         CorsConfiguration corsConfiguration = new CorsConfiguration();
@@ -47,6 +54,18 @@ public class Config {
         UrlBasedCorsConfigurationSource configurationSource = new UrlBasedCorsConfigurationSource();
         configurationSource.registerCorsConfiguration("/**", corsConfiguration());
         return new CorsFilter(configurationSource);
+    }
+
+    @Bean
+    public RedisMessageListenerContainer redisMessageListenerContainer() {
+        RedisMessageListenerContainer redisMessageListenerContainer = new RedisMessageListenerContainer();
+        redisMessageListenerContainer.setConnectionFactory(redisConnectionFactory);
+        return redisMessageListenerContainer;
+    }
+
+    @Bean
+    public KeyExpiredListener keyExpiredListener() {
+        return new KeyExpiredListener(this.redisMessageListenerContainer());
     }
 
 //

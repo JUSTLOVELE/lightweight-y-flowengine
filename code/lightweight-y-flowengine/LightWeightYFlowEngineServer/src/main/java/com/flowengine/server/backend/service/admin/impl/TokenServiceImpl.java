@@ -1,27 +1,24 @@
 package com.flowengine.server.backend.service.admin.impl;
 
-import cn.hutool.json.JSONObject;
-import cn.hutool.json.JSONUtil;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.flowengine.common.utils.CacheObject;
-import com.flowengine.common.utils.CacheService;
+import com.flowengine.common.utils.CommonConstant;
 import com.flowengine.common.utils.RSA;
 import com.flowengine.common.utils.entity.PublicUserEntity;
 import com.flowengine.common.utils.mapper.PublicUserMapper;
 import com.flowengine.server.backend.service.admin.TokenService;
 import com.flowengine.server.core.BaseService;
 import com.flowengine.server.env.YmlProjectConfig;
-import com.flowengine.server.model.UserCache;
 import com.flowengine.server.utils.Constant;
 import com.flowengine.server.utils.DateUtil;
-import com.flowengine.server.utils.SessionUtils;
 import com.flowengine.server.utils.UUIDGenerator;
 import jakarta.annotation.Resource;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Wrapper;
-import java.util.*;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 @Transactional(rollbackFor = Exception.class)
@@ -33,8 +30,10 @@ public class TokenServiceImpl extends BaseService implements TokenService {
     @Resource
     private YmlProjectConfig _ymlProjectConfig;
 
+    private static final Log _logger = LogFactory.getLog(TokenServiceImpl.class);
+
     @Override
-    public void getLoginToken(PublicUserEntity user) {
+    public void setLoginToken(PublicUserEntity user) {
 
         if(user == null) {
             throw new RuntimeException("user为空");
@@ -42,42 +41,63 @@ public class TokenServiceImpl extends BaseService implements TokenService {
 
         user.setLastLogin(new Date());
         user.setAccessToken(UUIDGenerator.getUUID());
-        user.setAccessTokenLimit(120);
+        user.setAccessTokenLimit(_ymlProjectConfig.getAccessTokenLimit());
         user.setRefreshToken(UUIDGenerator.getUUID());
-        user.setRefreshTokenLimit(2);
+        user.setRefreshTokenLimit(_ymlProjectConfig.getRefreshTokenLimit());
         _publicUserMapper.updateById(user);
     }
 
     @Override
-    public void getLoginToken(String userOpId) {
+    public void setLoginToken(String userOpId) {
 
         PublicUserEntity publicUserEntity = _publicUserMapper.selectById(userOpId);
-        this.getLoginToken(publicUserEntity);
+        this.setLoginToken(publicUserEntity);
     }
 
     /**
      *
-     * @param accessToken
+     * @param sign
+     * @param user
      * @return
      */
     @Override
-    public boolean verifyToken(String accessToken) {
+    public boolean verifyToken(String sign, PublicUserEntity user) {
 
-//        JSONObject entries = JSONUtil.parseObj(token);
-//        String accessToken = entries.getStr(Constant.Token.ACCESS_TOKEN);
-//        String sign = entries.getStr(Constant.Token.SIGN);
-//        String timestamp = entries.getStr(Constant.Token.TIMESTAMP);
-//        String refreshToken = entries.getStr(Constant.Token.REFRESH_TOKEN);
-//        String content = timestamp + ";" + accessToken + ";" + refreshToken + ";";
-//        boolean verify = RSA.verify(content, _ymlProjectConfig.getPk(), sign);
-//
-//        return verify;
-        return false;
+        String timestamp = DateUtil.toString(user.getLastLogin(), DateUtil.YMDHMS);
+        String newSign = createAndGetSign(timestamp, user.getAccessToken(), user.getRefreshToken());
+
+        return sign.equals(newSign);
     }
 
     @Override
-    public String reRefreshToken(String token) {
-        return null;
+    public String createAndGetSign(String timestamp, String accessToken, String refreshToken) {
+
+        String content = timestamp + ";" + accessToken + ";" + refreshToken + ";";
+        return  RSA.signBySHA256WithRSA(content, _ymlProjectConfig.getSk());
+    }
+
+    @Override
+    public String reRefreshToken(String accessToken, String sign) {
+
+        PublicUserEntity publicUserEntity = _publicUserMapper.queryByAccessToken(accessToken);
+
+        if(publicUserEntity == null) {
+            throw new RuntimeException("根据accessToken查询用户失败!刷新reRefreshToken失败!");
+        }
+
+        if(!verifyToken(sign, publicUserEntity)) {
+            throw new RuntimeException("验证签名失败!");
+        }
+
+        publicUserEntity.setRefreshToken(UUIDGenerator.getUUID());
+        _publicUserMapper.updateById(publicUserEntity);
+        String timestamp = DateUtil.toString(publicUserEntity.getLastLogin(), DateUtil.YMDHMS);
+        String newSign = createAndGetSign(timestamp, publicUserEntity.getAccessToken(), publicUserEntity.getRefreshToken());
+        Map<String, Object> data = new HashMap<String, Object>();
+        data.put(CommonConstant.Token.SIGN, newSign);
+        data.put(CommonConstant.Token.REFRESH_TOKEN, publicUserEntity.getRefreshToken());
+
+        return getJSON(data);
     }
 }
 

@@ -6,6 +6,7 @@ import com.flowengine.common.utils.RSA;
 import com.flowengine.common.utils.entity.PublicUserEntity;
 import com.flowengine.server.backend.service.admin.TokenService;
 import com.flowengine.server.backend.service.admin.UserService;
+import com.flowengine.server.backend.system.SessionService;
 import com.flowengine.server.core.BaseAction;
 import com.flowengine.server.env.YmlProjectConfig;
 import com.flowengine.server.model.UserCache;
@@ -40,6 +41,9 @@ public class LoginAction extends BaseAction {
 
     @Resource
     private TokenService _tokenService;
+
+    @Resource
+    private SessionService _sessionService;
 
     @Resource
     private YmlProjectConfig _ymlProjectConfig;
@@ -81,7 +85,8 @@ public class LoginAction extends BaseAction {
             return  renderFailureList(CommonConstant.NOT_FIND_USER);
         }
 
-        _tokenService.getLoginToken(entity);
+        String oldToken = entity.getAccessToken();
+        _tokenService.setLoginToken(entity);
         UserCache user = new UserCache(entity);
         List<Map<String, Object>> roleIds = _userService.queryRoleId(user.getOpId());
 
@@ -97,13 +102,13 @@ public class LoginAction extends BaseAction {
             user.setRoleIds(rs);
         }
 
-        SessionUtils.addUserSession(entity.getAccessToken(), user);
+        _sessionService.setCache(entity.getAccessToken(), user, oldToken);
         List<Map<String, Object>> datas = new ArrayList<Map<String,Object>>();
         Map<String, Object> data = new HashMap<String, Object>();
         data.put(Constant.Key.USER_NAME, ( user.getUserName() != null) ? user.getUserName() : user.getUserId());
         String timestamp = DateUtil.toString(user.getLastLogin(), DateUtil.YMDHMS);
-        String content = timestamp + ";" + user.getAccessToken() + ";" + user.getRefreshToken() + ";";
-        data.put(CommonConstant.Token.SIGN, RSA.signBySHA256WithRSA(content, _ymlProjectConfig.getSk()));
+        String sign = _tokenService.createAndGetSign(timestamp, user.getAccessToken(), user.getRefreshToken());
+        data.put(CommonConstant.Token.SIGN, sign);
         data.put(CommonConstant.Token.TIMESTAMP, timestamp);
         data.put(CommonConstant.Token.ACCESS_TOKEN, user.getAccessToken());
         data.put(CommonConstant.Token.REFRESH_TOKEN, user.getRefreshToken());

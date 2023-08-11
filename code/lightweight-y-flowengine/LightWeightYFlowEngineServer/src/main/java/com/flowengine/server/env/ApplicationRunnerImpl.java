@@ -1,7 +1,11 @@
 package com.flowengine.server.env;
 
+import jakarta.annotation.Resource;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.RedisSerializer;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.stereotype.Component;
 /**
  * @Description:
@@ -12,8 +16,24 @@ import org.springframework.stereotype.Component;
 @Component
 public class ApplicationRunnerImpl implements ApplicationRunner {
 
+    @Resource
+    private RedisTemplate<String, Object> redisTemplate;
+
     @Override
     public void run(ApplicationArguments args) throws Exception {
 
+    }
+
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    @Resource
+    public void setRedisTemplate(RedisTemplate redisTemplate) {
+        //spring-data-redis的RedisTemplate<K, V>模板类在操作redis时默认使用JdkSerializationRedisSerializer来进行序列化(key会乱码)
+        //手动指定键序列化类型使用stringRedisSerializer
+        RedisSerializer stringSerializer = new StringRedisSerializer();
+        redisTemplate.setKeySerializer(stringSerializer);
+        redisTemplate.setValueSerializer(stringSerializer);
+        redisTemplate.setHashKeySerializer(stringSerializer);
+        redisTemplate.setHashValueSerializer(stringSerializer);
+        this.redisTemplate = redisTemplate;
     }
 }

@@ -20,6 +20,14 @@ import java.util.Map;
 public interface PublicUserMapper extends BaseMapper<PublicUserEntity> {
 
     /**
+     *
+     * @param accessToken
+     * @return
+     */
+    @Select("select * from public_user_tbl where access_token = #{accessToken}")
+    public PublicUserEntity queryByAccessToken(@Param("accessToken") String accessToken);
+
+    /**
      * 更新模式
      * @param opId
      * @param darkMode

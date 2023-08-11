@@ -1,5 +1,6 @@
 package com.flowengine.server.env;
 
+import jakarta.annotation.Resource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
@@ -37,11 +38,14 @@ public class SpringWebMvcConfigurer implements WebMvcConfigurer {
 //	        deviceHandlerMethodArgumentResolver() {
 //	    return new DeviceHandlerMethodArgumentResolver();
 //	}
+
+	@Resource
+	private ProcessorInterceptors _processorInterceptors;
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		
-		registry.addInterceptor(new ProcessorInterceptors());
+		registry.addInterceptor(_processorInterceptors);
 		//引入spring-mobile
 		//registry.addInterceptor(deviceResolverHandlerInterceptor());
 		//registry.addInterceptor(new ProcessorInterceptors()).addPathPatterns("/**");
