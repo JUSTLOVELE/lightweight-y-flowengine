@@ -1,5 +1,9 @@
 package com.flowengine.server.backend.service.flow;
 
+import com.flowengine.server.entity.PublicFlowMainEntity;
+import com.flowengine.server.entity.PublicFlowNodeEntity;
+
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -11,6 +15,14 @@ import java.util.Map;
 public interface MainService {
 
     /**
+     *
+     * @param mainEntity
+     * @param children
+     * @return
+     */
+    public String add(PublicFlowMainEntity mainEntity, String children);
+
+                       /**
      * 查询
      * @param param
      * @return

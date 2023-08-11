@@ -1,15 +1,12 @@
 package com.flowengine.server.backend.action.flow;
 
-import cn.hutool.json.JSON;
-import cn.hutool.json.JSONArray;
-import cn.hutool.json.JSONObject;
-import cn.hutool.json.JSONUtil;
 import com.flowengine.server.backend.service.flow.MainService;
 import com.flowengine.server.core.BaseAction;
 import com.flowengine.server.entity.PublicFlowMainEntity;
 import com.flowengine.server.model.UserCache;
 import com.flowengine.server.utils.Constant;
 import com.flowengine.server.utils.SessionUtils;
+import com.flowengine.server.utils.UUIDGenerator;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,18 +37,17 @@ public class MainAction extends BaseAction {
      * @return
      */
     @PostMapping(value = "/mainAction/add", produces = "application/json; charset=utf-8")
-    public String add(PublicFlowMainEntity mainEntity, String children) {
+    public String add(PublicFlowMainEntity mainEntity, String children, HttpServletRequest request) {
 
-        JSONArray objects = JSONUtil.parseArray(children);
+        UserCache userSession = SessionUtils.getUserSession(request);
+        mainEntity.setOpId(UUIDGenerator.getUUID());
+        mainEntity.setCreateTime(new Date());
+        mainEntity.setCreateUserId(userSession.getOpId());
+        mainEntity.setCreateUserName(userSession.getUserName());
+        mainEntity.setOrgId(userSession.getOrgId());
+        mainEntity.setDeptId(userSession.getDeptId());
 
-        for(int i=0; i<objects.size(); i++) {
-            JSONObject jsonObject = objects.getJSONObject(i);
-            JSONObject jsonObject1 = jsonObject.getJSONObject("nextNode");
-            System.out.println(jsonObject1.toString());
-        }
-
-
-        return renderOpSuccessList(1);
+        return _mainService.add(mainEntity, children);
     }
 
     /**

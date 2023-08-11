@@ -29,6 +29,8 @@ public class Constant {
 
     public interface Key {
 
+        public String NEXT_NODE = "nextNode";
+
         public String NEXT_NODE_ID = "nextNodeId";
 
         public String NEXT_NODE_KEY = "nextNodeKey";
@@ -95,6 +97,18 @@ public class Constant {
         public String IS_STOP = "isStop";
 
         public String FLOW_NODE_CHECK_TYPE = "flow_node_check_type";
+
+        public String LIMIT_TIME = "limitTime";
+
+        public String NODE_NAME = "nodeName";
+
+        public String NODE_KEY = "nodeKey";
+
+        public String NODE_TYPE = "nodeType";
+
+        public String NODE_STATUS = "nodeStatus";
+
+        public String CHECK_TYPE = "checkType";
     }
 
     public interface Value {

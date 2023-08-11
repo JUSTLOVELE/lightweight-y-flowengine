@@ -72,13 +72,11 @@ insert into  public_cfg (op_id, cfg_name, key_code) VALUES
 ('flow_node_type_101', '环节类型', 'node_type');
 
 insert into public_sub_cfg(op_id, cfg_id, sub_cfg_value, sub_cfg_name, key_code) VALUES
-('flow_node_type_sub_101', 'flow_node_type_101', '1', '创建', 'node_type');
+('flow_node_type_sub_101', 'flow_node_type_101', '1', '非会签', 'node_type');
 insert into public_sub_cfg(op_id, cfg_id, sub_cfg_value, sub_cfg_name, key_code) VALUES
-('flow_node_type_sub_102', 'flow_node_type_101', '2', '常规', 'node_type');
+('flow_node_type_sub_102', 'flow_node_type_101', '2', '会签', 'node_type');
 insert into public_sub_cfg(op_id, cfg_id, sub_cfg_value, sub_cfg_name, key_code) VALUES
-('flow_node_type_sub_103', 'flow_node_type_101', '3', '等待多人审批', 'node_type');
-insert into public_sub_cfg(op_id, cfg_id, sub_cfg_value, sub_cfg_name, key_code) VALUES
-('flow_node_type_sub_104', 'flow_node_type_10100', '100', '结束归档', 'node_type');
+('flow_node_type_sub_103', 'flow_node_type_101', '3', '依次逐个处理', 'node_type');
 
 insert into  public_cfg (op_id, cfg_name, key_code) VALUES
 ('flow_node_status_101', '节点状态', 'node_status');
@@ -99,4 +97,5 @@ insert into public_sub_cfg(op_id, cfg_id, sub_cfg_value, sub_cfg_name, key_code)
 ('flow_check_type_sub_102', 'flow_check_type_101', '2', '部门', 'flow_node_check_type');
 insert into public_sub_cfg(op_id, cfg_id, sub_cfg_value, sub_cfg_name, key_code) VALUES
 ('flow_check_type_sub_103', 'flow_check_type_101', '10', '角色', 'flow_node_check_type');
-
+insert into public_sub_cfg(op_id, cfg_id, sub_cfg_value, sub_cfg_name, key_code) VALUES
+('flow_check_type_sub_104', 'flow_check_type_101', '20', '所有人员', 'flow_node_check_type');

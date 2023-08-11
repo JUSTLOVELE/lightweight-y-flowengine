@@ -2,9 +2,9 @@
   "name": "SpeedFrame",
   "describe": "SpeedFrame",
   "avatar": "",
-  "version": "4.6.1",
+  "version": "4.6.2",
   "createdTime": "2022-12-9 22:49:27",
-  "updatedTime": "2023-8-8 16:47:10",
+  "updatedTime": "2023-8-11 16:11:38",
   "dbConns": [],
   "profile": {
     "default": {
@@ -410,63 +410,156 @@
     "headers": [
       {
         "refKey": "defKey",
-        "hideInGraph": false
+        "hideInGraph": false,
+        "value": "字段代码",
+        "freeze": false
       },
       {
         "refKey": "defName",
-        "hideInGraph": false
-      },
-      {
-        "refKey": "primaryKey",
-        "hideInGraph": false
-      },
-      {
-        "refKey": "notNull",
-        "hideInGraph": true
-      },
-      {
-        "refKey": "autoIncrement",
-        "hideInGraph": true
-      },
-      {
-        "refKey": "domain",
-        "hideInGraph": true
-      },
-      {
-        "refKey": "type",
-        "hideInGraph": false
-      },
-      {
-        "refKey": "len",
-        "hideInGraph": false
-      },
-      {
-        "refKey": "scale",
-        "hideInGraph": false
+        "hideInGraph": false,
+        "value": "显示名称",
+        "freeze": false
       },
       {
         "refKey": "comment",
-        "hideInGraph": true
+        "hideInGraph": true,
+        "value": "说明",
+        "freeze": false
+      },
+      {
+        "refKey": "primaryKey",
+        "hideInGraph": false,
+        "value": "主键",
+        "freeze": false
+      },
+      {
+        "refKey": "notNull",
+        "hideInGraph": true,
+        "value": "不为空",
+        "freeze": false
+      },
+      {
+        "refKey": "autoIncrement",
+        "hideInGraph": true,
+        "value": "自增",
+        "freeze": false
+      },
+      {
+        "refKey": "domain",
+        "hideInGraph": true,
+        "value": "数据域",
+        "freeze": false
+      },
+      {
+        "refKey": "type",
+        "hideInGraph": false,
+        "value": "数据类型",
+        "freeze": false
+      },
+      {
+        "refKey": "scale",
+        "hideInGraph": false,
+        "value": "小数位数",
+        "freeze": false
+      },
+      {
+        "refKey": "len",
+        "hideInGraph": false,
+        "value": "长度",
+        "freeze": false
       },
       {
         "refKey": "refDict",
-        "hideInGraph": true
+        "hideInGraph": true,
+        "value": "数据字典",
+        "freeze": false
       },
       {
         "refKey": "defaultValue",
-        "hideInGraph": true
+        "hideInGraph": true,
+        "value": "默认值",
+        "freeze": false
       },
       {
         "refKey": "isStandard",
-        "hideInGraph": false
+        "hideInGraph": false,
+        "value": "标准字段",
+        "freeze": false
       },
       {
         "refKey": "uiHint",
-        "hideInGraph": true
+        "hideInGraph": true,
+        "value": "UI建议",
+        "freeze": false
       },
       {
         "refKey": "extProps",
-        "hideInGraph": true
+        "hideInGraph": true,
+        "value": "拓展属性",
+        "freeze": false
+      },
+      {
+        "refKey": "attr1",
+        "value": "拓展字段1",
+        "hideInGraph": true,
+        "enable": false,
+        "freeze": false
+      },
+      {
+        "refKey": "attr2",
+        "value": "拓展字段2",
+        "hideInGraph": true,
+        "enable": false,
+        "freeze": false
+      },
+      {
+        "refKey": "attr3",
+        "value": "拓展字段3",
+        "hideInGraph": true,
+        "enable": false,
+        "freeze": false
+      },
+      {
+        "refKey": "attr4",
+        "value": "拓展字段4",
+        "hideInGraph": true,
+        "enable": false,
+        "freeze": false
+      },
+      {
+        "refKey": "attr5",
+        "value": "拓展字段5",
+        "hideInGraph": true,
+        "enable": false,
+        "freeze": false
+      },
+      {
+        "refKey": "attr6",
+        "value": "拓展字段6",
+        "hideInGraph": true,
+        "enable": false,
+        "freeze": false
+      },
+      {
+        "refKey": "attr7",
+        "value": "拓展字段7",
+        "hideInGraph": true,
+        "enable": false,
+        "freeze": false
+      },
+      {
+        "refKey": "attr8",
+        "value": "拓展字段8",
+        "hideInGraph": true,
+        "enable": false,
+        "freeze": false
+      },
+      {
+        "refKey": "attr9",
+        "value": "拓展字段9",
+        "hideInGraph": true,
+        "enable": false,
+        "freeze": false
       }
     ],
     "menuWidth": "328px",
@@ -508,6 +601,10 @@
           "hideInGraph": false
         },
         {
+          "refKey": "comment",
+          "hideInGraph": true
+        },
+        {
           "refKey": "primaryKey",
           "hideInGraph": false
         },
@@ -528,16 +625,12 @@
           "hideInGraph": false
         },
         {
-          "refKey": "len",
-          "hideInGraph": false
-        },
-        {
           "refKey": "scale",
           "hideInGraph": false
         },
         {
-          "refKey": "comment",
-          "hideInGraph": true
+          "refKey": "len",
+          "hideInGraph": false
         },
         {
           "refKey": "refDict",
@@ -557,6 +650,51 @@
         },
         {
           "refKey": "extProps",
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr1",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr2",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr3",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr4",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr5",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr6",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr7",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr8",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr9",
+          "freeze": false,
           "hideInGraph": true
         }
       ],
@@ -821,6 +959,10 @@
           "hideInGraph": false
         },
         {
+          "refKey": "comment",
+          "hideInGraph": true
+        },
+        {
           "refKey": "primaryKey",
           "hideInGraph": false
         },
@@ -841,16 +983,12 @@
           "hideInGraph": false
         },
         {
-          "refKey": "len",
-          "hideInGraph": false
-        },
-        {
           "refKey": "scale",
           "hideInGraph": false
         },
         {
-          "refKey": "comment",
-          "hideInGraph": true
+          "refKey": "len",
+          "hideInGraph": false
         },
         {
           "refKey": "refDict",
@@ -870,6 +1008,51 @@
         },
         {
           "refKey": "extProps",
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr1",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr2",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr3",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr4",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr5",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr6",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr7",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr8",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr9",
+          "freeze": false,
           "hideInGraph": true
         }
       ],
@@ -1013,7 +1196,7 @@
         {
           "defKey": "node_type",
           "defName": "看说明",
-          "comment": "1:创建;2:常规;3:等待多人审批;100:结束归档",
+          "comment": "1：非会签（有一个通过就可以）；2：会签（都要审核通过）；3：依次逐个处理（按顺序会签）；",
           "type": "",
           "len": "",
           "scale": "",
@@ -1117,6 +1300,10 @@
           "hideInGraph": false
         },
         {
+          "refKey": "comment",
+          "hideInGraph": true
+        },
+        {
           "refKey": "primaryKey",
           "hideInGraph": false
         },
@@ -1137,16 +1324,12 @@
           "hideInGraph": false
         },
         {
-          "refKey": "len",
-          "hideInGraph": false
-        },
-        {
           "refKey": "scale",
           "hideInGraph": false
         },
         {
-          "refKey": "comment",
-          "hideInGraph": true
+          "refKey": "len",
+          "hideInGraph": false
         },
         {
           "refKey": "refDict",
@@ -1166,6 +1349,51 @@
         },
         {
           "refKey": "extProps",
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr1",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr2",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr3",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr4",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr5",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr6",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr7",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr8",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr9",
+          "freeze": false,
           "hideInGraph": true
         }
       ],
@@ -1205,8 +1433,8 @@
           "id": "65ED13CD-CF9A-4A18-9787-7AB199D74619"
         },
         {
-          "defKey": "node_op_id",
-          "defName": "public_flow_node_tbl的主键",
+          "defKey": "group_op_id",
+          "defName": "分组表的主键",
           "comment": "",
           "type": "",
           "len": "",
@@ -1254,23 +1482,6 @@
           "extProps": {},
           "domain": "9092C4E0-1A54-4859-ABBB-5B62DBC27573",
           "id": "E67CE97B-8B58-489F-946C-77BF5B8FA8FC"
-        },
-        {
-          "defKey": "类型",
-          "defName": "见说明",
-          "comment": "1：非会签（有一个通过就可以）；2：会签（都要审核通过）；3：依次逐个处理；4：抄送",
-          "type": "",
-          "len": "",
-          "scale": "",
-          "primaryKey": false,
-          "notNull": false,
-          "autoIncrement": false,
-          "defaultValue": "",
-          "hideInGraph": false,
-          "refDict": "",
-          "extProps": {},
-          "domain": "6BC8F04B-6CFA-4995-98D3-318F5CDD774E",
-          "id": "D818FBC9-A461-46CA-BCA8-22561ACF92B3"
         }
       ],
       "correlations": [],
@@ -1311,6 +1522,10 @@
           "hideInGraph": false
         },
         {
+          "refKey": "comment",
+          "hideInGraph": true
+        },
+        {
           "refKey": "primaryKey",
           "hideInGraph": false
         },
@@ -1331,16 +1546,12 @@
           "hideInGraph": false
         },
         {
-          "refKey": "len",
-          "hideInGraph": false
-        },
-        {
           "refKey": "scale",
           "hideInGraph": false
         },
         {
-          "refKey": "comment",
-          "hideInGraph": true
+          "refKey": "len",
+          "hideInGraph": false
         },
         {
           "refKey": "refDict",
@@ -1360,6 +1571,51 @@
         },
         {
           "refKey": "extProps",
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr1",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr2",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr3",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr4",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr5",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr6",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr7",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr8",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr9",
+          "freeze": false,
           "hideInGraph": true
         }
       ],
@@ -1675,6 +1931,10 @@
           "hideInGraph": false
         },
         {
+          "refKey": "comment",
+          "hideInGraph": true
+        },
+        {
           "refKey": "primaryKey",
           "hideInGraph": false
         },
@@ -1695,16 +1955,12 @@
           "hideInGraph": false
         },
         {
-          "refKey": "len",
-          "hideInGraph": false
-        },
-        {
           "refKey": "scale",
           "hideInGraph": false
         },
         {
-          "refKey": "comment",
-          "hideInGraph": true
+          "refKey": "len",
+          "hideInGraph": false
         },
         {
           "refKey": "refDict",
@@ -1724,6 +1980,51 @@
         },
         {
           "refKey": "extProps",
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr1",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr2",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr3",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr4",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr5",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr6",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr7",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr8",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr9",
+          "freeze": false,
           "hideInGraph": true
         }
       ],
@@ -2128,6 +2429,10 @@
           "hideInGraph": false
         },
         {
+          "refKey": "comment",
+          "hideInGraph": true
+        },
+        {
           "refKey": "primaryKey",
           "hideInGraph": false
         },
@@ -2148,16 +2453,12 @@
           "hideInGraph": false
         },
         {
-          "refKey": "len",
-          "hideInGraph": false
-        },
-        {
           "refKey": "scale",
           "hideInGraph": false
         },
         {
-          "refKey": "comment",
-          "hideInGraph": true
+          "refKey": "len",
+          "hideInGraph": false
         },
         {
           "refKey": "refDict",
@@ -2177,6 +2478,51 @@
         },
         {
           "refKey": "extProps",
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr1",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr2",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr3",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr4",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr5",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr6",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr7",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr8",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr9",
+          "freeze": false,
           "hideInGraph": true
         }
       ],
@@ -2382,6 +2728,10 @@
           "hideInGraph": false
         },
         {
+          "refKey": "comment",
+          "hideInGraph": true
+        },
+        {
           "refKey": "primaryKey",
           "hideInGraph": false
         },
@@ -2402,16 +2752,12 @@
           "hideInGraph": false
         },
         {
-          "refKey": "len",
-          "hideInGraph": false
-        },
-        {
           "refKey": "scale",
           "hideInGraph": false
         },
         {
-          "refKey": "comment",
-          "hideInGraph": true
+          "refKey": "len",
+          "hideInGraph": false
         },
         {
           "refKey": "refDict",
@@ -2431,6 +2777,51 @@
         },
         {
           "refKey": "extProps",
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr1",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr2",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr3",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr4",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr5",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr6",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr7",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr8",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr9",
+          "freeze": false,
           "hideInGraph": true
         }
       ],
@@ -2711,6 +3102,10 @@
           "hideInGraph": false
         },
         {
+          "refKey": "comment",
+          "hideInGraph": true
+        },
+        {
           "refKey": "primaryKey",
           "hideInGraph": false
         },
@@ -2731,16 +3126,12 @@
           "hideInGraph": false
         },
         {
-          "refKey": "len",
-          "hideInGraph": false
-        },
-        {
           "refKey": "scale",
           "hideInGraph": false
         },
         {
-          "refKey": "comment",
-          "hideInGraph": true
+          "refKey": "len",
+          "hideInGraph": false
         },
         {
           "refKey": "refDict",
@@ -2760,6 +3151,51 @@
         },
         {
           "refKey": "extProps",
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr1",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr2",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr3",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr4",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr5",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr6",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr7",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr8",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr9",
+          "freeze": false,
           "hideInGraph": true
         }
       ],
@@ -3043,6 +3479,10 @@
           "hideInGraph": false
         },
         {
+          "refKey": "comment",
+          "hideInGraph": true
+        },
+        {
           "refKey": "primaryKey",
           "hideInGraph": false
         },
@@ -3063,16 +3503,12 @@
           "hideInGraph": false
         },
         {
-          "refKey": "len",
-          "hideInGraph": false
-        },
-        {
           "refKey": "scale",
           "hideInGraph": false
         },
         {
-          "refKey": "comment",
-          "hideInGraph": true
+          "refKey": "len",
+          "hideInGraph": false
         },
         {
           "refKey": "refDict",
@@ -3092,6 +3528,51 @@
         },
         {
           "refKey": "extProps",
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr1",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr2",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr3",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr4",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr5",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr6",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr7",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr8",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr9",
+          "freeze": false,
           "hideInGraph": true
         }
       ],
@@ -3322,6 +3803,10 @@
           "hideInGraph": false
         },
         {
+          "refKey": "comment",
+          "hideInGraph": true
+        },
+        {
           "refKey": "primaryKey",
           "hideInGraph": false
         },
@@ -3342,16 +3827,12 @@
           "hideInGraph": false
         },
         {
-          "refKey": "len",
-          "hideInGraph": false
-        },
-        {
           "refKey": "scale",
           "hideInGraph": false
         },
         {
-          "refKey": "comment",
-          "hideInGraph": true
+          "refKey": "len",
+          "hideInGraph": false
         },
         {
           "refKey": "refDict",
@@ -3371,6 +3852,51 @@
         },
         {
           "refKey": "extProps",
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr1",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr2",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr3",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr4",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr5",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr6",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr7",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr8",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr9",
+          "freeze": false,
           "hideInGraph": true
         }
       ],
@@ -3890,6 +4416,10 @@
           "hideInGraph": false
         },
         {
+          "refKey": "comment",
+          "hideInGraph": true
+        },
+        {
           "refKey": "primaryKey",
           "hideInGraph": false
         },
@@ -3910,16 +4440,12 @@
           "hideInGraph": false
         },
         {
-          "refKey": "len",
-          "hideInGraph": false
-        },
-        {
           "refKey": "scale",
           "hideInGraph": false
         },
         {
-          "refKey": "comment",
-          "hideInGraph": true
+          "refKey": "len",
+          "hideInGraph": false
         },
         {
           "refKey": "refDict",
@@ -3939,6 +4465,51 @@
         },
         {
           "refKey": "extProps",
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr1",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr2",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr3",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr4",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr5",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr6",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr7",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr8",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr9",
+          "freeze": false,
           "hideInGraph": true
         }
       ],
@@ -4104,6 +4675,10 @@
           "hideInGraph": false
         },
         {
+          "refKey": "comment",
+          "hideInGraph": true
+        },
+        {
           "refKey": "primaryKey",
           "hideInGraph": false
         },
@@ -4124,16 +4699,12 @@
           "hideInGraph": false
         },
         {
-          "refKey": "len",
-          "hideInGraph": false
-        },
-        {
           "refKey": "scale",
           "hideInGraph": false
         },
         {
-          "refKey": "comment",
-          "hideInGraph": true
+          "refKey": "len",
+          "hideInGraph": false
         },
         {
           "refKey": "refDict",
@@ -4153,6 +4724,51 @@
         },
         {
           "refKey": "extProps",
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr1",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr2",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr3",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr4",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr5",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr6",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr7",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr8",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr9",
+          "freeze": false,
           "hideInGraph": true
         }
       ],
@@ -4264,6 +4880,10 @@
           "hideInGraph": false
         },
         {
+          "refKey": "comment",
+          "hideInGraph": true
+        },
+        {
           "refKey": "primaryKey",
           "hideInGraph": false
         },
@@ -4284,16 +4904,12 @@
           "hideInGraph": false
         },
         {
-          "refKey": "len",
-          "hideInGraph": false
-        },
-        {
           "refKey": "scale",
           "hideInGraph": false
         },
         {
-          "refKey": "comment",
-          "hideInGraph": true
+          "refKey": "len",
+          "hideInGraph": false
         },
         {
           "refKey": "refDict",
@@ -4313,6 +4929,51 @@
         },
         {
           "refKey": "extProps",
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr1",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr2",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr3",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr4",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr5",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr6",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr7",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr8",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr9",
+          "freeze": false,
           "hideInGraph": true
         }
       ],
@@ -4491,6 +5152,10 @@
           "hideInGraph": false
         },
         {
+          "refKey": "comment",
+          "hideInGraph": true
+        },
+        {
           "refKey": "primaryKey",
           "hideInGraph": false
         },
@@ -4511,16 +5176,12 @@
           "hideInGraph": false
         },
         {
-          "refKey": "len",
-          "hideInGraph": false
-        },
-        {
           "refKey": "scale",
           "hideInGraph": false
         },
         {
-          "refKey": "comment",
-          "hideInGraph": true
+          "refKey": "len",
+          "hideInGraph": false
         },
         {
           "refKey": "refDict",
@@ -4540,6 +5201,51 @@
         },
         {
           "refKey": "extProps",
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr1",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr2",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr3",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr4",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr5",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr6",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr7",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr8",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr9",
+          "freeze": false,
           "hideInGraph": true
         }
       ],
@@ -4691,6 +5397,10 @@
           "hideInGraph": false
         },
         {
+          "refKey": "comment",
+          "hideInGraph": true
+        },
+        {
           "refKey": "primaryKey",
           "hideInGraph": false
         },
@@ -4711,16 +5421,12 @@
           "hideInGraph": false
         },
         {
-          "refKey": "len",
-          "hideInGraph": false
-        },
-        {
           "refKey": "scale",
           "hideInGraph": false
         },
         {
-          "refKey": "comment",
-          "hideInGraph": true
+          "refKey": "len",
+          "hideInGraph": false
         },
         {
           "refKey": "refDict",
@@ -4740,6 +5446,51 @@
         },
         {
           "refKey": "extProps",
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr1",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr2",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr3",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr4",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr5",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr6",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr7",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr8",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr9",
+          "freeze": false,
           "hideInGraph": true
         }
       ],
@@ -4836,6 +5587,10 @@
           "hideInGraph": false
         },
         {
+          "refKey": "comment",
+          "hideInGraph": true
+        },
+        {
           "refKey": "primaryKey",
           "hideInGraph": false
         },
@@ -4856,16 +5611,12 @@
           "hideInGraph": false
         },
         {
-          "refKey": "len",
-          "hideInGraph": false
-        },
-        {
           "refKey": "scale",
           "hideInGraph": false
         },
         {
-          "refKey": "comment",
-          "hideInGraph": true
+          "refKey": "len",
+          "hideInGraph": false
         },
         {
           "refKey": "refDict",
@@ -4885,6 +5636,51 @@
         },
         {
           "refKey": "extProps",
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr1",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr2",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr3",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr4",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr5",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr6",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr7",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr8",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr9",
+          "freeze": false,
           "hideInGraph": true
         }
       ],
@@ -4981,6 +5777,10 @@
           "hideInGraph": false
         },
         {
+          "refKey": "comment",
+          "hideInGraph": true
+        },
+        {
           "refKey": "primaryKey",
           "hideInGraph": false
         },
@@ -5001,16 +5801,12 @@
           "hideInGraph": false
         },
         {
-          "refKey": "len",
-          "hideInGraph": false
-        },
-        {
           "refKey": "scale",
           "hideInGraph": false
         },
         {
-          "refKey": "comment",
-          "hideInGraph": true
+          "refKey": "len",
+          "hideInGraph": false
         },
         {
           "refKey": "refDict",
@@ -5030,6 +5826,51 @@
         },
         {
           "refKey": "extProps",
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr1",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr2",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr3",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr4",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr5",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr6",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr7",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr8",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr9",
+          "freeze": false,
           "hideInGraph": true
         }
       ],
@@ -5165,6 +6006,763 @@
           "attr8": "",
           "attr9": "",
           "id": "6A7E25C2-F6F5-49EE-8E1E-FD37CDCABBB4"
+        }
+      ],
+      "correlations": [],
+      "indexes": []
+    },
+    {
+      "id": "FDAE7BCE-90A6-4A32-9601-9766708A8063",
+      "env": {
+        "base": {
+          "nameSpace": "",
+          "codeRoot": ""
+        }
+      },
+      "defKey": "public_flow_node_group_tbl",
+      "defName": "环节分组表",
+      "comment": "",
+      "properties": {
+        "partitioned by": "(date string)",
+        "row format delimited": "",
+        "fields terminated by ','": "",
+        "collection items terminated by '-'": "",
+        "map keys terminated by ':'": "",
+        "store as textfile;": ""
+      },
+      "nameTemplate": "{defKey}[{defName}]",
+      "notes": {},
+      "headers": [
+        {
+          "refKey": "hideInGraph",
+          "hideInGraph": true
+        },
+        {
+          "refKey": "defKey",
+          "freeze": false,
+          "hideInGraph": false
+        },
+        {
+          "refKey": "defName",
+          "freeze": false,
+          "hideInGraph": false
+        },
+        {
+          "refKey": "comment",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "primaryKey",
+          "freeze": false,
+          "hideInGraph": false
+        },
+        {
+          "refKey": "notNull",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "autoIncrement",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "domain",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "type",
+          "freeze": false,
+          "hideInGraph": false
+        },
+        {
+          "refKey": "scale",
+          "freeze": false,
+          "hideInGraph": false
+        },
+        {
+          "refKey": "len",
+          "freeze": false,
+          "hideInGraph": false
+        },
+        {
+          "refKey": "refDict",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "defaultValue",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "isStandard",
+          "freeze": false,
+          "hideInGraph": false
+        },
+        {
+          "refKey": "uiHint",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "extProps",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr1",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr2",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr3",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr4",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr5",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr6",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr7",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr8",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr9",
+          "freeze": false,
+          "hideInGraph": true
+        }
+      ],
+      "fields": [
+        {
+          "defKey": "op_id",
+          "defName": "",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": true,
+          "notNull": true,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "domain": "16120F75-6AA7-4483-868D-F07F511BB081",
+          "refDict": "",
+          "extProps": {},
+          "notes": {},
+          "attr1": "",
+          "attr2": "",
+          "attr3": "",
+          "attr4": "",
+          "attr5": "",
+          "attr6": "",
+          "attr7": "",
+          "attr8": "",
+          "attr9": "",
+          "id": "91656BF7-BA2A-4736-9EE6-8F6691FD6F56"
+        },
+        {
+          "defKey": "create_time",
+          "defName": "",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "domain": "7CFFA0D3-6A93-4DDC-BC10-DF21211064DC",
+          "refDict": "",
+          "extProps": {},
+          "notes": {},
+          "attr1": "",
+          "attr2": "",
+          "attr3": "",
+          "attr4": "",
+          "attr5": "",
+          "attr6": "",
+          "attr7": "",
+          "attr8": "",
+          "attr9": "",
+          "id": "8CC06A6D-0C57-4EC6-A407-869146AEE897"
+        },
+        {
+          "defKey": "node_op_id",
+          "defName": "环节表主键",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "extProps": {},
+          "domain": "16120F75-6AA7-4483-868D-F07F511BB081",
+          "id": "3DD3D2FB-70F4-444B-AE73-BA0F66B6BF54"
+        },
+        {
+          "defKey": "group_name",
+          "defName": "分组名称",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "extProps": {},
+          "domain": "9092C4E0-1A54-4859-ABBB-5B62DBC27573",
+          "id": "9FD1C5DE-3773-494F-A632-42AE21C04C82"
+        },
+        {
+          "defKey": "node_type",
+          "defName": "看说明",
+          "comment": "1：非会签（有一个通过就可以）；2：会签（都要审核通过）；3：依次逐个处理（按顺序会签）；",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "domain": "9092C4E0-1A54-4859-ABBB-5B62DBC27573",
+          "refDict": "",
+          "extProps": {},
+          "notes": {},
+          "attr1": "",
+          "attr2": "",
+          "attr3": "",
+          "attr4": "",
+          "attr5": "",
+          "attr6": "",
+          "attr7": "",
+          "attr8": "",
+          "attr9": "",
+          "id": "B4145EF9-D960-45B4-A8CF-C83A29FE367C"
+        }
+      ],
+      "correlations": [],
+      "indexes": []
+    },
+    {
+      "id": "24DC136F-A5C5-4C69-BB2E-6DD22F34A3F3",
+      "env": {
+        "base": {
+          "nameSpace": "",
+          "codeRoot": ""
+        }
+      },
+      "defKey": "public_flow_role_tbl",
+      "defName": "流程角色表",
+      "comment": "",
+      "properties": {
+        "partitioned by": "(date string)",
+        "row format delimited": "",
+        "fields terminated by ','": "",
+        "collection items terminated by '-'": "",
+        "map keys terminated by ':'": "",
+        "store as textfile;": ""
+      },
+      "nameTemplate": "{defKey}[{defName}]",
+      "notes": {},
+      "headers": [
+        {
+          "refKey": "hideInGraph",
+          "hideInGraph": true
+        },
+        {
+          "refKey": "defKey",
+          "freeze": false,
+          "hideInGraph": false
+        },
+        {
+          "refKey": "defName",
+          "freeze": false,
+          "hideInGraph": false
+        },
+        {
+          "refKey": "comment",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "primaryKey",
+          "freeze": false,
+          "hideInGraph": false
+        },
+        {
+          "refKey": "notNull",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "autoIncrement",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "domain",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "type",
+          "freeze": false,
+          "hideInGraph": false
+        },
+        {
+          "refKey": "scale",
+          "freeze": false,
+          "hideInGraph": false
+        },
+        {
+          "refKey": "len",
+          "freeze": false,
+          "hideInGraph": false
+        },
+        {
+          "refKey": "refDict",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "defaultValue",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "isStandard",
+          "freeze": false,
+          "hideInGraph": false
+        },
+        {
+          "refKey": "uiHint",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "extProps",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr1",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr2",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr3",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr4",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr5",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr6",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr7",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr8",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr9",
+          "freeze": false,
+          "hideInGraph": true
+        }
+      ],
+      "fields": [
+        {
+          "defKey": "op_id",
+          "defName": "",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": true,
+          "notNull": true,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "domain": "16120F75-6AA7-4483-868D-F07F511BB081",
+          "refDict": "",
+          "extProps": {},
+          "notes": {},
+          "attr1": "",
+          "attr2": "",
+          "attr3": "",
+          "attr4": "",
+          "attr5": "",
+          "attr6": "",
+          "attr7": "",
+          "attr8": "",
+          "attr9": "",
+          "id": "98DBB3BB-8350-4EC1-A482-378A2DE9C7B3"
+        },
+        {
+          "defKey": "create_time",
+          "defName": "",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "domain": "7CFFA0D3-6A93-4DDC-BC10-DF21211064DC",
+          "refDict": "",
+          "extProps": {},
+          "notes": {},
+          "attr1": "",
+          "attr2": "",
+          "attr3": "",
+          "attr4": "",
+          "attr5": "",
+          "attr6": "",
+          "attr7": "",
+          "attr8": "",
+          "attr9": "",
+          "id": "A796444C-2AEA-4259-A1D0-F150A1AF8C7B"
+        },
+        {
+          "defKey": "role_type",
+          "defName": "类型",
+          "comment": "1:超级管理员2:机构管理员3:负责人4:普通",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "domain": "9092C4E0-1A54-4859-ABBB-5B62DBC27573",
+          "refDict": "",
+          "extProps": {},
+          "notes": {},
+          "attr1": "",
+          "attr2": "",
+          "attr3": "",
+          "attr4": "",
+          "attr5": "",
+          "attr6": "",
+          "attr7": "",
+          "attr8": "",
+          "attr9": "",
+          "id": "6BF76ECC-0AE5-40F5-864F-D7249B381630"
+        },
+        {
+          "defKey": "role_name",
+          "defName": "角色名称",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "extProps": {},
+          "domain": "9092C4E0-1A54-4859-ABBB-5B62DBC27573",
+          "id": "796DE7FC-EC91-4059-86A8-DF975D38C924"
+        }
+      ],
+      "correlations": [],
+      "indexes": []
+    },
+    {
+      "id": "9FE63B39-F0A8-490B-BB31-32FF3A1B1245",
+      "env": {
+        "base": {
+          "nameSpace": "",
+          "codeRoot": ""
+        }
+      },
+      "defKey": "public_flow_role_user_grant",
+      "defName": "流程角色-用户关联表",
+      "comment": "",
+      "properties": {
+        "partitioned by": "(date string)",
+        "row format delimited": "",
+        "fields terminated by ','": "",
+        "collection items terminated by '-'": "",
+        "map keys terminated by ':'": "",
+        "store as textfile;": ""
+      },
+      "nameTemplate": "{defKey}[{defName}]",
+      "notes": {},
+      "headers": [
+        {
+          "refKey": "hideInGraph",
+          "hideInGraph": true
+        },
+        {
+          "refKey": "defKey",
+          "freeze": false,
+          "hideInGraph": false
+        },
+        {
+          "refKey": "defName",
+          "freeze": false,
+          "hideInGraph": false
+        },
+        {
+          "refKey": "comment",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "primaryKey",
+          "freeze": false,
+          "hideInGraph": false
+        },
+        {
+          "refKey": "notNull",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "autoIncrement",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "domain",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "type",
+          "freeze": false,
+          "hideInGraph": false
+        },
+        {
+          "refKey": "scale",
+          "freeze": false,
+          "hideInGraph": false
+        },
+        {
+          "refKey": "len",
+          "freeze": false,
+          "hideInGraph": false
+        },
+        {
+          "refKey": "refDict",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "defaultValue",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "isStandard",
+          "freeze": false,
+          "hideInGraph": false
+        },
+        {
+          "refKey": "uiHint",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "extProps",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr1",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr2",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr3",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr4",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr5",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr6",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr7",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr8",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr9",
+          "freeze": false,
+          "hideInGraph": true
+        }
+      ],
+      "fields": [
+        {
+          "defKey": "op_id",
+          "defName": "",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": true,
+          "notNull": true,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "domain": "16120F75-6AA7-4483-868D-F07F511BB081",
+          "refDict": "",
+          "extProps": {},
+          "notes": {},
+          "attr1": "",
+          "attr2": "",
+          "attr3": "",
+          "attr4": "",
+          "attr5": "",
+          "attr6": "",
+          "attr7": "",
+          "attr8": "",
+          "attr9": "",
+          "id": "0E906543-7F9F-4EF1-92AE-CC0DF5B13818"
+        },
+        {
+          "defKey": "create_time",
+          "defName": "",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "domain": "7CFFA0D3-6A93-4DDC-BC10-DF21211064DC",
+          "refDict": "",
+          "extProps": {},
+          "notes": {},
+          "attr1": "",
+          "attr2": "",
+          "attr3": "",
+          "attr4": "",
+          "attr5": "",
+          "attr6": "",
+          "attr7": "",
+          "attr8": "",
+          "attr9": "",
+          "id": "256A33CD-4B22-4B2C-8173-15E4A8320DB0"
+        },
+        {
+          "defKey": "user_op_id",
+          "defName": "public_user_tbl主键",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "extProps": {},
+          "domain": "9092C4E0-1A54-4859-ABBB-5B62DBC27573",
+          "id": "EB328B46-C8A4-4083-80F3-F67C7172AA4B"
+        },
+        {
+          "defKey": "flow_role_id",
+          "defName": "public_flow_role_tbl主键",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "extProps": {},
+          "domain": "9092C4E0-1A54-4859-ABBB-5B62DBC27573",
+          "id": "DA4A5D0A-CA98-44EC-A08B-0F312C497E02"
         }
       ],
       "correlations": [],
@@ -5579,8 +7177,11 @@
       "defKey": "flow",
       "defName": "工作流引擎",
       "refEntities": [
+        "24DC136F-A5C5-4C69-BB2E-6DD22F34A3F3",
+        "9FE63B39-F0A8-490B-BB31-32FF3A1B1245",
         "E6F64516-7067-4C65-B655-24C50A19FF4D",
         "1E153517-694E-4CE1-AA2C-A74C30B72ABB",
+        "FDAE7BCE-90A6-4A32-9601-9766708A8063",
         "6E4E8198-72FA-4D29-B7E1-2F56A97F49F2",
         "30A0C9C5-C89B-46A1-863A-88F50B04325D",
         "1AB4BB21-4524-4BF2-A05A-3BA64D21D52E"

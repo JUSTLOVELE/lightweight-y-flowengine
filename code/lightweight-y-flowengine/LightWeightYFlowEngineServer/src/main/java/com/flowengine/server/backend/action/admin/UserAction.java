@@ -54,7 +54,6 @@ public class UserAction extends BaseAction {
          return renderQuerySuccessList(1);
     }
 
-
     /**
      * @return
      */
