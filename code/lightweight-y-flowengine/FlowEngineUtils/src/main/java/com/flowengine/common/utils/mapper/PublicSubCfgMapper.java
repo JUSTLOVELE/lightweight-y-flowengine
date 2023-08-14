@@ -19,6 +19,21 @@ import java.util.Map;
 public interface PublicSubCfgMapper extends BaseMapper<PublicSubCfgEntity> {
 
     /**
+     * 查询子表
+     */
+    String QUERY_SUB_SQL = """
+            
+            select 
+                sub_cfg_value value,
+                sub_cfg_name name,
+                sub_cfg_value_type "subCfgValueType"
+            from public_sub_cfg where cfg_id = #{cfgId}
+            
+            """;
+    @Select(QUERY_SUB_SQL)
+    public List<Map<String, Object>> querWithCfgId(@Param("cfgId") String cfgId);
+
+    /**
      * 查询nodetype作为下拉框数据
      * @return
      */

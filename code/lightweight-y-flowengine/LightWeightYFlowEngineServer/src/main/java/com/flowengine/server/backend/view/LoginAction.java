@@ -109,7 +109,6 @@ public class LoginAction extends BaseAction {
         String timestamp = DateUtil.toString(user.getLastLogin(), DateUtil.YMDHMS);
         String sign = _tokenService.createAndGetSign(timestamp, user.getAccessToken(), user.getRefreshToken());
         data.put(CommonConstant.Token.SIGN, sign);
-        data.put(CommonConstant.Token.TIMESTAMP, timestamp);
         data.put(CommonConstant.Token.ACCESS_TOKEN, user.getAccessToken());
         data.put(CommonConstant.Token.REFRESH_TOKEN, user.getRefreshToken());
         data.put(CommonConstant.Token.DARK_MODE, user.getDarkMode());

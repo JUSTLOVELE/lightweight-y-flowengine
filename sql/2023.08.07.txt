@@ -99,3 +99,13 @@ insert into public_sub_cfg(op_id, cfg_id, sub_cfg_value, sub_cfg_name, key_code)
 ('flow_check_type_sub_103', 'flow_check_type_101', '10', '角色', 'flow_node_check_type');
 insert into public_sub_cfg(op_id, cfg_id, sub_cfg_value, sub_cfg_name, key_code) VALUES
 ('flow_check_type_sub_104', 'flow_check_type_101', '20', '所有人员', 'flow_node_check_type');
+
+
+
+alter table public_cfg add column json_desc text;
+alter table public_cfg add column sort int;
+alter table public_cfg add column dept_id varchar(32);
+alter table public_sub_cfg add sub_cfg_value_type int2;
+alter table public_cfg add column combobox_desc text;
+
+

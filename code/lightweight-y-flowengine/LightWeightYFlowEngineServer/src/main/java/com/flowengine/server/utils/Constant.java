@@ -25,6 +25,8 @@ public class Constant {
         public String TABLE_OP_ID = "table_op_id";
 
         public String NODE_STATUS = "node_status";
+
+        public String CFG_ID = "cfg_id";
     }
 
     public interface Key {
@@ -109,6 +111,16 @@ public class Constant {
         public String NODE_STATUS = "nodeStatus";
 
         public String CHECK_TYPE = "checkType";
+
+        public String VALUE = "value";
+
+        public String SUB_CFG_VALUE_TYPE = "subCfgValueType";
+
+        public String CFG_NAME = "cfgName";
+
+        public String KEY_CODE = "keyCode";
+
+        public String LABEL = "label";
     }
 
     public interface Value {

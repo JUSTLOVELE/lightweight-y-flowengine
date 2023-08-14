@@ -4,11 +4,11 @@
   "avatar": "",
   "version": "4.6.2",
   "createdTime": "2022-12-9 22:49:27",
-  "updatedTime": "2023-8-11 16:11:38",
+  "updatedTime": "2023-8-14 17:49:57",
   "dbConns": [],
   "profile": {
     "default": {
-      "db": "29D1CE08-4C35-4D2D-AAA9-23D93305B52E",
+      "db": "DFBEC1DD-AA84-456E-BBF3-C95DD0DB2022",
       "dbConn": "D4843C6A-F7EC-480D-A8DB-4F6655F65F92",
       "entityInitFields": [
         {
@@ -427,6 +427,18 @@
         "freeze": false
       },
       {
+        "refKey": "type",
+        "hideInGraph": false,
+        "value": "数据类型",
+        "freeze": false
+      },
+      {
+        "refKey": "len",
+        "hideInGraph": false,
+        "value": "长度",
+        "freeze": false
+      },
+      {
         "refKey": "primaryKey",
         "hideInGraph": false,
         "value": "主键",
@@ -451,21 +463,9 @@
         "freeze": false
       },
       {
-        "refKey": "type",
-        "hideInGraph": false,
-        "value": "数据类型",
-        "freeze": false
-      },
-      {
         "refKey": "scale",
         "hideInGraph": false,
         "value": "小数位数",
-        "freeze": false
-      },
-      {
-        "refKey": "len",
-        "hideInGraph": false,
-        "value": "长度",
         "freeze": false
       },
       {
@@ -605,6 +605,14 @@
           "hideInGraph": true
         },
         {
+          "refKey": "type",
+          "hideInGraph": false
+        },
+        {
+          "refKey": "len",
+          "hideInGraph": false
+        },
+        {
           "refKey": "primaryKey",
           "hideInGraph": false
         },
@@ -621,15 +629,7 @@
           "hideInGraph": true
         },
         {
-          "refKey": "type",
-          "hideInGraph": false
-        },
-        {
           "refKey": "scale",
-          "hideInGraph": false
-        },
-        {
-          "refKey": "len",
           "hideInGraph": false
         },
         {
@@ -963,6 +963,14 @@
           "hideInGraph": true
         },
         {
+          "refKey": "type",
+          "hideInGraph": false
+        },
+        {
+          "refKey": "len",
+          "hideInGraph": false
+        },
+        {
           "refKey": "primaryKey",
           "hideInGraph": false
         },
@@ -979,15 +987,7 @@
           "hideInGraph": true
         },
         {
-          "refKey": "type",
-          "hideInGraph": false
-        },
-        {
           "refKey": "scale",
-          "hideInGraph": false
-        },
-        {
-          "refKey": "len",
           "hideInGraph": false
         },
         {
@@ -1304,6 +1304,14 @@
           "hideInGraph": true
         },
         {
+          "refKey": "type",
+          "hideInGraph": false
+        },
+        {
+          "refKey": "len",
+          "hideInGraph": false
+        },
+        {
           "refKey": "primaryKey",
           "hideInGraph": false
         },
@@ -1320,15 +1328,7 @@
           "hideInGraph": true
         },
         {
-          "refKey": "type",
-          "hideInGraph": false
-        },
-        {
           "refKey": "scale",
-          "hideInGraph": false
-        },
-        {
-          "refKey": "len",
           "hideInGraph": false
         },
         {
@@ -1526,6 +1526,14 @@
           "hideInGraph": true
         },
         {
+          "refKey": "type",
+          "hideInGraph": false
+        },
+        {
+          "refKey": "len",
+          "hideInGraph": false
+        },
+        {
           "refKey": "primaryKey",
           "hideInGraph": false
         },
@@ -1542,15 +1550,7 @@
           "hideInGraph": true
         },
         {
-          "refKey": "type",
-          "hideInGraph": false
-        },
-        {
           "refKey": "scale",
-          "hideInGraph": false
-        },
-        {
-          "refKey": "len",
           "hideInGraph": false
         },
         {
@@ -1935,6 +1935,14 @@
           "hideInGraph": true
         },
         {
+          "refKey": "type",
+          "hideInGraph": false
+        },
+        {
+          "refKey": "len",
+          "hideInGraph": false
+        },
+        {
           "refKey": "primaryKey",
           "hideInGraph": false
         },
@@ -1951,15 +1959,7 @@
           "hideInGraph": true
         },
         {
-          "refKey": "type",
-          "hideInGraph": false
-        },
-        {
           "refKey": "scale",
-          "hideInGraph": false
-        },
-        {
-          "refKey": "len",
           "hideInGraph": false
         },
         {
@@ -2433,6 +2433,14 @@
           "hideInGraph": true
         },
         {
+          "refKey": "type",
+          "hideInGraph": false
+        },
+        {
+          "refKey": "len",
+          "hideInGraph": false
+        },
+        {
           "refKey": "primaryKey",
           "hideInGraph": false
         },
@@ -2449,15 +2457,7 @@
           "hideInGraph": true
         },
         {
-          "refKey": "type",
-          "hideInGraph": false
-        },
-        {
           "refKey": "scale",
-          "hideInGraph": false
-        },
-        {
-          "refKey": "len",
           "hideInGraph": false
         },
         {
@@ -2732,6 +2732,14 @@
           "hideInGraph": true
         },
         {
+          "refKey": "type",
+          "hideInGraph": false
+        },
+        {
+          "refKey": "len",
+          "hideInGraph": false
+        },
+        {
           "refKey": "primaryKey",
           "hideInGraph": false
         },
@@ -2748,15 +2756,7 @@
           "hideInGraph": true
         },
         {
-          "refKey": "type",
-          "hideInGraph": false
-        },
-        {
           "refKey": "scale",
-          "hideInGraph": false
-        },
-        {
-          "refKey": "len",
           "hideInGraph": false
         },
         {
@@ -3106,6 +3106,14 @@
           "hideInGraph": true
         },
         {
+          "refKey": "type",
+          "hideInGraph": false
+        },
+        {
+          "refKey": "len",
+          "hideInGraph": false
+        },
+        {
           "refKey": "primaryKey",
           "hideInGraph": false
         },
@@ -3122,15 +3130,7 @@
           "hideInGraph": true
         },
         {
-          "refKey": "type",
-          "hideInGraph": false
-        },
-        {
           "refKey": "scale",
-          "hideInGraph": false
-        },
-        {
-          "refKey": "len",
           "hideInGraph": false
         },
         {
@@ -3483,6 +3483,14 @@
           "hideInGraph": true
         },
         {
+          "refKey": "type",
+          "hideInGraph": false
+        },
+        {
+          "refKey": "len",
+          "hideInGraph": false
+        },
+        {
           "refKey": "primaryKey",
           "hideInGraph": false
         },
@@ -3499,15 +3507,7 @@
           "hideInGraph": true
         },
         {
-          "refKey": "type",
-          "hideInGraph": false
-        },
-        {
           "refKey": "scale",
-          "hideInGraph": false
-        },
-        {
-          "refKey": "len",
           "hideInGraph": false
         },
         {
@@ -3807,6 +3807,14 @@
           "hideInGraph": true
         },
         {
+          "refKey": "type",
+          "hideInGraph": false
+        },
+        {
+          "refKey": "len",
+          "hideInGraph": false
+        },
+        {
           "refKey": "primaryKey",
           "hideInGraph": false
         },
@@ -3823,15 +3831,7 @@
           "hideInGraph": true
         },
         {
-          "refKey": "type",
-          "hideInGraph": false
-        },
-        {
           "refKey": "scale",
-          "hideInGraph": false
-        },
-        {
-          "refKey": "len",
           "hideInGraph": false
         },
         {
@@ -4420,6 +4420,14 @@
           "hideInGraph": true
         },
         {
+          "refKey": "type",
+          "hideInGraph": false
+        },
+        {
+          "refKey": "len",
+          "hideInGraph": false
+        },
+        {
           "refKey": "primaryKey",
           "hideInGraph": false
         },
@@ -4436,15 +4444,7 @@
           "hideInGraph": true
         },
         {
-          "refKey": "type",
-          "hideInGraph": false
-        },
-        {
           "refKey": "scale",
-          "hideInGraph": false
-        },
-        {
-          "refKey": "len",
           "hideInGraph": false
         },
         {
@@ -4679,6 +4679,14 @@
           "hideInGraph": true
         },
         {
+          "refKey": "type",
+          "hideInGraph": false
+        },
+        {
+          "refKey": "len",
+          "hideInGraph": false
+        },
+        {
           "refKey": "primaryKey",
           "hideInGraph": false
         },
@@ -4695,15 +4703,7 @@
           "hideInGraph": true
         },
         {
-          "refKey": "type",
-          "hideInGraph": false
-        },
-        {
           "refKey": "scale",
-          "hideInGraph": false
-        },
-        {
-          "refKey": "len",
           "hideInGraph": false
         },
         {
@@ -4884,6 +4884,14 @@
           "hideInGraph": true
         },
         {
+          "refKey": "type",
+          "hideInGraph": false
+        },
+        {
+          "refKey": "len",
+          "hideInGraph": false
+        },
+        {
           "refKey": "primaryKey",
           "hideInGraph": false
         },
@@ -4900,15 +4908,7 @@
           "hideInGraph": true
         },
         {
-          "refKey": "type",
-          "hideInGraph": false
-        },
-        {
           "refKey": "scale",
-          "hideInGraph": false
-        },
-        {
-          "refKey": "len",
           "hideInGraph": false
         },
         {
@@ -4985,8 +4985,8 @@
           "type": "",
           "len": "",
           "scale": "",
-          "primaryKey": false,
-          "notNull": false,
+          "primaryKey": true,
+          "notNull": true,
           "autoIncrement": false,
           "defaultValue": "",
           "hideInGraph": true,
@@ -5112,6 +5112,23 @@
           "attr8": "",
           "attr9": "",
           "id": "96BD557A-A001-40BB-B38B-83B2E30616A6"
+        },
+        {
+          "defKey": "sub_cfg_value_type",
+          "defName": "value的类型,存储全部用字符串存储",
+          "comment": "1:字符串;2:整型;",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "extProps": {},
+          "domain": "6BC8F04B-6CFA-4995-98D3-318F5CDD774E",
+          "id": "936603A7-08AE-4978-B447-FA2E06CEE60F"
         }
       ],
       "correlations": [],
@@ -5156,6 +5173,14 @@
           "hideInGraph": true
         },
         {
+          "refKey": "type",
+          "hideInGraph": false
+        },
+        {
+          "refKey": "len",
+          "hideInGraph": false
+        },
+        {
           "refKey": "primaryKey",
           "hideInGraph": false
         },
@@ -5172,15 +5197,7 @@
           "hideInGraph": true
         },
         {
-          "refKey": "type",
-          "hideInGraph": false
-        },
-        {
           "refKey": "scale",
-          "hideInGraph": false
-        },
-        {
-          "refKey": "len",
           "hideInGraph": false
         },
         {
@@ -5257,8 +5274,8 @@
           "type": "",
           "len": "",
           "scale": "",
-          "primaryKey": false,
-          "notNull": false,
+          "primaryKey": true,
+          "notNull": true,
           "autoIncrement": false,
           "defaultValue": "",
           "hideInGraph": true,
@@ -5357,6 +5374,74 @@
           "attr8": "",
           "attr9": "",
           "id": "19FBFD91-FEF3-4BFC-867F-D0CC0E038A83"
+        },
+        {
+          "defKey": "combobox_desc",
+          "defName": "下拉框格式",
+          "comment": "",
+          "type": "TEXT",
+          "len": 255,
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "extProps": {},
+          "domain": "",
+          "id": "32FDC3E3-379D-42D6-98DD-55144B2BBD14"
+        },
+        {
+          "defKey": "json_desc",
+          "defName": "json格式",
+          "comment": "",
+          "type": "TEXT",
+          "len": 255,
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "extProps": {},
+          "domain": "",
+          "id": "6333F36E-D3B7-4F86-BA93-CFA6394CDCD3"
+        },
+        {
+          "defKey": "sort",
+          "defName": "排序",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "extProps": {},
+          "domain": "6BC8F04B-6CFA-4995-98D3-318F5CDD774E",
+          "id": "964B7C11-EF2F-4279-A6F2-C8ACA2C10777"
+        },
+        {
+          "defKey": "dept_id",
+          "defName": "所属科室",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "extProps": {},
+          "domain": "9092C4E0-1A54-4859-ABBB-5B62DBC27573",
+          "id": "8D35C7FD-11DB-460F-8B4B-415FCFA12093"
         }
       ],
       "correlations": [],
@@ -5401,6 +5486,14 @@
           "hideInGraph": true
         },
         {
+          "refKey": "type",
+          "hideInGraph": false
+        },
+        {
+          "refKey": "len",
+          "hideInGraph": false
+        },
+        {
           "refKey": "primaryKey",
           "hideInGraph": false
         },
@@ -5417,15 +5510,7 @@
           "hideInGraph": true
         },
         {
-          "refKey": "type",
-          "hideInGraph": false
-        },
-        {
           "refKey": "scale",
-          "hideInGraph": false
-        },
-        {
-          "refKey": "len",
           "hideInGraph": false
         },
         {
@@ -5591,6 +5676,14 @@
           "hideInGraph": true
         },
         {
+          "refKey": "type",
+          "hideInGraph": false
+        },
+        {
+          "refKey": "len",
+          "hideInGraph": false
+        },
+        {
           "refKey": "primaryKey",
           "hideInGraph": false
         },
@@ -5607,15 +5700,7 @@
           "hideInGraph": true
         },
         {
-          "refKey": "type",
-          "hideInGraph": false
-        },
-        {
           "refKey": "scale",
-          "hideInGraph": false
-        },
-        {
-          "refKey": "len",
           "hideInGraph": false
         },
         {
@@ -5781,6 +5866,14 @@
           "hideInGraph": true
         },
         {
+          "refKey": "type",
+          "hideInGraph": false
+        },
+        {
+          "refKey": "len",
+          "hideInGraph": false
+        },
+        {
           "refKey": "primaryKey",
           "hideInGraph": false
         },
@@ -5797,15 +5890,7 @@
           "hideInGraph": true
         },
         {
-          "refKey": "type",
-          "hideInGraph": false
-        },
-        {
           "refKey": "scale",
-          "hideInGraph": false
-        },
-        {
-          "refKey": "len",
           "hideInGraph": false
         },
         {
@@ -5882,8 +5967,8 @@
           "type": "",
           "len": "",
           "scale": "",
-          "primaryKey": false,
-          "notNull": false,
+          "primaryKey": true,
+          "notNull": true,
           "autoIncrement": false,
           "defaultValue": "",
           "hideInGraph": true,
@@ -6053,6 +6138,16 @@
           "hideInGraph": true
         },
         {
+          "refKey": "type",
+          "freeze": false,
+          "hideInGraph": false
+        },
+        {
+          "refKey": "len",
+          "freeze": false,
+          "hideInGraph": false
+        },
+        {
           "refKey": "primaryKey",
           "freeze": false,
           "hideInGraph": false
@@ -6073,17 +6168,7 @@
           "hideInGraph": true
         },
         {
-          "refKey": "type",
-          "freeze": false,
-          "hideInGraph": false
-        },
-        {
           "refKey": "scale",
-          "freeze": false,
-          "hideInGraph": false
-        },
-        {
-          "refKey": "len",
           "freeze": false,
           "hideInGraph": false
         },
@@ -6320,6 +6405,16 @@
           "hideInGraph": true
         },
         {
+          "refKey": "type",
+          "freeze": false,
+          "hideInGraph": false
+        },
+        {
+          "refKey": "len",
+          "freeze": false,
+          "hideInGraph": false
+        },
+        {
           "refKey": "primaryKey",
           "freeze": false,
           "hideInGraph": false
@@ -6340,17 +6435,7 @@
           "hideInGraph": true
         },
         {
-          "refKey": "type",
-          "freeze": false,
-          "hideInGraph": false
-        },
-        {
           "refKey": "scale",
-          "freeze": false,
-          "hideInGraph": false
-        },
-        {
-          "refKey": "len",
           "freeze": false,
           "hideInGraph": false
         },
@@ -6483,7 +6568,7 @@
         {
           "defKey": "role_type",
           "defName": "类型",
-          "comment": "1:超级管理员2:机构管理员3:负责人4:普通",
+          "comment": "1:超级管理员2:机构管理员20:负责人40:普通",
           "type": "",
           "len": "",
           "scale": "",
@@ -6492,7 +6577,7 @@
           "autoIncrement": false,
           "defaultValue": "",
           "hideInGraph": false,
-          "domain": "9092C4E0-1A54-4859-ABBB-5B62DBC27573",
+          "domain": "16120F75-6AA7-4483-868D-F07F511BB081",
           "refDict": "",
           "extProps": {},
           "notes": {},
@@ -6570,6 +6655,16 @@
           "hideInGraph": true
         },
         {
+          "refKey": "type",
+          "freeze": false,
+          "hideInGraph": false
+        },
+        {
+          "refKey": "len",
+          "freeze": false,
+          "hideInGraph": false
+        },
+        {
           "refKey": "primaryKey",
           "freeze": false,
           "hideInGraph": false
@@ -6590,17 +6685,7 @@
           "hideInGraph": true
         },
         {
-          "refKey": "type",
-          "freeze": false,
-          "hideInGraph": false
-        },
-        {
           "refKey": "scale",
-          "freeze": false,
-          "hideInGraph": false
-        },
-        {
-          "refKey": "len",
           "freeze": false,
           "hideInGraph": false
         },

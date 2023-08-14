@@ -25,6 +25,8 @@ public class PublicSubCfgEntity implements Serializable {
     /** 关键字 */
     private String keyCode ;
 
+    private Integer subCfgValueType;
+
     public String getOpId() {
         return opId;
     }
@@ -63,5 +65,13 @@ public class PublicSubCfgEntity implements Serializable {
 
     public void setKeyCode(String keyCode) {
         this.keyCode = keyCode;
+    }
+
+    public Integer getSubCfgValueType() {
+        return subCfgValueType;
+    }
+
+    public void setSubCfgValueType(Integer subCfgValueType) {
+        this.subCfgValueType = subCfgValueType;
     }
 }
