@@ -1,12 +1,21 @@
 package com.flowengine.server.backend.action.flow;
 
+import com.flowengine.common.utils.entity.PublicFlowRoleEntity;
+import com.flowengine.common.utils.entity.PublicFlowRoleUserGrantEntity;
 import com.flowengine.server.backend.service.flow.FlowRoleService;
 import com.flowengine.server.core.BaseAction;
 import com.flowengine.server.utils.SessionUtils;
+import com.flowengine.server.utils.UUIDGenerator;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.List;
 
 /**
  * @author yangzl 2023/8/14
@@ -21,6 +30,71 @@ public class FlowRoleAction extends BaseAction {
 
     @Resource
     private FlowRoleService _flowRoleService;
+
+    /**
+     * 删除
+     * @param opId
+     * @return
+     */
+    @PostMapping(value = "/flowRoleAction/delete", produces = "application/json; charset=utf-8")
+    public String delete(String opId) {
+        return _flowRoleService.delete(opId);
+    }
+
+    /**
+     * 编辑
+     * @param roleName
+     * @param roleType
+     * @param persons
+     * @return
+     */
+    @PostMapping(value = "/flowRoleAction/edit", produces = "application/json; charset=utf-8")
+    public String edit(String opId, String roleName, Integer roleType, @RequestParam("persons[]") String[] persons) {
+        return _flowRoleService.edit(opId, roleName, roleType, persons);
+    }
+
+
+    /**
+     * 新增
+     * @param roleName
+     * @param roleType
+     * @param persons
+     * @return
+     */
+    @PostMapping(value = "/flowRoleAction/add", produces = "application/json; charset=utf-8")
+    public String add(String roleName, Integer roleType, @RequestParam("persons[]") String[] persons) {
+
+        PublicFlowRoleEntity flowRoleEntity = new PublicFlowRoleEntity();
+        flowRoleEntity.setOpId(UUIDGenerator.getUUID());
+        flowRoleEntity.setRoleName(roleName);
+        flowRoleEntity.setRoleType(roleType);
+        List<PublicFlowRoleUserGrantEntity> flowRoleUserGrantEntities = null;
+
+        if(persons != null && persons.length > 0) {
+
+            flowRoleUserGrantEntities = new ArrayList<>();
+
+            for(String person: persons) {
+
+                PublicFlowRoleUserGrantEntity grantEntity = new PublicFlowRoleUserGrantEntity();
+                grantEntity.setOpId(UUIDGenerator.getUUID());
+                grantEntity.setUserOpId(person);
+                grantEntity.setFlowRoleId(flowRoleEntity.getOpId());
+                flowRoleUserGrantEntities.add(grantEntity);
+            }
+        }
+
+        return _flowRoleService.add(flowRoleEntity, flowRoleUserGrantEntities);
+    }
+
+    /**
+     * 获取role_type下拉框
+     * @return
+     */
+    @GetMapping(value = "/flowRoleAction/getRoleTypeCombobox", produces = "application/json; charset=utf-8")
+    public String getRoleTypeCombobox() {
+        return _flowRoleService.getRoleTypeCombobox();
+    }
 
     /**
      * 查询

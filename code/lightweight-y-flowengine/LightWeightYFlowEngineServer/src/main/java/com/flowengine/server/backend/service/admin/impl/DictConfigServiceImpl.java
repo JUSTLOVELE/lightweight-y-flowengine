@@ -43,6 +43,23 @@ public class DictConfigServiceImpl extends BaseService implements DictConfigServ
     private DictConfigDao _dictConfigDao;
 
     @Override
+    public String queryComboboxWithKeyCode(String keyCode) {
+
+        if(StrUtil.isEmpty(keyCode)) {
+            return "[]";
+        }
+
+        List<Map<String, Object>> datas = _cfgMapper.queryComboboxWithKeyCode(keyCode);
+
+        if(datas != null && datas.size() == 1) {
+
+            return (String) datas.get(0).get(Constant.Key.COMBOBOX_DESC);
+        }
+
+        return "[]";
+    }
+
+    @Override
     public String edit(PublicCfgEntity entity, String children) {
 
         List<PublicSubCfgEntity> subCfgEntities = getSubCfg(entity, children);

@@ -52,6 +52,11 @@ public class FlowRoleDaoImpl extends BaseDao implements FlowRoleDao {
         sb.append("a.op_id \"opId\",");
         sb.append("a.role_name \"roleName\",");
         sb.append("a.role_type \"roleType\",");
+        sb.append("  case when a.role_type = 1 then '超级管理员' ");
+        sb.append("   when a.role_type = 2 then '机构管理员' ");
+        sb.append("   when a.role_type = 20 then '负责人' ");
+        sb.append("   when a.role_type = 40 then '普通' ");
+        sb.append("else '未知错误' end \"roleTypeDesc\",  ");
         sb.append("to_char(a.create_time, 'YYYY-MM-DD hh24:mi:ss') as \"createTime\" ");
         sb.append(" FROM public_flow_role_tbl a WHERE 1=1 "); //仅查询普通用户角色
         List<Object> array = new ArrayList<>();

@@ -4,7 +4,7 @@
   "avatar": "",
   "version": "4.6.0",
   "createdTime": "2022-12-9 22:49:27",
-  "updatedTime": "2023-8-14 23:25:40",
+  "updatedTime": "2023-8-14 23:25:35",
   "dbConns": [],
   "profile": {
     "default": {
@@ -6599,7 +6599,7 @@
           "defName": "类型",
           "comment": "1:超级管理员2:机构管理员20:负责人40:普通",
           "type": "INTEGER",
-          "len": 3,
+          "len": 32,
           "scale": "",
           "primaryKey": false,
           "notNull": false,

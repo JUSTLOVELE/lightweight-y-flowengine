@@ -13,6 +13,13 @@ import java.util.Map;
 public interface DictConfigService {
 
     /**
+     * 根据keyCode查询
+     * @param keyCode
+     * @return
+     */
+    public String queryComboboxWithKeyCode(String keyCode);
+
+    /**
      * 新增
      * @param cfgEntity
      * @param children

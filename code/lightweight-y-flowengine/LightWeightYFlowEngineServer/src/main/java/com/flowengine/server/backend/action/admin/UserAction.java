@@ -68,17 +68,18 @@ public class UserAction extends BaseAction {
     @GetMapping(value = "/userAction/getUserCombox2", produces = "application/json; charset=utf-8")
     public String getUserCombox2() {
 
-        List<Map<String, Object>> array = new ArrayList<>();
-
-        for(int i=0; i<1000; i++) {
-
-            Map<String, Object> data = new HashMap<>();
-            data.put("label", "label" + i);
-            data.put("value", "value" + i);
-            array.add(data);
-        }
-
-        return getJSON(array);
+        return _userService.getUserCombox();
+//        List<Map<String, Object>> array = new ArrayList<>();
+//
+//        for(int i=0; i<1000; i++) {
+//
+//            Map<String, Object> data = new HashMap<>();
+//            data.put("label", "label" + i);
+//            data.put("value", "value" + i);
+//            array.add(data);
+//        }
+//
+//        return getJSON(array);
     }
 
     /**

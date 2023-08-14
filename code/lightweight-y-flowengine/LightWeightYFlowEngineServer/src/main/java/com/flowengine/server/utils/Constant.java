@@ -27,6 +27,8 @@ public class Constant {
         public String NODE_STATUS = "node_status";
 
         public String CFG_ID = "cfg_id";
+
+        public String FLOW_ROLE_ID = "flow_role_id";
     }
 
     public interface Key {
@@ -121,10 +123,17 @@ public class Constant {
         public String KEY_CODE = "keyCode";
 
         public String LABEL = "label";
+
+        public String COMBOBOX_DESC = "comboboxDesc";
     }
 
     public interface Value {
 
         String START = "start";
+    }
+
+    public interface Dict {
+
+        String FLOW_ROLE_ROLE_TYPE = "flow_role_role_type";
     }
 }
