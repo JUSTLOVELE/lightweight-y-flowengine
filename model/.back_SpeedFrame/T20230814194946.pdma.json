@@ -4,7 +4,7 @@
   "avatar": "",
   "version": "4.6.0",
   "createdTime": "2022-12-9 22:49:27",
-  "updatedTime": "2023-8-14 21:28:24",
+  "updatedTime": "2023-8-14 19:49:46",
   "dbConns": [],
   "profile": {
     "default": {
@@ -3067,7 +3067,16 @@
           "id": "1F0B525A-1518-4522-A11A-044DFE6F12CF"
         }
       ],
-      "correlations": [],
+      "correlations": [
+        {
+          "myField": "3C0BD1D6-4DBA-4E35-8B16-CE95A5AE3A59",
+          "refEntity": "3531B396-5AE9-4AA2-8A79-4C3E2A1D02BB",
+          "refField": "A90F197B-FAD7-4363-8840-D95CDF3274F6",
+          "myRows": "triangle-fill",
+          "refRows": "none",
+          "innerType": ""
+        }
+      ],
       "indexes": []
     },
     {
@@ -3444,7 +3453,16 @@
           "id": "9121AFDA-90E7-47CD-B5C9-8B4B5AA377DD"
         }
       ],
-      "correlations": [],
+      "correlations": [
+        {
+          "myField": "1AA1ED45-7D4F-4E2B-886E-B1B8403306D7",
+          "refEntity": "70725201-8C5D-45F6-82CC-DD14323C4836",
+          "refField": "FE64FE94-56F6-4086-9097-FD06CD863625",
+          "myRows": "triangle-fill",
+          "refRows": "none",
+          "innerType": ""
+        }
+      ],
       "indexes": [
         {
           "defKey": "",
@@ -5454,23 +5472,6 @@
           "extProps": {},
           "domain": "9092C4E0-1A54-4859-ABBB-5B62DBC27573",
           "id": "8D35C7FD-11DB-460F-8B4B-415FCFA12093"
-        },
-        {
-          "defKey": "cfg_type",
-          "defName": "1:系统配置;2:系统字典",
-          "comment": "",
-          "type": "INTEGER",
-          "len": 1,
-          "scale": "",
-          "primaryKey": false,
-          "notNull": false,
-          "autoIncrement": false,
-          "defaultValue": "",
-          "hideInGraph": false,
-          "refDict": "",
-          "extProps": {},
-          "domain": "",
-          "id": "FB1E2BA6-801B-486E-8BEB-18D69D32DFFA"
         }
       ],
       "correlations": [],

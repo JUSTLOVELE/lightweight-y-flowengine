@@ -4,7 +4,7 @@
   "avatar": "",
   "version": "4.6.0",
   "createdTime": "2022-12-9 22:49:27",
-  "updatedTime": "2023-8-14 21:28:24",
+  "updatedTime": "2023-8-14 19:37:28",
   "dbConns": [],
   "profile": {
     "default": {
@@ -563,10 +563,7 @@
       }
     ],
     "menuWidth": "328px",
-    "modelType": "modalGroup",
-    "recentColors": [
-      "#DDE5FF"
-    ]
+    "modelType": "modalGroup"
   },
   "entities": [
     {
@@ -2541,7 +2538,7 @@
           "notNull": true,
           "autoIncrement": false,
           "defaultValue": "",
-          "hideInGraph": false,
+          "hideInGraph": true,
           "domain": "16120F75-6AA7-4483-868D-F07F511BB081",
           "refDict": "",
           "extProps": {},
@@ -2568,7 +2565,7 @@
           "notNull": false,
           "autoIncrement": false,
           "defaultValue": "",
-          "hideInGraph": true,
+          "hideInGraph": false,
           "domain": "9092C4E0-1A54-4859-ABBB-5B62DBC27573",
           "refDict": "",
           "extProps": {},
@@ -2595,7 +2592,7 @@
           "notNull": false,
           "autoIncrement": false,
           "defaultValue": "",
-          "hideInGraph": true,
+          "hideInGraph": false,
           "domain": "6BC8F04B-6CFA-4995-98D3-318F5CDD774E",
           "refDict": "",
           "extProps": {},
@@ -2840,7 +2837,7 @@
           "notNull": true,
           "autoIncrement": false,
           "defaultValue": "",
-          "hideInGraph": false,
+          "hideInGraph": true,
           "domain": "16120F75-6AA7-4483-868D-F07F511BB081",
           "refDict": "",
           "uiHint": "",
@@ -2857,7 +2854,7 @@
           "notNull": false,
           "autoIncrement": false,
           "defaultValue": "",
-          "hideInGraph": true,
+          "hideInGraph": false,
           "refDict": "",
           "extProps": {},
           "domain": "9092C4E0-1A54-4859-ABBB-5B62DBC27573",
@@ -2874,7 +2871,7 @@
           "notNull": false,
           "autoIncrement": false,
           "defaultValue": "",
-          "hideInGraph": true,
+          "hideInGraph": false,
           "domain": "9092C4E0-1A54-4859-ABBB-5B62DBC27573",
           "refDict": "",
           "extProps": {},
@@ -2945,7 +2942,7 @@
           "notNull": false,
           "autoIncrement": false,
           "defaultValue": "",
-          "hideInGraph": true,
+          "hideInGraph": false,
           "refDict": "",
           "extProps": {},
           "domain": "9092C4E0-1A54-4859-ABBB-5B62DBC27573",
@@ -3043,7 +3040,7 @@
           "notNull": false,
           "autoIncrement": false,
           "defaultValue": "",
-          "hideInGraph": true,
+          "hideInGraph": false,
           "refDict": "",
           "extProps": {},
           "domain": "7CFFA0D3-6A93-4DDC-BC10-DF21211064DC",
@@ -3060,7 +3057,7 @@
           "notNull": false,
           "autoIncrement": false,
           "defaultValue": "",
-          "hideInGraph": true,
+          "hideInGraph": false,
           "refDict": "",
           "extProps": {},
           "domain": "",
@@ -3214,7 +3211,7 @@
           "notNull": true,
           "autoIncrement": false,
           "defaultValue": "",
-          "hideInGraph": false,
+          "hideInGraph": true,
           "domain": "16120F75-6AA7-4483-868D-F07F511BB081",
           "refDict": "",
           "extProps": {},
@@ -3241,7 +3238,7 @@
           "notNull": false,
           "autoIncrement": false,
           "defaultValue": "",
-          "hideInGraph": true,
+          "hideInGraph": false,
           "domain": "9092C4E0-1A54-4859-ABBB-5B62DBC27573",
           "refDict": "",
           "extProps": {},
@@ -3295,7 +3292,7 @@
           "notNull": false,
           "autoIncrement": false,
           "defaultValue": "",
-          "hideInGraph": true,
+          "hideInGraph": false,
           "refDict": "",
           "extProps": {},
           "domain": "9092C4E0-1A54-4859-ABBB-5B62DBC27573",
@@ -3312,7 +3309,7 @@
           "notNull": false,
           "autoIncrement": false,
           "defaultValue": "",
-          "hideInGraph": true,
+          "hideInGraph": false,
           "refDict": "",
           "extProps": {},
           "domain": "9092C4E0-1A54-4859-ABBB-5B62DBC27573",
@@ -3437,7 +3434,7 @@
           "notNull": false,
           "autoIncrement": false,
           "defaultValue": "",
-          "hideInGraph": true,
+          "hideInGraph": false,
           "refDict": "",
           "extProps": {},
           "domain": "7CFFA0D3-6A93-4DDC-BC10-DF21211064DC",
@@ -3445,16 +3442,7 @@
         }
       ],
       "correlations": [],
-      "indexes": [
-        {
-          "defKey": "",
-          "defName": null,
-          "unique": true,
-          "comment": "",
-          "fields": [],
-          "id": "8BD7443E-CB89-410E-B8A7-87604C343926"
-        }
-      ]
+      "indexes": []
     },
     {
       "id": "C77C7BA0-F70B-415A-861D-6A3A2A46CCF7",
@@ -5454,23 +5442,6 @@
           "extProps": {},
           "domain": "9092C4E0-1A54-4859-ABBB-5B62DBC27573",
           "id": "8D35C7FD-11DB-460F-8B4B-415FCFA12093"
-        },
-        {
-          "defKey": "cfg_type",
-          "defName": "1:系统配置;2:系统字典",
-          "comment": "",
-          "type": "INTEGER",
-          "len": 1,
-          "scale": "",
-          "primaryKey": false,
-          "notNull": false,
-          "autoIncrement": false,
-          "defaultValue": "",
-          "hideInGraph": false,
-          "refDict": "",
-          "extProps": {},
-          "domain": "",
-          "id": "FB1E2BA6-801B-486E-8BEB-18D69D32DFFA"
         }
       ],
       "correlations": [],
@@ -7301,9 +7272,7 @@
         "1AB4BB21-4524-4BF2-A05A-3BA64D21D52E"
       ],
       "refViews": [],
-      "refDiagrams": [
-        "63B3417B-6E56-4260-BC7C-FCB8C4097508"
-      ],
+      "refDiagrams": [],
       "refDicts": [],
       "id": "94B81F0D-873C-473B-9A4E-AFC270473C8D"
     }
@@ -7536,114 +7505,7 @@
       "id": "3E948CEC-3070-472C-AF92-F3CA11EC9D15"
     }
   ],
-  "diagrams": [
-    {
-      "defKey": "test",
-      "defName": "测试",
-      "relationType": "field",
-      "canvasData": {
-        "cells": [
-          {
-            "id": "44c3b580-d3fa-4d24-b3e2-8ebf24824fbd",
-            "shape": "erdRelation",
-            "source": {
-              "cell": "ca54226d-0a38-41c2-95f8-5d802f00b760",
-              "port": "A90F197B-FAD7-4363-8840-D95CDF3274F6%out"
-            },
-            "target": {
-              "cell": "22483a22-4d5b-4f94-b49e-6b338b795a6f",
-              "port": "3C0BD1D6-4DBA-4E35-8B16-CE95A5AE3A59%in"
-            },
-            "relation": "none:triangle-fill",
-            "vertices": [
-              {
-                "x": 260,
-                "y": 8
-              }
-            ],
-            "fillColor": "rgb(25, 25, 26)",
-            "router": {
-              "name": "manhattan"
-            },
-            "attrs": {
-              "line": {
-                "strokeDasharray": ""
-              }
-            }
-          },
-          {
-            "id": "10ce18aa-79e4-49e7-8bdf-bf7f9bada43a",
-            "shape": "erdRelation",
-            "source": {
-              "cell": "22483a22-4d5b-4f94-b49e-6b338b795a6f",
-              "port": "FE64FE94-56F6-4086-9097-FD06CD863625%in"
-            },
-            "target": {
-              "cell": "8f2a4ebb-e8d6-401a-915b-aeac0c0934e9",
-              "port": "1AA1ED45-7D4F-4E2B-886E-B1B8403306D7%in"
-            },
-            "relation": "none:triangle-fill",
-            "fillColor": "rgb(25, 25, 26)",
-            "router": {
-              "name": "manhattan"
-            },
-            "attrs": {
-              "line": {
-                "strokeDasharray": ""
-              }
-            }
-          },
-          {
-            "id": "8f2a4ebb-e8d6-401a-915b-aeac0c0934e9",
-            "shape": "table",
-            "position": {
-              "x": 290,
-              "y": 190
-            },
-            "count": 0,
-            "originKey": "8A62B2DC-8D6A-4A06-A3F9-22F690B96ED8",
-            "fillColor": "#DDE5FF",
-            "size": {
-              "width": 503,
-              "height": 169
-            }
-          },
-          {
-            "id": "22483a22-4d5b-4f94-b49e-6b338b795a6f",
-            "shape": "table",
-            "position": {
-              "x": 318,
-              "y": -90
-            },
-            "count": 0,
-            "originKey": "70725201-8C5D-45F6-82CC-DD14323C4836",
-            "fillColor": "#DDE5FF",
-            "size": {
-              "width": 447,
-              "height": 169
-            }
-          },
-          {
-            "id": "ca54226d-0a38-41c2-95f8-5d802f00b760",
-            "shape": "table",
-            "position": {
-              "x": -200,
-              "y": -30
-            },
-            "count": 0,
-            "originKey": "3531B396-5AE9-4AA2-8A79-4C3E2A1D02BB",
-            "fillColor": "#DDE5FF",
-            "size": {
-              "width": 432,
-              "height": 123
-            }
-          }
-        ]
-      },
-      "id": "63B3417B-6E56-4260-BC7C-FCB8C4097508",
-      "comment": ""
-    }
-  ],
+  "diagrams": [],
   "standardFields": [
     {
       "defKey": "personInfo",

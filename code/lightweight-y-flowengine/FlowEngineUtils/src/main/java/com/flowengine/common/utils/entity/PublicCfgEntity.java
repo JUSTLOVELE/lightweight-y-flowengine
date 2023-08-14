@@ -29,6 +29,8 @@ public class PublicCfgEntity {
     /** 所属科室 */
     private String deptId ;
 
+    private Integer cfgType;
+
     /** 主键 */
     public String getOpId(){
         return this.opId;
@@ -84,6 +86,14 @@ public class PublicCfgEntity {
     /** 所属科室 */
     public void setDeptId(String deptId){
         this.deptId=deptId;
+    }
+
+    public Integer getCfgType() {
+        return cfgType;
+    }
+
+    public void setCfgType(Integer cfgType) {
+        this.cfgType = cfgType;
     }
 
     public String getComboboxDesc() {

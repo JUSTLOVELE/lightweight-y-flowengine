@@ -65,6 +65,9 @@ public class DictConfigDaoImpl extends BaseDao implements DictConfigDao {
 				    a.cfg_name "cfgName",
 				    a.key_code "keyCode",
 				    a.sort "sort",
+				    a.cfg_type "cfgType",
+				    case when a.cfg_type = 1 then '系统配置'
+                        else '系统字典' end "cfgTypeText",
 				    a.dept_id "deptId" from public_cfg a where 1=1 
 				""";
         StringBuffer sb = new StringBuffer(sql);

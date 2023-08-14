@@ -4,7 +4,7 @@
   "avatar": "",
   "version": "4.6.0",
   "createdTime": "2022-12-9 22:49:27",
-  "updatedTime": "2023-8-14 21:28:24",
+  "updatedTime": "2023-8-14 19:47:33",
   "dbConns": [],
   "profile": {
     "default": {
@@ -563,10 +563,7 @@
       }
     ],
     "menuWidth": "328px",
-    "modelType": "modalGroup",
-    "recentColors": [
-      "#DDE5FF"
-    ]
+    "modelType": "modalGroup"
   },
   "entities": [
     {
@@ -2693,7 +2690,16 @@
           "id": "FF9A7E3C-92DA-44B0-9F36-2A1403C48A5D"
         }
       ],
-      "correlations": [],
+      "correlations": [
+        {
+          "myField": "A90F197B-FAD7-4363-8840-D95CDF3274F6",
+          "refEntity": "70725201-8C5D-45F6-82CC-DD14323C4836",
+          "refField": "3C0BD1D6-4DBA-4E35-8B16-CE95A5AE3A59",
+          "myRows": "1",
+          "refRows": "triangle-fill",
+          "innerType": ""
+        }
+      ],
       "indexes": []
     },
     {
@@ -5454,23 +5460,6 @@
           "extProps": {},
           "domain": "9092C4E0-1A54-4859-ABBB-5B62DBC27573",
           "id": "8D35C7FD-11DB-460F-8B4B-415FCFA12093"
-        },
-        {
-          "defKey": "cfg_type",
-          "defName": "1:系统配置;2:系统字典",
-          "comment": "",
-          "type": "INTEGER",
-          "len": 1,
-          "scale": "",
-          "primaryKey": false,
-          "notNull": false,
-          "autoIncrement": false,
-          "defaultValue": "",
-          "hideInGraph": false,
-          "refDict": "",
-          "extProps": {},
-          "domain": "",
-          "id": "FB1E2BA6-801B-486E-8BEB-18D69D32DFFA"
         }
       ],
       "correlations": [],
@@ -7554,7 +7543,7 @@
               "cell": "22483a22-4d5b-4f94-b49e-6b338b795a6f",
               "port": "3C0BD1D6-4DBA-4E35-8B16-CE95A5AE3A59%in"
             },
-            "relation": "none:triangle-fill",
+            "relation": "1:triangle-fill",
             "vertices": [
               {
                 "x": 260,
@@ -7572,70 +7561,31 @@
             }
           },
           {
-            "id": "10ce18aa-79e4-49e7-8bdf-bf7f9bada43a",
-            "shape": "erdRelation",
-            "source": {
-              "cell": "22483a22-4d5b-4f94-b49e-6b338b795a6f",
-              "port": "FE64FE94-56F6-4086-9097-FD06CD863625%in"
-            },
-            "target": {
-              "cell": "8f2a4ebb-e8d6-401a-915b-aeac0c0934e9",
-              "port": "1AA1ED45-7D4F-4E2B-886E-B1B8403306D7%in"
-            },
-            "relation": "none:triangle-fill",
-            "fillColor": "rgb(25, 25, 26)",
-            "router": {
-              "name": "manhattan"
-            },
-            "attrs": {
-              "line": {
-                "strokeDasharray": ""
-              }
-            }
-          },
-          {
-            "id": "8f2a4ebb-e8d6-401a-915b-aeac0c0934e9",
+            "id": "ca54226d-0a38-41c2-95f8-5d802f00b760",
             "shape": "table",
             "position": {
-              "x": 290,
-              "y": 190
+              "x": -230,
+              "y": -30
             },
             "count": 0,
-            "originKey": "8A62B2DC-8D6A-4A06-A3F9-22F690B96ED8",
-            "fillColor": "#DDE5FF",
+            "originKey": "3531B396-5AE9-4AA2-8A79-4C3E2A1D02BB",
             "size": {
-              "width": 503,
-              "height": 169
+              "width": 432,
+              "height": 123
             }
           },
           {
             "id": "22483a22-4d5b-4f94-b49e-6b338b795a6f",
             "shape": "table",
             "position": {
-              "x": 318,
-              "y": -90
+              "x": 290,
+              "y": -20
             },
             "count": 0,
             "originKey": "70725201-8C5D-45F6-82CC-DD14323C4836",
-            "fillColor": "#DDE5FF",
             "size": {
               "width": 447,
               "height": 169
-            }
-          },
-          {
-            "id": "ca54226d-0a38-41c2-95f8-5d802f00b760",
-            "shape": "table",
-            "position": {
-              "x": -200,
-              "y": -30
-            },
-            "count": 0,
-            "originKey": "3531B396-5AE9-4AA2-8A79-4C3E2A1D02BB",
-            "fillColor": "#DDE5FF",
-            "size": {
-              "width": 432,
-              "height": 123
             }
           }
         ]
