@@ -55,7 +55,7 @@ public class SessionService {
 
                 PublicUserEntity publicUserEntity = _userMapper.selectById(opId);
                 user = new UserCache(publicUserEntity);
-                setCache(accessToken, user, publicUserEntity.getAccessToken());
+                SessionUtils.addUserSession(accessToken, user);
 
                 return user;
             }

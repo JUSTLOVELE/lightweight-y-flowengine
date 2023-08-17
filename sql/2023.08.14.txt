@@ -1,1 +1,0 @@
-alter table public_cfg add column cfg_type int2;

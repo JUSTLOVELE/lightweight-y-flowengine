@@ -76,7 +76,6 @@ public class MainServiceImpl extends BaseService implements MainService {
                 nodeEntity.setNodeStatus(jsonObject.getStr(Constant.Key.NODE_STATUS));
                 nodeEntity.setCheckType(jsonObject.getStr(Constant.Key.CHECK_TYPE));
                 nodeEntities.add(nodeEntity);
-
             }
         }
 

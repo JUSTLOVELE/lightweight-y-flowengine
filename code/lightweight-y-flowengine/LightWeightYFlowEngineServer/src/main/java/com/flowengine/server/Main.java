@@ -17,7 +17,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 public class Main {
 
     /**
-     * http://192.168.31.232:8082/flow/test/test2
+     *
      * @param args
      */
     public static void main(String[] args) {

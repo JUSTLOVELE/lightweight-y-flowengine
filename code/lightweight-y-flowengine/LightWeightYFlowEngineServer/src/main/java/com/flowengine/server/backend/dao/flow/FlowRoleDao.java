@@ -17,17 +17,15 @@ public interface FlowRoleDao {
 
     /**
      * 查询角色总数
-     * @param name
+     * @param param
      * @return
      */
-    public Integer queryTotal(String name, UserCache userCache);
+    public Integer queryTotal(Map<String, Object> param);
 
     /**
      * 角色查询
-     * @param name
-     * @param limit
-     * @param page
+     * @param param
      * @return
      */
-    public List<Map<String, Object>> query(String name, Integer limit, Integer page, UserCache userCache);
+    public List<Map<String, Object>> query(Map<String, Object> param);
 }

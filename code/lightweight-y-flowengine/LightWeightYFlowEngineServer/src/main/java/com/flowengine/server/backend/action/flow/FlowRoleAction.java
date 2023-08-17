@@ -4,6 +4,7 @@ import com.flowengine.common.utils.entity.PublicFlowRoleEntity;
 import com.flowengine.common.utils.entity.PublicFlowRoleUserGrantEntity;
 import com.flowengine.server.backend.service.flow.FlowRoleService;
 import com.flowengine.server.core.BaseAction;
+import com.flowengine.server.utils.Constant;
 import com.flowengine.server.utils.SessionUtils;
 import com.flowengine.server.utils.UUIDGenerator;
 import jakarta.annotation.Resource;
@@ -13,9 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author yangzl 2023/8/14
@@ -30,6 +29,15 @@ public class FlowRoleAction extends BaseAction {
 
     @Resource
     private FlowRoleService _flowRoleService;
+
+    /**
+     * 获取role_type下拉框
+     * @return
+     */
+    @GetMapping(value = "/flowRoleAction/getCombobox", produces = "application/json; charset=utf-8")
+    public String getCombobox() {
+        return _flowRoleService.getCombobox();
+    }
 
     /**
      * 删除
@@ -52,7 +60,6 @@ public class FlowRoleAction extends BaseAction {
     public String edit(String opId, String roleName, Integer roleType, @RequestParam("persons[]") String[] persons) {
         return _flowRoleService.edit(opId, roleName, roleType, persons);
     }
-
 
     /**
      * 新增
@@ -102,8 +109,15 @@ public class FlowRoleAction extends BaseAction {
      * @return
      */
     @GetMapping(value = "/flowRoleAction/query", produces = "application/json; charset=utf-8")
-    public String query(String name, Integer limit, Integer page, HttpServletRequest request) {
-        return _flowRoleService.query(name, limit, page, SessionUtils.getUserSession(request));
+    public String query(String roleName, Integer roleType, Integer limit, Integer page, HttpServletRequest request) {
+
+        Map<String, Object> param = new HashMap<>();
+        param.put(Constant.Key.LIMIT, limit);
+        param.put(Constant.Key.PAGE, page);
+        param.put(Constant.Key.ROLE_NAME, roleName);
+        param.put(Constant.Key.ROLE_TYPE, roleType);
+
+        return _flowRoleService.query(param);
     }
 
 }

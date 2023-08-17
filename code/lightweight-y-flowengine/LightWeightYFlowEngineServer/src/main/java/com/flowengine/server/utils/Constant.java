@@ -125,6 +125,10 @@ public class Constant {
         public String LABEL = "label";
 
         public String COMBOBOX_DESC = "comboboxDesc";
+
+        public String ROLE_NAME = "roleName";
+
+        public String ROLE_TYPE = "roleType";
     }
 
     public interface Value {

@@ -45,6 +45,11 @@ public class FlowRoleServiceImpl extends BaseService implements FlowRoleService 
     private PublicFlowRoleUserGrantMapper _flowRoleUserGrantMapper;
 
     @Override
+    public String getCombobox() {
+        return getJSON(_flowRoleMapper.getCombobox());
+    }
+
+    @Override
     public String delete(String opId) {
 
         deleteFlowRoleUserGrantWithFlowRoleId(opId);
@@ -104,7 +109,10 @@ public class FlowRoleServiceImpl extends BaseService implements FlowRoleService 
     }
 
     @Override
-    public String query(String name, Integer limit, Integer page, UserCache userCache) {
+    public String query(Map<String, Object> param) {
+
+        Integer limit = (Integer) param.get(Constant.Key.LIMIT);
+        Integer page = (Integer) param.get(Constant.Key.PAGE);
 
         if(limit == null) {
             return renderFailureList("limit为空");
@@ -114,7 +122,7 @@ public class FlowRoleServiceImpl extends BaseService implements FlowRoleService 
             return renderFailureList("page为空");
         }
 
-        List<Map<String, Object>> roles = _flowRoleDao.query(name, limit, page, userCache);
+        List<Map<String, Object>> roles = _flowRoleDao.query(param);
 
         for(Map<String, Object> role: roles) {
 
@@ -124,7 +132,7 @@ public class FlowRoleServiceImpl extends BaseService implements FlowRoleService 
         }
 
         if(roles != null && roles.size() > 0) {
-            return renderQuerySuccessList(_flowRoleDao.queryTotal(name, userCache), roles);
+            return renderQuerySuccessList(_flowRoleDao.queryTotal(param), roles);
         }else {
             return renderQuerySuccessList(0, roles);
         }

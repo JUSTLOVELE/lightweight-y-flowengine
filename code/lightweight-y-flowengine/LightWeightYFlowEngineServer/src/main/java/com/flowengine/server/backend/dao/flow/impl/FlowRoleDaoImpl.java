@@ -5,6 +5,7 @@ import com.flowengine.server.backend.dao.admin.impl.RoleDaoImpl;
 import com.flowengine.server.backend.dao.flow.FlowRoleDao;
 import com.flowengine.server.core.BaseDao;
 import com.flowengine.server.model.UserCache;
+import com.flowengine.server.utils.Constant;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Repository;
@@ -27,15 +28,24 @@ public class FlowRoleDaoImpl extends BaseDao implements FlowRoleDao {
     private final static Log _logger = LogFactory.getLog(RoleDaoImpl.class);
 
     @Override
-    public Integer queryTotal(String name, UserCache userCache) {
+    public Integer queryTotal(Map<String, Object> param) {
 
+        String roleName = (String) param.get(Constant.Key.ROLE_NAME);
+        Integer roleType = (Integer) param.get(Constant.Key.ROLE_TYPE);
         List<Object> array = new ArrayList<>();
         StringBuffer sb = new StringBuffer();
         sb.append("SELECT count(*) FROM public_flow_role_tbl a WHERE 1=1 ");
 
-        if(StrUtil.isNotEmpty(name)) {
+        if(StrUtil.isNotEmpty(roleName)) {
+
             sb.append(" and a.role_name like  ? ");
-            array.add("%" + name + "%");
+            array.add("%" + roleName + "%");
+        }
+
+        if(roleType != null) {
+
+            sb.append(" and a.role_type = ? ");
+            array.add(roleType);
         }
 
         String sql = sb.toString();
@@ -45,8 +55,12 @@ public class FlowRoleDaoImpl extends BaseDao implements FlowRoleDao {
     }
 
     @Override
-    public List<Map<String, Object>> query(String name, Integer limit, Integer page, UserCache userCache) {
+    public List<Map<String, Object>> query(Map<String, Object> param) {
 
+        Integer limit = (Integer) param.get(Constant.Key.LIMIT);
+        Integer page = (Integer) param.get(Constant.Key.PAGE);
+        String roleName = (String) param.get(Constant.Key.ROLE_NAME);
+        Integer roleType = (Integer) param.get(Constant.Key.ROLE_TYPE);
         StringBuffer sb = new StringBuffer();
         sb.append("SELECT ");
         sb.append("a.op_id \"opId\",");
@@ -61,9 +75,16 @@ public class FlowRoleDaoImpl extends BaseDao implements FlowRoleDao {
         sb.append(" FROM public_flow_role_tbl a WHERE 1=1 "); //仅查询普通用户角色
         List<Object> array = new ArrayList<>();
 
-        if(StrUtil.isNotEmpty(name)) {
+        if(StrUtil.isNotEmpty(roleName)) {
+
             sb.append(" and a.role_name like ? ");
-            array.add("%" + name + "%");
+            array.add("%" + roleName + "%");
+        }
+
+        if(roleType != null) {
+
+            sb.append(" and a.role_type = ? ");
+            array.add(roleType);
         }
 
         sb.append(" ORDER BY a.create_time desc LIMIT ? offset ? ");

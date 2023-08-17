@@ -57,7 +57,7 @@ public class ProcessorInterceptors implements HandlerInterceptor{
                 response.getWriter().print(renderFailureList("查无缓存"));
                 return false;
             } else {
-                response.sendRedirect(request.getContextPath()+ "/login");
+                response.sendRedirect(request.getContextPath()+ "/admin");
                 return false;
             }
         }

@@ -2,9 +2,9 @@ package com.flowengine.server.backend.service.flow;
 
 import com.flowengine.common.utils.entity.PublicFlowRoleEntity;
 import com.flowengine.common.utils.entity.PublicFlowRoleUserGrantEntity;
-import com.flowengine.server.model.UserCache;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author yangzl 2023/8/14
@@ -15,6 +15,12 @@ import java.util.List;
  * @history:
  */
 public interface FlowRoleService {
+
+    /**
+     *
+     * @return
+     */
+    public String getCombobox();
 
     /**
      * 删除
@@ -44,10 +50,8 @@ public interface FlowRoleService {
 
     /**
      * 查询角色
-     * @param name
-     * @param limit
-     * @param page
+     * @param param
      * @return
      */
-    public String query(String name, Integer limit, Integer page, UserCache userCache);
+    public String query(Map<String, Object> param);
 }
