@@ -79,6 +79,8 @@ public class MainDaoImpl extends BaseDao implements MainDao  {
                     a.main_name "mainName",
                     to_char(a.create_time,'YYYY-MM-DD') as "createTime",
                     a.reference_table_name "referenceTableName",
+                    a.dept_id "deptId",
+                    a.reference_table_id "referenceTableId",
                     (select b.dept_name from public_dept b where b.op_id = a.dept_id) "deptName",
                     a.create_user_name "createUserName"
                     from public_flow_main_tbl a where 1=1

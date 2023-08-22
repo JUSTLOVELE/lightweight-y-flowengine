@@ -1,12 +1,18 @@
 package com.flowengine.server.backend.action.flow;
 
+import cn.hutool.core.util.StrUtil;
+import cn.hutool.json.JSONArray;
+import cn.hutool.json.JSONUtil;
+import com.flowengine.common.utils.entity.PublicFlowMainEntity;
+import com.flowengine.common.utils.entity.PublicFlowNodeEntity;
 import com.flowengine.server.backend.service.flow.MainService;
+import com.flowengine.server.backend.service.flow.NodeService;
 import com.flowengine.server.core.BaseAction;
-import com.flowengine.server.entity.PublicFlowMainEntity;
 import com.flowengine.server.model.UserCache;
 import com.flowengine.server.utils.Constant;
 import com.flowengine.server.utils.SessionUtils;
 import com.flowengine.server.utils.UUIDGenerator;
+import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,8 +33,42 @@ import java.util.Map;
 @RestController
 public class MainAction extends BaseAction {
 
-    @Autowired
+    @Resource
     private MainService _mainService;
+
+    @Resource
+    private NodeService _nodeService;
+
+    /**
+     * 新增
+     * @param mainEntity
+     * @param children
+     * @return
+     */
+    @PostMapping(value = "/mainAction/edit", produces = "application/json; charset=utf-8")
+    public String edit(PublicFlowMainEntity mainEntity, String children) {
+        return _mainService.edit(mainEntity, children);
+    }
+
+    /**
+     * 根据流程主表的主键去查询其节点
+     * @param opId
+     * @return
+     */
+    @GetMapping(value = "/mainAction/queryNodesByOpId", produces = "application/json; charset=utf-8")
+    public String queryNodesByOpId(String opId) {
+        return _nodeService.queryNodesByMainId(opId);
+    }
+
+    /**
+     * 删除
+     * @param opId
+     * @return
+     */
+    @PostMapping(value = "/mainAction/delete", produces = "application/json; charset=utf-8")
+    public String delete(String opId) {
+        return _mainService.delete(opId);
+    }
 
     /**
      * 新增
@@ -45,7 +85,6 @@ public class MainAction extends BaseAction {
         mainEntity.setCreateUserId(userSession.getOpId());
         mainEntity.setCreateUserName(userSession.getUserName());
         mainEntity.setOrgId(userSession.getOrgId());
-        mainEntity.setDeptId(userSession.getDeptId());
 
         return _mainService.add(mainEntity, children);
     }

@@ -1,5 +1,7 @@
 package com.flowengine.server.backend.service.flow.impl;
 
+import com.flowengine.common.utils.mapper.PublicFlowNodeCheckMapper;
+import com.flowengine.common.utils.mapper.PublicFlowNodeMapper;
 import com.flowengine.common.utils.mapper.PublicSubCfgMapper;
 import com.flowengine.server.backend.service.flow.NodeService;
 import com.flowengine.server.core.BaseService;
@@ -23,6 +25,30 @@ public class NodeServiceImpl extends BaseService implements NodeService {
 
     @Resource
     private PublicSubCfgMapper _publicSubCfgMapper;
+
+    @Resource
+    private PublicFlowNodeMapper _publicFlowNodeMapper;
+
+    @Resource
+    private PublicFlowNodeCheckMapper _publicFlowNodeCheckMapper;
+
+    @Override
+    public String queryNodesByMainId(String mainId) {
+
+        List<Map<String, Object>> nodes = _publicFlowNodeMapper.queryNodesByMainId(mainId);
+
+        for(Map<String, Object> node: nodes) {
+
+            String opId = (String) node.get(Constant.Key.OP_ID);
+            List<Map<String, Object>> datas = _publicFlowNodeCheckMapper.queryNodeChecksByNodeId(opId);
+
+            if(datas != null && !datas.isEmpty()) {
+                node.put(Constant.Key.CHILDREN, datas);
+            }
+        }
+
+        return renderQuerySuccessList(nodes.size(), nodes);
+    }
 
     @Override
     public String getCheckTypeCombobox() {

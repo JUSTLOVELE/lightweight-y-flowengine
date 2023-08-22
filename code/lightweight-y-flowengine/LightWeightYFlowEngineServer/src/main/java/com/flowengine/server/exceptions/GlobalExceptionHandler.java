@@ -9,6 +9,8 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -18,7 +20,10 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     @ResponseBody
     public CommonResult error(Exception e) {
-        _logger.error("", e);
+
+        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        String uri = attributes.getRequest().getRequestURI();
+        _logger.error("uri=" + uri + ";", e);
         return CommonResult.fail(e.getMessage());
     }
 

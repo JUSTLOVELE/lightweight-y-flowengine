@@ -1,5 +1,6 @@
 package com.flowengine.server.backend.action.flow;
 
+import com.flowengine.server.backend.action.admin.UserAction;
 import com.flowengine.server.backend.service.flow.NodeService;
 import com.flowengine.server.core.BaseAction;
 import jakarta.annotation.Resource;
@@ -17,6 +18,36 @@ public class NodeAction extends BaseAction {
 
     @Resource
     private NodeService _nodeService;
+
+    @Resource
+    private UserAction _userAction;
+
+    @Resource
+    private DeptAction _deptAction;
+
+    @Resource
+    private FlowRoleAction _flowRoleAction;
+
+    /**
+     * 获取审批类型下拉框
+     * @return
+     */
+    @GetMapping(value = "/nodeAction/getCheckCombobox")
+    public String getCheckCombobox(String value) {
+
+        switch (value) {
+            case "1":
+                return _userAction.getUserCombox();
+            case "2":
+                return _deptAction.getCombobox();
+            case "10":
+                return _flowRoleAction.getCombobox();
+        }
+
+        return "[]";
+    }
+
+
 
     /**
      * 获取审批类型下拉框

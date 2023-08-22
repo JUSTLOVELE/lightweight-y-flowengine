@@ -26,23 +26,19 @@ public class PublicFlowNodeEntity implements Serializable {
     private String lastNodeKey ;
     /** 限制时间,单位天 */
     private Integer limitTime ;
-    /** 下一个环节(json配置);下一个环节*/
+    /** 下一个环节(json配置)**/
     private String nextNode ;
     /** 当前环节名称 */
     private String nodeName ;
     /** 当前环节key;关键字start开始;ing:中间环节;或者其他指定的key也表示中间环节;end结束; */
     private String nodeKey ;
-    /** 看说明;1:创建;2:常规;3:等待多人审批;100:结束归档 */
-    private String nodeType ;
     /** 节点排序：1,2,3,4 */
     private Integer nodeSort ;
     /** 1:开始;2:常规节点;10:结束 */
-    private Integer nodeStatus ;
-    /** 看说明;审批类型,可能为1,2,3;1:人员;2:部门;3:角色;可能为多个值 */
-    private String checkType ;
+    private String nodeStatus ;
     /** 主键 */
     public String getOpId(){
-        return this.opId;
+    return this.opId;
     }
     /** 主键 */
     public void setOpId(String opId){
@@ -114,14 +110,6 @@ public class PublicFlowNodeEntity implements Serializable {
     public void setNodeKey(String nodeKey){
         this.nodeKey=nodeKey;
     }
-    /** 看说明;1:创建;2:常规;3:等待多人审批;100:结束归档 */
-    public String getNodeType(){
-        return this.nodeType;
-    }
-    /** 看说明;1:创建;2:常规;3:等待多人审批;100:结束归档 */
-    public void setNodeType(String nodeType){
-        this.nodeType=nodeType;
-    }
     /** 节点排序：1,2,3,4 */
     public Integer getNodeSort(){
         return this.nodeSort;
@@ -131,19 +119,11 @@ public class PublicFlowNodeEntity implements Serializable {
         this.nodeSort=nodeSort;
     }
     /** 1:开始;2:常规节点;10:结束 */
-    public Integer getNodeStatus(){
+    public String getNodeStatus(){
         return this.nodeStatus;
     }
     /** 1:开始;2:常规节点;10:结束 */
-    public void setNodeStatus(Integer nodeStatus){
+    public void setNodeStatus(String nodeStatus){
         this.nodeStatus=nodeStatus;
-    }
-    /** 看说明;审批类型,可能为1,2,3;1:人员;2:部门;3:角色;可能为多个值 */
-    public String getCheckType(){
-        return this.checkType;
-    }
-    /** 看说明;审批类型,可能为1,2,3;1:人员;2:部门;3:角色;可能为多个值 */
-    public void setCheckType(String checkType){
-        this.checkType=checkType;
     }
 }

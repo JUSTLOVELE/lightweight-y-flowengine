@@ -2,6 +2,7 @@ package com.flowengine.common.utils.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.flowengine.common.utils.entity.PublicFlowTableNameEntity;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
@@ -17,6 +18,14 @@ import java.util.Map;
  */
 @Repository
 public interface PublicFlowTableNameMapper extends BaseMapper<PublicFlowTableNameEntity> {
+
+    /**
+     * 根据opId查询表名
+     * @param opId
+     * @return
+     */
+    @Select("select table_name from public_flow_table_name_tbl where op_id = #{opId}")
+    public String queryTableNameByOpId(@Param("opId") String opId);
 
     /**
      * 获取下拉框数据

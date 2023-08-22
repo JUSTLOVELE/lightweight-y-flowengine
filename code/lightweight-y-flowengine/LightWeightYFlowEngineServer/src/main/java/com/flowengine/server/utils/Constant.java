@@ -129,6 +129,12 @@ public class Constant {
         public String ROLE_NAME = "roleName";
 
         public String ROLE_TYPE = "roleType";
+
+        public String CHILDREN = "children";
+
+        public String PERSON = "person";
+
+        public String SORT = "sort";
     }
 
     public interface Value {

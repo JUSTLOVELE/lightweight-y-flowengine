@@ -1,9 +1,7 @@
 package com.flowengine.server.backend.service.flow;
 
-import com.flowengine.server.entity.PublicFlowMainEntity;
-import com.flowengine.server.entity.PublicFlowNodeEntity;
+import com.flowengine.common.utils.entity.PublicFlowMainEntity;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -13,6 +11,21 @@ import java.util.Map;
  * @history:
  */
 public interface MainService {
+
+    /**
+     * 编辑
+     * @param mainEntity
+     * @param children
+     * @return
+     */
+    public String edit(PublicFlowMainEntity mainEntity, String children);
+
+    /**
+     * 删除
+     * @param opId
+     * @return
+     */
+    public String delete(String opId);
 
     /**
      *
