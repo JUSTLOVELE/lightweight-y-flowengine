@@ -1,7 +1,7 @@
 package com.flowengine.server.backend.service.createmodule.impl;
 
-import com.flowengine.common.utils.entity.PublicFlowTableModuleEntity;
-import com.flowengine.common.utils.mapper.PublicFlowTableModuleMapper;
+import com.flowengine.common.utils.entity.createmodel.PublicFlowTableModuleEntity;
+import com.flowengine.common.utils.mapper.createmodel.PublicFlowTableModuleMapper;
 import com.flowengine.server.backend.dao.createmodule.TableModuleDao;
 import com.flowengine.server.backend.service.createmodule.TableModuleService;
 import com.flowengine.server.core.Base;

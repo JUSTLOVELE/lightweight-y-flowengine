@@ -1,6 +1,6 @@
 package com.flowengine.server.backend.service.createmodule;
 
-import com.flowengine.common.utils.entity.PublicFlowTableModuleEntity;
+import com.flowengine.common.utils.entity.createmodel.PublicFlowTableModuleEntity;
 
 import java.util.Map;
 

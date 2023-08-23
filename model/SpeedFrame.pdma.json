@@ -4,7 +4,7 @@
   "avatar": "",
   "version": "4.6.2",
   "createdTime": "2022-12-9 22:49:27",
-  "updatedTime": "2023-8-22 17:14:42",
+  "updatedTime": "2023-8-23 10:53:35",
   "dbConns": [],
   "profile": {
     "default": {
@@ -1546,7 +1546,7 @@
         }
       },
       "defKey": "public_flow_instance_tbl",
-      "defName": "流程实例表",
+      "defName": "流程实例表（模版）",
       "comment": "",
       "properties": {
         "partitioned by": "(date string)",
@@ -1895,8 +1895,8 @@
           "defKey": "public_flow_attachment",
           "defName": "附件id,多个附件用逗号风格，一个流程最多不超过30个附件；公开附件信息",
           "comment": "",
-          "type": "",
-          "len": "",
+          "type": "TEXT",
+          "len": "900",
           "scale": "",
           "primaryKey": false,
           "notNull": false,
@@ -1905,15 +1905,15 @@
           "hideInGraph": false,
           "refDict": "",
           "extProps": {},
-          "domain": "3E948CEC-3070-472C-AF92-F3CA11EC9D15",
+          "domain": "",
           "id": "589395E4-711F-4190-92C2-70D7E42203C2"
         },
         {
           "defKey": "private_flow_attachment",
           "defName": "附件id,多个附件用逗号风格，一个流程最多不超过30个附件；不公开附件信息",
           "comment": "",
-          "type": "",
-          "len": "",
+          "type": "TEXT",
+          "len": "900",
           "scale": "",
           "primaryKey": false,
           "notNull": false,
@@ -1922,7 +1922,7 @@
           "hideInGraph": false,
           "refDict": "",
           "extProps": {},
-          "domain": "3E948CEC-3070-472C-AF92-F3CA11EC9D15",
+          "domain": "",
           "id": "055DD4D7-7558-42C0-987B-7B5596C465DC"
         },
         {
@@ -1955,7 +1955,7 @@
         }
       },
       "defKey": "public_flow_instance_flow_tbl",
-      "defName": "流程流转表",
+      "defName": "流程流转表（模版）",
       "comment": "",
       "properties": {
         "partitioned by": "(date string)",
@@ -6661,6 +6661,263 @@
       ],
       "correlations": [],
       "indexes": []
+    },
+    {
+      "id": "6C502446-EF54-4855-A19B-935D9E11403E",
+      "env": {
+        "base": {
+          "nameSpace": "",
+          "codeRoot": ""
+        }
+      },
+      "defKey": "public_flow_table_flow_instance_tbl",
+      "defName": "建模引擎-表-业务流程表",
+      "comment": "",
+      "properties": {
+        "partitioned by": "(date string)",
+        "row format delimited": "",
+        "fields terminated by ','": "",
+        "collection items terminated by '-'": "",
+        "map keys terminated by ':'": "",
+        "store as textfile;": ""
+      },
+      "nameTemplate": "{defKey}[{defName}]",
+      "notes": {},
+      "headers": [
+        {
+          "refKey": "hideInGraph",
+          "hideInGraph": true
+        },
+        {
+          "refKey": "defKey",
+          "freeze": false,
+          "hideInGraph": false
+        },
+        {
+          "refKey": "defName",
+          "freeze": false,
+          "hideInGraph": false
+        },
+        {
+          "refKey": "comment",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "type",
+          "freeze": false,
+          "hideInGraph": false
+        },
+        {
+          "refKey": "len",
+          "freeze": false,
+          "hideInGraph": false
+        },
+        {
+          "refKey": "primaryKey",
+          "freeze": false,
+          "hideInGraph": false
+        },
+        {
+          "refKey": "notNull",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "autoIncrement",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "domain",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "scale",
+          "freeze": false,
+          "hideInGraph": false
+        },
+        {
+          "refKey": "refDict",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "defaultValue",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "isStandard",
+          "freeze": false,
+          "hideInGraph": false
+        },
+        {
+          "refKey": "uiHint",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "extProps",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr1",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr2",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr3",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr4",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr5",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr6",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr7",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr8",
+          "freeze": false,
+          "hideInGraph": true
+        },
+        {
+          "refKey": "attr9",
+          "freeze": false,
+          "hideInGraph": true
+        }
+      ],
+      "fields": [
+        {
+          "defKey": "op_id",
+          "defName": "主键",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": true,
+          "notNull": true,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "domain": "16120F75-6AA7-4483-868D-F07F511BB081",
+          "refDict": "",
+          "extProps": {},
+          "notes": {},
+          "attr1": "",
+          "attr2": "",
+          "attr3": "",
+          "attr4": "",
+          "attr5": "",
+          "attr6": "",
+          "attr7": "",
+          "attr8": "",
+          "attr9": "",
+          "id": "D226BC69-2C85-411C-A442-6D5B29732D59"
+        },
+        {
+          "defKey": "create_time",
+          "defName": "创建时间",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": true,
+          "domain": "7CFFA0D3-6A93-4DDC-BC10-DF21211064DC",
+          "refDict": "",
+          "extProps": {},
+          "notes": {},
+          "attr1": "",
+          "attr2": "",
+          "attr3": "",
+          "attr4": "",
+          "attr5": "",
+          "attr6": "",
+          "attr7": "",
+          "attr8": "",
+          "attr9": "",
+          "id": "90508A98-BDD5-48CB-8C83-06CD94BE4D3D"
+        },
+        {
+          "defKey": "table_op_id",
+          "defName": "public_flow_table_name_tbl的主键",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "extProps": {},
+          "domain": "9092C4E0-1A54-4859-ABBB-5B62DBC27573",
+          "id": "12FDD548-56B7-4735-AB8B-0584AA29E191"
+        },
+        {
+          "defKey": "table_type",
+          "defName": "1:流程实例;2:流程流转",
+          "comment": "",
+          "type": "INTEGER",
+          "len": 1,
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "extProps": {},
+          "domain": "",
+          "id": "09B8163C-4F19-4C40-9F4B-4CF44A091250"
+        },
+        {
+          "defKey": "table_name",
+          "defName": "表名",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "extProps": {},
+          "domain": "9092C4E0-1A54-4859-ABBB-5B62DBC27573",
+          "id": "13468C3A-B2B8-4221-A327-D27671ADACAA"
+        }
+      ],
+      "correlations": [],
+      "indexes": []
     }
   ],
   "views": [],
@@ -7060,7 +7317,8 @@
       "refEntities": [
         "3531B396-5AE9-4AA2-8A79-4C3E2A1D02BB",
         "70725201-8C5D-45F6-82CC-DD14323C4836",
-        "8A62B2DC-8D6A-4A06-A3F9-22F690B96ED8"
+        "8A62B2DC-8D6A-4A06-A3F9-22F690B96ED8",
+        "6C502446-EF54-4855-A19B-935D9E11403E"
       ],
       "refViews": [],
       "refDiagrams": [],

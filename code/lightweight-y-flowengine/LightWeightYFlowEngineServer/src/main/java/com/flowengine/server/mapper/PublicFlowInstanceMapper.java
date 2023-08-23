@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
  * @version 1.00.00
  * @history:
  */
+@Deprecated
 @Repository
 public interface PublicFlowInstanceMapper extends BaseMapper<PublicFlowInstanceEntity> {
 }

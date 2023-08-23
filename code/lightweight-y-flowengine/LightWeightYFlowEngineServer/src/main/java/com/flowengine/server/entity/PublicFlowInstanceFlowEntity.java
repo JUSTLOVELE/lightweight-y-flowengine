@@ -11,6 +11,7 @@ import java.util.Date;
  * @version 1.00.00
  * @history:
  */
+@Deprecated
 @TableName("public_flow_instance_flow_tbl")
 public class PublicFlowInstanceFlowEntity implements Serializable {
     /** 主键 */

@@ -1,4 +1,4 @@
-package com.flowengine.common.utils.entity;
+package com.flowengine.common.utils.entity.createmodel;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;

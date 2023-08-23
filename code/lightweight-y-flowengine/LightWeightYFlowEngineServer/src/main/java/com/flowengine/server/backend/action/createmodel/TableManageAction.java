@@ -1,6 +1,6 @@
 package com.flowengine.server.backend.action.createmodel;
 
-import com.flowengine.common.utils.entity.PublicFlowTableNameEntity;
+import com.flowengine.common.utils.entity.createmodel.PublicFlowTableNameEntity;
 import com.flowengine.server.backend.service.createmodule.TableManageService;
 import com.flowengine.server.core.BaseAction;
 import com.flowengine.server.utils.Constant;
@@ -26,6 +26,20 @@ public class TableManageAction extends BaseAction {
 
     @Resource
     private TableManageService _tableManageService;
+
+    /**
+     * 表-列查询
+     * @param opId
+     * @return
+     */
+    @GetMapping(value = "/tableManageAction/tableFlowInstanceQuery", produces = "application/json; charset=utf-8")
+    public String tableFlowInstanceQuery(String opId) {
+
+        Map<String, Object> param = new HashMap<>();
+        param.put(Constant.Key.OP_ID, opId);
+
+        return _tableManageService.tableFlowInstanceQuery(param);
+    }
 
     /**
      * 获得下拉框

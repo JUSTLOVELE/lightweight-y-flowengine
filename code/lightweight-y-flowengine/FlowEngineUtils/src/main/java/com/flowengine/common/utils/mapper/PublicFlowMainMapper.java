@@ -2,6 +2,8 @@ package com.flowengine.common.utils.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.flowengine.common.utils.entity.PublicFlowMainEntity;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -14,4 +16,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface PublicFlowMainMapper extends BaseMapper<PublicFlowMainEntity> {
+
+    @Select("select 1 as \"c\" from public_flow_main_tbl WHERE reference_table_id = #{refOpId} limit 1")
+    public int queryCountByRefOpId(@Param("refOpId") String refOpId);
 }

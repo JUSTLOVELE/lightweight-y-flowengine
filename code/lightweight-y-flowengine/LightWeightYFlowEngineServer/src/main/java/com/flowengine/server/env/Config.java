@@ -27,7 +27,7 @@ import org.springframework.web.filter.CorsFilter;
  * @history:
  */
 @Configuration
-@MapperScan({"com.flowengine.server.mapper", "com.flowengine.common.utils.mapper"})
+@MapperScan({"com.flowengine.server.mapper", "com.flowengine.common.utils.mapper", "com.flowengine.common.utils.mapper.*"})
 public class Config {
 
     private final static Log _logger = LogFactory.getLog(Config.class);

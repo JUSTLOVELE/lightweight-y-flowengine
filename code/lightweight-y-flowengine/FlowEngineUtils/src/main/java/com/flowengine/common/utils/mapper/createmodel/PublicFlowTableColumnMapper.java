@@ -1,7 +1,7 @@
-package com.flowengine.common.utils.mapper;
+package com.flowengine.common.utils.mapper.createmodel;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.flowengine.common.utils.entity.PublicFlowTableColumnEntity;
+import com.flowengine.common.utils.entity.createmodel.PublicFlowTableColumnEntity;
 import org.springframework.stereotype.Repository;
 
 /**

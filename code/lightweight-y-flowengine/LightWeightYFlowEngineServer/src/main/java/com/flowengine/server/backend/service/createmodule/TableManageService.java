@@ -1,6 +1,6 @@
 package com.flowengine.server.backend.service.createmodule;
 
-import com.flowengine.common.utils.entity.PublicFlowTableNameEntity;
+import com.flowengine.common.utils.entity.createmodel.PublicFlowTableNameEntity;
 
 import java.util.Map;
 
@@ -11,6 +11,13 @@ import java.util.Map;
  * @history:
  */
 public interface TableManageService {
+
+    /**
+     * 业务关联的流程表名查询
+     * @param param
+     * @return
+     */
+    public String tableFlowInstanceQuery(Map<String, Object> param);
 
     /**
      * 获取下拉框

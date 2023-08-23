@@ -12,8 +12,9 @@ import com.flowengine.common.utils.enums.FlowCheckTypeEnum;
 import com.flowengine.common.utils.mapper.PublicFlowMainMapper;
 import com.flowengine.common.utils.mapper.PublicFlowNodeCheckMapper;
 import com.flowengine.common.utils.mapper.PublicFlowNodeMapper;
-import com.flowengine.common.utils.mapper.PublicFlowTableNameMapper;
+import com.flowengine.common.utils.mapper.createmodel.PublicFlowTableNameMapper;
 import com.flowengine.server.backend.dao.flow.MainDao;
+import com.flowengine.server.backend.service.createmodule.TableFlowInstanceService;
 import com.flowengine.server.backend.service.flow.MainService;
 import com.flowengine.server.core.BaseService;
 import com.flowengine.server.utils.Constant;
@@ -22,7 +23,6 @@ import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -51,6 +51,9 @@ public class MainServiceImpl extends BaseService implements MainService {
     @Resource
     private PublicFlowTableNameMapper _flowTableNameMapper;
 
+    @Resource
+    private TableFlowInstanceService _tableFlowInstanceService;
+
     @Override
     public String edit(PublicFlowMainEntity mainEntity, String children) {
 
@@ -60,9 +63,12 @@ public class MainServiceImpl extends BaseService implements MainService {
         publicFlowMainEntity.setDeptId(mainEntity.getDeptId());
 
         if(!mainEntity.getReferenceTableId().equals(publicFlowMainEntity.getReferenceTableId())) {
+
             String tableName = _flowTableNameMapper.queryTableNameByOpId(mainEntity.getReferenceTableId());
             publicFlowMainEntity.setReferenceTableName(tableName);
-            publicFlowMainEntity.setReferenceTableId(publicFlowMainEntity.getReferenceTableId());
+            publicFlowMainEntity.setReferenceTableId(mainEntity.getReferenceTableId());
+            _tableFlowInstanceService.dropTableByTableOpId(mainEntity.getReferenceTableId());
+            _tableFlowInstanceService.createFlowAndFlowInstance(mainEntity.getReferenceTableId(), tableName);
         }
 
         _mainMapper.updateById(publicFlowMainEntity);
@@ -89,6 +95,7 @@ public class MainServiceImpl extends BaseService implements MainService {
         mainEntity.setReferenceTableName(tableName);
         _mainMapper.insert(mainEntity);
         setNode(children, mainEntity.getOpId());
+        _tableFlowInstanceService.createFlowAndFlowInstance(mainEntity.getReferenceTableId(), tableName);
         return renderOpSuccessList(1);
     }
 
@@ -104,6 +111,7 @@ public class MainServiceImpl extends BaseService implements MainService {
         if(StrUtil.isNotEmpty(arrayJson)) {
 
             JSONArray objects = JSONUtil.parseArray(arrayJson);
+            PublicFlowNodeEntity lastNodeEntity = null;
 
             for(int i=0; i<objects.size(); i++) {
 
@@ -118,6 +126,13 @@ public class MainServiceImpl extends BaseService implements MainService {
                 nodeEntity.setNodeKey(jsonObject.getStr(Constant.Key.NODE_KEY));
                 nodeEntity.setNodeSort(i+1);
                 nodeEntity.setNodeStatus(jsonObject.getStr(Constant.Key.NODE_STATUS));
+
+                if(lastNodeEntity != null) {
+                    nodeEntity.setLastNodeId(lastNodeEntity.getOpId());
+                    nodeEntity.setLastNodeKey(lastNodeEntity.getNodeKey());
+                }
+
+                lastNodeEntity = nodeEntity;
                 _nodeMapper.insert(nodeEntity);
                 JSONArray nodeChecks = jsonObject.getJSONArray(Constant.Key.CHILDREN);
 

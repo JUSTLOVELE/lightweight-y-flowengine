@@ -1,7 +1,7 @@
-package com.flowengine.common.utils.mapper;
+package com.flowengine.common.utils.mapper.createmodel;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.flowengine.common.utils.entity.PublicFlowTableModuleEntity;
+import com.flowengine.common.utils.entity.createmodel.PublicFlowTableModuleEntity;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 

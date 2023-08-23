@@ -1,15 +1,12 @@
 package com.flowengine.server.backend.action.createmodel;
 
-import com.flowengine.common.utils.entity.PublicFlowTableModuleEntity;
+import com.flowengine.common.utils.entity.createmodel.PublicFlowTableModuleEntity;
 import com.flowengine.server.backend.service.createmodule.TableModuleService;
 import com.flowengine.server.core.BaseAction;
-import com.flowengine.server.model.UserCache;
 import com.flowengine.server.utils.Constant;
-import com.flowengine.server.utils.SessionUtils;
 import com.flowengine.server.utils.UUIDGenerator;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;

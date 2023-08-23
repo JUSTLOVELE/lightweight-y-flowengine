@@ -2,12 +2,15 @@ package com.flowengine.server.backend.service.createmodule.impl;
 
 import cn.hutool.core.util.StrUtil;
 import com.flowengine.common.utils.UUIDGenerator;
-import com.flowengine.common.utils.entity.PublicFlowTableColumnEntity;
-import com.flowengine.common.utils.entity.PublicFlowTableNameEntity;
-import com.flowengine.common.utils.mapper.PublicFlowTableColumnMapper;
-import com.flowengine.common.utils.mapper.PublicFlowTableModuleMapper;
-import com.flowengine.common.utils.mapper.PublicFlowTableNameMapper;
+import com.flowengine.common.utils.entity.createmodel.PublicFlowTableColumnEntity;
+import com.flowengine.common.utils.entity.createmodel.PublicFlowTableNameEntity;
+import com.flowengine.common.utils.mapper.PublicFlowMainMapper;
+import com.flowengine.common.utils.mapper.createmodel.PublicFlowTableColumnMapper;
+import com.flowengine.common.utils.mapper.createmodel.PublicFlowTableFlowInstanceMapper;
+import com.flowengine.common.utils.mapper.createmodel.PublicFlowTableModuleMapper;
+import com.flowengine.common.utils.mapper.createmodel.PublicFlowTableNameMapper;
 import com.flowengine.server.backend.dao.createmodule.TableManageDao;
+import com.flowengine.server.backend.service.createmodule.TableFlowInstanceService;
 import com.flowengine.server.backend.service.createmodule.TableManageService;
 import com.flowengine.server.core.BaseService;
 import com.flowengine.server.utils.Constant;
@@ -17,7 +20,6 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,7 +46,25 @@ public class TableManageServiceImpl extends BaseService implements TableManageSe
     @Resource
     private PublicFlowTableColumnMapper _flowTableColumnMapper;
 
+    @Resource
+    private PublicFlowTableFlowInstanceMapper _flowTableFlowInstanceMapper;
+
+    @Resource
+    private PublicFlowMainMapper _flowMainMapper;
+
+    @Resource
+    private TableFlowInstanceService _tableFlowInstanceService;
+
     private final static Log _logger = LogFactory.getLog(TableManageServiceImpl.class);
+
+    @Override
+    public String tableFlowInstanceQuery(Map<String, Object> param) {
+
+        String opId = (String) param.get(Constant.Key.OP_ID);
+        List<Map<String, Object>> datas = _flowTableFlowInstanceMapper.queryByTableOpId(opId);
+
+        return renderQuerySuccessList(datas.size(), datas);
+    }
 
     @Override
     public String getCombobox() {
@@ -127,18 +147,23 @@ public class TableManageServiceImpl extends BaseService implements TableManageSe
     public String delete(Map<String, Object> param) {
 
         String tableName = (String) param.get(Constant.Key.TABLE_NAME);
+        String opId = (String) param.get(Constant.Key.OP_ID);
         int total = _tableManageDao.queryTableCount(tableName);
 
         if(total > 0) {
             return renderPrintFailureList("该表已经产生业务数据,请联系超级管理员进行删除!");
         }
 
+        if(_flowMainMapper.queryCountByRefOpId(opId) > 0) {
+            return renderPrintFailureList("该表已经被流程绑定,请联系超级管理员进行删除!");
+        }
+
         _tableManageDao.executeDropSQL(tableName);
-        String opId = (String) param.get(Constant.Key.OP_ID);
         Map<String,Object> p = new HashMap<>();
         p.put(Constant.Column.TABLE_OP_ID, opId);
         _flowTableColumnMapper.deleteByMap(p);
         _flowTableNameMapper.deleteById(opId);
+        _tableFlowInstanceService.dropTableByTableOpId(opId);
 
         return renderOpSuccessList(1);
     }
