@@ -18,6 +18,9 @@ import java.util.Map;
 @Repository
 public interface PublicFlowTableFlowInstanceMapper extends BaseMapper<PublicFlowTableFlowInstanceEntity> {
 
+
+
+
     /**
      * 根据tableOpId删除数据
      * @param tableOpId
@@ -32,6 +35,7 @@ public interface PublicFlowTableFlowInstanceMapper extends BaseMapper<PublicFlow
     String QUERY_BY_TABLEOPID_SQL = """
             select 
             table_name "tableName",
+            table_type "tableType",
             to_char(create_time, 'YYYY-MM-DD') "createTime",
             (case when table_type = 1 then '流程实例'
             when table_type = 2 then '流程流转'

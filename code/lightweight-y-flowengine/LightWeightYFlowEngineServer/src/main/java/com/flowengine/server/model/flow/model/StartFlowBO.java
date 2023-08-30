@@ -1,4 +1,4 @@
-package com.flowengine.server.model;
+package com.flowengine.server.model.flow.model;
 
 /**
  * @Description:

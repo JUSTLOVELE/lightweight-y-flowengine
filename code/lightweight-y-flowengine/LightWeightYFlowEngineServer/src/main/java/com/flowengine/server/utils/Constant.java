@@ -135,6 +135,8 @@ public class Constant {
         public String PERSON = "person";
 
         public String SORT = "sort";
+
+        public String TABLE_TYPE = "tableType";
     }
 
     public interface Value {
@@ -145,5 +147,15 @@ public class Constant {
     public interface Dict {
 
         String FLOW_ROLE_ROLE_TYPE = "flow_role_role_type";
+    }
+
+    public interface Flow {
+        String REFERENCE_TABLE_NAME = "referenceTableName";
+
+        String REFERENCE_TABLE_ID = "referenceTableId";
+
+        String FLOW_INSTANCE_TABLE_NAME = "flowInstanceTableName";
+
+        String FLOW_INSTANCE_FLOW_TABLE_NAME = "flowInstanceFlowTableName";
     }
 }

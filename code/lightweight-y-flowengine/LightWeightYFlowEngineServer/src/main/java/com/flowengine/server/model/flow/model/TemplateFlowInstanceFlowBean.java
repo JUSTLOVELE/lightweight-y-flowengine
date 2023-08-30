@@ -1,0 +1,215 @@
+package com.flowengine.server.model.flow.model;
+
+import java.util.Date;
+
+/**
+ * @author yangzl 2023/8/30
+ * @version 1.00.00
+ * @Description:
+ * @Copyright: Copyright (c) 2023 THINK WIN BIG DATA All Rights Reserved
+ * @Company: 福建星云大数据应用服务有限公司
+ * @history:
+ */
+public class TemplateFlowInstanceFlowBean {
+    /** 主键 */
+    private String opId ;
+    /** 流程实例表主键 */
+    private String instanceId ;
+    /** 绑定的业务主键 */
+    private String taskOpId ;
+    /** 创建时间 */
+    private Date createTime ;
+    /** 环节id */
+    private String nodeId ;
+    /**  */
+    private String nodeKey ;
+    /** 机构id */
+    private String orgId ;
+    /** 部门id */
+    private String deptId ;
+    /**  */
+    private String lastNodeId ;
+    /**  */
+    private String lastNodeKey ;
+    /**  */
+    private String nextNodeId ;
+    /**  */
+    private String nextNodeKey ;
+    /**  */
+    private Date operationTime ;
+    /** 就这个表的上一个环节的主键 */
+    private String lastOpId ;
+    /** 流程状态;0:未操作;1:已操作;注意这里仅仅是是否操作过，如果不通过也是属于操作的也就是1 */
+    private Integer flowStatus ;
+    /** 处理结果:0:不通过;1:通过 */
+    private Integer flowResult ;
+    /** 处理意见 */
+    private String flowComment ;
+    /** 领导处理意见 */
+    private String headerComment ;
+    /** 回退意见 */
+    private String backComment ;
+    /** 顺序 */
+    private Integer flowSort ;
+
+    /** 主键 */
+    public String getOpId(){
+        return this.opId;
+    }
+    /** 主键 */
+    public void setOpId(String opId){
+        this.opId=opId;
+    }
+    /** 流程实例表主键 */
+    public String getInstanceId(){
+        return this.instanceId;
+    }
+    /** 流程实例表主键 */
+    public void setInstanceId(String instanceId){
+        this.instanceId=instanceId;
+    }
+    /** 绑定的业务主键 */
+    public String getTaskOpId(){
+        return this.taskOpId;
+    }
+    /** 绑定的业务主键 */
+    public void setTaskOpId(String taskOpId){
+        this.taskOpId=taskOpId;
+    }
+    /** 创建时间 */
+    public Date getCreateTime(){
+        return this.createTime;
+    }
+    /** 创建时间 */
+    public void setCreateTime(Date createTime){
+        this.createTime=createTime;
+    }
+    /** 环节id */
+    public String getNodeId(){
+        return this.nodeId;
+    }
+    /** 环节id */
+    public void setNodeId(String nodeId){
+        this.nodeId=nodeId;
+    }
+    /**  */
+    public String getNodeKey(){
+        return this.nodeKey;
+    }
+    /**  */
+    public void setNodeKey(String nodeKey){
+        this.nodeKey=nodeKey;
+    }
+    /** 机构id */
+    public String getOrgId(){
+        return this.orgId;
+    }
+    /** 机构id */
+    public void setOrgId(String orgId){
+        this.orgId=orgId;
+    }
+    /** 部门id */
+    public String getDeptId(){
+        return this.deptId;
+    }
+    /** 部门id */
+    public void setDeptId(String deptId){
+        this.deptId=deptId;
+    }
+    /**  */
+    public String getLastNodeId(){
+        return this.lastNodeId;
+    }
+    /**  */
+    public void setLastNodeId(String lastNodeId){
+        this.lastNodeId=lastNodeId;
+    }
+    /**  */
+    public String getLastNodeKey(){
+        return this.lastNodeKey;
+    }
+    /**  */
+    public void setLastNodeKey(String lastNodeKey){
+        this.lastNodeKey=lastNodeKey;
+    }
+    /**  */
+    public String getNextNodeId(){
+        return this.nextNodeId;
+    }
+    /**  */
+    public void setNextNodeId(String nextNodeId){
+        this.nextNodeId=nextNodeId;
+    }
+    /**  */
+    public String getNextNodeKey(){
+        return this.nextNodeKey;
+    }
+    /**  */
+    public void setNextNodeKey(String nextNodeKey){
+        this.nextNodeKey=nextNodeKey;
+    }
+    /**  */
+    public Date getOperationTime(){
+        return this.operationTime;
+    }
+    /**  */
+    public void setOperationTime(Date operationTime){
+        this.operationTime=operationTime;
+    }
+    /** 就这个表的上一个环节的主键 */
+    public String getLastOpId(){
+        return this.lastOpId;
+    }
+    /** 就这个表的上一个环节的主键 */
+    public void setLastOpId(String lastOpId){
+        this.lastOpId=lastOpId;
+    }
+    /** 流程状态;0:未操作;1:已操作;注意这里仅仅是是否操作过，如果不通过也是属于操作的也就是1 */
+    public Integer getFlowStatus(){
+        return this.flowStatus;
+    }
+    /** 流程状态;0:未操作;1:已操作;注意这里仅仅是是否操作过，如果不通过也是属于操作的也就是1 */
+    public void setFlowStatus(Integer flowStatus){
+        this.flowStatus=flowStatus;
+    }
+    /** 处理结果:0:不通过;1:通过 */
+    public Integer getFlowResult(){
+        return this.flowResult;
+    }
+    /** 处理结果:0:不通过;1:通过 */
+    public void setFlowResult(Integer flowResult){
+        this.flowResult=flowResult;
+    }
+    /** 处理意见 */
+    public String getFlowComment(){
+        return this.flowComment;
+    }
+    /** 处理意见 */
+    public void setFlowComment(String flowComment){
+        this.flowComment=flowComment;
+    }
+    /** 领导处理意见 */
+    public String getHeaderComment(){
+        return this.headerComment;
+    }
+    /** 领导处理意见 */
+    public void setHeaderComment(String headerComment){
+        this.headerComment=headerComment;
+    }
+    /** 回退意见 */
+    public String getBackComment(){
+        return this.backComment;
+    }
+    /** 回退意见 */
+    public void setBackComment(String backComment){
+        this.backComment=backComment;
+    }
+    /** 顺序 */
+    public Integer getFlowSort(){
+        return this.flowSort;
+    }
+    /** 顺序 */
+    public void setFlowSort(Integer flowSort){
+        this.flowSort=flowSort;
+    }
+}

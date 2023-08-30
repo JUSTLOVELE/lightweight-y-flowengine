@@ -15,6 +15,7 @@ import com.flowengine.common.utils.mapper.PublicFlowNodeMapper;
 import com.flowengine.common.utils.mapper.createmodel.PublicFlowTableNameMapper;
 import com.flowengine.server.backend.dao.flow.MainDao;
 import com.flowengine.server.backend.service.createmodule.TableFlowInstanceService;
+import com.flowengine.server.backend.service.flow.FlowInitService;
 import com.flowengine.server.backend.service.flow.MainService;
 import com.flowengine.server.core.BaseService;
 import com.flowengine.server.utils.Constant;
@@ -54,6 +55,9 @@ public class MainServiceImpl extends BaseService implements MainService {
     @Resource
     private TableFlowInstanceService _tableFlowInstanceService;
 
+    @Resource
+    private FlowInitService _flowInitService;
+
     @Override
     public String edit(PublicFlowMainEntity mainEntity, String children) {
 
@@ -75,6 +79,7 @@ public class MainServiceImpl extends BaseService implements MainService {
         _nodeMapper.deleteByMainOpId(mainEntity.getOpId());
         _nodeCheckMapper.deleteByMainOpId(mainEntity.getOpId());
         setNode(children, mainEntity.getOpId());
+        _flowInitService.initFlowMainData(mainEntity.getOpId(), mainEntity.getReferenceTableName(), mainEntity.getReferenceTableId());
 
         return renderOpSuccessList(1);
     }
@@ -85,6 +90,8 @@ public class MainServiceImpl extends BaseService implements MainService {
         _mainMapper.deleteById(opId);
         _nodeMapper.deleteByMainOpId(opId);
         _nodeCheckMapper.deleteByMainOpId(opId);
+        _flowInitService.deleteFlowMainDataFromRedis(opId);
+
         return renderOpSuccessList(1);
     }
 
@@ -96,6 +103,7 @@ public class MainServiceImpl extends BaseService implements MainService {
         _mainMapper.insert(mainEntity);
         setNode(children, mainEntity.getOpId());
         _tableFlowInstanceService.createFlowAndFlowInstance(mainEntity.getReferenceTableId(), tableName);
+        _flowInitService.initFlowMainData(mainEntity.getOpId(), mainEntity.getReferenceTableName(), mainEntity.getReferenceTableId());
         return renderOpSuccessList(1);
     }
 

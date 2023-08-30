@@ -3,7 +3,7 @@ package com.flowengine.server.backend.service.flow;
 import com.flowengine.server.model.BackFlowBO;
 import com.flowengine.server.model.EndFlowBO;
 import com.flowengine.server.model.NextFlowBO;
-import com.flowengine.server.model.StartFlowBO;
+import com.flowengine.server.model.flow.model.StartFlowBO;
 
 /**
  * @Description:

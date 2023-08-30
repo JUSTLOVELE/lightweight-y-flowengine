@@ -1,5 +1,6 @@
 package com.flowengine.server.env;
 
+import com.flowengine.server.backend.service.flow.FlowInitService;
 import jakarta.annotation.Resource;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -17,11 +18,15 @@ import org.springframework.stereotype.Component;
 public class ApplicationRunnerImpl implements ApplicationRunner {
 
     @Resource
+    private FlowInitService _flowInitService;
+
+    @Resource
     private RedisTemplate<String, Object> redisTemplate;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
 
+        _flowInitService.initFlowMainDatas();
     }
 
     @SuppressWarnings({ "unchecked", "rawtypes" })

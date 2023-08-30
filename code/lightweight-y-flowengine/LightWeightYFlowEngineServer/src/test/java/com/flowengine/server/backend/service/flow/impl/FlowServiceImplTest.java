@@ -2,7 +2,7 @@ package com.flowengine.server.backend.service.flow.impl;
 
 import com.flowengine.server.Main;
 import com.flowengine.server.backend.service.flow.FlowService;
-import com.flowengine.server.model.StartFlowBO;
+import com.flowengine.server.model.flow.model.StartFlowBO;
 import jakarta.annotation.Resource;
 import org.junit.Test;
 import org.junit.runner.RunWith;
