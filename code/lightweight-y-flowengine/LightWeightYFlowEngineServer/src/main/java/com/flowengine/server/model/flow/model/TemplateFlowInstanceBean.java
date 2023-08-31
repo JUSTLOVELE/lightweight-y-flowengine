@@ -1,5 +1,7 @@
 package com.flowengine.server.model.flow.model;
 
+import com.flowengine.server.utils.UUIDGenerator;
+
 import java.util.Date;
 
 /**
@@ -41,6 +43,12 @@ public class TemplateFlowInstanceBean {
     private String privateFlowAttachment ;
     /** 创建人 */
     private String createUserOpId ;
+
+    public TemplateFlowInstanceBean() {
+
+        this.createTime = new Date();
+        this.opId = UUIDGenerator.getUUID();
+    }
 
     /** 主键 */
     public String getOpId(){

@@ -6,7 +6,7 @@ import com.flowengine.common.utils.mapper.PublicFlowMainMapper;
 import com.flowengine.common.utils.mapper.createmodel.PublicFlowTableFlowInstanceMapper;
 import com.flowengine.server.backend.service.flow.FlowInitService;
 import com.flowengine.server.core.BaseService;
-import com.flowengine.server.model.flow.enums.TableFlowInstanceTableType;
+import com.flowengine.server.model.flow.enums.TableFlowInstanceTableTypeEnums;
 import com.flowengine.server.model.flow.model.FlowMainToTableBean;
 import com.flowengine.server.utils.Constant;
 import jakarta.annotation.Resource;
@@ -69,9 +69,9 @@ public class FlowInitServiceImpl extends BaseService implements FlowInitService 
             Integer tableType = (Integer) tableFlowInstance.get(Constant.Key.TABLE_TYPE);
             String tableName = (String) tableFlowInstance.get(Constant.Key.TABLE_NAME);
 
-            if(tableType == TableFlowInstanceTableType.FLOW_INSTANCE.getValue()) {
+            if(tableType == TableFlowInstanceTableTypeEnums.FLOW_INSTANCE.getValue()) {
                 jsonMap.put(Constant.Flow.FLOW_INSTANCE_TABLE_NAME, tableName);
-            }else if (tableType == TableFlowInstanceTableType.FLOW_INSTANCE_FLOW.getValue()) {
+            }else if (tableType == TableFlowInstanceTableTypeEnums.FLOW_INSTANCE_FLOW.getValue()) {
                 jsonMap.put(Constant.Flow.FLOW_INSTANCE_FLOW_TABLE_NAME, tableName);
             }
         }
