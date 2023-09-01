@@ -1,6 +1,7 @@
 package com.flowengine.server.model.flow.model;
 
-import com.flowengine.server.utils.UUIDGenerator;
+
+import com.flowengine.common.utils.UUIDGenerator;
 
 import java.util.Date;
 

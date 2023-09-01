@@ -1,20 +1,31 @@
 package com.flowengine.server.backend.service.flow.impl;
 
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
+import com.flowengine.common.utils.UUIDGenerator;
+import com.flowengine.common.utils.entity.PublicFlowNodeEntity;
+import com.flowengine.common.utils.mapper.PublicFlowNodeMapper;
 import com.flowengine.server.backend.dao.flow.FlowDao;
 import com.flowengine.server.backend.service.flow.FlowInitService;
 import com.flowengine.server.backend.service.flow.FlowService;
 import com.flowengine.server.model.BackFlowBO;
 import com.flowengine.server.model.EndFlowBO;
 import com.flowengine.server.model.NextFlowBO;
-import com.flowengine.server.model.flow.enums.FlowOverTime;
+import com.flowengine.server.model.flow.enums.FlowInstanceFlowFlowStatusEnum;
+import com.flowengine.server.model.flow.enums.FlowResultEnum;
 import com.flowengine.server.model.flow.enums.FlowStatusEnums;
 import com.flowengine.server.model.flow.model.FlowMainToTableBean;
 import com.flowengine.server.model.flow.model.StartFlowBO;
 import com.flowengine.server.model.flow.model.TemplateFlowInstanceBean;
+import com.flowengine.server.model.flow.model.TemplateFlowInstanceFlowBean;
+import com.flowengine.server.utils.Constant;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Date;
+
 
 /**
  * @Description:
@@ -28,6 +39,9 @@ public class FlowServiceImpl implements FlowService {
 
     @Resource
     private FlowInitService _flowInitService;
+
+    @Resource
+    private PublicFlowNodeMapper _flowNodeMapper;
 
     @Resource
     private FlowDao _flowDao;
@@ -57,65 +71,60 @@ public class FlowServiceImpl implements FlowService {
         flowInstanceBean.setDeptId(startFlowVO.getDeptId());
         flowInstanceBean.setCreateUserOpId(startFlowVO.getCreateUserOpId());
         _flowDao.insertStartFlowInstanceData(flowInstanceBean, flowMainToTableBean.getFlowInstanceTableName(), startFlowVO);
+        //获取当前流程的起始节点
+        PublicFlowNodeEntity startNode = _flowNodeMapper.getStartNode(startFlowVO.getMainId());
         //插入业务流程流转表
-        PublicFlowInstanceFlowEntity flowInstanceFlowEntity = new PublicFlowInstanceFlowEntity();
-        flowInstanceFlowEntity.setOpId(UUIDGenerator.getUUID());
-        flowInstanceFlowEntity.setInstanceId(publicFlowInstanceEntity.getOpId());
-        flowInstanceFlowEntity.setTaskOpId(publicFlowInstanceEntity.getTaskOpId());
-        flowInstanceFlowEntity.setCreateTime(publicFlowInstanceEntity.getCreateTime());
-        flowInstanceFlowEntity.setNodeId(startNode.getOpId());
-        flowInstanceFlowEntity.setNodeKey(startNode.getNodeKey());
-        flowInstanceFlowEntity.setOrgId(publicFlowInstanceEntity.getOrgId());
-        flowInstanceFlowEntity.setDeptId(publicFlowInstanceEntity.getDeptId());
-        flowInstanceFlowEntity.setLastNodeId(startNode.getLastNodeId());
-        flowInstanceFlowEntity.setLastNodeKey(startNode.getLastNodeKey());
+        TemplateFlowInstanceFlowBean flowInstanceFlowBean = new TemplateFlowInstanceFlowBean();
+        flowInstanceFlowBean.setInstanceId(flowInstanceBean.getOpId());
+        flowInstanceFlowBean.setTaskOpId(startFlowVO.getTaskOpId());
+        flowInstanceFlowBean.setNodeId(startNode.getOpId());
+        flowInstanceFlowBean.setNodeKey(startNode.getNodeKey());
+        flowInstanceFlowBean.setOrgId(startFlowVO.getOrgId());
+        flowInstanceFlowBean.setDeptId(startFlowVO.getDeptId());
+        flowInstanceFlowBean.setLastNodeId(startNode.getLastNodeId());
+        flowInstanceFlowBean.setLastNodeKey(startNode.getLastNodeKey());
         String nextNode = startNode.getNextNode();
         JSONObject nextJson = JSONUtil.parseObj(nextNode);
-        Integer refType = null;
-        String refId = null;
         JSONObject jsonObject = nextJson.getJSONObject((StrUtil.isNotEmpty(startFlowVO.getKey()) ? startFlowVO.getKey() : Constant.Value.START));
 
         if(jsonObject != null) {
 
-            flowInstanceFlowEntity.setNextNodeId(jsonObject.getStr(Constant.Key.NEXT_NODE_ID));
-            flowInstanceFlowEntity.setNextNodeKey(jsonObject.getStr(Constant.Key.NEXT_NODE_KEY));
-            refType = jsonObject.getInt(Constant.Key.REF_TYPE);
-            refId = jsonObject.getStr(Constant.Key.REF_ID);
+            flowInstanceFlowBean.setNextNodeId(jsonObject.getStr(Constant.Key.NEXT_NODE_ID));
+            flowInstanceFlowBean.setNextNodeKey(jsonObject.getStr(Constant.Key.NEXT_NODE_KEY));
         }else {
             throw new RuntimeException("初始节点必须配置为start");
         }
 
-        flowInstanceFlowEntity.setFlowSort(1);//初始
-        flowInstanceFlowEntity.setOperationTime(new Date());
-        flowInstanceFlowEntity.setUserOpId(startFlowVO.getCreateUserOpId());
-        flowInstanceFlowEntity.setFlowResult(FlowResultEnum.PASS.
-                getValue());
-        flowInstanceFlowEntity.setFlowStatus(FlowInstanceFlowFlowStatusEnum.OPERATED.getValue()); //0:未操作;1:已操作;注意这里仅仅是是否操作过，如果不通过也是属于操作的也就是1
-        _publicFlowInstanceFlowMapper.insert(flowInstanceFlowEntity);
+        flowInstanceFlowBean.setFlowSort(1);//初始
+        flowInstanceFlowBean.setOperationTime(new Date());
+        flowInstanceFlowBean.setUserOpId(startFlowVO.getCreateUserOpId());
+        flowInstanceFlowBean.setFlowResult(FlowResultEnum.PASS. getValue());
+        //0:未操作;1:已操作;注意这里仅仅是是否操作过，如果不通过也是属于操作的也就是1
+        flowInstanceFlowBean.setFlowStatus(FlowInstanceFlowFlowStatusEnum.OPERATED.getValue());
+        _flowDao.insertStartFlowInstanceFlowData(flowInstanceFlowBean, flowMainToTableBean.getFlowInstanceFlowTableName());
         //插入一条当前自己的发起的流程数据后要插入下一条流程的信息，意思就是转发给下一个用户的流程数据
-        _publicFlowInstanceFlowMapper.insert(getFlowInstanceFlowEntity(flowInstanceFlowEntity, refType, refId));
+        _flowDao.insertNextFlowInstanceFlowData(getNextFlowInstanceFlowBean(flowInstanceFlowBean), flowMainToTableBean.getFlowInstanceFlowTableName());
     }
 
-    private PublicFlowInstanceFlowEntity getFlowInstanceFlowEntity(PublicFlowInstanceFlowEntity flowInstanceFlowEntity,
-                                                                   Integer refType,
-                                                                   String refId) {
-
-        PublicFlowInstanceFlowEntity nextFlowInstanceFlowEntity = new PublicFlowInstanceFlowEntity();
-        nextFlowInstanceFlowEntity.setOpId(UUIDGenerator.getUUID());
-        nextFlowInstanceFlowEntity.setInstanceId(flowInstanceFlowEntity.getInstanceId());
-        nextFlowInstanceFlowEntity.setTaskOpId(flowInstanceFlowEntity.getTaskOpId());
-        nextFlowInstanceFlowEntity.setCreateTime(flowInstanceFlowEntity.getCreateTime());
-        nextFlowInstanceFlowEntity.setNodeId(flowInstanceFlowEntity.getNextNodeId());
-        nextFlowInstanceFlowEntity.setNodeKey(flowInstanceFlowEntity.getNextNodeKey());
-        nextFlowInstanceFlowEntity.setOrgId(flowInstanceFlowEntity.getOrgId());
+    private TemplateFlowInstanceFlowBean getNextFlowInstanceFlowBean(TemplateFlowInstanceFlowBean flowInstanceFlowBean) {
+        
+        TemplateFlowInstanceFlowBean nextFlowInstanceFlowBean = new TemplateFlowInstanceFlowBean();
+        nextFlowInstanceFlowBean.setOpId(UUIDGenerator.getUUID());
+        nextFlowInstanceFlowBean.setInstanceId(flowInstanceFlowBean.getInstanceId());
+        nextFlowInstanceFlowBean.setTaskOpId(flowInstanceFlowBean.getTaskOpId());
+        nextFlowInstanceFlowBean.setCreateTime(flowInstanceFlowBean.getCreateTime());
+        nextFlowInstanceFlowBean.setNodeId(flowInstanceFlowBean.getNextNodeId());
+        nextFlowInstanceFlowBean.setNodeKey(flowInstanceFlowBean.getNextNodeKey());
+        nextFlowInstanceFlowBean.setOrgId(flowInstanceFlowBean.getOrgId());
+        //可能会流转到下一个科室，所以在next中更新
         //nextFlowInstanceFlowEntity.setDeptId(flowInstanceFlowEntity.getDeptId());
-        nextFlowInstanceFlowEntity.setLastNodeId(flowInstanceFlowEntity.getNodeId());
-        nextFlowInstanceFlowEntity.setLastNodeKey(flowInstanceFlowEntity.getNodeKey());
-        nextFlowInstanceFlowEntity.setLastOpId(flowInstanceFlowEntity.getOpId());
-        nextFlowInstanceFlowEntity.setFlowStatus(FlowInstanceFlowFlowStatusEnum.WAIT_OPERATE.getValue());
-        nextFlowInstanceFlowEntity.setFlowSort(flowInstanceFlowEntity.getFlowSort()+1);
-        nextFlowInstanceFlowEntity.setRefType(refType);
-        nextFlowInstanceFlowEntity.setRefId(refId);
+        nextFlowInstanceFlowBean.setLastNodeId(flowInstanceFlowBean.getNodeId());
+        nextFlowInstanceFlowBean.setLastNodeKey(flowInstanceFlowBean.getNodeKey());
+        nextFlowInstanceFlowBean.setLastOpId(flowInstanceFlowBean.getOpId());
+        nextFlowInstanceFlowBean.setFlowStatus(FlowInstanceFlowFlowStatusEnum.WAIT_OPERATE.getValue());
+        nextFlowInstanceFlowBean.setFlowSort(flowInstanceFlowBean.getFlowSort()+1);
+
+        return nextFlowInstanceFlowBean;
     }
 
     @Override

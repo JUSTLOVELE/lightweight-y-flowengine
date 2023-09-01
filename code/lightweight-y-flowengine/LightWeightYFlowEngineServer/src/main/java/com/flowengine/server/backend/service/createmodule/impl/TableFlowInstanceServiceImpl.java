@@ -64,26 +64,26 @@ public class TableFlowInstanceServiceImpl extends BaseService implements TableFl
     @Override
     public void createFlowAndFlowInstance(String tableId, String tableName) {
 
-        PublicFlowTableFlowInstanceEntity instanceEntity = new PublicFlowTableFlowInstanceEntity();
-        instanceEntity.setOpId(UUIDGenerator.getUUID());
-        instanceEntity.setTableOpId(tableId);
-        instanceEntity.setTableType(1);
-        tableName = tableName.replace("tbl", "");
-        instanceEntity.setTableName(tableName + "_flow_tbl");
-        _flowTableFlowInstanceMapper.insert(instanceEntity);
         PublicFlowTableFlowInstanceEntity flowInstanceEntity = new PublicFlowTableFlowInstanceEntity();
         flowInstanceEntity.setOpId(UUIDGenerator.getUUID());
         flowInstanceEntity.setTableOpId(tableId);
-        flowInstanceEntity.setTableType(2);
+        flowInstanceEntity.setTableType(1);
+        tableName = tableName.replace("_tbl", ""); //把末尾的tbl去掉
         flowInstanceEntity.setTableName(tableName + "_flow_instance_tbl");
         _flowTableFlowInstanceMapper.insert(flowInstanceEntity);
-        String createFlowSQL = getCreateFlowSQL(instanceEntity.getTableName());
-        String createFlowInstanceSQL = getCreateFlowSQL(flowInstanceEntity.getTableName());
-        _tableManageDao.executeCreateSQL(createFlowSQL);
+        PublicFlowTableFlowInstanceEntity flowInstanceFlowEntity = new PublicFlowTableFlowInstanceEntity();
+        flowInstanceFlowEntity.setOpId(UUIDGenerator.getUUID());
+        flowInstanceFlowEntity.setTableOpId(tableId);
+        flowInstanceFlowEntity.setTableType(2);
+        flowInstanceFlowEntity.setTableName(tableName + "_flow_instance_flow_tbl");
+        _flowTableFlowInstanceMapper.insert(flowInstanceFlowEntity);
+        String createFlowInstanceSQL = getCreateFlowInstanceSQL(flowInstanceEntity.getTableName());
+        String createFlowInstanceFlowSQL = getCreateFlowInstanceFlowSQL(flowInstanceFlowEntity.getTableName());
         _tableManageDao.executeCreateSQL(createFlowInstanceSQL);
+        _tableManageDao.executeCreateSQL(createFlowInstanceFlowSQL);
     }
 
-    public String getCreateFlowSQL(String tableName) {
+    public String getCreateFlowInstanceSQL(String tableName) {
 
         String sql = """
                 (
@@ -103,6 +103,42 @@ public class TableFlowInstanceServiceImpl extends BaseService implements TableFl
                     public_flow_attachment TEXT,
                     private_flow_attachment TEXT,
                     create_user_op_id VARCHAR(32),
+                    PRIMARY KEY (op_id)
+                )
+                """;
+        StringBuffer sb = new StringBuffer();
+        sb.append("CREATE TABLE ").append(tableName);
+        sb.append(sql);
+
+        return sb.toString();
+    }
+
+
+    public String getCreateFlowInstanceFlowSQL(String tableName) {
+
+        String sql = """
+                (
+                    op_id VARCHAR(32) NOT NULL,
+                    instance_id VARCHAR(32),
+                    task_op_id VARCHAR(32),
+                    create_time TIMESTAMP,
+                    node_id VARCHAR(32),
+                    node_key VARCHAR(255),
+                    org_id VARCHAR(32),
+                    dept_id VARCHAR(32),
+                    last_node_id VARCHAR(32),
+                    last_node_key VARCHAR(255),
+                    next_node_id VARCHAR(32),
+                    next_node_key VARCHAR(900),
+                    operation_time TIMESTAMP,
+                    user_op_id VARCHAR(32),
+                    last_op_id VARCHAR(32),
+                    flow_status INTEGER,
+                    flow_result INTEGER,
+                    flow_comment VARCHAR(900),
+                    header_comment VARCHAR(900),
+                    back_comment VARCHAR(900),
+                    flow_sort INTEGER,
                     PRIMARY KEY (op_id)
                 )
                 """;

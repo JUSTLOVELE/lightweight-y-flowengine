@@ -1,5 +1,8 @@
 package com.flowengine.server.model.flow.model;
 
+
+import com.flowengine.common.utils.UUIDGenerator;
+
 import java.util.Date;
 
 /**
@@ -37,6 +40,8 @@ public class TemplateFlowInstanceFlowBean {
     private String nextNodeKey ;
     /**  */
     private Date operationTime ;
+
+    private String userOpId;
     /** 就这个表的上一个环节的主键 */
     private String lastOpId ;
     /** 流程状态;0:未操作;1:已操作;注意这里仅仅是是否操作过，如果不通过也是属于操作的也就是1 */
@@ -51,6 +56,12 @@ public class TemplateFlowInstanceFlowBean {
     private String backComment ;
     /** 顺序 */
     private Integer flowSort ;
+
+    public TemplateFlowInstanceFlowBean() {
+
+        this.createTime = new Date();
+        this.opId = UUIDGenerator.getUUID();
+    }
 
     /** 主键 */
     public String getOpId(){
@@ -211,5 +222,13 @@ public class TemplateFlowInstanceFlowBean {
     /** 顺序 */
     public void setFlowSort(Integer flowSort){
         this.flowSort=flowSort;
+    }
+
+    public String getUserOpId() {
+        return userOpId;
+    }
+
+    public void setUserOpId(String userOpId) {
+        this.userOpId = userOpId;
     }
 }

@@ -1,7 +1,7 @@
 package com.flowengine.server.model;
 
 import cn.hutool.core.util.StrUtil;
-import com.flowengine.server.model.enums.FlowResultEnum;
+import com.flowengine.server.model.flow.enums.FlowResultEnum;
 
 /**
  * @Description:

@@ -1,4 +1,4 @@
-package com.flowengine.server.model.enums;
+package com.flowengine.server.model.flow.enums;
 
 /**
  * @Description:

@@ -1,7 +1,5 @@
 package com.flowengine.server.model;
 
-import com.flowengine.server.model.enums.FlowResultEnum;
-
 /**
  * @Description:
  * @author yangzl 2023.1.28

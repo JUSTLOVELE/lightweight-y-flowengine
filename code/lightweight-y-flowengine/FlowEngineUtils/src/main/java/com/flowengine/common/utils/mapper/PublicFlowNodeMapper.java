@@ -22,6 +22,14 @@ import java.util.Map;
 public interface PublicFlowNodeMapper extends BaseMapper<PublicFlowNodeEntity> {
 
     /**
+     *
+     * @param mainId
+     * @return
+     */
+    @Select("select * from public_flow_node_tbl where main_id = #{mainId} and node_key = 'start' ")
+    public PublicFlowNodeEntity getStartNode(@Param("mainId") String mainId);
+
+    /**
      * 根据流程主表的主键查询其节点
      * @param mainId
      * @return

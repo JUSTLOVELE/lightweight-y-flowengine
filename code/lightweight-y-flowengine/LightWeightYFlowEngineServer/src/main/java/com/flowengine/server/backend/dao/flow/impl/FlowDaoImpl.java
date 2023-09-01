@@ -1,10 +1,11 @@
 package com.flowengine.server.backend.dao.flow.impl;
 
+import com.flowengine.common.utils.DateUtil;
 import com.flowengine.server.backend.dao.flow.FlowDao;
 import com.flowengine.server.core.BaseDao;
 import com.flowengine.server.model.flow.model.StartFlowBO;
 import com.flowengine.server.model.flow.model.TemplateFlowInstanceBean;
-import com.flowengine.server.utils.DateUtil;
+import com.flowengine.server.model.flow.model.TemplateFlowInstanceFlowBean;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -23,7 +24,85 @@ public class FlowDaoImpl extends BaseDao implements FlowDao {
     private final static Log _logger = LogFactory.getLog(FlowDaoImpl.class);
 
     @Override
-    public void insertStartFlowInstanceData(TemplateFlowInstanceBean flowInstanceBean, String tableName, StartFlowBO startFlowVO) {
+    public void insertNextFlowInstanceFlowData(TemplateFlowInstanceFlowBean bean, String tableName) {
+
+        StringBuffer sb = new StringBuffer();
+        sb.append("insert into " + tableName);
+        sb.append("""
+                (op_id,         create_time,    instance_id,    task_op_id,     node_id,
+                node_key,       org_id,         last_node_id,   last_node_key,  last_op_id,
+                flow_sort,    flow_status
+                )values (?, to_date(?, 'YYYY-MM-DD hh:mi:ss'), ), ?, ?, ?,
+                ?,?,?,?,?,
+                ?,?
+                )
+                """);
+        String sql = sb.toString();
+        _logger.info(sql);
+        List<Object> array = new ArrayList<>();
+        //------------------------
+        array.add(bean.getOpId());
+        array.add(DateUtil.toString(bean.getCreateTime(), DateUtil.YMDHMS));
+        array.add(bean.getInstanceId());
+        array.add(bean.getTaskOpId());
+        array.add(bean.getNodeId());
+        //------------------------
+        array.add(bean.getNodeKey());
+        array.add(bean.getOrgId());
+        array.add(bean.getLastNodeId());
+        array.add(bean.getLastNodeKey());
+        array.add(bean.getLastOpId());
+        //-------------------------
+        array.add(bean.getFlowSort());
+        array.add(bean.getFlowStatus());
+        this.getJdbcTemplate().update(sql, array.toArray());
+    }
+
+    @Override
+    public void insertStartFlowInstanceFlowData(TemplateFlowInstanceFlowBean bean, String tableName) {
+
+        StringBuffer sb = new StringBuffer();
+        sb.append("insert into " + tableName);
+        sb.append("""
+                (op_id,         create_time,    instance_id,    task_op_id,     node_id,
+                node_key,       org_id,         dept_id,        last_node_id,   last_node_key,
+                next_node_id,   next_node_key,  flow_sort,      user_op_id,     operation_time,
+                flow_result,    flow_status
+                )values (?, to_date(?, 'YYYY-MM-DD hh:mi:ss'), ), ?, ?, ?,
+                ?,?,?,?,?,
+                ?,?,?,?,to_date(?, 'YYYY-MM-DD hh:mi:ss'),
+                ?,?
+                )
+                """);
+        String sql = sb.toString();
+        _logger.info(sql);
+        List<Object> array = new ArrayList<>();
+        //------------------------
+        array.add(bean.getOpId());
+        array.add(DateUtil.toString(bean.getCreateTime(), DateUtil.YMDHMS));
+        array.add(bean.getInstanceId());
+        array.add(bean.getTaskOpId());
+        array.add(bean.getNodeId());
+        //------------------------
+        array.add(bean.getNodeKey());
+        array.add(bean.getOrgId());
+        array.add(bean.getDeptId());
+        array.add(bean.getLastNodeId());
+        array.add(bean.getLastNodeKey());
+        //-------------------------
+        array.add(bean.getNextNodeId());
+        array.add(bean.getNextNodeKey());
+        array.add(bean.getFlowSort());
+        array.add(bean.getUserOpId());
+        array.add(DateUtil.toString(bean.getOperationTime(), DateUtil.YMDHMS));
+        //-------------------------
+        array.add(bean.getFlowResult());
+        array.add(bean.getFlowStatus());
+        this.getJdbcTemplate().update(sql, array.toArray());
+    }
+
+    @Override
+    public void insertStartFlowInstanceData(TemplateFlowInstanceBean bean, String tableName, StartFlowBO startFlowVO) {
 
         StringBuffer sb = new StringBuffer();
         sb.append("insert into " + tableName);
@@ -33,10 +112,10 @@ public class FlowDaoImpl extends BaseDao implements FlowDao {
         String sql = sb.toString();
         _logger.info(sql);
         List<Object> array = new ArrayList<>();
-        array.add(flowInstanceBean.getOpId());
-        array.add(DateUtil.toString(flowInstanceBean.getCreateTime(), DateUtil.YMDHMS));
-        array.add(flowInstanceBean.getFlowStatus());
-        array.add(flowInstanceBean);
+        array.add(bean.getOpId());
+        array.add(DateUtil.toString(bean.getCreateTime(), DateUtil.YMDHMS));
+        array.add(bean.getFlowStatus());
+        array.add(bean);
         array.add(startFlowVO.getTaskOpId());
         array.add(startFlowVO.getMainId());
         array.add(startFlowVO.getOrgId());

@@ -2,6 +2,7 @@ package com.flowengine.server.backend.dao.flow;
 
 import com.flowengine.server.model.flow.model.StartFlowBO;
 import com.flowengine.server.model.flow.model.TemplateFlowInstanceBean;
+import com.flowengine.server.model.flow.model.TemplateFlowInstanceFlowBean;
 
 /**
  * @author yangzl 2023/8/31
@@ -12,7 +13,21 @@ import com.flowengine.server.model.flow.model.TemplateFlowInstanceBean;
 public interface FlowDao {
 
     /**
-     * 查询开始阶段的流程实例表
+     * 插入下一阶段的流程流转表
+     * @param flowInstanceFlowBean
+     * @param tableName
+     */
+    public void insertNextFlowInstanceFlowData(TemplateFlowInstanceFlowBean flowInstanceFlowBean, String tableName);
+
+    /**
+     * 插入开始阶段的流程流转表
+     * @param flowInstanceFlowBean
+     * @param tableName
+     */
+    public void insertStartFlowInstanceFlowData(TemplateFlowInstanceFlowBean flowInstanceFlowBean, String tableName);
+
+    /**
+     * 插入开始阶段的流程实例表
      * @param flowInstanceBean
      */
     public void insertStartFlowInstanceData(TemplateFlowInstanceBean flowInstanceBean, String tableName, StartFlowBO startFlowVO);
