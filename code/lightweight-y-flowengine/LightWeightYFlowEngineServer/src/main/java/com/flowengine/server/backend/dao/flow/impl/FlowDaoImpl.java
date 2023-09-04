@@ -11,6 +11,7 @@ import org.apache.commons.logging.LogFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -22,6 +23,27 @@ import java.util.Objects;
 public class FlowDaoImpl extends BaseDao implements FlowDao {
 
     private final static Log _logger = LogFactory.getLog(FlowDaoImpl.class);
+
+    @Override
+    public List<Map<String, Object>> queryFlowInstanceFlow(String opId, String tableName) {
+
+        StringBuffer sb = new StringBuffer();
+        sb.append("""
+                select 
+                 node_id "nodeId",
+                 node_key "nodeKey",
+                 instance_id "instanceId",
+                 task_op_id "taskOpId",
+                 
+                 flow_sort "flowSort" from 
+                """);
+        sb.append(tableName);
+        sb.append(" where op_id = ? ");
+        String sql = sb.toString();
+        _logger.info(sql);
+
+        return this.getJdbcTemplate().queryForList(sql, new Object[] {opId});
+    }
 
     @Override
     public void insertNextFlowInstanceFlowData(TemplateFlowInstanceFlowBean bean, String tableName) {
@@ -65,11 +87,11 @@ public class FlowDaoImpl extends BaseDao implements FlowDao {
         sb.append("insert into " + tableName);
         sb.append("""
                 (op_id,         create_time,    instance_id,    task_op_id,     node_id,
-                node_key,       org_id,         dept_id,        last_node_id,   last_node_key,
+                node_key,       org_id,         dept_id,        
                 next_node_id,   next_node_key,  flow_sort,      user_op_id,     operation_time,
                 flow_result,    flow_status
                 )values (?, to_date(?, 'YYYY-MM-DD hh:mi:ss'), ), ?, ?, ?,
-                ?,?,?,?,?,
+                ?,?,?,
                 ?,?,?,?,to_date(?, 'YYYY-MM-DD hh:mi:ss'),
                 ?,?
                 )
@@ -87,8 +109,6 @@ public class FlowDaoImpl extends BaseDao implements FlowDao {
         array.add(bean.getNodeKey());
         array.add(bean.getOrgId());
         array.add(bean.getDeptId());
-        array.add(bean.getLastNodeId());
-        array.add(bean.getLastNodeKey());
         //-------------------------
         array.add(bean.getNextNodeId());
         array.add(bean.getNextNodeKey());

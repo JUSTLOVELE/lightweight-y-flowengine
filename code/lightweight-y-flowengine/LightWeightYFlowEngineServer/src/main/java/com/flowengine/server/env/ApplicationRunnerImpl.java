@@ -25,7 +25,6 @@ public class ApplicationRunnerImpl implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-
         _flowInitService.initFlowMainDatas();
     }
 

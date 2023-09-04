@@ -130,10 +130,10 @@ public class MainServiceImpl extends BaseService implements MainService {
                 nodeEntity.setMainId(mainOpId);
                 nodeEntity.setLimitTime(jsonObject.getInt(Constant.Key.LIMIT_TIME));
                 nodeEntity.setNextNode(nextNodeJson.toString());
-                nodeEntity.setNodeName(jsonObject.getStr(Constant.Key.NODE_NAME));
-                nodeEntity.setNodeKey(jsonObject.getStr(Constant.Key.NODE_KEY));
+                nodeEntity.setNodeName(jsonObject.getStr(Constant.Flow.NODE_NAME));
+                nodeEntity.setNodeKey(jsonObject.getStr(Constant.Flow.NODE_KEY));
                 nodeEntity.setNodeSort(i+1);
-                nodeEntity.setNodeStatus(jsonObject.getStr(Constant.Key.NODE_STATUS));
+                nodeEntity.setNodeStatus(jsonObject.getStr(Constant.Flow.NODE_STATUS));
 
                 if(lastNodeEntity != null) {
                     nodeEntity.setLastNodeId(lastNodeEntity.getOpId());
@@ -152,7 +152,7 @@ public class MainServiceImpl extends BaseService implements MainService {
                         PublicFlowNodeCheckEntity flowNodeCheckEntity = new PublicFlowNodeCheckEntity();
                         flowNodeCheckEntity.setOpId(UUIDGenerator.getUUID());
                         flowNodeCheckEntity.setNodeOpId(nodeEntity.getOpId());
-                        flowNodeCheckEntity.setNodeType(nodeChecksJSONObject.getStr(Constant.Key.NODE_TYPE));
+                        flowNodeCheckEntity.setNodeType(nodeChecksJSONObject.getStr(Constant.Flow.NODE_TYPE));
                         String checkType = nodeChecksJSONObject.getStr(Constant.Key.CHECK_TYPE);
                         flowNodeCheckEntity.setCheckType(checkType);
                         //checkType=20则不要写ref

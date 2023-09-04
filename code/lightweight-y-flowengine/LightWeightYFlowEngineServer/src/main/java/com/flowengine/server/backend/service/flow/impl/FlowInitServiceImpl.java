@@ -45,9 +45,10 @@ public class FlowInitServiceImpl extends BaseService implements FlowInitService 
         String json = (String) redisTemplate.opsForValue().get(mainOpId);
         JSONObject entries = JSONUtil.parseObj(json);
         FlowMainToTableBean flowMainToTableBean = new FlowMainToTableBean();
+        flowMainToTableBean.setReferenceTableName(entries.getStr(Constant.Flow.REFERENCE_TABLE_NAME));
         flowMainToTableBean.setFlowInstanceFlowTableName(entries.getStr(Constant.Flow.FLOW_INSTANCE_FLOW_TABLE_NAME));
         flowMainToTableBean.setFlowInstanceTableName(entries.getStr(Constant.Flow.FLOW_INSTANCE_TABLE_NAME));
-        flowMainToTableBean.setReferenceTableName(entries.getStr(Constant.Flow.REFERENCE_TABLE_NAME));
+        flowMainToTableBean.setFlowCommentTableName(entries.getStr(Constant.Flow.FLOW_COMMENT_TABLE_NAME));
 
         return flowMainToTableBean;
     }
@@ -66,13 +67,15 @@ public class FlowInitServiceImpl extends BaseService implements FlowInitService 
 
         for(Map<String, Object> tableFlowInstance: tableFlowInstances) {
 
-            Integer tableType = (Integer) tableFlowInstance.get(Constant.Key.TABLE_TYPE);
+            Integer tableType = (Integer) tableFlowInstance.get(Constant.Flow.TABLE_TYPE);
             String tableName = (String) tableFlowInstance.get(Constant.Key.TABLE_NAME);
 
             if(tableType == TableFlowInstanceTableTypeEnums.FLOW_INSTANCE.getValue()) {
                 jsonMap.put(Constant.Flow.FLOW_INSTANCE_TABLE_NAME, tableName);
             }else if (tableType == TableFlowInstanceTableTypeEnums.FLOW_INSTANCE_FLOW.getValue()) {
                 jsonMap.put(Constant.Flow.FLOW_INSTANCE_FLOW_TABLE_NAME, tableName);
+            }else if(tableType == TableFlowInstanceTableTypeEnums.FLOW_COMMENT.getValue()) {
+                jsonMap.put(Constant.Flow.FLOW_COMMENT_TABLE_NAME, tableName);
             }
         }
 

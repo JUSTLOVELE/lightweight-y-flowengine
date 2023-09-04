@@ -77,10 +77,43 @@ public class TableFlowInstanceServiceImpl extends BaseService implements TableFl
         flowInstanceFlowEntity.setTableType(2);
         flowInstanceFlowEntity.setTableName(tableName + "_flow_instance_flow_tbl");
         _flowTableFlowInstanceMapper.insert(flowInstanceFlowEntity);
+        PublicFlowTableFlowInstanceEntity flowCommentEntity = new PublicFlowTableFlowInstanceEntity();
+        flowCommentEntity.setOpId(UUIDGenerator.getUUID());
+        flowCommentEntity.setTableOpId(tableId);
+        flowCommentEntity.setTableType(3);
+        flowCommentEntity.setTableName(tableName + "_flow_comment_tbl");
+        _flowTableFlowInstanceMapper.insert(flowCommentEntity);
         String createFlowInstanceSQL = getCreateFlowInstanceSQL(flowInstanceEntity.getTableName());
         String createFlowInstanceFlowSQL = getCreateFlowInstanceFlowSQL(flowInstanceFlowEntity.getTableName());
+        String createFlowCommentSQL = getCreateFlowCommentSQL(flowCommentEntity.getTableName());
         _tableManageDao.executeCreateSQL(createFlowInstanceSQL);
         _tableManageDao.executeCreateSQL(createFlowInstanceFlowSQL);
+        _tableManageDao.executeCreateSQL(createFlowCommentSQL);
+    }
+
+    private String getCreateFlowCommentSQL(String tableName) {
+
+        String sql = """
+                
+               (
+                    op_id VARCHAR(32) NOT NULL,
+                    instance_id VARCHAR(32),
+                    task_op_id VARCHAR(32),
+                    create_time TIMESTAMP,
+                    node_id VARCHAR(32),
+                    flow_comment VARCHAR(900),
+                    flow_sort INTEGER,
+                    flow_result INTEGER,
+                    instance_flow_id VARCHAR(255),
+                    PRIMARY KEY (op_id)
+                )
+                """;
+
+        StringBuffer sb = new StringBuffer();
+        sb.append("CREATE TABLE ").append(tableName);
+        sb.append(sql);
+
+        return sb.toString();
     }
 
     public String getCreateFlowInstanceSQL(String tableName) {

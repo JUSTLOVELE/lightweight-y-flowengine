@@ -13,6 +13,8 @@ public class FlowMainToTableBean {
     public String flowInstanceTableName;
     /**流程实例流转表名**/
     public String flowInstanceFlowTableName;
+    /**流转意见表**/
+    public String flowCommentTableName;
 
     public String getReferenceTableName() {
         return referenceTableName;
@@ -36,5 +38,13 @@ public class FlowMainToTableBean {
 
     public void setFlowInstanceFlowTableName(String flowInstanceFlowTableName) {
         this.flowInstanceFlowTableName = flowInstanceFlowTableName;
+    }
+
+    public String getFlowCommentTableName() {
+        return flowCommentTableName;
+    }
+
+    public void setFlowCommentTableName(String flowCommentTableName) {
+        this.flowCommentTableName = flowCommentTableName;
     }
 }

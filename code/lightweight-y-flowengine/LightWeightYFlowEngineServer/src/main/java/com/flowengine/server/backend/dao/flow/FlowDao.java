@@ -4,6 +4,9 @@ import com.flowengine.server.model.flow.model.StartFlowBO;
 import com.flowengine.server.model.flow.model.TemplateFlowInstanceBean;
 import com.flowengine.server.model.flow.model.TemplateFlowInstanceFlowBean;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * @author yangzl 2023/8/31
  * @version 1.00.00
@@ -11,6 +14,14 @@ import com.flowengine.server.model.flow.model.TemplateFlowInstanceFlowBean;
  * @history:
  */
 public interface FlowDao {
+
+    /**
+     * 查询对应表的数据
+     * @param opId
+     * @param tableName
+     * @return
+     */
+    public List<Map<String, Object>> queryFlowInstanceFlow(String opId, String tableName);
 
     /**
      * 插入下一阶段的流程流转表

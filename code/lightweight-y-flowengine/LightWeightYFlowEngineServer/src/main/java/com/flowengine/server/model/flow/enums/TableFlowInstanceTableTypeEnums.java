@@ -9,7 +9,8 @@ package com.flowengine.server.model.flow.enums;
 public enum TableFlowInstanceTableTypeEnums {
 
     FLOW_INSTANCE(1, "流程实例"),
-    FLOW_INSTANCE_FLOW(2,  "流程流转")
+    FLOW_INSTANCE_FLOW(2,  "流程流转"),
+    FLOW_COMMENT(3, "流转意见")
     ;
 
     private int value;

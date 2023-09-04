@@ -31,6 +31,7 @@ public interface PublicFlowNodeCheckMapper extends BaseMapper<PublicFlowNodeChec
     String QUERY_NODES_BY_MAINID_SQL = """
             select 
                 a.ref_id "person",
+                a.ref_id "refId",
                 a.node_type "nodeType",
                 a.check_type "checkType",
                 (case when a.check_type = '1' then '人员'

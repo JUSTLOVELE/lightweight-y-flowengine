@@ -24,6 +24,8 @@ public class FlowRunBO {
 
     private String key;
 
+    private String mainId;
+
     public FlowRunBO(String instanceFlowId, String userOpId) {
 
         if(StrUtil.isEmpty(instanceFlowId) || StrUtil.isEmpty(userOpId)) {
@@ -80,5 +82,13 @@ public class FlowRunBO {
 
     public void setKey(String key) {
         this.key = key;
+    }
+
+    public String getMainId() {
+        return mainId;
+    }
+
+    public void setMainId(String mainId) {
+        this.mainId = mainId;
     }
 }

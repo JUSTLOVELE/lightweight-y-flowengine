@@ -100,17 +100,7 @@ public class Constant {
 
         public String IS_STOP = "isStop";
 
-        public String FLOW_NODE_CHECK_TYPE = "flow_node_check_type";
-
         public String LIMIT_TIME = "limitTime";
-
-        public String NODE_NAME = "nodeName";
-
-        public String NODE_KEY = "nodeKey";
-
-        public String NODE_TYPE = "nodeType";
-
-        public String NODE_STATUS = "nodeStatus";
 
         public String CHECK_TYPE = "checkType";
 
@@ -135,8 +125,6 @@ public class Constant {
         public String PERSON = "person";
 
         public String SORT = "sort";
-
-        public String TABLE_TYPE = "tableType";
     }
 
     public interface Value {
@@ -157,5 +145,21 @@ public class Constant {
         String FLOW_INSTANCE_TABLE_NAME = "flowInstanceTableName";
 
         String FLOW_INSTANCE_FLOW_TABLE_NAME = "flowInstanceFlowTableName";
+
+        String FLOW_COMMENT_TABLE_NAME = "flowCommentTableName";
+
+        String NODE_ID = "nodeId";
+
+        public String NODE_NAME = "nodeName";
+
+        public String FLOW_NODE_CHECK_TYPE = "flow_node_check_type";
+
+        public String NODE_KEY = "nodeKey";
+
+        public String NODE_TYPE = "nodeType";
+
+        public String NODE_STATUS = "nodeStatus";
+
+        public String TABLE_TYPE = "tableType";
     }
 }

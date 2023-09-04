@@ -53,7 +53,7 @@ public class NodeServiceImpl extends BaseService implements NodeService {
     @Override
     public String getCheckTypeCombobox() {
 
-        List<Map<String, Object>> datas = _publicSubCfgMapper.getCombobox(Constant.Key.FLOW_NODE_CHECK_TYPE);
+        List<Map<String, Object>> datas = _publicSubCfgMapper.getCombobox(Constant.Flow.FLOW_NODE_CHECK_TYPE);
         return getJSON(datas);
     }
 

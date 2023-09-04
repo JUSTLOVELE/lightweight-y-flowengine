@@ -5,6 +5,7 @@ import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.flowengine.common.utils.UUIDGenerator;
 import com.flowengine.common.utils.entity.PublicFlowNodeEntity;
+import com.flowengine.common.utils.mapper.PublicFlowNodeCheckMapper;
 import com.flowengine.common.utils.mapper.PublicFlowNodeMapper;
 import com.flowengine.server.backend.dao.flow.FlowDao;
 import com.flowengine.server.backend.service.flow.FlowInitService;
@@ -25,6 +26,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -45,6 +48,9 @@ public class FlowServiceImpl implements FlowService {
 
     @Resource
     private FlowDao _flowDao;
+
+    @Resource
+    private PublicFlowNodeCheckMapper _flowNodeCheckMapper;
 
     @Override
     public void startFlow(StartFlowBO startFlowVO) {
@@ -130,7 +136,73 @@ public class FlowServiceImpl implements FlowService {
     @Override
     public void next(NextFlowBO nextFlowVO) {
 
+        if(StrUtil.isEmpty(nextFlowVO.getFlowRunBO().getInstanceFlowId())) {
+            throw new RuntimeException("流程流转id不能为空");
+        }
+
+        if(StrUtil.isEmpty(nextFlowVO.getFlowRunBO().getMainId())) {
+            throw new RuntimeException("mainId不能为空");
+        }
+        //先获取业务表的数据
+        FlowMainToTableBean flowMainToTableBean = _flowInitService.getMainToTableDataFromRedis(nextFlowVO.getFlowRunBO().getMainId());
+        //获取当前的流转业务数据
+        List<Map<String, Object>> flowInstanceFlowDatas = _flowDao.queryFlowInstanceFlow(nextFlowVO.getFlowRunBO().getInstanceFlowId(), flowMainToTableBean.getFlowInstanceFlowTableName());
+        //需要判断当前环节是否完结
+        //1、获取节点主键
+        String nodeOpId = (String) flowInstanceFlowDatas.get(0).get(Constant.Flow.NODE_ID);
+        //2、获取所有审核的关键数据
+        List<Map<String, Object>> checkPersons = _flowNodeCheckMapper.queryNodeChecksByNodeId(nodeOpId);
+
+        for(Map<String, Object> check: checkPersons) {
+            //2.1 如果是非会签，因为当前用户已经审核了，所以直接过
+
+            //2.2 如果是会签，则要判断
+        }
+
+
+//
+//        PublicFlowInstanceFlowEntity flowInstanceFlowEntity = _publicFlowInstanceFlowMapper.selectById(nextFlowVO.getFlowRunBO().getInstanceFlowId());
+//
+//        if(flowInstanceFlowEntity == null) {
+//            throw new RuntimeException("根据流程流转id查询不到流程流转对象");
+//        }
+//
+//        if(StrUtil.isNotEmpty(nextFlowVO.getFlowRunBO().getOrgId())) {
+//            flowInstanceFlowEntity.setOrgId(nextFlowVO.getFlowRunBO().getOrgId());
+//        }
+//
+//        if(StrUtil.isNotEmpty(nextFlowVO.getFlowRunBO().getDeptId())) {
+//            flowInstanceFlowEntity.setDeptId(nextFlowVO.getFlowRunBO().getDeptId());
+//        }
+//
+//        flowInstanceFlowEntity.setOperationTime(new Date());
+//        flowInstanceFlowEntity.setUserOpId(nextFlowVO.getFlowRunBO().getUserOpId());
+//        flowInstanceFlowEntity.setFlowStatus(FlowInstanceFlowFlowStatusEnum.OPERATED.getValue());
+//        //下一个环节通常都是pass
+//        if(nextFlowVO.getFlowRunBO().getFlowResultEnum() == null) {
+//            flowInstanceFlowEntity.setFlowResult(FlowResultEnum.PASS.getValue());
+//        }else {
+//            flowInstanceFlowEntity.setFlowResult(nextFlowVO.getFlowRunBO().getFlowResultEnum().getValue());
+//        }
+//
+//        setOpinion(flowInstanceFlowEntity, nextFlowVO.getOpinionBO());
+//        PublicFlowNodeEntity publicFlowNodeEntity = _flowNodeMapper.selectById(flowInstanceFlowEntity.getNodeId());
+//        JSONObject nextJson = JSONUtil.parseObj(publicFlowNodeEntity.getNextNode());
+//        JSONObject jsonObject = nextJson.getJSONObject((StrUtil.isNotEmpty(nextFlowVO.getFlowRunBO().getKey()) ? nextFlowVO.getFlowRunBO().getKey() : Constant.Key.NEXT));
+//        flowInstanceFlowEntity.setNextNodeKey(jsonObject.getStr(Constant.Key.NEXT_NODE_KEY));
+//        flowInstanceFlowEntity.setNextNodeId(jsonObject.getStr(Constant.Key.NEXT_NODE_ID));
+//        _publicFlowInstanceFlowMapper.updateById(flowInstanceFlowEntity);
+//        Integer refType = jsonObject.getInt(Constant.Key.REF_TYPE);
+//        String refId = jsonObject.getStr(Constant.Key.REF_ID);
+//        _publicFlowInstanceFlowMapper.insert(getFlowInstanceFlowEntity(flowInstanceFlowEntity, refType, refId));
     }
+
+//    private void setOpinion(PublicFlowInstanceFlowEntity flowInstanceFlowEntity, OpinionBO opinionBO) {
+//
+//        flowInstanceFlowEntity.setHeaderComment(opinionBO.getHeaderComment());
+//        flowInstanceFlowEntity.setBackComment(opinionBO.getBackComment());
+//        flowInstanceFlowEntity.setFlowComment(opinionBO.getFlowComment());
+//    }
 
     @Override
     public void back(BackFlowBO backFlowBO) {
