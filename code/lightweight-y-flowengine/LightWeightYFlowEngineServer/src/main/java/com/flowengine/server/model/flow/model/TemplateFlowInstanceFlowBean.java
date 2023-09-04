@@ -9,8 +9,6 @@ import java.util.Date;
  * @author yangzl 2023/8/30
  * @version 1.00.00
  * @Description:
- * @Copyright: Copyright (c) 2023 THINK WIN BIG DATA All Rights Reserved
- * @Company: 福建星云大数据应用服务有限公司
  * @history:
  */
 public class TemplateFlowInstanceFlowBean {
@@ -48,12 +46,6 @@ public class TemplateFlowInstanceFlowBean {
     private Integer flowStatus ;
     /** 处理结果:0:不通过;1:通过 */
     private Integer flowResult ;
-    /** 处理意见 */
-    private String flowComment ;
-    /** 领导处理意见 */
-    private String headerComment ;
-    /** 回退意见 */
-    private String backComment ;
     /** 顺序 */
     private Integer flowSort ;
 
@@ -190,30 +182,6 @@ public class TemplateFlowInstanceFlowBean {
     /** 处理结果:0:不通过;1:通过 */
     public void setFlowResult(Integer flowResult){
         this.flowResult=flowResult;
-    }
-    /** 处理意见 */
-    public String getFlowComment(){
-        return this.flowComment;
-    }
-    /** 处理意见 */
-    public void setFlowComment(String flowComment){
-        this.flowComment=flowComment;
-    }
-    /** 领导处理意见 */
-    public String getHeaderComment(){
-        return this.headerComment;
-    }
-    /** 领导处理意见 */
-    public void setHeaderComment(String headerComment){
-        this.headerComment=headerComment;
-    }
-    /** 回退意见 */
-    public String getBackComment(){
-        return this.backComment;
-    }
-    /** 回退意见 */
-    public void setBackComment(String backComment){
-        this.backComment=backComment;
     }
     /** 顺序 */
     public Integer getFlowSort(){

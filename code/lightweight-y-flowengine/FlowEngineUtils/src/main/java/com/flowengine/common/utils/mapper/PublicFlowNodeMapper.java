@@ -22,6 +22,14 @@ import java.util.Map;
 public interface PublicFlowNodeMapper extends BaseMapper<PublicFlowNodeEntity> {
 
     /**
+     * 查询下一个节点配置
+     * @param opId
+     * @return
+     */
+    @Select("select next_node from public_flow_node_tbl where op_id = #{opId}")
+    public String queryNextJsonByOpId(@Param("opId") String opId);
+
+    /**
      *
      * @param mainId
      * @return

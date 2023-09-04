@@ -102,8 +102,6 @@ public class Constant {
 
         public String LIMIT_TIME = "limitTime";
 
-        public String CHECK_TYPE = "checkType";
-
         public String VALUE = "value";
 
         public String SUB_CFG_VALUE_TYPE = "subCfgValueType";
@@ -125,6 +123,9 @@ public class Constant {
         public String PERSON = "person";
 
         public String SORT = "sort";
+
+        public String CREATE_TIME = "createTime";
+
     }
 
     public interface Value {
@@ -161,5 +162,23 @@ public class Constant {
         public String NODE_STATUS = "nodeStatus";
 
         public String TABLE_TYPE = "tableType";
+
+        public String CHECK_TYPE = "checkType";
+
+        public String INSTANCE_ID = "instanceId";
+
+        public String TASK_OP_ID = "taskOpId";
+
+        public String FLOW_STATUS = "flowStatus";
+
+        public String FLOW_RESULT = "flowResult";
+
+        public String FLOW_SORT = "flowSort";
+
+        public String NEXT_NODE_ID = "nextNodeId";
+
+        public String NEXT_NODE_KEY = "nextNodeKey";
+
+        public String OPERATION_TIME = "operationTime";
     }
 }

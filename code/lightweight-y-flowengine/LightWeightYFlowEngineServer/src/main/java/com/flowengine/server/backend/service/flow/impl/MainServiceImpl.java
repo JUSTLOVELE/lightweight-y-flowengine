@@ -153,7 +153,7 @@ public class MainServiceImpl extends BaseService implements MainService {
                         flowNodeCheckEntity.setOpId(UUIDGenerator.getUUID());
                         flowNodeCheckEntity.setNodeOpId(nodeEntity.getOpId());
                         flowNodeCheckEntity.setNodeType(nodeChecksJSONObject.getStr(Constant.Flow.NODE_TYPE));
-                        String checkType = nodeChecksJSONObject.getStr(Constant.Key.CHECK_TYPE);
+                        String checkType = nodeChecksJSONObject.getStr(Constant.Flow.CHECK_TYPE);
                         flowNodeCheckEntity.setCheckType(checkType);
                         //checkType=20则不要写ref
                         if(!FlowCheckTypeEnum.ALL.getValue().equals(checkType)) {

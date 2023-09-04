@@ -19,10 +19,17 @@ public class MainTest {
     @Test
     public void XMLTest() {
 
-//        Map<Object, Object> data = new HashMap<>();
-//        data.put("start", "开始");
-//        data.put(1, "开始2");
-//        String s = XmlUtil.mapToXmlStr(data);
-//        System.out.println(s);
+        outer:
+        for(int i=0; i<10; i++) {
+            System.out.println("i=" + i);
+            for(int j=0; j<10; j++) {
+                System.out.println("j=" + j);
+                if(j==5) {
+                    System.out.println("end");
+                    break outer;
+                }
+            }
+        }
+
     }
 }

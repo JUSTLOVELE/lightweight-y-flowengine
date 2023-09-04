@@ -94,20 +94,23 @@ public class TableFlowInstanceServiceImpl extends BaseService implements TableFl
     private String getCreateFlowCommentSQL(String tableName) {
 
         String sql = """
-                
-               (
-                    op_id VARCHAR(32) NOT NULL,
-                    instance_id VARCHAR(32),
-                    task_op_id VARCHAR(32),
-                    create_time TIMESTAMP,
-                    node_id VARCHAR(32),
-                    flow_comment VARCHAR(900),
-                    flow_sort INTEGER,
-                    flow_result INTEGER,
-                    instance_flow_id VARCHAR(255),
-                    PRIMARY KEY (op_id)
-                )
-                """;
+                 
+                (
+                     op_id VARCHAR(32) NOT NULL,
+                     instance_id VARCHAR(32),
+                     task_op_id VARCHAR(32),
+                     create_time TIMESTAMP,
+                     node_id VARCHAR(32),
+                     flow_comment VARCHAR(900),
+                     flow_sort INTEGER,
+                     flow_result INTEGER,
+                     instance_flow_id VARCHAR(255),
+                     user_op_id VARCHAR(255),
+                     dept_id VARCHAR(255),
+                     org_id VARCHAR(255),
+                     PRIMARY KEY (op_id)
+                 )
+                 """;
 
         StringBuffer sb = new StringBuffer();
         sb.append("CREATE TABLE ").append(tableName);
@@ -168,9 +171,6 @@ public class TableFlowInstanceServiceImpl extends BaseService implements TableFl
                     last_op_id VARCHAR(32),
                     flow_status INTEGER,
                     flow_result INTEGER,
-                    flow_comment VARCHAR(900),
-                    header_comment VARCHAR(900),
-                    back_comment VARCHAR(900),
                     flow_sort INTEGER,
                     PRIMARY KEY (op_id)
                 )

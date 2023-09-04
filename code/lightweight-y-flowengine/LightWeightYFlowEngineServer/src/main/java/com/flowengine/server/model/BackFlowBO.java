@@ -1,5 +1,7 @@
 package com.flowengine.server.model;
 
+import com.flowengine.server.model.flow.enums.FlowResultEnum;
+
 /**
  * @Description:
  * @author yangzl 2023.2.1
@@ -8,33 +10,85 @@ package com.flowengine.server.model;
  */
 public class BackFlowBO {
 
-    private OpinionBO opinionBO;
+    private String flowComment;
 
-    private FlowRunBO flowRunBO;
 
-    public BackFlowBO(FlowRunBO flowRunBO, OpinionBO opinionBO) {
+    /**public_flow_instance_flow_tbl的主键**/
+    private String instanceFlowId;
 
-        if(flowRunBO == null || opinionBO == null) {
-            throw new RuntimeException("入参不允许为空");
-        }
+    private String orgId;
 
-        this.flowRunBO = flowRunBO;
-        this.opinionBO = opinionBO;
+    private String deptId;
+
+    private String userOpId;
+
+    private FlowResultEnum flowResultEnum;
+
+    private String key;
+
+    private String mainId;
+
+    public String getFlowComment() {
+        return flowComment;
     }
 
-    public OpinionBO getOpinionBO() {
-        return opinionBO;
+    public void setFlowComment(String flowComment) {
+        this.flowComment = flowComment;
     }
 
-    public void setOpinionBO(OpinionBO opinionBO) {
-        this.opinionBO = opinionBO;
+    public String getInstanceFlowId() {
+        return instanceFlowId;
     }
 
-    public FlowRunBO getFlowRunBO() {
-        return flowRunBO;
+    public void setInstanceFlowId(String instanceFlowId) {
+        this.instanceFlowId = instanceFlowId;
     }
 
-    public void setFlowRunBO(FlowRunBO flowRunBO) {
-        this.flowRunBO = flowRunBO;
+    public String getOrgId() {
+        return orgId;
+    }
+
+    public void setOrgId(String orgId) {
+        this.orgId = orgId;
+    }
+
+    public String getDeptId() {
+        return deptId;
+    }
+
+    public void setDeptId(String deptId) {
+        this.deptId = deptId;
+    }
+
+    public String getUserOpId() {
+        return userOpId;
+    }
+
+    public void setUserOpId(String userOpId) {
+        this.userOpId = userOpId;
+    }
+
+    public FlowResultEnum getFlowResultEnum() {
+        return flowResultEnum;
+    }
+
+    public void setFlowResultEnum(FlowResultEnum flowResultEnum) {
+        this.flowResultEnum = flowResultEnum;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public String getMainId() {
+        return mainId;
+    }
+
+    public void setMainId(String mainId) {
+        this.mainId = mainId;
     }
 }

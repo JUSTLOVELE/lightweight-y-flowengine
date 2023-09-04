@@ -1,10 +1,10 @@
 package com.flowengine.server.backend.action.createmodel;
 
+import com.flowengine.common.utils.UUIDGenerator;
 import com.flowengine.common.utils.entity.createmodel.PublicFlowTableNameEntity;
 import com.flowengine.server.backend.service.createmodule.TableManageService;
 import com.flowengine.server.core.BaseAction;
 import com.flowengine.server.utils.Constant;
-import com.flowengine.server.utils.UUIDGenerator;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.GetMapping;
